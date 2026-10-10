@@ -9,7 +9,7 @@ it).
   (Base UI), lucide icons, react-i18next.
 - **Backend:** [Tauri 2](https://tauri.app) (`src-tauri/src/main.rs`). It reads and writes
   `launcher.json` and `bbport.ini` in `~/Library/Application Support/bloodborne_mac`, lists mods
-  and patches through `scripts/launcher_api.py`, controllers through `bb-gpu-capabilities`, and
+  and patches through `runtime/scripts/launcher_api.py`, controllers through `bb-gpu-capabilities`, and
   runs `run.sh`.
 
 ```bash
