@@ -50,15 +50,18 @@ impl Paths {
                 bundled: true,
             };
         }
-        // Development (npm run tauri dev): the checkout's build, Homebrew's bash, any Python 3.
+        // Development (npm run tauri dev): the checkout's build (the runtime/ submodule,
+        // bloodborne-runtime, or BB_REPO), Homebrew's bash, any Python 3.
         let root = std::env::var_os("BB_REPO").map(PathBuf::from).unwrap_or_else(|| {
             let mut dir = macos.clone();
-            while !dir.join("run.sh").is_file() {
-                if !dir.pop() {
-                    break;
+            loop {
+                if dir.join("runtime/run.sh").is_file() {
+                    return dir.join("runtime");
+                }
+                if dir.join("run.sh").is_file() || !dir.pop() {
+                    return dir;
                 }
             }
-            dir
         });
         let bash = ["/opt/homebrew/bin/bash", "/usr/local/bin/bash"]
             .iter()
