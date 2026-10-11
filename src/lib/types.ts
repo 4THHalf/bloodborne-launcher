@@ -9,6 +9,8 @@ export type Settings = {
   patches_dir: string;
   language: string;
   fullscreen: boolean;
+  /** The game's monitor by name (BB_DISPLAY); "" = the main display. */
+  display: string;
   hdr: boolean;
   present_mode: string;
   gamepad: string;
@@ -65,6 +67,8 @@ export type Patch = {
 };
 
 export type Gamepad = { guid: string; name: string };
+/** A monitor as the game sees it (bb-gpu-capabilities --displays). */
+export type Display = { name: string; size: string; primary: boolean };
 
 export type GameState = { running: boolean; code?: number | null };
 

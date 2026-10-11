@@ -24,7 +24,7 @@
   },
   "graphics": {
     "title": "Grafik", "subtitle": "Oyun içi menüyle ortak (F1 veya L3 + R3).", "display": "Ekran",
-    "outputRes": "Çıkış çözünürlüğü", "outputResHint": "Görüntünün ekrandaki boyutu. Ölçekleyici onu doldurur.", "fullscreen": "Tam ekran",
+    "outputRes": "Çıkış çözünürlüğü", "outputResHint": "Görüntünün ekrandaki boyutu. Ölçekleyici onu doldurur.", "fullscreen": "Tam ekran", "monitor": "Monitör", "monitorHint": "Oyun penceresinin ve tam ekranın açıldığı ekran.", "monitorMain": "Ana ekran",
     "presentMode": "Kare sunumu", "showFps": "FPS göster", "upscaling": "Ölçekleme",
     "upscalingHint": "Oyun çıkış çözünürlüğünün altında işler ve FSR görüntüyü yeniden oluşturur: Apple Silicon'da en büyük performans kazancı.",
     "upscaler": "Ölçekleyici", "preset": "Kalite ön ayarı", "presetRender": "{{name}} · {{size}} çözünürlükte işler",

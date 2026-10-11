@@ -24,7 +24,7 @@
   },
   "graphics": {
     "title": "Grafik", "subtitle": "Gemeinsam mit dem Menü im Spiel (F1 oder L3 + R3).", "display": "Anzeige",
-    "outputRes": "Ausgabeauflösung", "outputResHint": "Die Größe des Bildes auf dem Bildschirm. Der Upscaler füllt sie.", "fullscreen": "Vollbild",
+    "outputRes": "Ausgabeauflösung", "outputResHint": "Die Größe des Bildes auf dem Bildschirm. Der Upscaler füllt sie.", "fullscreen": "Vollbild", "monitor": "Monitor", "monitorHint": "Wo das Spielfenster und der Vollbildmodus geöffnet werden.", "monitorMain": "Hauptbildschirm",
     "presentMode": "Bildausgabe", "showFps": "FPS anzeigen", "upscaling": "Hochskalierung",
     "upscalingHint": "Das Spiel rendert unter der Ausgabeauflösung und FSR rekonstruiert das Bild: der größte Leistungshebel auf Apple Silicon.",
     "upscaler": "Upscaler", "preset": "Qualitätsstufe", "presetRender": "{{name}} · rendert in {{size}}",

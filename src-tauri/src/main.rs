@@ -96,6 +96,7 @@ fn default_settings() -> Map<String, Value> {
         "patches_dir": "",
         "language": "1",
         "fullscreen": false,
+        "display": "",
         "hdr": false,
         "present_mode": "Fifo",
         "gamepad": "",
@@ -376,6 +377,29 @@ async fn list_gamepads(state: State<'_, AppState>) -> Result<Vec<Gamepad>, Strin
         .collect())
 }
 
+#[derive(Serialize)]
+struct Display {
+    name: String,
+    size: String,
+    primary: bool,
+}
+
+/// The monitors in SDL's order, as the game sees them: "name<TAB>WxH<TAB>primary" lines.
+#[tauri::command]
+async fn list_displays(state: State<'_, AppState>) -> Result<Vec<Display>, String> {
+    let out = Command::new(&state.paths.capabilities)
+        .arg("--displays")
+        .output()
+        .map_err(|e| e.to_string())?;
+    Ok(String::from_utf8_lossy(&out.stdout)
+        .lines()
+        .filter_map(|l| {
+            let mut f = l.split('\t');
+            Some(Display { name: f.next()?.to_string(), size: f.next()?.to_string(), primary: f.next()? == "1" })
+        })
+        .collect())
+}
+
 /// One key or button for a control: bb-gpu-capabilities opens a small window and prints
 /// "key <name>" or "pad <name>"; None when cancelled.
 #[tauri::command]
@@ -424,8 +448,9 @@ fn game_environment(p: &Paths, s: &Map<String, Value>) -> Vec<(String, String)> 
     set("BB_UI_LANGUAGE", if ui.is_empty() { system_language() } else { ui });
     set("BB_FULLSCREEN", (if bool_setting(s, "fullscreen") { "1" } else { "0" }).into());
     set("BB_PRESENT_MODE", str_setting(s, "present_mode"));
-    for (key, var) in [("gamepad", "BB_GAMEPAD"), ("draw_pipe", "BB_DRAW_PIPE"), ("readbacks", "BB_READBACKS"),
-                       ("preupload", "BB_PREUPLOAD")] {
+    // display: the monitor's name (BB_DISPLAY matches part of it), so it survives a new order.
+    for (key, var) in [("gamepad", "BB_GAMEPAD"), ("display", "BB_DISPLAY"), ("draw_pipe", "BB_DRAW_PIPE"),
+                       ("readbacks", "BB_READBACKS"), ("preupload", "BB_PREUPLOAD")] {
         let v = str_setting(s, key);
         if !v.is_empty() {
             set(var, v);
@@ -576,7 +601,7 @@ fn main() {
         })
         .invoke_handler(tauri::generate_handler![
             load_config, save_settings, save_ini, check_game, list_mods, save_mods, list_patches,
-            save_patches, list_gamepads, read_input, open_path, launch, stop
+            save_patches, list_gamepads, list_displays, read_input, open_path, launch, stop
         ])
         .on_window_event(|window, event| {
             if let tauri::WindowEvent::Destroyed = event {

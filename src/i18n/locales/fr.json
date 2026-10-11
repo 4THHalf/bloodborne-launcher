@@ -24,7 +24,7 @@
   },
   "graphics": {
     "title": "Graphismes", "subtitle": "Partagés avec le menu du jeu (F1 ou L3 + R3).", "display": "Affichage",
-    "outputRes": "Résolution de sortie", "outputResHint": "La taille de l'image à l'écran. L'upscaler la remplit.", "fullscreen": "Plein écran",
+    "outputRes": "Résolution de sortie", "outputResHint": "La taille de l'image à l'écran. L'upscaler la remplit.", "fullscreen": "Plein écran", "monitor": "Écran", "monitorHint": "Où s'ouvrent la fenêtre du jeu et le plein écran.", "monitorMain": "Écran principal",
     "presentMode": "Présentation des images", "showFps": "Afficher les FPS", "upscaling": "Mise à l'échelle",
     "upscalingHint": "Le jeu effectue son rendu sous la résolution de sortie et FSR reconstruit l'image : le meilleur levier de performance sur Apple Silicon.",
     "upscaler": "Upscaler", "preset": "Préréglage de qualité", "presetRender": "{{name}} · rendu en {{size}}",

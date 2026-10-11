@@ -14,4 +14,5 @@ export const queryKeys = {
   mods: ["mods"] as const,
   patches: ["patches"] as const,
   gamepads: ["gamepads"] as const,
+  displays: ["displays"] as const,
 };

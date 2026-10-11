@@ -24,7 +24,7 @@
   },
   "graphics": {
     "title": "Grafik", "subtitle": "Delas med menyn i spelet (F1 eller L3 + R3).", "display": "Skärm",
-    "outputRes": "Utdataupplösning", "outputResHint": "Bildens storlek på skärmen. Uppskalaren fyller den.", "fullscreen": "Helskärm",
+    "outputRes": "Utdataupplösning", "outputResHint": "Bildens storlek på skärmen. Uppskalaren fyller den.", "fullscreen": "Helskärm", "monitor": "Skärm", "monitorHint": "Var spelfönstret och helskärm öppnas.", "monitorMain": "Huvudskärm",
     "presentMode": "Bildvisning", "showFps": "Visa FPS", "upscaling": "Uppskalning",
     "upscalingHint": "Spelet renderar under utdataupplösningen och FSR återskapar bilden: den största prestandavinsten på Apple Silicon.",
     "upscaler": "Uppskalare", "preset": "Kvalitetsförval", "presetRender": "{{name}} · renderar i {{size}}",

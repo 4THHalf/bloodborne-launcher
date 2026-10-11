@@ -24,7 +24,7 @@
   },
   "graphics": {
     "title": "Graphics", "subtitle": "Gedeeld met het menu in het spel (F1 of L3 + R3).", "display": "Beeld",
-    "outputRes": "Uitvoerresolutie", "outputResHint": "De grootte van het beeld op het scherm. De upscaler vult het.", "fullscreen": "Volledig scherm",
+    "outputRes": "Uitvoerresolutie", "outputResHint": "De grootte van het beeld op het scherm. De upscaler vult het.", "fullscreen": "Volledig scherm", "monitor": "Monitor", "monitorHint": "Waar het spelvenster en volledig scherm openen.", "monitorMain": "Hoofdscherm",
     "presentMode": "Beeldweergave", "showFps": "FPS tonen", "upscaling": "Upscaling",
     "upscalingHint": "Het spel rendert onder de uitvoerresolutie en FSR reconstrueert het beeld: de grootste prestatiewinst op Apple Silicon.",
     "upscaler": "Upscaler", "preset": "Kwaliteitsvoorinstelling", "presetRender": "{{name}} · rendert op {{size}}",

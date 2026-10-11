@@ -24,7 +24,7 @@
   },
   "graphics": {
     "title": "Grafik", "subtitle": "Delt med menuen i spillet (F1 eller L3 + R3).", "display": "Skærm",
-    "outputRes": "Outputopløsning", "outputResHint": "Billedets størrelse på skærmen. Opskaleringen udfylder det.", "fullscreen": "Fuld skærm",
+    "outputRes": "Outputopløsning", "outputResHint": "Billedets størrelse på skærmen. Opskaleringen udfylder det.", "fullscreen": "Fuld skærm", "monitor": "Skærm", "monitorHint": "Hvor spilvinduet og fuld skærm åbner.", "monitorMain": "Hovedskærm",
     "presentMode": "Billedvisning", "showFps": "Vis FPS", "upscaling": "Opskalering",
     "upscalingHint": "Spillet renderer under outputopløsningen, og FSR genskaber billedet: den største ydelsesgevinst på Apple Silicon.",
     "upscaler": "Opskalering", "preset": "Kvalitetsforudindstilling", "presetRender": "{{name}} · renderer i {{size}}",

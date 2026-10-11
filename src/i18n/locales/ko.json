@@ -24,7 +24,7 @@
   },
   "graphics": {
     "title": "그래픽", "subtitle": "게임 내 메뉴(F1 또는 L3 + R3)와 공유됩니다.", "display": "화면",
-    "outputRes": "출력 해상도", "outputResHint": "화면에 표시되는 이미지 크기. 업스케일러가 채웁니다.", "fullscreen": "전체 화면",
+    "outputRes": "출력 해상도", "outputResHint": "화면에 표시되는 이미지 크기. 업스케일러가 채웁니다.", "fullscreen": "전체 화면", "monitor": "모니터", "monitorHint": "게임 창과 전체 화면이 열리는 화면입니다.", "monitorMain": "주 디스플레이",
     "presentMode": "프레임 표시 방식", "showFps": "FPS 표시", "upscaling": "업스케일링",
     "upscalingHint": "게임은 출력 해상도보다 낮게 렌더링하고 FSR이 이미지를 재구성합니다. Apple Silicon에서 성능 향상이 가장 큰 설정입니다.",
     "upscaler": "업스케일러", "preset": "품질 프리셋", "presetRender": "{{name}} · {{size}}로 렌더링",

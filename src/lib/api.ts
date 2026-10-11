@@ -3,7 +3,7 @@
 import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { mockApi } from "@/lib/mockApi";
-import type { Config, GameCheck, Gamepad, GameState, Mod, Patch, Settings } from "@/lib/types";
+import type { Config, Display, GameCheck, Gamepad, GameState, Mod, Patch, Settings } from "@/lib/types";
 
 /** Running inside the Tauri app (else a browser preview with mock data). */
 const inTauri = typeof window !== "undefined" && "__TAURI_INTERNALS__" in window;
@@ -19,6 +19,7 @@ const tauriApi = {
   savePatches: (shown: string[], enabled: string[], disabled: string[]) =>
     invoke<void>("save_patches", { shown, enabled, disabled }),
   listGamepads: () => invoke<Gamepad[]>("list_gamepads"),
+  listDisplays: () => invoke<Display[]>("list_displays"),
   readInput: (kind: "key" | "pad") => invoke<string | null>("read_input", { kind }),
   openPath: (path: string) => invoke<void>("open_path", { path }),
   launch: () => invoke<void>("launch"),

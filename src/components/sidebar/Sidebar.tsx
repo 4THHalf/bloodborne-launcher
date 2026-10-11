@@ -25,7 +25,10 @@ export function Sidebar() {
   const running = useGameStore((s) => s.running);
   const { data: config } = useConfig();
   return (
-    <aside className="drag flex w-60 shrink-0 flex-col border-r border-sidebar-border bg-sidebar/80 px-3 pb-4 pt-11">
+    <aside
+      className="drag flex w-60 shrink-0 flex-col border-r border-sidebar-border bg-sidebar/80 px-3 pb-4 pt-11"
+      data-tauri-drag-region
+    >
       <div className="mb-7 flex items-center gap-3 px-2">
         <Moon className="size-9" />
         <div>

@@ -24,7 +24,7 @@
   },
   "graphics": {
     "title": "圖形", "subtitle": "與遊戲內選單（F1 或 L3 + R3）共用。", "display": "顯示",
-    "outputRes": "輸出解析度", "outputResHint": "畫面上影像的尺寸，由超解析度填滿。", "fullscreen": "全螢幕",
+    "outputRes": "輸出解析度", "outputResHint": "畫面上影像的尺寸，由超解析度填滿。", "fullscreen": "全螢幕", "monitor": "顯示器", "monitorHint": "遊戲視窗與全螢幕顯示的螢幕。", "monitorMain": "主顯示器",
     "presentMode": "影格呈現方式", "showFps": "顯示 FPS", "upscaling": "超解析度",
     "upscalingHint": "遊戲以低於輸出解析度的解析度算繪，由 FSR 重建影像：這是在 Apple Silicon 上提升效能最多的設定。",
     "upscaler": "超解析度", "preset": "品質預設", "presetRender": "{{name}} · 以 {{size}} 算繪",

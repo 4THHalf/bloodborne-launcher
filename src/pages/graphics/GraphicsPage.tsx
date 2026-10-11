@@ -3,6 +3,7 @@ import { PageHeader, SelectRow, SettingsSection, SliderRow, SwitchRow } from "@/
 import { useIni, useSetting, useSettingsData } from "@/hooks";
 import { MODEL_LOD, OUTPUT_RES, PRESENT_MODES, PRESETS, UPSCALERS, renderSize } from "@/lib/data";
 import type { Option } from "@/lib";
+import { DisplayPicker } from "@/pages/graphics/DisplayPicker";
 
 export function GraphicsPage() {
   const { t } = useTranslation();
@@ -29,6 +30,7 @@ export function GraphicsPage() {
           options={OUTPUT_RES}
           onChange={(v) => setIni("output_res", v)}
         />
+        <DisplayPicker />
         <SwitchRow title={t("graphics.fullscreen")} checked={settings.fullscreen} onChange={(v) => setSetting("fullscreen", v)} />
         <SelectRow
           title={t("graphics.presentMode")}

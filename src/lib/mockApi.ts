@@ -1,6 +1,6 @@
 // Browser preview (npm run dev outside Tauri): the backend's answers, in memory, so the
 // interface can be developed and screenshotted in any browser. Never used in the app.
-import type { Config, GameCheck, Gamepad, GameState, Mod, Patch, Settings } from "@/lib/types";
+import type { Config, Display, GameCheck, Gamepad, GameState, Mod, Patch, Settings } from "@/lib/types";
 
 const config: Config = {
   settings: {
@@ -11,6 +11,7 @@ const config: Config = {
     patches_dir: "",
     language: "1",
     fullscreen: false,
+    display: "",
     hdr: false,
     present_mode: "Fifo",
     gamepad: "",
@@ -90,6 +91,11 @@ export const mockApi = {
       }))),
     ),
   listGamepads: () => wait<Gamepad[]>([{ guid: "030000004c050000e60c000000016800", name: "DualSense Wireless Controller" }]),
+  listDisplays: () =>
+    wait<Display[]>([
+      { name: "Built-in Retina Display", size: "1728x1117", primary: true },
+      { name: "LG UltraFine", size: "2560x1440", primary: false },
+    ]),
   readInput: (kind: "key" | "pad") => wait(kind === "pad" ? "rightshoulder" : "G"),
   openPath: () => wait(undefined),
   launch: () => wait(undefined),

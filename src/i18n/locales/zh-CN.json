@@ -24,7 +24,7 @@
   },
   "graphics": {
     "title": "图形", "subtitle": "与游戏内菜单（F1 或 L3 + R3）共享。", "display": "显示",
-    "outputRes": "输出分辨率", "outputResHint": "屏幕上图像的尺寸，由超分辨率填满。", "fullscreen": "全屏",
+    "outputRes": "输出分辨率", "outputResHint": "屏幕上图像的尺寸，由超分辨率填满。", "fullscreen": "全屏", "monitor": "显示器", "monitorHint": "游戏窗口和全屏显示的屏幕。", "monitorMain": "主显示器",
     "presentMode": "帧呈现方式", "showFps": "显示 FPS", "upscaling": "超分辨率",
     "upscalingHint": "游戏以低于输出分辨率的分辨率渲染，由 FSR 重建图像：这是在 Apple Silicon 上提升性能最大的设置。",
     "upscaler": "超分辨率", "preset": "质量预设", "presetRender": "{{name}} · 以 {{size}} 渲染",
