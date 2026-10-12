@@ -10,6 +10,7 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 mod saves;
+mod profiles;
 
 use serde::Serialize;
 use serde_json::{json, Map, Value};
@@ -258,7 +259,7 @@ fn load_config(state: State<AppState>) -> Value {
             "mods": mods_dir(p, &s),
             "patches": patches_dir(p, &s),
             "logs": p.data.join("logs"),
-            "saves": selected_user_dir(p, &s).unwrap_or_default(),
+            "saves": selected_user_dir(p).unwrap_or_default(),
         },
         "bundled": p.bundled,
         "version": env!("CARGO_PKG_VERSION"),
@@ -269,8 +270,8 @@ fn load_config(state: State<AppState>) -> Value {
 #[tauri::command]
 fn save_settings(state: State<AppState>, settings: Map<String, Value>) -> Result<(), String> {
     let game = state.game.lock().map_err(|e| e.to_string())?;
-    if settings.contains_key("save_profile") { return Err("Select save profiles in the Saves tab.".into()); }
-    if settings.contains_key("user_dir") { saves_idle(&game)?; }
+    if settings.contains_key("save_profile") || settings.contains_key("user_dir") { return Err("Manage profile ownership in the Profiles tab.".into()); }
+    let _ = &game; // Serialize settings writes with profile changes and launch.
     let mut merged = load_settings(&state.paths);
     merged.extend(settings);
     write_settings(&state.paths, merged)
@@ -287,8 +288,8 @@ fn original_user_dir(p: &Paths, s: &Map<String, Value>) -> PathBuf {
     let custom = str_setting(s, "user_dir");
     if custom.is_empty() { p.data.join("user") } else { expand(&custom) }
 }
-fn selected_user_dir(p: &Paths, s: &Map<String, Value>) -> Result<PathBuf, String> {
-    saves::user_dir(&p.data, &original_user_dir(p, s), &str_setting(s, "save_profile"))
+fn selected_user_dir(p: &Paths) -> Result<PathBuf, String> {
+    Ok(profiles::selected(&p.data)?.path)
 }
 fn saves_idle(game: &Game) -> Result<(), String> {
     if game.child.is_some() { return Err("Stop the game before changing or copying saves.".into()); }
@@ -299,32 +300,40 @@ fn saves_idle(game: &Game) -> Result<(), String> {
     Ok(())
 }
 #[tauri::command]
-fn list_saves(state: State<AppState>) -> Result<Value, String> {
+fn list_profiles(state: State<AppState>) -> Result<profiles::ProfileList, String> {
     let _game = state.game.lock().map_err(|e| e.to_string())?;
     let s = load_settings(&state.paths);
-    Ok(json!({"active": str_setting(&s, "save_profile"), "profiles": saves::list(&state.paths.data, &original_user_dir(&state.paths, &s))?}))
+    profiles::list(&state.paths.data, &original_user_dir(&state.paths, &s))
 }
 #[tauri::command]
-fn change_save(state: State<AppState>, action: String, id: String, name: Option<String>, backup: Option<String>) -> Result<(), String> {
+fn change_profile(state: State<AppState>, action: String, id: String, name: Option<String>, source: Option<String>) -> Result<(), String> {
     let game = state.game.lock().map_err(|e| e.to_string())?;
     saves_idle(&game)?;
     let p = &state.paths;
-    let mut s = load_settings(p);
-    let original = original_user_dir(p, &s);
+    if action == "initialize" {
+        let s = load_settings(p);
+        profiles::initialize(&p.data, &original_user_dir(p, &s), &str_setting(&s, "save_profile"), name.as_deref().unwrap_or_default())
+    } else { profiles::change(&p.data, &action, &id, name.as_deref(), source.as_deref()) }
+}
+#[tauri::command]
+fn list_saves(state: State<AppState>) -> Result<Value, String> {
+    let _game = state.game.lock().map_err(|e| e.to_string())?;
+    let selected = profiles::selected(&state.paths.data)?;
+    Ok(json!({"active": selected.id, "profiles": [selected]}))
+}
+#[tauri::command]
+fn change_save(state: State<AppState>, action: String, id: String, backup: Option<String>) -> Result<(), String> {
+    let game = state.game.lock().map_err(|e| e.to_string())?;
+    saves_idle(&game)?;
+    let p = &state.paths;
+    let registry = profiles::require(&p.data)?;
+    let selected = profiles::selected(&p.data)?;
+    if id != selected.id { return Err("Choose the owning profile before managing its saves.".into()); }
     match action.as_str() {
-        "select" => {
-            saves::user_dir(&p.data, &original, &id)?;
-            s.insert("save_profile".into(), json!(id));
-            write_settings(p, s)?;
-        },
-        "create" | "duplicate" => {
-            saves::create(&p.data, &original, name.as_deref().unwrap_or_default(), if action == "duplicate" { Some(&id) } else { None })?;
-        },
-        "backup" => { saves::backup(&p.data, &original, &id)?; },
-        "restore" => saves::restore(&p.data, &original, &id, backup.as_deref().unwrap_or_default())?,
-        _ => return Err("Unknown save operation.".into()),
+        "backup" => { saves::backup(&p.data, &registry.original_user_dir, &id)?; Ok(()) },
+        "restore" => saves::restore(&p.data, &registry.original_user_dir, &id, backup.as_deref().unwrap_or_default()),
+        _ => Err("Manage identities in the Profiles tab.".into()),
     }
-    Ok(())
 }
 
 /// Sets bbport.ini keys (null removes the line: the default applies), keeping the other lines.
@@ -534,8 +543,9 @@ fn game_environment(p: &Paths, s: &Map<String, Value>) -> Result<Vec<(String, St
     }
     // The selected profile wins over inherited and extra environment save paths. GPU caches
     // stay in the original user directory, shared by all profiles.
-    set("BB_USER_DIR", selected_user_dir(p, s)?.to_string_lossy().into());
-    set("BB_GPU_USER_DIR", original_user_dir(p, s).to_string_lossy().into());
+    set("BB_USER_DIR", selected_user_dir(p)?.to_string_lossy().into());
+    set("BB_GPU_USER_DIR", profiles::require(&p.data)?.original_user_dir.to_string_lossy().into());
+    set("BB_USER_NAME", profiles::selected(&p.data)?.name);
     Ok(env)
 }
 
@@ -571,10 +581,11 @@ fn start_game(app: &AppHandle, state: &AppState) -> Result<(), String> {
     }
     saves_idle(&game)?;
     let s = load_settings(&p);
-    selected_user_dir(&p, &s)?;
-    fs::create_dir_all(original_user_dir(&p, &s)).map_err(|e| e.to_string())?;
+    selected_user_dir(&p)?;
+    let registry = profiles::require(&p.data)?;
+    fs::create_dir_all(&registry.original_user_dir).map_err(|e| e.to_string())?;
     // Back up the complete set before launch. Failure prevents starting without a recovery copy.
-    saves::backup(&p.data, &original_user_dir(&p, &s), &str_setting(&s, "save_profile"))?;
+    saves::backup(&p.data, &registry.original_user_dir, &registry.active)?;
     fs::create_dir_all(p.data.join("logs")).map_err(|e| e.to_string())?;
     let log_path = p.data.join("logs/last.log");
     let mut cmd = Command::new(&p.bash);
@@ -660,7 +671,7 @@ fn main() {
         })
         .invoke_handler(tauri::generate_handler![
             load_config, save_settings, save_ini, check_game, list_mods, save_mods, list_patches,
-            save_patches, list_gamepads, list_displays, read_input, open_path, launch, stop, list_saves, change_save
+            save_patches, list_gamepads, list_displays, read_input, open_path, launch, stop, list_saves, change_save, list_profiles, change_profile
         ])
         .on_window_event(|window, event| {
             if let tauri::WindowEvent::Destroyed = event {
@@ -698,16 +709,19 @@ mod save_tests {
         let p = Paths { game_root: root.clone(), bash: PathBuf::from("bash"), python: PathBuf::from("python3"),
             probe: root.join("bb-probe"), capabilities: root.join("capabilities"), data: root.clone(), bundled: false };
         let mut settings = default_settings();
-        assert_eq!(selected_user_dir(&p, &settings).unwrap(), root.join("user"));
+        assert!(selected_user_dir(&p).is_err());
+        profiles::initialize(&root, &root.join("user"), "original", "First").unwrap();
+        assert_eq!(selected_user_dir(&p).unwrap(), root.join("user"));
         let id = saves::create(&root, &root.join("user"), "Synthetic", None).unwrap();
-        settings.insert("save_profile".into(), json!(id));
-        settings.insert("extra_env".into(), json!("BB_USER_DIR=/wrong BB_GPU_USER_DIR=/wrong"));
+        profiles::change(&root, "select", &id, None, None).unwrap();
+        settings.insert("extra_env".into(), json!("BB_USER_DIR=/wrong BB_GPU_USER_DIR=/wrong BB_USER_NAME=wrong"));
         let env: BTreeMap<_,_> = game_environment(&p, &settings).unwrap().into_iter().collect();
         assert_eq!(env["BB_USER_DIR"], root.join("save-profiles").join(&id).join("user").to_string_lossy());
         assert_eq!(env["BB_GPU_USER_DIR"], root.join("user").to_string_lossy());
+        assert_eq!(env["BB_USER_NAME"], "Synthetic");
         // Configuration and original save files are never moved by profile creation/selection.
         assert!(!root.join("user").exists());
-        settings.insert("save_profile".into(), json!("p-dead"));
+        fs::remove_dir_all(root.join("save-profiles").join(&id)).unwrap();
         assert!(game_environment(&p, &settings).is_err());
         fs::remove_dir_all(&root).unwrap();
     }

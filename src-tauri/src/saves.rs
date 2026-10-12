@@ -65,7 +65,7 @@ fn check_ancestors(path: &Path) -> Result<()> {
     }
     Ok(())
 }
-fn ensure_directory(path: &Path) -> Result<()> {
+pub(crate) fn ensure_directory(path: &Path) -> Result<()> {
     check_ancestors(path)?;
     fs::create_dir_all(path).map_err(fail)
 }
@@ -281,6 +281,24 @@ pub fn create(data: &Path, original: &Path, name: &str, source: Option<&str>) ->
         source.as_ref().map(|p| p.join("savedata")).as_deref(),
         "p-",
     )
+}
+pub fn rename(data: &Path, original: &Path, id: &str, name: &str) -> Result<()> {
+    user_dir(data, original, id)?;
+    if id == "original" {
+        return Err("Rename the original owner through its registry.".into());
+    }
+    let profile = data.join("save-profiles").join(id);
+    let mut meta = metadata(&profile)?;
+    meta.name = name.into();
+    let pending = profile.join("profile.json.pending");
+    if pending
+        .symlink_metadata()
+        .is_ok_and(|m| m.file_type().is_symlink())
+    {
+        return Err("Invalid profile staging file.".into());
+    }
+    fs::write(&pending, serde_json::to_vec(&meta).map_err(fail)?).map_err(fail)?;
+    fs::rename(pending, profile.join("profile.json")).map_err(fail)
 }
 pub fn backup(data: &Path, original: &Path, id: &str) -> Result<String> {
     let user = user_dir(data, original, id)?;
