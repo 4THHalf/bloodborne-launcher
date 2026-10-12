@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "para Apple Silicon", "version": "v{{version}}" },
-  "nav": { "home": "Inicio", "graphics": "Gráficos", "controls": "Controles", "game": "Juego", "mods": "Mods", "patches": "Parches", "advanced": "Avanzado", "log": "Registro" },
+  "nav": { "home": "Inicio", "graphics": "Gráficos", "controls": "Controles", "game": "Juego", "mods": "Mods", "patches": "Parches", "advanced": "Avanzado", "log": "Registro", "saves": "Partidas" },
   "play": {
     "play": "Jugar", "stop": "Detener", "running": "En ejecución",
     "started": "El juego se está iniciando. El primer inicio compila los shaders del juego y tarda unos minutos.",
@@ -101,5 +101,28 @@
       "effect_ssao": "Oclusión ambiental (SSAO)", "effect_game_aa": "Antialiasing propio del juego", "effect_dynamic_shadows": "Sombras de luces dinámicas",
       "effect_ssr": "Reflejos en espacio de pantalla", "effect_ssrHint": "No estaba en el juego original"
     }
+  },
+  "saves": {
+    "title": "Partidas",
+    "subtitle": "Elige el conjunto de partidas para el próximo inicio.",
+    "stopFirst": "Cierra el juego para gestionar las partidas.",
+    "profiles": "Perfiles de partidas",
+    "backupHint": "Copia de seguridad automática antes de cada inicio.",
+    "newProfile": "Nuevo perfil",
+    "name": "Nombre",
+    "create": "Crear",
+    "startFrom": "Empezar desde",
+    "fresh": "Partida nueva",
+    "original": "Original",
+    "originalFolder": "Carpeta de la partida original",
+    "active": "Activo",
+    "use": "Usar esta partida",
+    "backup": "Crear copia",
+    "backups": "Copias de seguridad",
+    "empty": "Todavía no hay datos guardados",
+    "size": "{{size}} MB",
+    "restore": "Restaurar",
+    "restoreHint": "¿Restaurar esta copia? Primero se creará una copia de la partida actual.",
+    "cancel": "Cancelar"
   }
 }

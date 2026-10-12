@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-import { Gamepad2, House, MonitorCog, Package, ScrollText, Settings2, Swords, Wrench } from "lucide-react";
+import { Archive, Gamepad2, House, MonitorCog, Package, ScrollText, Settings2, Swords, Wrench } from "lucide-react";
 import { Moon } from "@/components/brand";
 import { PlayButton } from "@/components/sidebar/PlayButton";
 import { SidebarNavItem } from "@/components/sidebar/SidebarNavItem";
@@ -13,6 +13,7 @@ const TABS: { id: Tab; icon: ReactNode }[] = [
   { id: "graphics", icon: <MonitorCog /> },
   { id: "controls", icon: <Gamepad2 /> },
   { id: "game", icon: <Swords /> },
+  { id: "saves", icon: <Archive /> },
   { id: "mods", icon: <Package /> },
   { id: "patches", icon: <Wrench /> },
   { id: "advanced", icon: <Settings2 /> },

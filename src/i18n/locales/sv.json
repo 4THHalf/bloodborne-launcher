@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "för Apple Silicon", "version": "v{{version}}" },
-  "nav": { "home": "Hem", "graphics": "Grafik", "controls": "Kontroller", "game": "Spel", "mods": "Moddar", "patches": "Patchar", "advanced": "Avancerat", "log": "Logg" },
+  "nav": { "home": "Hem", "graphics": "Grafik", "controls": "Kontroller", "game": "Spel", "mods": "Moddar", "patches": "Patchar", "advanced": "Avancerat", "log": "Logg", "saves": "Sparfiler" },
   "play": {
     "play": "Spela", "stop": "Stoppa", "running": "Körs",
     "started": "Spelet startar. Första starten kompilerar spelets shaders och tar några minuter.",
@@ -101,5 +101,28 @@
       "effect_ssao": "Omgivningsskuggning (SSAO)", "effect_game_aa": "Spelets egen kantutjämning", "effect_dynamic_shadows": "Skuggor från dynamiska ljus",
       "effect_ssr": "Skärmrymdsreflektioner", "effect_ssrHint": "Fanns inte i originalspelet"
     }
+  },
+  "saves": {
+    "title": "Sparfiler",
+    "subtitle": "Välj sparfilerna som används vid nästa start.",
+    "stopFirst": "Stäng spelet för att hantera sparfiler.",
+    "profiles": "Sparprofiler",
+    "backupHint": "Automatisk säkerhetskopia före varje start.",
+    "newProfile": "Ny profil",
+    "name": "Namn",
+    "create": "Skapa",
+    "startFrom": "Börja från",
+    "fresh": "Ny sparfil",
+    "original": "Original",
+    "originalFolder": "Ursprunglig sparmapp",
+    "active": "Aktiv",
+    "use": "Använd denna sparfil",
+    "backup": "Säkerhetskopiera",
+    "backups": "Säkerhetskopior",
+    "empty": "Inga sparade data ännu",
+    "size": "{{size}} MB",
+    "restore": "Återställ",
+    "restoreHint": "Återställ denna säkerhetskopia? Din nuvarande sparfil säkerhetskopieras först.",
+    "cancel": "Avbryt"
   }
 }

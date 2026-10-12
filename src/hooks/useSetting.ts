@@ -25,7 +25,7 @@ export function useSetting() {
       // The folders decide the mod and patch lists and the paths shown.
       if (key === "mods_dir" || key === "patches_dir" || key === "user_dir") {
         client.invalidateQueries({ queryKey: queryKeys.config });
-        client.invalidateQueries({ queryKey: key === "mods_dir" ? queryKeys.mods : queryKeys.patches });
+        client.invalidateQueries({ queryKey: key === "mods_dir" ? queryKeys.mods : key === "user_dir" ? queryKeys.saves : queryKeys.patches });
       }
     },
   });

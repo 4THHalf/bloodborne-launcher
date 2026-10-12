@@ -1,11 +1,10 @@
 import { useTranslation } from "react-i18next";
-import { FolderRow, NumberRow, PageHeader, SelectRow, SettingsSection, SwitchRow } from "@/components/settings";
-import { useConfig, useIni, useSetting, useSettingsData } from "@/hooks";
+import { NumberRow, PageHeader, SelectRow, SettingsSection, SwitchRow } from "@/components/settings";
+import { useIni, useSetting, useSettingsData } from "@/hooks";
 import { EFFECTS, FPS_MODES, GAME_LANGUAGES } from "@/lib/data";
 
 export function GamePage() {
   const { t } = useTranslation();
-  const { data: config } = useConfig();
   const { settings, ini } = useSettingsData();
   const setIni = useIni();
   const setSetting = useSetting();
@@ -57,15 +56,6 @@ export function GamePage() {
           description={t("game.debugMenuHint")}
           checked={flag("debug_menu", false)}
           onChange={(v) => setIni("debug_menu", v ? "1" : "0")}
-        />
-      </SettingsSection>
-      <SettingsSection title={t("game.saves")}>
-        <FolderRow
-          title={t("game.savesFolder")}
-          path={config?.paths.saves ?? ""}
-          custom={!!settings.user_dir}
-          onChoose={(path) => setSetting("user_dir", path)}
-          onReset={() => setSetting("user_dir", "")}
         />
       </SettingsSection>
     </>

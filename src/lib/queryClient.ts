@@ -9,6 +9,7 @@ export const queryClient = new QueryClient({
 });
 
 export const queryKeys = {
+  saves: ["saves"] as const,
   config: ["config"] as const,
   gameCheck: (dir: string) => ["game-check", dir] as const,
   mods: ["mods"] as const,

@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "for Apple Silicon", "version": "v{{version}}" },
-  "nav": { "home": "Hjem", "graphics": "Grafikk", "controls": "Kontroller", "game": "Spill", "mods": "Modder", "patches": "Patcher", "advanced": "Avansert", "log": "Logg" },
+  "nav": { "home": "Hjem", "graphics": "Grafikk", "controls": "Kontroller", "game": "Spill", "mods": "Modder", "patches": "Patcher", "advanced": "Avansert", "log": "Logg", "saves": "Lagrede spill" },
   "play": {
     "play": "Spill", "stop": "Stopp", "running": "Kjører",
     "started": "Spillet starter. Første oppstart kompilerer spillets shadere og tar noen minutter.",
@@ -101,5 +101,28 @@
       "effect_ssao": "Omgivelsesskygge (SSAO)", "effect_game_aa": "Spillets egen kantutjevning", "effect_dynamic_shadows": "Skygger fra dynamisk lys",
       "effect_ssr": "Skjermromsrefleksjoner", "effect_ssrHint": "Fantes ikke i originalspillet"
     }
+  },
+  "saves": {
+    "title": "Lagrede spill",
+    "subtitle": "Velg de lagrede spillene for neste oppstart.",
+    "stopFirst": "Lukk spillet for å administrere lagrede spill.",
+    "profiles": "Lagringsprofiler",
+    "backupHint": "Automatisk sikkerhetskopi før hver oppstart.",
+    "newProfile": "Ny profil",
+    "name": "Navn",
+    "create": "Opprett",
+    "startFrom": "Start fra",
+    "fresh": "Nytt lagret spill",
+    "original": "Original",
+    "originalFolder": "Opprinnelig lagringsmappe",
+    "active": "Aktiv",
+    "use": "Bruk dette lagrede spillet",
+    "backup": "Sikkerhetskopier",
+    "backups": "Sikkerhetskopier",
+    "empty": "Ingen lagrede data ennå",
+    "size": "{{size}} MB",
+    "restore": "Gjenopprett",
+    "restoreHint": "Gjenopprette denne sikkerhetskopien? Det nåværende lagrede spillet sikkerhetskopieres først.",
+    "cancel": "Avbryt"
   }
 }

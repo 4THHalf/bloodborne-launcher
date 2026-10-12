@@ -1,13 +1,13 @@
 import { create } from "zustand";
 
-export type Tab = "home" | "graphics" | "controls" | "game" | "mods" | "patches" | "advanced" | "log";
+export type Tab = "home" | "graphics" | "controls" | "game" | "saves" | "mods" | "patches" | "advanced" | "log";
 
 type UiStore = {
   tab: Tab;
   setTab: (tab: Tab) => void;
 };
 
-const TABS: Tab[] = ["home", "graphics", "controls", "game", "mods", "patches", "advanced", "log"];
+const TABS: Tab[] = ["home", "graphics", "controls", "game", "saves", "mods", "patches", "advanced", "log"];
 
 /** The first tab: the URL's hash when it names one (#graphics; previews and development). */
 function initialTab(): Tab {

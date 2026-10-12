@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "per Apple Silicon", "version": "v{{version}}" },
-  "nav": { "home": "Home", "graphics": "Grafica", "controls": "Comandi", "game": "Gioco", "mods": "Mod", "patches": "Patch", "advanced": "Avanzate", "log": "Registro" },
+  "nav": { "home": "Home", "graphics": "Grafica", "controls": "Comandi", "game": "Gioco", "mods": "Mod", "patches": "Patch", "advanced": "Avanzate", "log": "Registro", "saves": "Salvataggi" },
   "play": {
     "play": "Gioca", "stop": "Ferma", "running": "In esecuzione",
     "started": "Il gioco si sta avviando. Il primo avvio compila gli shader del gioco e richiede qualche minuto.",
@@ -101,5 +101,28 @@
       "effect_ssao": "Occlusione ambientale (SSAO)", "effect_game_aa": "Antialiasing del gioco", "effect_dynamic_shadows": "Ombre delle luci dinamiche",
       "effect_ssr": "Riflessi in screen space", "effect_ssrHint": "Non presente nel gioco originale"
     }
+  },
+  "saves": {
+    "title": "Salvataggi",
+    "subtitle": "Scegli i salvataggi da usare al prossimo avvio.",
+    "stopFirst": "Chiudi il gioco per gestire i salvataggi.",
+    "profiles": "Profili di salvataggio",
+    "backupHint": "Backup automatico prima di ogni avvio.",
+    "newProfile": "Nuovo profilo",
+    "name": "Nome",
+    "create": "Crea",
+    "startFrom": "Inizia da",
+    "fresh": "Nuovo salvataggio",
+    "original": "Originale",
+    "originalFolder": "Cartella del salvataggio originale",
+    "active": "Attivo",
+    "use": "Usa questo salvataggio",
+    "backup": "Crea backup",
+    "backups": "Backup",
+    "empty": "Nessun dato salvato",
+    "size": "{{size}} MB",
+    "restore": "Ripristina",
+    "restoreHint": "Ripristinare questo backup? Prima verrà creato un backup del salvataggio attuale.",
+    "cancel": "Annulla"
   }
 }

@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "Apple Silicon için", "version": "v{{version}}" },
-  "nav": { "home": "Ana sayfa", "graphics": "Grafik", "controls": "Kontroller", "game": "Oyun", "mods": "Modlar", "patches": "Yamalar", "advanced": "Gelişmiş", "log": "Günlük" },
+  "nav": { "home": "Ana sayfa", "graphics": "Grafik", "controls": "Kontroller", "game": "Oyun", "mods": "Modlar", "patches": "Yamalar", "advanced": "Gelişmiş", "log": "Günlük", "saves": "Kayıtlar" },
   "play": {
     "play": "Oyna", "stop": "Durdur", "running": "Çalışıyor",
     "started": "Oyun başlıyor. İlk açılışta oyunun gölgelendiricileri derlenir, bu birkaç dakika sürer.",
@@ -101,5 +101,28 @@
       "effect_ssao": "Ortam perdelemesi (SSAO)", "effect_game_aa": "Oyunun kendi kenar yumuşatması", "effect_dynamic_shadows": "Dinamik ışık gölgeleri",
       "effect_ssr": "Ekran alanı yansımaları", "effect_ssrHint": "Orijinal oyunda yoktu"
     }
+  },
+  "saves": {
+    "title": "Kayıtlar",
+    "subtitle": "Sonraki başlatmada kullanılacak kayıtları seçin.",
+    "stopFirst": "Kayıtları yönetmek için oyunu kapatın.",
+    "profiles": "Kayıt profilleri",
+    "backupHint": "Her başlatmadan önce otomatik yedekleme.",
+    "newProfile": "Yeni profil",
+    "name": "Ad",
+    "create": "Oluştur",
+    "startFrom": "Başlangıç",
+    "fresh": "Yeni kayıt",
+    "original": "Asıl",
+    "originalFolder": "Asıl kayıt klasörü",
+    "active": "Etkin",
+    "use": "Bu kaydı kullan",
+    "backup": "Yedekle",
+    "backups": "Yedekler",
+    "empty": "Henüz kayıt verisi yok",
+    "size": "{{size}} MB",
+    "restore": "Geri yükle",
+    "restoreHint": "Bu yedek geri yüklensin mi? Önce mevcut kaydınız yedeklenecek.",
+    "cancel": "İptal"
   }
 }

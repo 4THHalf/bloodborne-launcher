@@ -1,4 +1,4 @@
-import { AdvancedPage, ControlsPage, GamePage, GraphicsPage, HomePage, LogPage, ModsPage, PatchesPage } from "@/pages";
+import { AdvancedPage, ControlsPage, GamePage, GraphicsPage, HomePage, LogPage, ModsPage, PatchesPage, SavesPage } from "@/pages";
 import { useUiStore } from "@/stores";
 
 /** The page of the chosen tab. */
@@ -13,6 +13,8 @@ export function PageOutlet() {
       return <ControlsPage />;
     case "game":
       return <GamePage />;
+    case "saves":
+      return <SavesPage />;
     case "mods":
       return <ModsPage />;
     case "patches":

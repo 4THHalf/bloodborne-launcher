@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "Apple Silicon용", "version": "v{{version}}" },
-  "nav": { "home": "홈", "graphics": "그래픽", "controls": "조작", "game": "게임", "mods": "모드", "patches": "패치", "advanced": "고급", "log": "로그" },
+  "nav": { "home": "홈", "graphics": "그래픽", "controls": "조작", "game": "게임", "mods": "모드", "patches": "패치", "advanced": "고급", "log": "로그", "saves": "저장 데이터" },
   "play": {
     "play": "플레이", "stop": "중지", "running": "실행 중",
     "started": "게임을 시작하는 중입니다. 처음 실행할 때는 게임의 셰이더를 컴파일하므로 몇 분 걸립니다.",
@@ -101,5 +101,28 @@
       "effect_ssao": "앰비언트 오클루전(SSAO)", "effect_game_aa": "게임 자체 안티에일리어싱", "effect_dynamic_shadows": "동적 조명의 그림자",
       "effect_ssr": "화면 공간 반사", "effect_ssrHint": "원작 게임에는 없던 효과"
     }
+  },
+  "saves": {
+    "title": "저장 데이터",
+    "subtitle": "다음 실행에 사용할 저장 데이터를 선택하세요.",
+    "stopFirst": "저장 데이터를 관리하려면 게임을 종료하세요.",
+    "profiles": "저장 프로필",
+    "backupHint": "실행 전에 매번 자동으로 백업합니다.",
+    "newProfile": "새 프로필",
+    "name": "이름",
+    "create": "만들기",
+    "startFrom": "시작 데이터",
+    "fresh": "새 저장 데이터",
+    "original": "기존",
+    "originalFolder": "기존 저장 폴더",
+    "active": "사용 중",
+    "use": "이 저장 데이터 사용",
+    "backup": "백업",
+    "backups": "백업 목록",
+    "empty": "아직 저장 데이터가 없습니다",
+    "size": "{{size}} MB",
+    "restore": "복원",
+    "restoreHint": "이 백업을 복원할까요? 현재 저장 데이터는 먼저 백업됩니다.",
+    "cancel": "취소"
   }
 }

@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "voor Apple Silicon", "version": "v{{version}}" },
-  "nav": { "home": "Start", "graphics": "Graphics", "controls": "Besturing", "game": "Spel", "mods": "Mods", "patches": "Patches", "advanced": "Geavanceerd", "log": "Logboek" },
+  "nav": { "home": "Start", "graphics": "Graphics", "controls": "Besturing", "game": "Spel", "mods": "Mods", "patches": "Patches", "advanced": "Geavanceerd", "log": "Logboek", "saves": "Opgeslagen spellen" },
   "play": {
     "play": "Spelen", "stop": "Stoppen", "running": "Actief",
     "started": "Het spel start. De eerste start compileert de shaders van het spel en duurt een paar minuten.",
@@ -101,5 +101,28 @@
       "effect_ssao": "Omgevingsocclusie (SSAO)", "effect_game_aa": "Anti-aliasing van het spel", "effect_dynamic_shadows": "Schaduwen van dynamische lichten",
       "effect_ssr": "Screen-space reflecties", "effect_ssrHint": "Niet in het originele spel"
     }
+  },
+  "saves": {
+    "title": "Opgeslagen spellen",
+    "subtitle": "Kies de opgeslagen spellen voor de volgende start.",
+    "stopFirst": "Sluit het spel om opgeslagen spellen te beheren.",
+    "profiles": "Opslagprofielen",
+    "backupHint": "Automatische back-up vóór elke start.",
+    "newProfile": "Nieuw profiel",
+    "name": "Naam",
+    "create": "Maken",
+    "startFrom": "Beginnen met",
+    "fresh": "Nieuw opgeslagen spel",
+    "original": "Origineel",
+    "originalFolder": "Oorspronkelijke opslagmap",
+    "active": "Actief",
+    "use": "Dit opgeslagen spel gebruiken",
+    "backup": "Back-up maken",
+    "backups": "Back-ups",
+    "empty": "Nog geen opgeslagen gegevens",
+    "size": "{{size}} MB",
+    "restore": "Herstellen",
+    "restoreHint": "Deze back-up herstellen? Eerst wordt een back-up van je huidige spel gemaakt.",
+    "cancel": "Annuleren"
   }
 }

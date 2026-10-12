@@ -1,11 +1,12 @@
 // Browser preview (npm run dev outside Tauri): the backend's answers, in memory, so the
 // interface can be developed and screenshotted in any browser. Never used in the app.
-import type { Config, Display, GameCheck, Gamepad, GameState, Mod, Patch, Settings } from "@/lib/types";
+import type { Config, Display, GameCheck, Gamepad, GameState, Mod, Patch, Settings, SaveChange, SaveList } from "@/lib/types";
 
 const config: Config = {
   settings: {
     game_dir: "/Users/hunter/Games/CUSA03173",
     user_dir: "",
+    save_profile: "original",
     mods_dir: "",
     mods_enabled: true,
     patches_dir: "",
@@ -63,7 +64,31 @@ let patches: Patch[] = [
 
 const wait = <T,>(value: T) => new Promise<T>((resolve) => setTimeout(() => resolve(value), 120));
 
+let nextProfile = 0;
+const saves: SaveList = { active: "original", profiles: [{ id: "original", name: "", path: config.paths.saves, bytes: 12582912, modified: 1720000000, backups: [] }] };
+
 export const mockApi = {
+  listSaves: () => wait(structuredClone(saves)),
+  changeSave: (change: SaveChange) => {
+    const profile = saves.profiles.find((p) => p.id === change.id);
+    if (change.action === "select" && profile) {
+      saves.active = profile.id;
+      config.settings.save_profile = profile.id;
+      config.paths.saves = profile.path;
+    } else if (change.action === "create" || change.action === "duplicate") {
+      const id = `p-${++nextProfile}`;
+      saves.profiles.push({ id, name: change.name ?? "", path: `${config.paths.data}/save-profiles/${id}/user`, bytes: change.action === "duplicate" ? profile?.bytes ?? 0 : 0, modified: null, backups: [] });
+    } else if (change.action === "backup" && profile) {
+      profile.backups.unshift({ id: `b-${Date.now()}`, created: Math.floor(Date.now() / 1000), bytes: profile.bytes });
+    } else if (change.action === "restore" && profile) {
+      const backup = profile.backups.find((b) => b.id === change.backup);
+      if (backup) {
+        profile.backups.unshift({ id: `b-${Date.now()}`, created: Math.floor(Date.now() / 1000), bytes: profile.bytes });
+        profile.bytes = backup.bytes;
+      }
+    }
+    return wait(undefined);
+  },
   loadConfig: () => wait(structuredClone(config)),
   saveSettings: (settings: Partial<Settings>) => wait(void Object.assign(config.settings, settings)),
   saveIni: (values: Record<string, string | null>) =>

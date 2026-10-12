@@ -3,12 +3,14 @@
 import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { mockApi } from "@/lib/mockApi";
-import type { Config, Display, GameCheck, Gamepad, GameState, Mod, Patch, Settings } from "@/lib/types";
+import type { Config, Display, GameCheck, Gamepad, GameState, Mod, Patch, Settings, SaveList, SaveChange } from "@/lib/types";
 
 /** Running inside the Tauri app (else a browser preview with mock data). */
 const inTauri = typeof window !== "undefined" && "__TAURI_INTERNALS__" in window;
 
 const tauriApi = {
+  listSaves: () => invoke<SaveList>("list_saves"),
+  changeSave: (change: SaveChange) => invoke<void>("change_save", change),
   loadConfig: () => invoke<Config>("load_config"),
   saveSettings: (settings: Partial<Settings>) => invoke<void>("save_settings", { settings }),
   saveIni: (values: Record<string, string | null>) => invoke<void>("save_ini", { values }),

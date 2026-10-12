@@ -12,7 +12,7 @@
     "mods": "Mods",
     "patches": "Patches",
     "advanced": "Advanced",
-    "log": "Log"
+    "log": "Log", "saves": "Saves"
   },
   "play": {
     "play": "Play",
@@ -300,5 +300,28 @@
       "effect_ssr": "Screen-space reflections",
       "effect_ssrHint": "Not in the original game"
     }
+  },
+  "saves": {
+    "title": "Saves",
+    "subtitle": "Choose the save set used at the next launch.",
+    "stopFirst": "Stop the game to manage saves.",
+    "profiles": "Save profiles",
+    "backupHint": "Automatic backup before each launch.",
+    "newProfile": "New profile",
+    "name": "Name",
+    "create": "Create",
+    "startFrom": "Start from",
+    "fresh": "Fresh save",
+    "original": "Original",
+    "originalFolder": "Original save folder",
+    "active": "Active",
+    "use": "Use this save",
+    "backup": "Back up",
+    "backups": "Backups",
+    "empty": "No save data yet",
+    "size": "{{size}} MB",
+    "restore": "Restore",
+    "restoreHint": "Restore this backup? Your current save will be backed up first.",
+    "cancel": "Cancel"
   }
 }

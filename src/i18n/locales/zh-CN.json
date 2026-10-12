@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "Apple Silicon 版", "version": "v{{version}}" },
-  "nav": { "home": "主页", "graphics": "图形", "controls": "操作", "game": "游戏", "mods": "模组", "patches": "补丁", "advanced": "高级", "log": "日志" },
+  "nav": { "home": "主页", "graphics": "图形", "controls": "操作", "game": "游戏", "mods": "模组", "patches": "补丁", "advanced": "高级", "log": "日志", "saves": "存档" },
   "play": {
     "play": "开始游戏", "stop": "停止", "running": "运行中",
     "started": "游戏正在启动。首次启动会编译游戏的着色器，需要几分钟。",
@@ -101,5 +101,28 @@
       "effect_ssao": "环境光遮蔽（SSAO）", "effect_game_aa": "游戏自带抗锯齿", "effect_dynamic_shadows": "动态光源阴影",
       "effect_ssr": "屏幕空间反射", "effect_ssrHint": "原版游戏中没有"
     }
+  },
+  "saves": {
+    "title": "存档",
+    "subtitle": "选择下次启动时使用的存档。",
+    "stopFirst": "请关闭游戏后管理存档。",
+    "profiles": "存档配置",
+    "backupHint": "每次启动前自动备份。",
+    "newProfile": "新建配置",
+    "name": "名称",
+    "create": "创建",
+    "startFrom": "初始存档",
+    "fresh": "全新存档",
+    "original": "原始",
+    "originalFolder": "原始存档文件夹",
+    "active": "使用中",
+    "use": "使用此存档",
+    "backup": "备份",
+    "backups": "备份列表",
+    "empty": "暂无存档数据",
+    "size": "{{size}} MB",
+    "restore": "恢复",
+    "restoreHint": "恢复此备份？当前存档会先备份。",
+    "cancel": "取消"
   }
 }

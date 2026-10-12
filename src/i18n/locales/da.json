@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "til Apple Silicon", "version": "v{{version}}" },
-  "nav": { "home": "Hjem", "graphics": "Grafik", "controls": "Styring", "game": "Spil", "mods": "Mods", "patches": "Patches", "advanced": "Avanceret", "log": "Log" },
+  "nav": { "home": "Hjem", "graphics": "Grafik", "controls": "Styring", "game": "Spil", "mods": "Mods", "patches": "Patches", "advanced": "Avanceret", "log": "Log", "saves": "Gemte spil" },
   "play": {
     "play": "Spil", "stop": "Stop", "running": "Kører",
     "started": "Spillet starter. Første start kompilerer spillets shaders og tager et par minutter.",
@@ -101,5 +101,28 @@
       "effect_ssao": "Omgivelsesskygger (SSAO)", "effect_game_aa": "Spillets egen kantudjævning", "effect_dynamic_shadows": "Skygger fra dynamisk lys",
       "effect_ssr": "Skærmrumsrefleksioner", "effect_ssrHint": "Fandtes ikke i originalspillet"
     }
+  },
+  "saves": {
+    "title": "Gemte spil",
+    "subtitle": "Vælg de gemte spil til næste start.",
+    "stopFirst": "Luk spillet for at administrere gemte spil.",
+    "profiles": "Gemte spilprofiler",
+    "backupHint": "Automatisk sikkerhedskopi før hver start.",
+    "newProfile": "Ny profil",
+    "name": "Navn",
+    "create": "Opret",
+    "startFrom": "Start fra",
+    "fresh": "Nyt gemt spil",
+    "original": "Original",
+    "originalFolder": "Oprindelig mappe til gemte spil",
+    "active": "Aktiv",
+    "use": "Brug dette gemte spil",
+    "backup": "Sikkerhedskopiér",
+    "backups": "Sikkerhedskopier",
+    "empty": "Ingen gemte data endnu",
+    "size": "{{size}} MB",
+    "restore": "Gendan",
+    "restoreHint": "Gendan denne sikkerhedskopi? Dit nuværende gemte spil sikkerhedskopieres først.",
+    "cancel": "Annuller"
   }
 }

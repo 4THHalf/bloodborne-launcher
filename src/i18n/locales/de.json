@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "für Apple Silicon", "version": "v{{version}}" },
-  "nav": { "home": "Start", "graphics": "Grafik", "controls": "Steuerung", "game": "Spiel", "mods": "Mods", "patches": "Patches", "advanced": "Erweitert", "log": "Protokoll" },
+  "nav": { "home": "Start", "graphics": "Grafik", "controls": "Steuerung", "game": "Spiel", "mods": "Mods", "patches": "Patches", "advanced": "Erweitert", "log": "Protokoll", "saves": "Spielstände" },
   "play": {
     "play": "Spielen", "stop": "Beenden", "running": "Läuft",
     "started": "Das Spiel startet. Beim ersten Start werden die Shader des Spiels kompiliert, das dauert einige Minuten.",
@@ -101,5 +101,28 @@
       "effect_ssao": "Umgebungsverdeckung (SSAO)", "effect_game_aa": "Kantenglättung des Spiels", "effect_dynamic_shadows": "Schatten dynamischer Lichter",
       "effect_ssr": "Bildschirmraum-Reflexionen", "effect_ssrHint": "Nicht im Originalspiel"
     }
+  },
+  "saves": {
+    "title": "Spielstände",
+    "subtitle": "Wähle die Spielstände für den nächsten Start.",
+    "stopFirst": "Beende das Spiel, um Spielstände zu verwalten.",
+    "profiles": "Spielstandprofile",
+    "backupHint": "Automatische Sicherung vor jedem Start.",
+    "newProfile": "Neues Profil",
+    "name": "Name",
+    "create": "Erstellen",
+    "startFrom": "Beginnen mit",
+    "fresh": "Neuer Spielstand",
+    "original": "Original",
+    "originalFolder": "Ordner des ursprünglichen Spielstands",
+    "active": "Aktiv",
+    "use": "Diesen Spielstand nutzen",
+    "backup": "Sichern",
+    "backups": "Sicherungen",
+    "empty": "Noch keine Speicherdaten",
+    "size": "{{size}} MB",
+    "restore": "Wiederherstellen",
+    "restoreHint": "Diese Sicherung wiederherstellen? Dein aktueller Spielstand wird vorher gesichert.",
+    "cancel": "Abbrechen"
   }
 }

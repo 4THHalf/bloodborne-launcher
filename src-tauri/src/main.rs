@@ -9,6 +9,8 @@
 //! as `bash run.sh` with the app's own bash and Python; its output is sent to the window.
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
+mod saves;
+
 use serde::Serialize;
 use serde_json::{json, Map, Value};
 use std::collections::BTreeMap;
@@ -91,6 +93,7 @@ fn default_settings() -> Map<String, Value> {
     let v = json!({
         "game_dir": "",
         "user_dir": "",
+        "save_profile": "original",
         "mods_dir": "",
         "mods_enabled": true,
         "patches_dir": "",
@@ -255,7 +258,7 @@ fn load_config(state: State<AppState>) -> Value {
             "mods": mods_dir(p, &s),
             "patches": patches_dir(p, &s),
             "logs": p.data.join("logs"),
-            "saves": if str_setting(&s, "user_dir").is_empty() { p.data.join("user") } else { expand(&str_setting(&s, "user_dir")) },
+            "saves": selected_user_dir(p, &s).unwrap_or_default(),
         },
         "bundled": p.bundled,
         "version": env!("CARGO_PKG_VERSION"),
@@ -265,12 +268,63 @@ fn load_config(state: State<AppState>) -> Value {
 
 #[tauri::command]
 fn save_settings(state: State<AppState>, settings: Map<String, Value>) -> Result<(), String> {
-    let p = &state.paths;
-    fs::create_dir_all(&p.data).map_err(|e| e.to_string())?;
-    let mut merged = load_settings(p);
+    let game = state.game.lock().map_err(|e| e.to_string())?;
+    if settings.contains_key("save_profile") { return Err("Select save profiles in the Saves tab.".into()); }
+    if settings.contains_key("user_dir") { saves_idle(&game)?; }
+    let mut merged = load_settings(&state.paths);
     merged.extend(settings);
-    let text = serde_json::to_string_pretty(&Value::Object(merged)).map_err(|e| e.to_string())?;
-    fs::write(settings_file(p), text + "\n").map_err(|e| e.to_string())
+    write_settings(&state.paths, merged)
+}
+
+fn write_settings(p: &Paths, settings: Map<String, Value>) -> Result<(), String> {
+    fs::create_dir_all(&p.data).map_err(|e| e.to_string())?;
+    let text = serde_json::to_string_pretty(&Value::Object(settings)).map_err(|e| e.to_string())?;
+    let pending = p.data.join("launcher.json.pending");
+    fs::write(&pending, text + "\n").map_err(|e| e.to_string())?;
+    fs::rename(pending, settings_file(p)).map_err(|e| e.to_string())
+}
+fn original_user_dir(p: &Paths, s: &Map<String, Value>) -> PathBuf {
+    let custom = str_setting(s, "user_dir");
+    if custom.is_empty() { p.data.join("user") } else { expand(&custom) }
+}
+fn selected_user_dir(p: &Paths, s: &Map<String, Value>) -> Result<PathBuf, String> {
+    saves::user_dir(&p.data, &original_user_dir(p, s), &str_setting(s, "save_profile"))
+}
+fn saves_idle(game: &Game) -> Result<(), String> {
+    if game.child.is_some() { return Err("Stop the game before changing or copying saves.".into()); }
+    // Also exclude games started outside this launcher, including isolated benchmark runs.
+    let status = Command::new("pgrep").args(["-x", "bb-probe"]).stdout(Stdio::null()).status().map_err(|e| e.to_string())?;
+    if status.success() { return Err("Stop the running game before changing or copying saves.".into()); }
+    if status.code() != Some(1) { return Err("Could not check whether the game is running.".into()); }
+    Ok(())
+}
+#[tauri::command]
+fn list_saves(state: State<AppState>) -> Result<Value, String> {
+    let _game = state.game.lock().map_err(|e| e.to_string())?;
+    let s = load_settings(&state.paths);
+    Ok(json!({"active": str_setting(&s, "save_profile"), "profiles": saves::list(&state.paths.data, &original_user_dir(&state.paths, &s))?}))
+}
+#[tauri::command]
+fn change_save(state: State<AppState>, action: String, id: String, name: Option<String>, backup: Option<String>) -> Result<(), String> {
+    let game = state.game.lock().map_err(|e| e.to_string())?;
+    saves_idle(&game)?;
+    let p = &state.paths;
+    let mut s = load_settings(p);
+    let original = original_user_dir(p, &s);
+    match action.as_str() {
+        "select" => {
+            saves::user_dir(&p.data, &original, &id)?;
+            s.insert("save_profile".into(), json!(id));
+            write_settings(p, s)?;
+        },
+        "create" | "duplicate" => {
+            saves::create(&p.data, &original, name.as_deref().unwrap_or_default(), if action == "duplicate" { Some(&id) } else { None })?;
+        },
+        "backup" => { saves::backup(&p.data, &original, &id)?; },
+        "restore" => saves::restore(&p.data, &original, &id, backup.as_deref().unwrap_or_default())?,
+        _ => return Err("Unknown save operation.".into()),
+    }
+    Ok(())
 }
 
 /// Sets bbport.ini keys (null removes the line: the default applies), keeping the other lines.
@@ -420,7 +474,7 @@ fn open_path(path: String) -> Result<(), String> {
     Command::new("open").arg(path).spawn().map(|_| ()).map_err(|e| e.to_string())
 }
 
-fn game_environment(p: &Paths, s: &Map<String, Value>) -> Vec<(String, String)> {
+fn game_environment(p: &Paths, s: &Map<String, Value>) -> Result<Vec<(String, String)>, String> {
     let mut env: Vec<(String, String)> = Vec::new();
     let mut set = |k: &str, v: String| env.push((k.to_string(), v));
     let path_dirs = [p.bash.parent().map(|d| d.to_string_lossy().to_string()).unwrap_or_default(),
@@ -432,10 +486,6 @@ fn game_environment(p: &Paths, s: &Map<String, Value>) -> Vec<(String, String)> 
     set("PYTHON", p.python.to_string_lossy().into());
     set("PYTHONDONTWRITEBYTECODE", "1".into());
     set("BB_GAME_DIR", expand(&str_setting(s, "game_dir")).to_string_lossy().into());
-    let user = str_setting(s, "user_dir");
-    if !user.is_empty() {
-        set("BB_USER_DIR", expand(&user).to_string_lossy().into());
-    }
     set("BB_MODS_DIR", mods_dir(p, s).to_string_lossy().into());
     set("BB_MODS_CONFIG", p.data.join("mods.json").to_string_lossy().into());
     set("BB_MODS_ENABLED", (if bool_setting(s, "mods_enabled") { "1" } else { "0" }).into());
@@ -482,7 +532,11 @@ fn game_environment(p: &Paths, s: &Map<String, Value>) -> Vec<(String, String)> 
             set(k, v.to_string());
         }
     }
-    env
+    // The selected profile wins over inherited and extra environment save paths. GPU caches
+    // stay in the original user directory, shared by all profiles.
+    set("BB_USER_DIR", selected_user_dir(p, s)?.to_string_lossy().into());
+    set("BB_GPU_USER_DIR", original_user_dir(p, s).to_string_lossy().into());
+    Ok(env)
 }
 
 /// The system's preferred language ("pt-BR"): an app started from Finder has no LANG.
@@ -515,7 +569,12 @@ fn start_game(app: &AppHandle, state: &AppState) -> Result<(), String> {
     if game.child.is_some() {
         return Err("The game is already running.".into());
     }
+    saves_idle(&game)?;
     let s = load_settings(&p);
+    selected_user_dir(&p, &s)?;
+    fs::create_dir_all(original_user_dir(&p, &s)).map_err(|e| e.to_string())?;
+    // Back up the complete set before launch. Failure prevents starting without a recovery copy.
+    saves::backup(&p.data, &original_user_dir(&p, &s), &str_setting(&s, "save_profile"))?;
     fs::create_dir_all(p.data.join("logs")).map_err(|e| e.to_string())?;
     let log_path = p.data.join("logs/last.log");
     let mut cmd = Command::new(&p.bash);
@@ -524,7 +583,7 @@ fn start_game(app: &AppHandle, state: &AppState) -> Result<(), String> {
         .stdin(Stdio::null())
         .stdout(Stdio::piped())
         .stderr(Stdio::piped());
-    for (k, v) in game_environment(&p, &s) {
+    for (k, v) in game_environment(&p, &s)? {
         cmd.env(k, v);
     }
     let mut child = cmd.spawn().map_err(|e| format!("Could not start the game: {e}"))?;
@@ -601,7 +660,7 @@ fn main() {
         })
         .invoke_handler(tauri::generate_handler![
             load_config, save_settings, save_ini, check_game, list_mods, save_mods, list_patches,
-            save_patches, list_gamepads, list_displays, read_input, open_path, launch, stop
+            save_patches, list_gamepads, list_displays, read_input, open_path, launch, stop, list_saves, change_save
         ])
         .on_window_event(|window, event| {
             if let tauri::WindowEvent::Destroyed = event {
@@ -616,4 +675,40 @@ fn main() {
         })
         .run(tauri::generate_context!())
         .expect("error while running the launcher");
+}
+
+#[cfg(test)]
+mod save_tests {
+    use super::*;
+
+    #[test]
+    fn save_changes_are_rejected_while_launcher_child_runs() {
+        let child = Command::new("sleep").arg("30").spawn().unwrap();
+        let mut game = Game { child: Some(child) };
+        assert!(saves_idle(&game).unwrap_err().contains("Stop the game"));
+        game.child.as_mut().unwrap().kill().unwrap();
+        game.child.as_mut().unwrap().wait().unwrap();
+    }
+
+    #[test]
+    fn selected_profile_controls_launch_and_shares_only_gpu_cache_path() {
+        let root = fs::canonicalize(std::env::temp_dir()).unwrap().join(format!(
+            "bb-save-launch-test-{}", std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_nanos()));
+        fs::create_dir(&root).unwrap();
+        let p = Paths { game_root: root.clone(), bash: PathBuf::from("bash"), python: PathBuf::from("python3"),
+            probe: root.join("bb-probe"), capabilities: root.join("capabilities"), data: root.clone(), bundled: false };
+        let mut settings = default_settings();
+        assert_eq!(selected_user_dir(&p, &settings).unwrap(), root.join("user"));
+        let id = saves::create(&root, &root.join("user"), "Synthetic", None).unwrap();
+        settings.insert("save_profile".into(), json!(id));
+        settings.insert("extra_env".into(), json!("BB_USER_DIR=/wrong BB_GPU_USER_DIR=/wrong"));
+        let env: BTreeMap<_,_> = game_environment(&p, &settings).unwrap().into_iter().collect();
+        assert_eq!(env["BB_USER_DIR"], root.join("save-profiles").join(&id).join("user").to_string_lossy());
+        assert_eq!(env["BB_GPU_USER_DIR"], root.join("user").to_string_lossy());
+        // Configuration and original save files are never moved by profile creation/selection.
+        assert!(!root.join("user").exists());
+        settings.insert("save_profile".into(), json!("p-dead"));
+        assert!(game_environment(&p, &settings).is_err());
+        fs::remove_dir_all(&root).unwrap();
+    }
 }

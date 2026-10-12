@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "dla Apple Silicon", "version": "v{{version}}" },
-  "nav": { "home": "Start", "graphics": "Grafika", "controls": "Sterowanie", "game": "Gra", "mods": "Mody", "patches": "Łatki", "advanced": "Zaawansowane", "log": "Dziennik" },
+  "nav": { "home": "Start", "graphics": "Grafika", "controls": "Sterowanie", "game": "Gra", "mods": "Mody", "patches": "Łatki", "advanced": "Zaawansowane", "log": "Dziennik", "saves": "Zapisy" },
   "play": {
     "play": "Graj", "stop": "Zatrzymaj", "running": "Uruchomiona",
     "started": "Gra się uruchamia. Pierwsze uruchomienie kompiluje shadery gry i trwa kilka minut.",
@@ -101,5 +101,28 @@
       "effect_ssao": "Okluzja otoczenia (SSAO)", "effect_game_aa": "Wygładzanie krawędzi gry", "effect_dynamic_shadows": "Cienie od dynamicznych świateł",
       "effect_ssr": "Odbicia w przestrzeni ekranu", "effect_ssrHint": "Nie było w oryginalnej grze"
     }
+  },
+  "saves": {
+    "title": "Zapisy",
+    "subtitle": "Wybierz zestaw zapisów na następne uruchomienie.",
+    "stopFirst": "Zamknij grę, aby zarządzać zapisami.",
+    "profiles": "Profile zapisów",
+    "backupHint": "Automatyczna kopia przed każdym uruchomieniem.",
+    "newProfile": "Nowy profil",
+    "name": "Nazwa",
+    "create": "Utwórz",
+    "startFrom": "Zacznij od",
+    "fresh": "Nowy zapis",
+    "original": "Oryginalny",
+    "originalFolder": "Folder oryginalnego zapisu",
+    "active": "Aktywny",
+    "use": "Użyj tego zapisu",
+    "backup": "Utwórz kopię",
+    "backups": "Kopie zapasowe",
+    "empty": "Brak zapisanych danych",
+    "size": "{{size}} MB",
+    "restore": "Przywróć",
+    "restoreHint": "Przywrócić tę kopię? Najpierw powstanie kopia bieżącego zapisu.",
+    "cancel": "Anuluj"
   }
 }

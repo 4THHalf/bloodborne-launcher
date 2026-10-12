@@ -1,7 +1,7 @@
 # Bloodborne launcher (macOS)
 
 The launcher inside `Bloodborne.app`. It has a game folder check, graphics, controls (controller
-choice and button mapping), game options, mods, patches, advanced options and the game's log. It
+choice and button mapping), game options, save profiles and backups, mods, patches, advanced options and the game's log. It
 starts the game with the app's own bash and Python (`packaging/macos.sh` builds the app around
 it).
 
@@ -57,5 +57,18 @@ These are enforced by ESLint (`eslint.config.js`) where possible.
 | `src/stores` | Zustand stores |
 | `src/lib` | Backend calls (`api.ts`, `mockApi.ts`), types, query client, `data/` (options, controls) |
 | `src/i18n` | i18next setup and locales: the game's 20 languages (`scripts/check_locales.py` checks them against `en.json`) |
+| `src-tauri/src/saves.rs` | Complete save sets, profiles, backups and restore; synthetic file tests |
 | `src-tauri` | Rust backend, Tauri config, icons |
 | `scripts/make_icon.swift` | Draws the icon the app's icons are made from |
+
+## Save manager checks
+
+```bash
+npm run check
+npm run build
+cd src-tauri && cargo test && cargo clippy -- -D warnings
+```
+
+File tests use synthetic data in temporary folders, never player saves. Browser previews use
+an in-memory save manager. [Save manager design](../../docs/SAVE_MANAGER.md) records the launch
+contract, recovery behavior and planned character previews and editing.

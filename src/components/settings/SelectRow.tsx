@@ -22,6 +22,7 @@ export function SelectRow<T extends string | number>({ title, description, value
   return (
     <SettingRow title={title} description={hint ?? description} disabled={disabled}>
       <Select
+        disabled={disabled}
         value={value}
         items={options.map((o) => ({ value: o.value, label: label(o) }))}
         onValueChange={(next) => next !== null && onChange(next as T)}

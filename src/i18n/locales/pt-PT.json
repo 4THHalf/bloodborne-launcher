@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "para Apple Silicon", "version": "v{{version}}" },
-  "nav": { "home": "Início", "graphics": "Gráficos", "controls": "Controlos", "game": "Jogo", "mods": "Mods", "patches": "Patches", "advanced": "Avançado", "log": "Registo" },
+  "nav": { "home": "Início", "graphics": "Gráficos", "controls": "Controlos", "game": "Jogo", "mods": "Mods", "patches": "Patches", "advanced": "Avançado", "log": "Registo", "saves": "Gravações" },
   "play": {
     "play": "Jogar", "stop": "Parar", "running": "Em execução",
     "started": "O jogo está a iniciar. No primeiro arranque os shaders do jogo são compilados, o que demora alguns minutos.",
@@ -101,5 +101,28 @@
       "effect_ssao": "Oclusão ambiente (SSAO)", "effect_game_aa": "Antialiasing do próprio jogo", "effect_dynamic_shadows": "Sombras de luzes dinâmicas",
       "effect_ssr": "Reflexos em espaço de ecrã", "effect_ssrHint": "Não existia no jogo original"
     }
+  },
+  "saves": {
+    "title": "Gravações",
+    "subtitle": "Escolha o conjunto de gravações usado no próximo arranque.",
+    "stopFirst": "Feche o jogo para gerir as gravações.",
+    "profiles": "Perfis de gravação",
+    "backupHint": "Cópia de segurança automática antes de cada arranque.",
+    "newProfile": "Novo perfil",
+    "name": "Nome",
+    "create": "Criar",
+    "startFrom": "Começar com",
+    "fresh": "Nova gravação",
+    "original": "Original",
+    "originalFolder": "Pasta da gravação original",
+    "active": "Ativo",
+    "use": "Usar esta gravação",
+    "backup": "Criar cópia",
+    "backups": "Cópias de segurança",
+    "empty": "Ainda não há dados gravados",
+    "size": "{{size}} MB",
+    "restore": "Restaurar",
+    "restoreHint": "Restaurar esta cópia? Primeiro será criada uma cópia da gravação atual.",
+    "cancel": "Cancelar"
   }
 }

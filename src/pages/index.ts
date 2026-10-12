@@ -6,3 +6,4 @@ export * from "@/pages/home";
 export * from "@/pages/log";
 export * from "@/pages/mods";
 export * from "@/pages/patches";
+export * from "@/pages/saves";

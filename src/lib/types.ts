@@ -4,6 +4,7 @@
 export type Settings = {
   game_dir: string;
   user_dir: string;
+  save_profile: string;
   mods_dir: string;
   mods_enabled: boolean;
   patches_dir: string;
@@ -79,3 +80,9 @@ export type TKey = import("i18next").ParseKeys;
 export type Option<T extends string | number> =
   | { value: T; label: TKey; hint?: TKey; literal?: false }
   | { value: T; label: string; hint?: undefined; literal: true };
+
+/** Complete runtime save sets, kept separate from shader caches. Times are Unix seconds. */
+export type SaveBackup = { id: string; created: number; bytes: number };
+export type SaveProfile = { id: string; name: string; path: string; bytes: number; modified: number | null; backups: SaveBackup[] };
+export type SaveList = { active: string; profiles: SaveProfile[] };
+export type SaveChange = { action: "select" | "create" | "duplicate" | "backup" | "restore"; id: string; name?: string; backup?: string };
