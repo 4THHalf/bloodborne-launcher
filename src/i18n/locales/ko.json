@@ -137,6 +137,8 @@
     "cancel": "취소"
   },
   "profiles": {
+    "trophies": "트로피",
+    "inDevelopment": "개발 중",
     "delete": "삭제",
     "deleteTitle": "{{name}} 삭제?",
     "deleteHint": "{{name}} 및 저장 데이터와 백업이 영구적으로 삭제됩니다. 이 작업은 취소할 수 없습니다.",

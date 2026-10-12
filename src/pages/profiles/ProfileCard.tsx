@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Trophy } from "lucide-react";
 import { Badge, Button, Input, Label } from "@/components/ui";
 import { DeleteProfileDialog } from "@/pages/profiles/DeleteProfileDialog";
 import type { ProfileChange, SaveProfile } from "@/lib";
@@ -17,6 +18,11 @@ export function ProfileCard({ profile, active, disabled, busy, onChange }: {
       <Button size="sm" variant="secondary" disabled={disabled} onClick={() => { setName(profile.name); setEditing(true); }}>{t("profiles.rename")}</Button>
       <DeleteProfileDialog profile={profile} active={active} disabled={disabled} busy={busy}
         onDelete={() => onChange({ action: "delete", id: profile.id })} />
+    </div>
+    <div className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
+      <Trophy className="size-4" aria-hidden="true" />
+      <span>{t("profiles.trophies")}</span>
+      <Badge variant="outline">{t("profiles.inDevelopment")}</Badge>
     </div>
     {editing && <form className="mt-3 flex items-center gap-3" onSubmit={async (event) => {
       event.preventDefault();

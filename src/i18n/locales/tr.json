@@ -137,6 +137,8 @@
     "cancel": "İptal"
   },
   "profiles": {
+    "trophies": "Kupalar",
+    "inDevelopment": "Geliştirme aşamasında",
     "delete": "Sil",
     "deleteTitle": "{{name}} silinsin mi?",
     "deleteHint": "Bu işlem {{name}}, kayıtları ve yedeklerini kalıcı olarak siler. Bu işlem geri alınamaz.",

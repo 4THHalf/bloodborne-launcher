@@ -137,6 +137,8 @@
     "cancel": "取消"
   },
   "profiles": {
+    "trophies": "奖杯",
+    "inDevelopment": "开发中",
     "delete": "删除",
     "deleteTitle": "删除 {{name}}？",
     "deleteHint": "这将永久删除 {{name}} 及其存档和备份。此操作无法撤销。",

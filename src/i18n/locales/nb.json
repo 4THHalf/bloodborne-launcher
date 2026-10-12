@@ -137,6 +137,8 @@
     "cancel": "Avbryt"
   },
   "profiles": {
+    "trophies": "Trofeer",
+    "inDevelopment": "Under utvikling",
     "delete": "Slett",
     "deleteTitle": "Slette {{name}}?",
     "deleteHint": "Dette sletter {{name}}, lagrede spill og sikkerhetskopier permanent. Handlingen kan ikke angres.",

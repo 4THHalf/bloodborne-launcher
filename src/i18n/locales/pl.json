@@ -137,6 +137,8 @@
     "cancel": "Anuluj"
   },
   "profiles": {
+    "trophies": "Trofea",
+    "inDevelopment": "W trakcie rozwoju",
     "delete": "Usuń",
     "deleteTitle": "Usunąć {{name}}?",
     "deleteHint": "Spowoduje to trwałe usunięcie {{name}}, zapisów gry i kopii zapasowych. Tej operacji nie można cofnąć.",

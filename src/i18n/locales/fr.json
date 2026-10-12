@@ -137,6 +137,8 @@
     "cancel": "Annuler"
   },
   "profiles": {
+    "trophies": "Trophées",
+    "inDevelopment": "En développement",
     "delete": "Supprimer",
     "deleteTitle": "Supprimer {{name}} ?",
     "deleteHint": "Cela supprime définitivement {{name}}, ses sauvegardes et ses copies de secours. Cette action est irréversible.",

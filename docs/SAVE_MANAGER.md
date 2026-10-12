@@ -149,5 +149,6 @@ backend for both fresh and upgrade setup, mandatory onboarding, identity operati
 save management, plus persistent configuration/database failures and successful manual retry. The shadcn creation and deletion modals are checked for focus, cancellation, duplicate-name retry,
 confirmed deletion and active/running-profile protection. They do not exercise the real game or capture screenshots.
 
+Profile cards show a Trophies row with an In development badge, without unlock counts or actions.
 Character parsing, editing and actual trophy collection remain future work. Game-derived files
 and analysis are never committed. Tests never write the player's save or settings.

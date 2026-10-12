@@ -137,6 +137,8 @@
     "cancel": "Annuller"
   },
   "profiles": {
+    "trophies": "Trofæer",
+    "inDevelopment": "Under udvikling",
     "delete": "Slet",
     "deleteTitle": "Slet {{name}}?",
     "deleteHint": "Dette sletter {{name}}, dets gemte spil og sikkerhedskopier permanent. Handlingen kan ikke fortrydes.",

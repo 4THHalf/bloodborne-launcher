@@ -137,6 +137,8 @@
     "cancel": "Peruuta"
   },
   "profiles": {
+    "trophies": "Palkinnot",
+    "inDevelopment": "Kehitteillä",
     "delete": "Poista",
     "deleteTitle": "Poistetaanko {{name}}?",
     "deleteHint": "Tämä poistaa profiilin {{name}}, sen tallennukset ja varmuuskopiot pysyvästi. Toimintoa ei voi perua.",

@@ -137,6 +137,8 @@
     "cancel": "Annuleren"
   },
   "profiles": {
+    "trophies": "Trofeeën",
+    "inDevelopment": "In ontwikkeling",
     "delete": "Verwijderen",
     "deleteTitle": "{{name}} verwijderen?",
     "deleteHint": "Dit verwijdert {{name}}, de opgeslagen spellen en back-ups permanent. Dit kan niet ongedaan worden gemaakt.",

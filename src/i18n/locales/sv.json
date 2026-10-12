@@ -137,6 +137,8 @@
     "cancel": "Avbryt"
   },
   "profiles": {
+    "trophies": "Troféer",
+    "inDevelopment": "Under utveckling",
     "delete": "Ta bort",
     "deleteTitle": "Ta bort {{name}}?",
     "deleteHint": "Detta tar permanent bort {{name}}, dess sparfiler och säkerhetskopior. Åtgärden kan inte ångras.",

@@ -137,6 +137,8 @@
     "cancel": "Abbrechen"
   },
   "profiles": {
+    "trophies": "Trophäen",
+    "inDevelopment": "In Entwicklung",
     "delete": "Löschen",
     "deleteTitle": "{{name}} löschen?",
     "deleteHint": "Dadurch werden {{name}}, die Spielstände und Sicherungen dauerhaft gelöscht. Dies kann nicht rückgängig gemacht werden.",

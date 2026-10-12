@@ -325,6 +325,8 @@
     "cancel": "Cancel"
   },
   "profiles": {
+    "trophies": "Trophies",
+    "inDevelopment": "In development",
     "delete": "Delete",
     "deleteTitle": "Delete {{name}}?",
     "deleteHint": "This permanently deletes {{name}}, its saves and backups. This cannot be undone.",

@@ -137,6 +137,8 @@
     "cancel": "Cancelar"
   },
   "profiles": {
+    "trophies": "Trofeos",
+    "inDevelopment": "En desarrollo",
     "delete": "Eliminar",
     "deleteTitle": "¿Eliminar {{name}}?",
     "deleteHint": "Se eliminarán permanentemente {{name}}, sus partidas guardadas y copias de seguridad. Esta acción no se puede deshacer.",

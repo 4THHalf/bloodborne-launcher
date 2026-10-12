@@ -20,7 +20,8 @@ its own complete save set, which can contain multiple characters. Creating a pro
 change which one is active. Choose **Use profile**, or use the **Active profile** selector above Play.
 
 Renaming a profile changes its displayed name without moving its files. Stop the game before
-changing profiles or managing saves. Trophy collection is planned; each profile owns its history.
+changing profiles or managing saves. Each profile shows **Trophies — In development**. Trophy collection and viewing unlocks are
+not available yet; the placeholder has no counts or trophy actions.
 
 ## Delete a profile
 

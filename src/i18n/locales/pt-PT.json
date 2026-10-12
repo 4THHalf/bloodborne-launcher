@@ -137,6 +137,8 @@
     "cancel": "Cancelar"
   },
   "profiles": {
+    "trophies": "Troféus",
+    "inDevelopment": "Em desenvolvimento",
     "delete": "Eliminar",
     "deleteTitle": "Eliminar {{name}}?",
     "deleteHint": "Isto elimina permanentemente {{name}}, os seus dados guardados e cópias de segurança. Esta ação não pode ser anulada.",
