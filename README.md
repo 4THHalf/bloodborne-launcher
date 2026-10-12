@@ -3,6 +3,7 @@
 The independent launcher for [bloodborne-native](https://github.com/bloodborne-native).
 It is included as the `launcher/app/` submodule of bloodborne-mac.
 macOS game integration works today; Windows and Linux integration are planned.
+Player guides and the roadmap are in the [launcher wiki](https://github.com/bloodborne-native/bloodborne-launcher/wiki).
 
 The launcher inside `Bloodborne.app`. It has a game folder check, graphics, controls (controller
 choice and button mapping), game options, user profiles, saves and backups, mods, patches, advanced options and the game's log. It

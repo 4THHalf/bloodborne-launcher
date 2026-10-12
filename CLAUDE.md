@@ -15,7 +15,8 @@ planned. Keep profile/save logic independent of the platform and renderer.
   Applied migration tags and SQL are immutable: add a migration, never rename or rewrite one.
   Test upgrades from the previous schema, rollback/retry, WAL-aware snapshots and data preservation.
   Never reset a user's database to bypass an initialization failure; keep the recovery UI usable.
-- `docs/`: profile/save design and roadmap. The launcher has no wiki; keep relevant guides in bloodborne-mac's docs and wiki in step.
+- `docs/`: profile/save design and roadmap. Keep the launcher wiki in step, and mirror relevant
+  player guides into bloodborne-mac's docs and wiki.
 - `npm ci && npm run check && npm run build`.
 - `cd src-tauri && cargo test && cargo clippy -- -D warnings`.
 - Standalone development: set `BB_REPO` to a bloodborne-runtime checkout for `npm run tauri dev`.
@@ -41,8 +42,9 @@ No `rm -rf` on variable shell paths; no `xargs ... sh -c`.
 
 ## Credits and docs
 
-Keep bbport and shadPS4 credited in README, docs/CREDITS.md and bloodborne-mac's wiki. Any adopted
-third-party code needs credits in those docs, the app's wiki, the commit message and a short code comment naming
+Keep bbport and shadPS4 credited in README, docs/CREDITS.md and the launcher wiki. Any adopted
+third-party code needs credits in those docs, the wiki, the commit message and a short code
+comment naming
 the source repository and commit. Docs use plain, precise English and measured numbers. Status
 progress bars have 20 blocks, one per 5%. Do not claim Windows/Linux game integration or trophy
 persistence before they are implemented and tested.
