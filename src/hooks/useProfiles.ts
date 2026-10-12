@@ -16,7 +16,13 @@ export function useProfiles() {
     onSuccess: async () => {
       await Promise.all([queryKeys.profiles, queryKeys.saves, queryKeys.config].map((queryKey) => client.invalidateQueries({ queryKey })));
     },
-    onError: (error) => toast.error(i18n.t("common.saveFailed"), { description: String(error) }),
+    onError: async (error, change) => {
+      toast.error(i18n.t("common.saveFailed"), { description: String(error) });
+      // Deletion may have committed its tombstone before a filesystem cleanup error.
+      if (change.action === "delete") {
+        await Promise.all([queryKeys.profiles, queryKeys.saves, queryKeys.config].map((queryKey) => client.invalidateQueries({ queryKey })));
+      }
+    },
   });
   return { ...query, change: mutation.mutateAsync, busy: pending > 0, running };
 }

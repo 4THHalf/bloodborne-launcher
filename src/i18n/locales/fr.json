@@ -126,6 +126,10 @@
     "cancel": "Annuler"
   },
   "profiles": {
+    "delete": "Supprimer",
+    "deleteTitle": "Supprimer {{name}} ?",
+    "deleteHint": "Cela supprime définitivement {{name}}, ses sauvegardes et ses copies de secours. Cette action est irréversible.",
+    "deleteActiveHint": "Passez à un autre profil avant de supprimer celui-ci.",
     "storageTitle": "Impossible de charger les profils",
     "storageHelp": "Vos données n’ont pas été réinitialisées. Corrigez l’erreur et réessayez, ou ouvrez le dossier de données pour obtenir de l’aide.",
     "retry": "Réessayer",

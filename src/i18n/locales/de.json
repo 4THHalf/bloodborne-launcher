@@ -126,6 +126,10 @@
     "cancel": "Abbrechen"
   },
   "profiles": {
+    "delete": "Löschen",
+    "deleteTitle": "{{name}} löschen?",
+    "deleteHint": "Dadurch werden {{name}}, die Spielstände und Sicherungen dauerhaft gelöscht. Dies kann nicht rückgängig gemacht werden.",
+    "deleteActiveHint": "Wechseln Sie zu einem anderen Profil, bevor Sie dieses löschen.",
     "storageTitle": "Profile konnten nicht geladen werden",
     "storageHelp": "Ihre Daten wurden nicht zurückgesetzt. Beheben Sie den Fehler und versuchen Sie es erneut, oder öffnen Sie den Datenordner, um Hilfe zu erhalten.",
     "retry": "Erneut versuchen",

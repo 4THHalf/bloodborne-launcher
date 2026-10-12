@@ -22,6 +22,17 @@ change which one is active. Choose **Use profile**, or use the **Active profile*
 Renaming a profile changes its displayed name without moving its files. Stop the game before
 changing profiles or managing saves. Trophy collection is planned; each profile owns its history.
 
+## Delete a profile
+
+Switch to a different profile first, then press **Delete** on the profile you want to remove.
+The confirmation names the profile and warns that its saves and backups will be permanently
+deleted. Press **Cancel** to keep it, or **Delete** to confirm. The active and last profiles are
+protected, and the game must be stopped.
+
+Deleting the original migrated profile preserves the shared shader cache. If some files cannot
+be removed, the launcher reports the error and keeps cleanup pending. Resolve the file error
+and restart with the game stopped to retry. The deleted profile will not reappear.
+
 ## Saves and backups
 
 The **Saves** tab shows the active profile's save size, modification time and backups. Character

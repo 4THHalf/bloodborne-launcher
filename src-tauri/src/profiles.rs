@@ -20,6 +20,7 @@ pub struct ProfileList {
     pub profiles: Vec<saves::Profile>,
 }
 async fn registry(connection: &mut SqliteConnection) -> Result<Option<Registry>> {
+    // The original row remains as a tombstone if deleted: its root still owns shared GPU caches.
     let row = sqlx::query("SELECT p.name, s.original_user_dir, s.active_profile_id FROM launcher_state s JOIN profiles p ON p.id='original' WHERE s.id=1")
         .fetch_optional(connection).await.map_err(err)?;
     row.map(|r| {
@@ -79,7 +80,12 @@ async fn owned(
     data: &Path,
     state: &Registry,
 ) -> Result<Vec<saves::Profile>> {
-    let mut physical = saves::list(data, &state.original_user_dir)?;
+    let deleted: Vec<String> =
+        sqlx::query_scalar("SELECT id FROM profiles WHERE deleted_at IS NOT NULL")
+            .fetch_all(&mut *connection)
+            .await
+            .map_err(err)?;
+    let mut physical = saves::list_excluding(data, &state.original_user_dir, &deleted)?;
     let mut tx = connection
         .begin_with("BEGIN IMMEDIATE")
         .await
@@ -121,7 +127,7 @@ async fn owned(
             .map_err(err)?;
         }
     }
-    let ids: Vec<String> = sqlx::query_scalar("SELECT id FROM profiles")
+    let ids: Vec<String> = sqlx::query_scalar("SELECT id FROM profiles WHERE deleted_at IS NULL")
         .fetch_all(&mut *tx)
         .await
         .map_err(err)?;
@@ -257,6 +263,10 @@ pub fn change(
             }
             Ok(())
         }),
+        "delete" => {
+            let op = mark_deleted(data, id)?;
+            cleanup_deleted(data, &state, id, &op)
+        }
         "create" => {
             let name = name(new_name.unwrap_or_default(), &profiles, None)?;
             if source.is_some() {
@@ -274,14 +284,82 @@ pub fn change(
         _ => Err("Unknown profile operation.".into()),
     }
 }
+fn mark_deleted(data: &Path, id: &str) -> Result<String> {
+    db::block(async {
+        let mut connection = db::connect(data).await?;
+        let mut tx = connection
+            .begin_with("BEGIN IMMEDIATE")
+            .await
+            .map_err(err)?;
+        let active: String =
+            sqlx::query_scalar("SELECT active_profile_id FROM launcher_state WHERE id=1")
+                .fetch_one(&mut *tx)
+                .await
+                .map_err(err)?;
+        if active == id {
+            return Err("Switch to another profile before deleting this one.".into());
+        }
+        let count: i64 =
+            sqlx::query_scalar("SELECT COUNT(*) FROM profiles WHERE deleted_at IS NULL")
+                .fetch_one(&mut *tx)
+                .await
+                .map_err(err)?;
+        if count <= 1 {
+            return Err("Keep at least one profile.".into());
+        }
+        let updated = sqlx::query(
+            "UPDATE profiles SET deleted_at=?,name_key=? WHERE id=? AND deleted_at IS NULL",
+        )
+        .bind(db::now())
+        .bind(format!("\u{1}deleted:{id}"))
+        .bind(id)
+        .execute(&mut *tx)
+        .await
+        .map_err(err)?;
+        if updated.rows_affected() != 1 {
+            return Err("Unknown profile.".into());
+        }
+        sqlx::query("DELETE FROM trophy_unlocks WHERE profile_id=?")
+            .bind(id)
+            .execute(&mut *tx)
+            .await
+            .map_err(err)?;
+        sqlx::query("DELETE FROM backups WHERE save_set_id IN (SELECT id FROM save_sets WHERE profile_id=?)").bind(id).execute(&mut *tx).await.map_err(err)?;
+        let op = db::operation_id();
+        sqlx::query("INSERT INTO pending_operations (id,profile_id,kind,status,created_at) VALUES (?,?,'delete_profile','pending',?)").bind(&op).bind(id).bind(db::now()).execute(&mut *tx).await.map_err(err)?;
+        tx.commit().await.map_err(err)?;
+        Ok(op)
+    })
+}
+fn cleanup_deleted(data: &Path, state: &Registry, id: &str, op: &str) -> Result<()> {
+    let result = saves::delete_profile_files(data, &state.original_user_dir, id);
+    // Failed cleanup stays pending. Startup can resume it idempotently without re-adoption.
+    if result.is_ok() {
+        finish(data, op, &result)?;
+    }
+    result.map_err(|e| format!("Profile removed, but some files could not be deleted: {e}. Resolve the file error and restart the launcher to retry cleanup."))
+}
 /// Only called at process startup, before commands or background work can begin.
 pub fn recover_operations(data: &Path) -> Result<()> {
+    let pending = db::block(async {
+        let mut connection = db::connect(data).await?;
+        let entries: Vec<(String, String)> = sqlx::query_as("SELECT o.id,o.profile_id FROM pending_operations o JOIN profiles p ON p.id=o.profile_id WHERE o.kind='delete_profile' AND o.status='pending' AND p.deleted_at IS NOT NULL").fetch_all(&mut connection).await.map_err(err)?;
+        Ok(entries)
+    })?;
+    if !pending.is_empty() {
+        let state = require(data)?;
+        for (op, id) in pending {
+            if let Err(error) = cleanup_deleted(data, &state, &id, &op) {
+                eprintln!("Profile cleanup: {error}");
+            }
+        }
+    }
     db::block(async {
         let mut connection = db::connect(data).await?;
         if let Some(state) = registry(&mut connection).await? {
             owned(&mut connection, data, &state).await?;
         }
-        sqlx::query("UPDATE pending_operations SET status='interrupted',error='Launcher stopped before completion; published files reconciled at startup' WHERE status='pending'")
+        sqlx::query("UPDATE pending_operations SET status='interrupted',error='Launcher stopped before completion; published files reconciled at startup' WHERE status='pending' AND kind!='delete_profile'")
             .execute(&mut connection).await.map_err(err)?;
         Ok(())
     })
@@ -331,6 +409,141 @@ mod tests {
         assert_eq!(selected(&f.0).unwrap().name, "Renamed");
         assert!(change(&f.0, "create", "", Some("pablo"), None).is_err());
         assert!(change(&f.0, "select", "../escape", None, None).is_err());
+    }
+    fn second(f: &Fixture) -> String {
+        change(&f.0, "create", "", Some("Second"), None).unwrap();
+        list(&f.0, &f.original())
+            .unwrap()
+            .profiles
+            .into_iter()
+            .find(|p| p.name == "Second")
+            .unwrap()
+            .id
+    }
+    #[test]
+    fn deletion_removes_owned_saves_backups_and_trophies_only() {
+        let f = Fixture::new();
+        let original = f.original();
+        initialize(&f.0, &original, "original", "First").unwrap();
+        let id = second(&f);
+        let user = saves::user_dir(&f.0, &original, &id).unwrap();
+        fs::create_dir_all(user.join("savedata")).unwrap();
+        fs::write(user.join("savedata/data"), b"synthetic deleted save").unwrap();
+        saves::backup(&f.0, &original, &id).unwrap();
+        db::block(async {
+            let mut db = db::connect(&f.0).await?;
+            sqlx::query("INSERT INTO trophy_unlocks VALUES (?,'synthetic',1,1)")
+                .bind(&id)
+                .execute(&mut db)
+                .await
+                .map_err(err)?;
+            Ok(())
+        })
+        .unwrap();
+        change(&f.0, "delete", &id, None, None).unwrap();
+        assert!(!f.0.join("save-profiles").join(&id).exists());
+        assert!(!f.0.join("save-backups").join(&id).exists());
+        assert_eq!(selected(&f.0).unwrap().id, "original");
+        assert_eq!(list(&f.0, &original).unwrap().profiles.len(), 1);
+        db::block(async {
+            let mut db = db::connect(&f.0).await?;
+            for query in [
+                "SELECT COUNT(*) FROM trophy_unlocks WHERE profile_id=?",
+                "SELECT COUNT(*) FROM backups WHERE save_set_id=?",
+            ] {
+                let count: i64 = sqlx::query_scalar(query)
+                    .bind(&id)
+                    .fetch_one(&mut db)
+                    .await
+                    .map_err(err)?;
+                assert_eq!(count, 0);
+            }
+            Ok(())
+        })
+        .unwrap();
+        change(&f.0, "create", "", Some("Second"), None).unwrap();
+    }
+    #[test]
+    fn active_last_unknown_and_repeated_deletions_are_rejected() {
+        let f = Fixture::new();
+        initialize(&f.0, &f.original(), "original", "First").unwrap();
+        assert!(change(&f.0, "delete", "original", None, None).is_err());
+        let id = second(&f);
+        assert!(change(&f.0, "delete", "original", None, None).is_err());
+        assert!(change(&f.0, "delete", "../outside", None, None).is_err());
+        change(&f.0, "delete", &id, None, None).unwrap();
+        assert!(change(&f.0, "delete", &id, None, None).is_err());
+        assert_eq!(selected(&f.0).unwrap().id, "original");
+    }
+    #[test]
+    fn deleting_original_preserves_shared_cache_and_never_readopts_it() {
+        let f = Fixture::new();
+        let original = f.original();
+        fs::create_dir_all(original.join("savedata")).unwrap();
+        fs::write(original.join("savedata/data"), b"synthetic legacy save").unwrap();
+        fs::create_dir(original.join("shader_cache")).unwrap();
+        fs::write(original.join("shader_cache/synthetic"), b"synthetic cache").unwrap();
+        initialize(&f.0, &original, "original", "First").unwrap();
+        let id = second(&f);
+        change(&f.0, "select", &id, None, None).unwrap();
+        change(&f.0, "delete", "original", None, None).unwrap();
+        recover_operations(&f.0).unwrap();
+        assert!(!original.join("savedata").exists());
+        assert_eq!(
+            fs::read(original.join("shader_cache/synthetic")).unwrap(),
+            b"synthetic cache"
+        );
+        assert_eq!(selected(&f.0).unwrap().id, id);
+        assert_eq!(list(&f.0, &original).unwrap().profiles.len(), 1);
+    }
+    #[test]
+    fn interrupted_deletion_resumes_cleanup_without_reappearing() {
+        let f = Fixture::new();
+        let original = f.original();
+        initialize(&f.0, &original, "original", "First").unwrap();
+        let id = second(&f);
+        saves::backup(&f.0, &original, &id).unwrap();
+        let op = mark_deleted(&f.0, &id).unwrap();
+        fs::remove_dir_all(f.0.join("save-profiles").join(&id)).unwrap();
+        assert_eq!(list(&f.0, &original).unwrap().profiles.len(), 1);
+        recover_operations(&f.0).unwrap();
+        recover_operations(&f.0).unwrap();
+        assert!(!f.0.join("save-backups").join(&id).exists());
+        db::block(async {
+            let mut db = db::connect(&f.0).await?;
+            let status: String =
+                sqlx::query_scalar("SELECT status FROM pending_operations WHERE id=?")
+                    .bind(&op)
+                    .fetch_one(&mut db)
+                    .await
+                    .map_err(err)?;
+            assert_eq!(status, "complete");
+            Ok(())
+        })
+        .unwrap();
+    }
+    #[test]
+    #[cfg(unix)]
+    fn deletion_cleanup_rejects_symlinked_folders_without_touching_target() {
+        let f = Fixture::new();
+        let original = f.original();
+        initialize(&f.0, &original, "original", "First").unwrap();
+        let id = second(&f);
+        mark_deleted(&f.0, &id).unwrap();
+        let folder = f.0.join("save-profiles").join(&id);
+        fs::remove_dir_all(&folder).unwrap();
+        let outside = f.0.join("outside");
+        fs::create_dir(&outside).unwrap();
+        fs::write(outside.join("keep"), b"synthetic protected file").unwrap();
+        std::os::unix::fs::symlink(&outside, &folder).unwrap();
+        recover_operations(&f.0).unwrap();
+        assert_eq!(
+            fs::read(outside.join("keep")).unwrap(),
+            b"synthetic protected file"
+        );
+        assert_eq!(list(&f.0, &original).unwrap().profiles.len(), 1);
+        fs::remove_file(&folder).unwrap();
+        recover_operations(&f.0).unwrap();
     }
     #[test]
     fn new_profiles_never_copy_existing_saves() {

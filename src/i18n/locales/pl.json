@@ -126,6 +126,10 @@
     "cancel": "Anuluj"
   },
   "profiles": {
+    "delete": "Usuń",
+    "deleteTitle": "Usunąć {{name}}?",
+    "deleteHint": "Spowoduje to trwałe usunięcie {{name}}, zapisów gry i kopii zapasowych. Tej operacji nie można cofnąć.",
+    "deleteActiveHint": "Przełącz się na inny profil przed usunięciem tego.",
     "storageTitle": "Nie można wczytać profili",
     "storageHelp": "Dane nie zostały zresetowane. Usuń przyczynę błędu i spróbuj ponownie lub otwórz folder danych, aby uzyskać pomoc.",
     "retry": "Spróbuj ponownie",

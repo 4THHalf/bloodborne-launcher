@@ -126,6 +126,10 @@
     "cancel": "Annulla"
   },
   "profiles": {
+    "delete": "Elimina",
+    "deleteTitle": "Eliminare {{name}}?",
+    "deleteHint": "{{name}}, i suoi salvataggi e le copie di sicurezza verranno eliminati definitivamente. Questa azione non può essere annullata.",
+    "deleteActiveHint": "Passa a un altro profilo prima di eliminare questo.",
     "storageTitle": "Impossibile caricare i profili",
     "storageHelp": "I dati non sono stati reimpostati. Risolvi l’errore e riprova, oppure apri la cartella dei dati per ricevere assistenza.",
     "retry": "Riprova",

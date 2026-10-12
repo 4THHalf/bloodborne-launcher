@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Badge, Button, Input, Label } from "@/components/ui";
+import { DeleteProfileDialog } from "@/pages/profiles/DeleteProfileDialog";
 import type { ProfileChange, SaveProfile } from "@/lib";
 
-export function ProfileCard({ profile, active, disabled, onChange }: {
-  profile: SaveProfile; active: boolean; disabled: boolean; onChange: (change: ProfileChange) => Promise<void>;
+export function ProfileCard({ profile, active, disabled, busy, onChange }: {
+  profile: SaveProfile; active: boolean; disabled: boolean; busy: boolean; onChange: (change: ProfileChange) => Promise<void>;
 }) {
   const { t } = useTranslation();
   const [editing, setEditing] = useState(false);
@@ -14,6 +15,8 @@ export function ProfileCard({ profile, active, disabled, onChange }: {
       <h2 className="flex-1 font-medium">{profile.name}</h2>
       {active ? <Badge>{t("saves.active")}</Badge> : <Button size="sm" disabled={disabled} onClick={() => onChange({ action: "select", id: profile.id }).catch(() => {})}>{t("profiles.use")}</Button>}
       <Button size="sm" variant="secondary" disabled={disabled} onClick={() => { setName(profile.name); setEditing(true); }}>{t("profiles.rename")}</Button>
+      <DeleteProfileDialog profile={profile} active={active} disabled={disabled} busy={busy}
+        onDelete={() => onChange({ action: "delete", id: profile.id })} />
     </div>
     {editing && <form className="mt-3 flex items-center gap-3" onSubmit={async (event) => {
       event.preventDefault();

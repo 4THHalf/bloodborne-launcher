@@ -126,6 +126,10 @@
     "cancel": "Cancelar"
   },
   "profiles": {
+    "delete": "Eliminar",
+    "deleteTitle": "Eliminar {{name}}?",
+    "deleteHint": "Isto elimina permanentemente {{name}}, os seus dados guardados e cópias de segurança. Esta ação não pode ser anulada.",
+    "deleteActiveHint": "Mude para outro perfil antes de eliminar este.",
     "storageTitle": "Não foi possível carregar os perfis",
     "storageHelp": "Os seus dados não foram repostos. Resolva o erro e tente novamente, ou abra a pasta de dados para obter ajuda.",
     "retry": "Tentar novamente",

@@ -220,6 +220,9 @@ pub fn user_dir(data: &Path, original: &Path, id: &str) -> Result<PathBuf> {
     Ok(user)
 }
 pub fn list(data: &Path, original: &Path) -> Result<Vec<Profile>> {
+    list_excluding(data, original, &[])
+}
+pub fn list_excluding(data: &Path, original: &Path, excluded: &[String]) -> Result<Vec<Profile>> {
     let mut ids = vec![("original".to_string(), String::new())];
     let root = data.join("save-profiles");
     if root.try_exists().map_err(fail)? {
@@ -227,7 +230,7 @@ pub fn list(data: &Path, original: &Path) -> Result<Vec<Profile>> {
         for entry in fs::read_dir(&root).map_err(fail)? {
             let entry = entry.map_err(fail)?;
             let id = entry.file_name().to_string_lossy().into_owned();
-            if id.starts_with('.') {
+            if id.starts_with('.') || excluded.contains(&id) {
                 continue;
             }
             validate(&id)?;
@@ -237,6 +240,7 @@ pub fn list(data: &Path, original: &Path) -> Result<Vec<Profile>> {
     }
     ids[1..].sort_by(|a, b| a.1.cmp(&b.1).then(a.0.cmp(&b.0)));
     ids.into_iter()
+        .filter(|(id, _)| !excluded.contains(id))
         .map(|(id, name)| {
             let path = user_dir(data, original, &id)?;
             let (bytes, modified) = stats(&path.join("savedata"))?;
@@ -270,6 +274,27 @@ pub fn list(data: &Path, original: &Path) -> Result<Vec<Profile>> {
             })
         })
         .collect()
+}
+// Only profile-owned files are removed; the original user root also holds shared GPU caches.
+pub fn delete_profile_files(data: &Path, original: &Path, id: &str) -> Result<()> {
+    validate(id)?;
+    let saves = if id == "original" {
+        original.join("savedata")
+    } else {
+        data.join("save-profiles").join(id)
+    };
+    for folder in [saves, data.join("save-backups").join(id)] {
+        check_ancestors(&folder)?;
+        match fs::symlink_metadata(&folder) {
+            Ok(_) => {
+                plain_directory(&folder)?;
+                fs::remove_dir_all(&folder).map_err(fail)?;
+            }
+            Err(e) if e.kind() == std::io::ErrorKind::NotFound => {}
+            Err(e) => return Err(fail(e)),
+        }
+    }
+    Ok(())
 }
 pub fn create(data: &Path, original: &Path, name: &str, source: Option<&str>) -> Result<String> {
     let source = source.map(|id| user_dir(data, original, id)).transpose()?;

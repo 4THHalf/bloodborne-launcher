@@ -8,6 +8,13 @@
       "when": 1791837984948,
       "tag": "0000_launcher_storage",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1791840525026,
+      "tag": "0001_profile_deletion",
+      "breakpoints": true
     }
   ]
 }

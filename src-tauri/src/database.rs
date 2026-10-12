@@ -38,10 +38,16 @@ pub async fn connect(data: &Path) -> Result<SqliteConnection> {
 pub fn err(error: impl std::fmt::Display) -> String {
     error.to_string()
 }
-const MIGRATIONS: &[(&str, &str)] = &[(
-    "0000_launcher_storage",
-    include_str!("../../src/db/migrations/0000_launcher_storage.sql"),
-)];
+const MIGRATIONS: &[(&str, &str)] = &[
+    (
+        "0000_launcher_storage",
+        include_str!("../../src/db/migrations/0000_launcher_storage.sql"),
+    ),
+    (
+        "0001_profile_deletion",
+        include_str!("../../src/db/migrations/0001_profile_deletion.sql"),
+    ),
+];
 // This first migration briefly shipped under the original Drizzle-generated name.
 // Both identities describe exactly the same SQL; never rerun its DDL to repair history.
 const INITIAL_ALIAS: &str = "0000_giant_rage";
@@ -248,22 +254,35 @@ mod tests {
             .unwrap()
             .join(operation_id())
     }
+    async fn initial_database(root: &Path) -> Result<SqliteConnection> {
+        saves::ensure_directory(root)?;
+        let mut db = SqliteConnection::connect_with(
+            &SqliteConnectOptions::new()
+                .filename(path(root))
+                .create_if_missing(true)
+                .foreign_keys(true),
+        )
+        .await
+        .map_err(err)?;
+        execute_sql(&mut db, MIGRATIONS[0].1).await?;
+        Ok(db)
+    }
     async fn seed(db: &mut SqliteConnection) -> Result<()> {
-        execute_sql(db, "INSERT INTO profiles VALUES ('owner','Hunter','hunter',123); --> statement-breakpoint INSERT INTO save_sets VALUES ('set','owner','/synthetic'); --> statement-breakpoint INSERT INTO backups VALUES ('backup','set','/synthetic-backup',124,456); --> statement-breakpoint INSERT INTO trophy_unlocks VALUES ('owner','synthetic-title',1,125)").await
+        execute_sql(db, "INSERT INTO profiles (id,name,name_key,created_at) VALUES ('owner','Hunter','hunter',123); --> statement-breakpoint INSERT INTO save_sets VALUES ('set','owner','/synthetic'); --> statement-breakpoint INSERT INTO backups VALUES ('backup','set','/synthetic-backup',124,456); --> statement-breakpoint INSERT INTO trophy_unlocks VALUES ('owner','synthetic-title',1,125)").await
     }
     #[test]
     fn renamed_migration_preserves_records_and_original_timestamp() {
         let root = fixture();
         block(async {
-            let mut db = connect(&root).await?;
+            let mut db = initial_database(&root).await?;
             seed(&mut db).await?;
-            sqlx::query("DROP TABLE __launcher_migrations").execute(&mut db).await.map_err(err)?;
             execute_sql(&mut db, "CREATE TABLE __launcher_migrations (tag TEXT PRIMARY KEY, applied_at INTEGER NOT NULL); --> statement-breakpoint INSERT INTO __launcher_migrations VALUES ('0000_giant_rage',123)").await?;
             drop(db);
             for _ in 0..2 {
                 let mut db = connect(&root).await?;
                 let history: Vec<(String, i64, String)> = sqlx::query_as("SELECT tag, applied_at, migration_sql FROM __launcher_migrations").fetch_all(&mut db).await.map_err(err)?;
-                assert_eq!(history, vec![(MIGRATIONS[0].0.into(),123,MIGRATIONS[0].1.into())]);
+                assert_eq!(history.len(), MIGRATIONS.len());
+                assert!(history.contains(&(MIGRATIONS[0].0.into(),123,MIGRATIONS[0].1.into())));
                 for table in ["profiles", "save_sets", "backups", "trophy_unlocks"] {
                     let count: i64 = sqlx::query_scalar(&format!("SELECT COUNT(*) FROM {table}")).fetch_one(&mut db).await.map_err(err)?;
                     assert_eq!(count,1);
@@ -277,13 +296,10 @@ mod tests {
     fn exact_untracked_schema_is_adopted_but_partial_schema_is_rejected() {
         let root = fixture();
         block(async {
-            let mut db = connect(&root).await?;
+            let mut db = initial_database(&root).await?;
             seed(&mut db).await?;
-            sqlx::query("DROP TABLE __launcher_migrations")
-                .execute(&mut db)
-                .await
-                .map_err(err)?;
-            migrate(&mut db).await?;
+            // Check adoption of the exact initial schema without applying later migrations yet.
+            migrate_with(&mut db, &MIGRATIONS[..1]).await?;
             sqlx::query("DROP TABLE __launcher_migrations")
                 .execute(&mut db)
                 .await
@@ -360,6 +376,7 @@ mod tests {
             seed(&mut db).await?;
             let bad = [
                 MIGRATIONS[0],
+                MIGRATIONS[1],
                 (
                     "synthetic_upgrade",
                     "CREATE TABLE upgrade_data(id INTEGER); --> statement-breakpoint INVALID SQL",
@@ -386,6 +403,7 @@ mod tests {
                 &mut db,
                 &[
                     MIGRATIONS[0],
+                    MIGRATIONS[1],
                     ("synthetic_upgrade", "CREATE TABLE upgrade_data(id INTEGER)"),
                 ],
             )
@@ -417,6 +435,7 @@ mod tests {
                 &mut db,
                 &[
                     MIGRATIONS[0],
+                    MIGRATIONS[1],
                     ("synthetic_upgrade", "CREATE TABLE upgrade_data(id INTEGER)")
                 ]
             )
@@ -432,7 +451,7 @@ mod tests {
                 .fetch_one(&mut db)
                 .await
                 .map_err(err)?;
-            assert_eq!(count, 1);
+            assert_eq!(count, MIGRATIONS.len() as i64);
             Ok(())
         })
         .unwrap();

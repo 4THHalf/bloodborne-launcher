@@ -126,6 +126,10 @@
     "cancel": "Peruuta"
   },
   "profiles": {
+    "delete": "Poista",
+    "deleteTitle": "Poistetaanko {{name}}?",
+    "deleteHint": "Tämä poistaa profiilin {{name}}, sen tallennukset ja varmuuskopiot pysyvästi. Toimintoa ei voi perua.",
+    "deleteActiveHint": "Vaihda toiseen profiiliin ennen tämän poistamista.",
     "storageTitle": "Profiileja ei voitu ladata",
     "storageHelp": "Tietojasi ei ole nollattu. Korjaa virhe ja yritä uudelleen tai avaa tietokansio saadaksesi apua.",
     "retry": "Yritä uudelleen",

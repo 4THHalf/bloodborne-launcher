@@ -711,7 +711,12 @@ fn main() {
         .manage(AppState { paths, game: Arc::new(Mutex::new(Game { child: None })) })
         // `open Bloodborne.app --args --play`: start the game at once (shortcuts, scripted tests).
         .setup(|app| {
-            if let Err(error) = profiles::recover_operations(&app.state::<AppState>().paths.data) { eprintln!("Profile recovery: {error}"); }
+            let state = app.state::<AppState>();
+            let game = state.game.lock().map_err(|e| std::io::Error::other(e.to_string()))?;
+            if saves_idle(&game).is_ok() {
+                if let Err(error) = profiles::recover_operations(&state.paths.data) { eprintln!("Profile recovery: {error}"); }
+            }
+            drop(game);
             if std::env::args().any(|a| a == "--play") {
                 let handle = app.handle().clone();
                 let state = app.state::<AppState>();

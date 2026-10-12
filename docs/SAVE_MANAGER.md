@@ -27,7 +27,7 @@ save set, which can contain multiple characters. The Saves tab shows the active 
 The active profile is also visible next to Play. Names are trimmed and normalized with Unicode lowercase for duplicate checks;
 ids and save paths remain unchanged on rename. Every new profile starts with empty saves,
 backups and trophy history; the backend rejects copy requests. Existing saves are adopted only
-by the one-time migration from launchers without profile ownership. Profile deletion is not implemented.
+by the one-time migration from launchers without profile ownership. Inactive profiles can be deleted with a confirmation modal.
 
 ## SQLite and Drizzle
 
@@ -111,16 +111,43 @@ The launcher is a single instance, serializing its file operations. An externall
 at exactly the same time remains outside this launcher contract. Backups are not automatically
 pruned yet. Restoring a save leaves profile identity and trophy history intact.
 
+## Profile deletion
+
+The profile card's Delete action opens a shadcn `AlertDialog` naming the profile and warning
+that its saves and backups will be permanently removed. Initial focus goes to Cancel. The
+active profile cannot be deleted: switch to another profile first. The last profile is protected.
+All deletion commands use the same game mutex and external-game check as other save operations.
+Profile creation also uses the shared shadcn `Dialog` component.
+
+Migration `0001_profile_deletion` adds a nullable `deleted_at` marker without changing earlier
+migration SQL. Deletion commits the marker and a pending cleanup operation together before
+removing files. Backup and trophy rows are removed, and the name becomes available for reuse.
+The profile and save-set rows remain as recovery tombstones; they are excluded from normal
+queries and prevent leftover manifests or the original folder from being adopted again.
+
+Remove the named profile's managed directory and its backup directory. For the original
+migrated profile, remove only `savedata/` and its backups, preserving the original root's shared
+shader/pipeline caches. No other profile's files are removed. Folder ancestors are checked and
+symlinked directories are rejected. Filesystem removal is idempotent; it is not part of the
+SQLite transaction and cannot be rolled back after confirmation.
+
+An interrupted or failed cleanup remains pending and is retried at startup when no game is
+running. Cleanup failure reports the file error and asks for a restart after resolving it;
+the deleted profile stays hidden and other profiles remain usable. Successful cleanup marks
+the operation complete. Database-upgrade snapshots contain metadata, not copies of game saves.
+
 ## Validation and boundaries
 
-Twenty-two native tests use temporary directories with synthetic data only. They cover migration rollback and retry, renamed/missing migration history, changed SQL,
+Twenty-seven native tests use temporary directories with synthetic data only. They cover migration rollback and retry, renamed/missing migration history, changed SQL,
 unsupported newer versions, concurrent startup, WAL-aware upgrade snapshots and failed snapshot
 gates, schema mismatch, ownership validation,
 foreign keys, missing/corrupt storage, atomic adoption, completed-copy recovery, name uniqueness, fresh-save creation despite existing migrated saves,
 complete-set copying, pre-restore copies, interrupted restore, unsafe paths, active-save launch
-routing, and preservation of trophy history on restore. Browser checks use the in-memory preview
+routing, and preservation of trophy history on restore, deletion of owned saves/backups/trophies, active and
+last-profile protection, original-cache preservation, interrupted deletion and unsafe cleanup paths. Browser checks use the in-memory preview
 backend for both fresh and upgrade setup, mandatory onboarding, identity operations and contextual
-save management, plus persistent configuration/database failures and successful manual retry. The creation modal is checked for focus, cancellation and duplicate-name retry. They do not exercise the real game or capture screenshots.
+save management, plus persistent configuration/database failures and successful manual retry. The shadcn creation and deletion modals are checked for focus, cancellation, duplicate-name retry,
+confirmed deletion and active/running-profile protection. They do not exercise the real game or capture screenshots.
 
 Character parsing, editing and actual trophy collection remain future work. Game-derived files
 and analysis are never committed. Tests never write the player's save or settings.

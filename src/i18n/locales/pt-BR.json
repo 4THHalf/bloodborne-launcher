@@ -312,6 +312,10 @@
     "cancel": "Cancelar"
   },
   "profiles": {
+    "delete": "Excluir",
+    "deleteTitle": "Excluir {{name}}?",
+    "deleteHint": "Isso exclui permanentemente {{name}}, seus saves e backups. Esta ação não pode ser desfeita.",
+    "deleteActiveHint": "Mude para outro perfil antes de excluir este.",
     "storageTitle": "Não foi possível carregar os perfis",
     "storageHelp": "Seus dados não foram redefinidos. Resolva o erro e tente novamente, ou abra a pasta de dados para obter ajuda.",
     "retry": "Tentar novamente",

@@ -17,7 +17,7 @@ export function ProfilesPage() {
         onCreate={(name) => change({ action: "create", id: "", name })} />
     </div>
     <SettingsSection title={t("profiles.title")}>
-      {data?.profiles.map((profile) => <ProfileCard key={profile.id} profile={profile} active={profile.id === data.active} disabled={disabled} onChange={change} />)}
+      {data?.profiles.map((profile) => <ProfileCard key={profile.id} profile={profile} active={profile.id === data.active} disabled={disabled} busy={busy} onChange={change} />)}
     </SettingsSection>
   </>);
 }

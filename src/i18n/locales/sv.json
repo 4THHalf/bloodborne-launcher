@@ -126,6 +126,10 @@
     "cancel": "Avbryt"
   },
   "profiles": {
+    "delete": "Ta bort",
+    "deleteTitle": "Ta bort {{name}}?",
+    "deleteHint": "Detta tar permanent bort {{name}}, dess sparfiler och säkerhetskopior. Åtgärden kan inte ångras.",
+    "deleteActiveHint": "Byt till en annan profil innan du tar bort denna.",
     "storageTitle": "Det gick inte att läsa in profiler",
     "storageHelp": "Dina data har inte återställts. Åtgärda felet och försök igen, eller öppna datamappen för att få hjälp.",
     "retry": "Försök igen",

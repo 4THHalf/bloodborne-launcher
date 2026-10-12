@@ -1,0 +1,1 @@
+ALTER TABLE `profiles` ADD `deleted_at` integer;

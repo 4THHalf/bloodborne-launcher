@@ -5,6 +5,7 @@ export const profiles = sqliteTable("profiles", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
   nameKey: text("name_key").notNull().unique(),
+  deletedAt: integer("deleted_at"),
   createdAt: integer("created_at").notNull(),
 });
 export const saveSets = sqliteTable("save_sets", {

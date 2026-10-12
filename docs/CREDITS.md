@@ -18,3 +18,10 @@ The Drizzle-to-Tauri SQL adapter in `src/db/client.ts` is adapted from
 [leari-mail/leari, commit 5876482](https://github.com/leari-mail/leari/tree/5876482)
 by Pablo Souza (MIT). Its service/hook organization and shared SQLite access informed this
 launcher design. The [original MIT notice](licenses/leari-MIT.txt) is retained here.
+
+## shadcn dialogs
+
+`src/components/ui/dialog.tsx` and `alert-dialog.tsx` were generated with shadcn CLI 4.21.4
+using the project's base-nova registry. The Base UI component templates are from
+[shadcn-ui/ui, reference 30a58d4](https://github.com/shadcn-ui/ui/tree/30a58d4498f270af1c1e981a7d78a15cf5740841/apps/v4/registry/bases/base/ui).
+The [upstream MIT notice](licenses/shadcn-ui-MIT.txt) is retained here.

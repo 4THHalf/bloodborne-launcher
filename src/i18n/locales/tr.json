@@ -126,6 +126,10 @@
     "cancel": "İptal"
   },
   "profiles": {
+    "delete": "Sil",
+    "deleteTitle": "{{name}} silinsin mi?",
+    "deleteHint": "Bu işlem {{name}}, kayıtları ve yedeklerini kalıcı olarak siler. Bu işlem geri alınamaz.",
+    "deleteActiveHint": "Bu profili silmeden önce başka bir profile geçin.",
     "storageTitle": "Profiller yüklenemedi",
     "storageHelp": "Verileriniz sıfırlanmadı. Hatayı giderip yeniden deneyin veya yardım almak için veri klasörünü açın.",
     "retry": "Yeniden dene",

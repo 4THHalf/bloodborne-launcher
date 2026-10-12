@@ -325,6 +325,10 @@
     "cancel": "Cancel"
   },
   "profiles": {
+    "delete": "Delete",
+    "deleteTitle": "Delete {{name}}?",
+    "deleteHint": "This permanently deletes {{name}}, its saves and backups. This cannot be undone.",
+    "deleteActiveHint": "Switch to another profile before deleting this one.",
     "storageTitle": "Unable to load profiles",
     "storageHelp": "Your data has not been reset. Retry after resolving the error, or open the data folder to get help.",
     "retry": "Retry",

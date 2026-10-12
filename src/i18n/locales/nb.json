@@ -126,6 +126,10 @@
     "cancel": "Avbryt"
   },
   "profiles": {
+    "delete": "Slett",
+    "deleteTitle": "Slette {{name}}?",
+    "deleteHint": "Dette sletter {{name}}, lagrede spill og sikkerhetskopier permanent. Handlingen kan ikke angres.",
+    "deleteActiveHint": "Bytt til en annen profil før du sletter denne.",
     "storageTitle": "Kunne ikke laste profiler",
     "storageHelp": "Dataene dine er ikke nullstilt. Rett feilen og prøv igjen, eller åpne datamappen for å få hjelp.",
     "retry": "Prøv igjen",

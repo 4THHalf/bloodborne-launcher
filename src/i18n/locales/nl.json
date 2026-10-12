@@ -126,6 +126,10 @@
     "cancel": "Annuleren"
   },
   "profiles": {
+    "delete": "Verwijderen",
+    "deleteTitle": "{{name}} verwijderen?",
+    "deleteHint": "Dit verwijdert {{name}}, de opgeslagen spellen en back-ups permanent. Dit kan niet ongedaan worden gemaakt.",
+    "deleteActiveHint": "Schakel naar een ander profiel voordat je dit verwijdert.",
     "storageTitle": "Profielen kunnen niet worden geladen",
     "storageHelp": "Je gegevens zijn niet gewist. Los de fout op en probeer opnieuw, of open de gegevensmap om hulp te krijgen.",
     "retry": "Opnieuw proberen",

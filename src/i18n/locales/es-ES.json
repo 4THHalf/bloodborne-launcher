@@ -126,6 +126,10 @@
     "cancel": "Cancelar"
   },
   "profiles": {
+    "delete": "Eliminar",
+    "deleteTitle": "¿Eliminar {{name}}?",
+    "deleteHint": "Se eliminarán permanentemente {{name}}, sus partidas guardadas y copias de seguridad. Esta acción no se puede deshacer.",
+    "deleteActiveHint": "Cambia a otro perfil antes de eliminar este.",
     "storageTitle": "No se pueden cargar los perfiles",
     "storageHelp": "Tus datos no se han restablecido. Resuelve el error y vuelve a intentarlo, o abre la carpeta de datos para obtener ayuda.",
     "retry": "Reintentar",

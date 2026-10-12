@@ -81,6 +81,10 @@ export const mockApi = {
     else if (change.action === "select" && profile) {
       saves.active = profile.id; config.paths.saves = profile.path;
     } else if (change.action === "rename" && profile) profile.name = change.name ?? "";
+    else if (change.action === "delete") {
+      if (!profile || saves.active === change.id) return Promise.reject("Switch to another profile before deleting this one.");
+      saves.profiles.splice(saves.profiles.indexOf(profile), 1);
+    }
     else if (change.action === "create") {
       if (saves.profiles.some((p) => p.name.toLowerCase() === change.name?.trim().toLowerCase())) return Promise.reject("A profile with this name already exists.");
       const id = `p-${++nextProfile}`;

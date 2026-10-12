@@ -1,5 +1,5 @@
 import { invoke } from "@tauri-apps/api/core";
-import { eq } from "drizzle-orm";
+import { eq, isNull } from "drizzle-orm";
 import { db, profiles, saveSets } from "@/db";
 import type { ProfileChange, ProfileList } from "@/lib/types";
 
@@ -9,7 +9,7 @@ export const profilesService = {
     const inventory = await invoke<ProfileList>("list_profiles");
     if (inventory.setup_required) return inventory;
     const rows = await db.select({ id: profiles.id, name: profiles.name, path: saveSets.userDir })
-      .from(profiles).innerJoin(saveSets, eq(saveSets.profileId, profiles.id));
+      .from(profiles).innerJoin(saveSets, eq(saveSets.profileId, profiles.id)).where(isNull(profiles.deletedAt));
     return { ...inventory, profiles: inventory.profiles.map((profile) => {
       const owner = rows.find((row) => row.id === profile.id);
       if (!owner || owner.path !== profile.path) throw new Error("Save ownership is inconsistent.");

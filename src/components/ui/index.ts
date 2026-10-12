@@ -12,3 +12,5 @@ export * from "@/components/ui/sonner";
 export * from "@/components/ui/switch";
 export * from "@/components/ui/tooltip";
 export * from "@/components/ui/tabs";
+export * from "@/components/ui/dialog";
+export * from "@/components/ui/alert-dialog";
