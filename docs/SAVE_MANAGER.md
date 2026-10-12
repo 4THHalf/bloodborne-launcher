@@ -48,7 +48,9 @@ transaction. A test checks that the native migration list matches Drizzle's jour
 
 The structure follows Leari: Drizzle schema and typed service reads, TanStack Query hooks and UI;
 SQLx in Rust opens the same SQLite file. Native connections use WAL, foreign keys and a busy
-timeout. The Tauri SQL plugin is loaded at the absolute database path returned by Rust. The
+timeout. Initial WAL-mode setup also retries SQLite lock errors with bounded backoff; its
+exclusive lock cannot rely on SQLite’s normal busy timeout. Other initialization errors fail
+immediately without resetting data. The Tauri SQL plugin is loaded at the absolute database path returned by Rust. The
 adapter exposes generated SELECT queries; SQL and file mutations go through native commands.
 The plugin's generic SELECT endpoint is not itself a read-only security boundary. The frontend
 has no execute permission and app services use only the constrained adapter.
@@ -139,7 +141,7 @@ the operation complete. Database-upgrade snapshots contain metadata, not copies 
 
 ## Validation and boundaries
 
-Thirty-one native tests use temporary directories with synthetic data only. They cover migration rollback and retry, renamed/missing migration history, changed SQL,
+Thirty-two native tests use temporary directories with synthetic data only. They cover migration rollback and retry, renamed/missing migration history, changed SQL,
 unsupported newer versions, concurrent startup, WAL-aware upgrade snapshots and failed snapshot
 gates, schema mismatch, ownership validation,
 foreign keys, missing/corrupt storage, atomic adoption, completed-copy recovery, name uniqueness, fresh-save creation despite existing migrated saves,

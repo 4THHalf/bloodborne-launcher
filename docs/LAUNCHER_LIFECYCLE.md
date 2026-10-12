@@ -37,7 +37,7 @@ Window restoration and Dock/taskbar handling follow
 ## Verification
 
 `cargo test --manifest-path src-tauri/Cargo.toml` includes process polling tests for successful,
-nonzero and killed processes, a missing handle and a retryable wait error. There are 31 native
+nonzero and killed processes, a missing handle and a retryable wait error. There are 32 native
 tests in total; profile/save tests continue to use synthetic temporary data.
 
 For a native GUI smoke check on a logged-in desktop:

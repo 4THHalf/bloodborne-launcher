@@ -5,7 +5,7 @@ use crate::saves;
 use sqlx::sqlite::{SqliteConnectOptions, SqliteJournalMode};
 use sqlx::{Connection, Row, SqliteConnection};
 use std::path::{Path, PathBuf};
-use std::time::Duration;
+use std::time::{Duration, Instant};
 
 pub type Result<T> = std::result::Result<T, String>;
 pub fn path(data: &Path) -> PathBuf {
@@ -29,11 +29,34 @@ pub async fn connect(data: &Path) -> Result<SqliteConnection> {
         .journal_mode(SqliteJournalMode::Wal)
         .foreign_keys(true)
         .busy_timeout(Duration::from_secs(10));
-    let mut connection = SqliteConnection::connect_with(&options)
-        .await
-        .map_err(err)?;
+    let mut connection = open(&options).await?;
     migrate(&mut connection).await?;
     Ok(connection)
+}
+async fn open(options: &SqliteConnectOptions) -> Result<SqliteConnection> {
+    // SQLx documents that switching journal mode needs an exclusive lock which
+    // sqlite3_busy_timeout cannot wait for. Retry this initialization step only;
+    // migrations keep their own atomic transactions and normal busy timeout.
+    let deadline = Instant::now() + Duration::from_secs(10);
+    let mut delay = Duration::from_millis(10);
+    loop {
+        match SqliteConnection::connect_with(options).await {
+            Ok(connection) => return Ok(connection),
+            Err(error) if initialization_locked(&error) && Instant::now() < deadline => {
+                tokio::time::sleep(delay.min(deadline.saturating_duration_since(Instant::now())))
+                    .await;
+                delay = (delay * 2).min(Duration::from_millis(250));
+            }
+            Err(error) => return Err(err(error)),
+        }
+    }
+}
+fn initialization_locked(error: &sqlx::Error) -> bool {
+    error
+        .as_database_error()
+        .and_then(|error| error.code())
+        .and_then(|code| code.parse::<i32>().ok())
+        .is_some_and(|code| matches!(code & 0xff, 5 | 6)) // SQLITE_BUSY / SQLITE_LOCKED, including extended codes.
 }
 pub fn err(error: impl std::fmt::Display) -> String {
     error.to_string()
@@ -475,6 +498,34 @@ mod tests {
                 .unwrap_err()
                 .contains("inconsistent ownership"));
             let count: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM save_sets")
+                .fetch_one(&mut db)
+                .await
+                .map_err(err)?;
+            assert_eq!(count, 1);
+            Ok(())
+        })
+        .unwrap();
+        std::fs::remove_dir_all(root).unwrap();
+    }
+    #[test]
+    fn wal_initialization_waits_for_an_existing_reader_without_losing_data() {
+        let root = fixture();
+        block(async {
+            let mut reader = initial_database(&root).await?;
+            seed(&mut reader).await?;
+            let mut held = reader.begin().await.map_err(err)?;
+            let count: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM profiles")
+                .fetch_one(&mut *held)
+                .await
+                .map_err(err)?;
+            assert_eq!(count, 1);
+            let copy = root.clone();
+            let opening = tokio::spawn(async move { connect(&copy).await });
+            tokio::time::sleep(Duration::from_millis(150)).await;
+            assert!(!opening.is_finished());
+            held.commit().await.map_err(err)?;
+            let mut db = opening.await.map_err(err)??;
+            let count: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM backups")
                 .fetch_one(&mut db)
                 .await
                 .map_err(err)?;
