@@ -126,6 +126,9 @@
     "cancel": "İptal"
   },
   "profiles": {
+    "storageTitle": "Profiller yüklenemedi",
+    "storageHelp": "Verileriniz sıfırlanmadı. Hatayı giderip yeniden deneyin veya yardım almak için veri klasörünü açın.",
+    "retry": "Yeniden dene",
     "title": "Profiller",
     "subtitle": "Her profil kendi karakterlerine ve kayıt yedeklerine sahiptir.",
     "active": "Etkin profil",

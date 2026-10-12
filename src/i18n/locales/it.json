@@ -126,6 +126,9 @@
     "cancel": "Annulla"
   },
   "profiles": {
+    "storageTitle": "Impossibile caricare i profili",
+    "storageHelp": "I dati non sono stati reimpostati. Risolvi l’errore e riprova, oppure apri la cartella dei dati per ricevere assistenza.",
+    "retry": "Riprova",
     "title": "Profili",
     "subtitle": "Ogni profilo ha i propri personaggi e backup.",
     "active": "Profilo attivo",

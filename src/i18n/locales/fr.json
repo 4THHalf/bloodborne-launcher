@@ -126,6 +126,9 @@
     "cancel": "Annuler"
   },
   "profiles": {
+    "storageTitle": "Impossible de charger les profils",
+    "storageHelp": "Vos données n’ont pas été réinitialisées. Corrigez l’erreur et réessayez, ou ouvrez le dossier de données pour obtenir de l’aide.",
+    "retry": "Réessayer",
     "title": "Profils",
     "subtitle": "Chaque profil possède ses personnages et copies de sauvegarde.",
     "active": "Profil actif",

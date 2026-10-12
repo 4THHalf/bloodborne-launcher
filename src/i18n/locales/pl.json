@@ -126,6 +126,9 @@
     "cancel": "Anuluj"
   },
   "profiles": {
+    "storageTitle": "Nie można wczytać profili",
+    "storageHelp": "Dane nie zostały zresetowane. Usuń przyczynę błędu i spróbuj ponownie lub otwórz folder danych, aby uzyskać pomoc.",
+    "retry": "Spróbuj ponownie",
     "title": "Profile",
     "subtitle": "Każdy profil ma własne postacie i kopie zapisów.",
     "active": "Aktywny profil",

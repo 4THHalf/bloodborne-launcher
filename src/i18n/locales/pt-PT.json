@@ -126,6 +126,9 @@
     "cancel": "Cancelar"
   },
   "profiles": {
+    "storageTitle": "Não foi possível carregar os perfis",
+    "storageHelp": "Os seus dados não foram repostos. Resolva o erro e tente novamente, ou abra a pasta de dados para obter ajuda.",
+    "retry": "Tentar novamente",
     "title": "Perfis",
     "subtitle": "Cada perfil tem as suas personagens e cópias das gravações.",
     "active": "Perfil ativo",

@@ -126,6 +126,9 @@
     "cancel": "Peruuta"
   },
   "profiles": {
+    "storageTitle": "Profiileja ei voitu ladata",
+    "storageHelp": "Tietojasi ei ole nollattu. Korjaa virhe ja yritä uudelleen tai avaa tietokansio saadaksesi apua.",
+    "retry": "Yritä uudelleen",
     "title": "Profiilit",
     "subtitle": "Jokaisella profiililla on omat hahmot ja tallennusten varmuuskopiot.",
     "active": "Aktiivinen profiili",

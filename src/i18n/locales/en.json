@@ -325,6 +325,9 @@
     "cancel": "Cancel"
   },
   "profiles": {
+    "storageTitle": "Unable to load profiles",
+    "storageHelp": "Your data has not been reset. Retry after resolving the error, or open the data folder to get help.",
+    "retry": "Retry",
     "title": "Profiles",
     "subtitle": "Each profile owns its characters and save backups.",
     "active": "Active profile",

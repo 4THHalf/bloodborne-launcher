@@ -126,6 +126,9 @@
     "cancel": "取消"
   },
   "profiles": {
+    "storageTitle": "无法加载个人档案",
+    "storageHelp": "您的数据未被重置。解决错误后重试，或打开数据文件夹以获取帮助。",
+    "retry": "重试",
     "title": "用户资料",
     "subtitle": "每个用户资料拥有自己的角色和存档备份。",
     "active": "当前用户资料",

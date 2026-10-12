@@ -511,6 +511,12 @@ async fn read_input(state: State<'_, AppState>, kind: String) -> Result<Option<S
 }
 
 #[tauri::command]
+fn open_launcher_data(state: State<'_, AppState>) -> Result<(), String> {
+    // This remains available when database initialization fails.
+    open_path(state.paths.data.to_string_lossy().into())
+}
+
+#[tauri::command]
 fn open_path(path: String) -> Result<(), String> {
     let path = expand(&path);
     let _ = fs::create_dir_all(&path);
@@ -717,7 +723,7 @@ fn main() {
         })
         .invoke_handler(tauri::generate_handler![
             load_config, save_settings, save_ini, check_game, list_mods, save_mods, list_patches,
-            save_patches, list_gamepads, list_displays, read_input, open_path, launch, stop, list_saves, change_save, list_profiles, change_profile, database_path
+            save_patches, list_gamepads, list_displays, read_input, open_path, open_launcher_data, launch, stop, list_saves, change_save, list_profiles, change_profile, database_path
         ])
         .on_window_event(|window, event| {
             if let tauri::WindowEvent::Destroyed = event {

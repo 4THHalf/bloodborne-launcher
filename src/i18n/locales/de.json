@@ -126,6 +126,9 @@
     "cancel": "Abbrechen"
   },
   "profiles": {
+    "storageTitle": "Profile konnten nicht geladen werden",
+    "storageHelp": "Ihre Daten wurden nicht zurückgesetzt. Beheben Sie den Fehler und versuchen Sie es erneut, oder öffnen Sie den Datenordner, um Hilfe zu erhalten.",
+    "retry": "Erneut versuchen",
     "title": "Profile",
     "subtitle": "Jedes Profil hat eigene Charaktere und Spielstandsicherungen.",
     "active": "Aktives Profil",

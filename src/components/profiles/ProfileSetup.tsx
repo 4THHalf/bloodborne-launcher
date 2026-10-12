@@ -7,7 +7,7 @@ import { useProfiles } from "@/hooks";
 /** Mandatory on first install and upgrades without profile ownership. No launcher is behind it. */
 export function ProfileSetup() {
   const { t } = useTranslation();
-  const { data, error, refetch, change, busy, running } = useProfiles();
+  const { data, change, busy, running } = useProfiles();
   const [name, setName] = useState("");
   const nameInput = useRef<HTMLInputElement>(null);
   useEffect(() => { nameInput.current?.focus(); }, []);
@@ -21,17 +21,16 @@ export function ProfileSetup() {
             <CardDescription id="profile-setup-description">{t(data?.has_existing_saves ? "profiles.setupExisting" : "profiles.setupFresh")}</CardDescription>
           </CardHeader>
           <CardContent>
-            {error ? <><p role="alert" className="mb-4 text-sm text-destructive">{String(error)}</p><Button onClick={() => refetch()}>{t("common.refresh")}</Button></> :
-              <form onSubmit={async (event) => {
-                event.preventDefault();
-                if (busy || running || !data) return;
-                try { await change({ action: "initialize", id: "original", name: name.trim() }); } catch { /* Reported by hook. */ }
-              }}>
-                <Label htmlFor="first-profile-name">{t("saves.name")}</Label>
-                <Input ref={nameInput} className="mb-4 mt-2" id="first-profile-name" maxLength={80} required value={name} disabled={busy || running} onChange={(e) => setName(e.target.value)} />
-                {running && <p className="mb-4 text-sm">{t("saves.stopFirst")}</p>}
-                <Button type="submit" className="w-full" disabled={busy || running || !data || !name.trim()}>{t("profiles.setupCreate")}</Button>
-              </form>}
+            <form onSubmit={async (event) => {
+              event.preventDefault();
+              if (busy || running || !data) return;
+              try { await change({ action: "initialize", id: "original", name: name.trim() }); } catch { /* Reported by hook. */ }
+            }}>
+              <Label htmlFor="first-profile-name">{t("saves.name")}</Label>
+              <Input ref={nameInput} className="mb-4 mt-2" id="first-profile-name" maxLength={80} required value={name} disabled={busy || running} onChange={(e) => setName(e.target.value)} />
+              {running && <p className="mb-4 text-sm">{t("saves.stopFirst")}</p>}
+              <Button type="submit" className="w-full" disabled={busy || running || !data || !name.trim()}>{t("profiles.setupCreate")}</Button>
+            </form>
           </CardContent>
         </Card>
       </section>

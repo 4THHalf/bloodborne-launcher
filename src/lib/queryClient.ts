@@ -4,7 +4,8 @@ import { QueryClient } from "@tanstack/react-query";
 // starts): no polling, no refetch on focus.
 export const queryClient = new QueryClient({
   defaultOptions: {
-    queries: { staleTime: Infinity, refetchOnWindowFocus: false, retry: false },
+    // Error views also observe these queries. Retry-on-mount would remount them in a loop.
+    queries: { staleTime: Infinity, refetchOnWindowFocus: false, retry: false, retryOnMount: false },
   },
 });
 

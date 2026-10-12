@@ -126,6 +126,9 @@
     "cancel": "Cancelar"
   },
   "profiles": {
+    "storageTitle": "No se pueden cargar los perfiles",
+    "storageHelp": "Tus datos no se han restablecido. Resuelve el error e inténtalo de nuevo, o abre la carpeta de datos para obtener ayuda.",
+    "retry": "Reintentar",
     "title": "Perfiles",
     "subtitle": "Cada perfil tiene sus personajes y respaldos de partidas.",
     "active": "Perfil activo",

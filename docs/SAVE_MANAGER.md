@@ -55,6 +55,35 @@ SQLite records metadata, not game save contents. `bbport.ini` and launcher start
 their existing formats for runtime compatibility. The active profile in SQLite is authoritative;
 the legacy `save_profile` setting is used only for the initial development-profile adoption.
 
+## Database upgrades and recovery
+
+Migration identities and SQL are immutable once used. Add a new migration for every schema
+change; never rename or rewrite an applied migration. Native startup stores the applied SQL and
+checks both the migration history and the actual tables, indexes, constraints and foreign keys.
+A newer database opened by an older launcher is rejected with an update instruction.
+
+The initial migration was briefly called `0000_giant_rage` before being renamed to
+`0000_launcher_storage`. This caused startup to attempt table creation again and report
+`table backups already exists`. Startup now recognizes that one known alias only after checking
+the complete schema, keeps the original timestamp and records the canonical identity without
+rerunning DDL. An exact initial schema with missing history can also be adopted. Partial or
+unknown schemas are preserved and reported, rather than guessed at or reset.
+
+Each schema migration and its history entry commit together under `BEGIN IMMEDIATE`. A failed
+migration rolls back and can be retried. Before upgrading an existing schema, `VACUUM INTO`
+creates a consistent snapshot, including committed WAL contents, under `database-backups/`.
+If the snapshot fails, schema changes do not start. Snapshots are retained and are not restored
+automatically over newer data. History normalization is transactional and changes no profile,
+save, backup or trophy rows.
+
+Startup failures show a recovery screen with Retry, the error details and Show in Finder.
+Configuration-loading failures also reach this screen instead of an indefinite loading view.
+Do not delete `launcher.db` to recover: it owns profile identity and trophy history. Correct a
+transient lock, disk-space or permissions error and retry; unsupported versions require an
+updated launcher. Unexpected schema or ownership errors require investigation with the original
+data retained. This preserves data on the tested failure paths; it cannot guarantee recovery
+from arbitrary disk corruption or hardware failure.
+
 ## Save files and recovery
 
 Keep the original user folder in place. Named directories remain under
@@ -83,12 +112,14 @@ pruned yet. Restoring a save leaves profile identity and trophy history intact.
 
 ## Validation and boundaries
 
-Fourteen native tests use temporary directories with synthetic data only. They cover migration rollback,
+Twenty-one native tests use temporary directories with synthetic data only. They cover migration rollback and retry, renamed/missing migration history, changed SQL,
+unsupported newer versions, concurrent startup, WAL-aware upgrade snapshots and failed snapshot
+gates, schema mismatch, ownership validation,
 foreign keys, missing/corrupt storage, atomic adoption, completed-copy recovery, name uniqueness,
 complete-set copying, pre-restore copies, interrupted restore, unsafe paths, active-save launch
 routing, and preservation of trophy history on restore. Browser checks use the in-memory preview
 backend for both fresh and upgrade setup, mandatory onboarding, identity operations and contextual
-save management. They do not exercise the real game or capture screenshots.
+save management, plus persistent configuration/database failures and successful manual retry. They do not exercise the real game or capture screenshots.
 
 Character parsing, editing and actual trophy collection remain future work. Game-derived files
 and analysis are never committed. Tests never write the player's save or settings.

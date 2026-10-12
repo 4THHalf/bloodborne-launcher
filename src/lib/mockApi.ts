@@ -137,6 +137,7 @@ export const mockApi = {
       { name: "LG UltraFine", size: "2560x1440", primary: false },
     ]),
   readInput: (kind: "key" | "pad") => wait(kind === "pad" ? "rightshoulder" : "G"),
+  openLauncherData: () => wait(undefined),
   openPath: () => wait(undefined),
   launch: () => wait(undefined),
   stop: () => wait(undefined),

@@ -26,6 +26,7 @@ const tauriApi = {
   listGamepads: () => invoke<Gamepad[]>("list_gamepads"),
   listDisplays: () => invoke<Display[]>("list_displays"),
   readInput: (kind: "key" | "pad") => invoke<string | null>("read_input", { kind }),
+  openLauncherData: () => invoke<void>("open_launcher_data"),
   openPath: (path: string) => invoke<void>("open_path", { path }),
   launch: () => invoke<void>("launch"),
   stop: () => invoke<void>("stop"),

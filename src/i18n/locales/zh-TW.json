@@ -126,6 +126,9 @@
     "cancel": "取消"
   },
   "profiles": {
+    "storageTitle": "無法載入個人檔案",
+    "storageHelp": "您的資料未被重設。解決錯誤後重試，或開啟資料資料夾以取得協助。",
+    "retry": "重試",
     "title": "使用者設定檔",
     "subtitle": "每個設定檔都有自己的角色和存檔備份。",
     "active": "目前設定檔",

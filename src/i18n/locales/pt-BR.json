@@ -312,6 +312,9 @@
     "cancel": "Cancelar"
   },
   "profiles": {
+    "storageTitle": "Não foi possível carregar os perfis",
+    "storageHelp": "Seus dados não foram redefinidos. Resolva o erro e tente novamente, ou abra a pasta de dados para obter ajuda.",
+    "retry": "Tentar novamente",
     "title": "Perfis",
     "subtitle": "Cada perfil tem seus personagens e backups de saves.",
     "active": "Perfil ativo",

@@ -126,6 +126,9 @@
     "cancel": "Annuleren"
   },
   "profiles": {
+    "storageTitle": "Profielen kunnen niet worden geladen",
+    "storageHelp": "Je gegevens zijn niet gewist. Los de fout op en probeer opnieuw, of open de gegevensmap om hulp te krijgen.",
+    "retry": "Opnieuw proberen",
     "title": "Profielen",
     "subtitle": "Elk profiel heeft eigen personages en opslagback-ups.",
     "active": "Actief profiel",

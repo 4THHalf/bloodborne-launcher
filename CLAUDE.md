@@ -12,6 +12,9 @@ planned. Keep profile/save logic independent of the platform and renderer.
 - `src/db/`: Drizzle schema and generated migrations; reads through `src/services/`. Rust owns
   transactions, migration application and file operations. Register new migrations in
   `src-tauri/src/database.rs`; `npm run db:generate` generates SQL. No component queries SQL directly.
+  Applied migration tags and SQL are immutable: add a migration, never rename or rewrite one.
+  Test upgrades from the previous schema, rollback/retry, WAL-aware snapshots and data preservation.
+  Never reset a user's database to bypass an initialization failure; keep the recovery UI usable.
 - `docs/`: profile/save design and roadmap. Keep this repository's wiki in step.
 - `npm ci && npm run check && npm run build`.
 - `cd src-tauri && cargo test && cargo clippy -- -D warnings`.

@@ -51,3 +51,16 @@ Under `~/Library/Application Support/bloodborne_mac/`:
 The original directory, existing backup ids and custom save paths are preserved during setup.
 Profiles and saves must be regular folders/files; links and special files are rejected.
 Import/export and character editing are planned.
+
+## If profiles cannot load
+
+The launcher shows the error with **Retry** and **Show in Finder**. Resolve disk-space,
+permissions or another running launcher's lock, then retry. If the error says the database is
+from a newer launcher, install the latest version. The fixed launcher automatically recognizes
+the initial migration's former name; it does not recreate existing tables.
+
+Do not delete `launcher.db` or create replacement profiles to bypass an error. Your identity,
+save ownership and future trophy history live there. For an unexpected schema or ownership
+error, retain the data folder and report the full message. Quit the launcher before copying the
+folder for recovery, including any `launcher.db-wal` and `launcher.db-shm` files. Schema-upgrade
+snapshots are kept in `database-backups/`; they are separate from your game-save backups.

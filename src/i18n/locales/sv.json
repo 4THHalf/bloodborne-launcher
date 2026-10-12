@@ -126,6 +126,9 @@
     "cancel": "Avbryt"
   },
   "profiles": {
+    "storageTitle": "Det gick inte att läsa in profiler",
+    "storageHelp": "Dina data har inte återställts. Åtgärda felet och försök igen, eller öppna datamappen för att få hjälp.",
+    "retry": "Försök igen",
     "title": "Profiler",
     "subtitle": "Varje profil har egna karaktärer och säkerhetskopior.",
     "active": "Aktiv profil",

@@ -126,6 +126,9 @@
     "cancel": "Avbryt"
   },
   "profiles": {
+    "storageTitle": "Kunne ikke laste profiler",
+    "storageHelp": "Dataene dine er ikke nullstilt. Rett feilen og prøv igjen, eller åpne datamappen for å få hjelp.",
+    "retry": "Prøv igjen",
     "title": "Profiler",
     "subtitle": "Hver profil har egne figurer og sikkerhetskopier.",
     "active": "Aktiv profil",
