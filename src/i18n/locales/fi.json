@@ -79,6 +79,8 @@
     "saveFailed": "Paikkoja ei voitu tallentaa"
   },
   "advanced": {
+    "hideLauncher": "Piilota käynnistin pelin aikana",
+    "hideLauncherHint": "Piilota valikkoriville tai ilmoitusalueelle pelin aikana. Poista käytöstä, jos haluat seurata lokia.",
     "debugCamera": "Vapaa kamera",
     "debugCameraHint": "Pidä Ristiä painettuna ja paina L3 vaihtaaksesi tilaa (näppäimistö: Välilyönti + Z).",
     "debugMenu": "Virheenkorjausvalikko",

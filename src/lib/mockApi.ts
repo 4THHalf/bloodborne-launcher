@@ -24,6 +24,7 @@ const config: Config = {
     preupload: "",
     frame_stats: true,
     save_log: false,
+    hide_launcher: true,
     crash_diag: false,
     gpu_profile: false,
     extra_env: "",

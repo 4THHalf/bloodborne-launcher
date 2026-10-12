@@ -79,6 +79,8 @@
     "saveFailed": "Não foi possível guardar os patches"
   },
   "advanced": {
+    "hideLauncher": "Ocultar launcher durante o jogo",
+    "hideLauncherHint": "Oculta na barra de menus ou área de notificação enquanto o jogo está a correr. Desative para acompanhar os registos.",
     "debugCamera": "Câmara livre",
     "debugCameraHint": "Mantenha Cruz e prima L3 para alternar modos (teclado: Espaço + Z).",
     "debugMenu": "Menu de depuração",

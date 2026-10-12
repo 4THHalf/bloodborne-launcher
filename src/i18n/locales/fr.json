@@ -79,6 +79,8 @@
     "saveFailed": "Impossible d'enregistrer les patchs"
   },
   "advanced": {
+    "hideLauncher": "Masquer le launcher pendant le jeu",
+    "hideLauncherHint": "Masque dans la barre de menus ou la zone de notification pendant le jeu. Désactivez pour suivre les journaux.",
     "debugCamera": "Caméra libre",
     "debugCameraHint": "Maintenez Croix et appuyez sur L3 pour changer de mode (clavier : Espace + Z).",
     "debugMenu": "Menu de débogage",

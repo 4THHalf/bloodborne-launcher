@@ -79,6 +79,8 @@
     "saveFailed": "Impossibile salvare le patch"
   },
   "advanced": {
+    "hideLauncher": "Nascondi il launcher durante il gioco",
+    "hideLauncherHint": "Nasconde nella barra dei menu o nell’area di notifica durante il gioco. Disattiva per seguire i log.",
     "debugCamera": "Telecamera libera",
     "debugCameraHint": "Tieni premuto Croce e premi L3 per cambiare modalità (tastiera: Spazio + Z).",
     "debugMenu": "Menu di debug",

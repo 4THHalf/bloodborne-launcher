@@ -79,6 +79,8 @@
     "saveFailed": "Nie udało się zapisać łatek"
   },
   "advanced": {
+    "hideLauncher": "Ukryj launcher podczas gry",
+    "hideLauncherHint": "Ukrywa w pasku menu lub zasobniku systemowym podczas gry. Wyłącz, aby śledzić logi.",
     "debugCamera": "Wolna kamera",
     "debugCameraHint": "Przytrzymaj Krzyżyk i naciśnij L3, aby zmienić tryb (klawiatura: Spacja + Z).",
     "debugMenu": "Menu debugowania",

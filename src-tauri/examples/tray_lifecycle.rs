@@ -33,6 +33,24 @@ fn exercise(app: &tauri::AppHandle) -> Result<(), String> {
         },
     )
     .map_err(|e| e.to_string())?;
+    // Let the queued launch update finish before checking that disabled hiding stays off.
+    tray::set_auto_hide(app, false);
+    tray::game_changed(app, true);
+    thread::sleep(Duration::from_millis(300));
+    wait_for(app, true)?;
+    tray::set_auto_hide(app, true);
+    wait_for(app, false)?;
+    tray::set_auto_hide(app, false);
+    wait_for(app, true)?;
+    app.get_webview_window("main")
+        .ok_or("Test window missing")?
+        .close()
+        .map_err(|e| e.to_string())?;
+    wait_for(app, false)?;
+    tray::game_changed(app, false);
+    wait_for(app, true)?;
+    tray::set_auto_hide(app, true);
+    println!("PASS: disabled auto-hide keeps logs visible, live toggles update visibility, explicit close still uses tray");
     for code in [0, 7] {
         let mut child = Command::new("sh")
             .args(["-c", &format!("sleep 1; exit {code}")])

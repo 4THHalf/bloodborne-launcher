@@ -79,6 +79,8 @@
     "saveFailed": "Kunne ikke lagre patchene"
   },
   "advanced": {
+    "hideLauncher": "Skjul launcheren under spilling",
+    "hideLauncherHint": "Skjul i menylinjen eller systemstatusfeltet mens spillet kjører. Slå av for å følge loggene.",
     "debugCamera": "Fritt kamera",
     "debugCameraHint": "Hold Kryss og trykk L3 for å bytte modus (tastatur: Mellomrom + Z).",
     "debugMenu": "Feilsøkingsmeny",

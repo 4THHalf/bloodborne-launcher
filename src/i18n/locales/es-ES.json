@@ -79,6 +79,8 @@
     "saveFailed": "No se pudieron guardar los parches"
   },
   "advanced": {
+    "hideLauncher": "Ocultar el launcher durante el juego",
+    "hideLauncherHint": "Oculta en la barra de menús o bandeja mientras se ejecuta el juego. Desactiva para ver los registros.",
     "debugCamera": "Cámara libre",
     "debugCameraHint": "Mantén Equis y pulsa L3 para cambiar de modo (teclado: Espacio + Z).",
     "debugMenu": "Menú de depuración",

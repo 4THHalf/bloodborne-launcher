@@ -26,6 +26,12 @@ export function AdvancedPage() {
           options={languages}
           onChange={(v) => setSetting("ui_language", v)}
         />
+        <SwitchRow
+          title={t("advanced.hideLauncher")}
+          description={t("advanced.hideLauncherHint")}
+          checked={settings.hide_launcher ?? true}
+          onChange={(v) => setSetting("hide_launcher", v)}
+        />
       </SettingsSection>
       <SettingsSection title={t("advanced.performance")}>
         <SelectRow title={t("advanced.drawPipe")} value={settings.draw_pipe} options={DRAW_PIPE} onChange={(v) => setSetting("draw_pipe", v)} />

@@ -79,6 +79,8 @@
     "saveFailed": "Kon de patches niet opslaan"
   },
   "advanced": {
+    "hideLauncher": "Launcher tijdens het spelen verbergen",
+    "hideLauncherHint": "Verberg in de menubalk of het systeemvak tijdens het spelen. Schakel uit om de logs te volgen.",
     "debugCamera": "Vrije camera",
     "debugCameraHint": "Houd Kruis vast en druk op L3 om van modus te wisselen (toetsenbord: Spatie + Z).",
     "debugMenu": "Debugmenu",

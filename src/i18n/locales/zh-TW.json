@@ -79,6 +79,8 @@
     "saveFailed": "無法儲存修補"
   },
   "advanced": {
+    "hideLauncher": "遊戲執行時隱藏啟動器",
+    "hideLauncherHint": "遊戲執行時隱藏至選單列或系統匣。關閉此選項即可查看日誌。",
     "debugCamera": "自由鏡頭",
     "debugCameraHint": "按住叉叉鈕並按 L3 切換模式（鍵盤：空白鍵 + Z）。",
     "debugMenu": "除錯選單",

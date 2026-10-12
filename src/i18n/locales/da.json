@@ -79,6 +79,8 @@
     "saveFailed": "Kunne ikke gemme patches"
   },
   "advanced": {
+    "hideLauncher": "Skjul launcheren under spillet",
+    "hideLauncherHint": "Skjul i menulinjen eller systembakken, mens spillet kører. Slå fra for at følge loggene.",
     "debugCamera": "Fri kamera",
     "debugCameraHint": "Hold Kryds nede, og tryk på L3 for at skifte tilstand (tastatur: Mellemrum + Z).",
     "debugMenu": "Fejlfindingsmenu",

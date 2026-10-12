@@ -79,6 +79,8 @@
     "saveFailed": "Yamalar kaydedilemedi"
   },
   "advanced": {
+    "hideLauncher": "Oyun sırasında başlatıcıyı gizle",
+    "hideLauncherHint": "Oyun çalışırken menü çubuğuna veya sistem tepsisine gizler. Günlükleri izlemek için kapatın.",
     "debugCamera": "Serbest kamera",
     "debugCameraHint": "Çarpı'yı basılı tutup modlar arasında geçmek için L3'e basın (klavye: Boşluk + Z).",
     "debugMenu": "Hata ayıklama menüsü",

@@ -79,6 +79,8 @@
     "saveFailed": "패치를 저장하지 못했습니다"
   },
   "advanced": {
+    "hideLauncher": "게임 중 런처 숨기기",
+    "hideLauncherHint": "게임 실행 중 메뉴 막대나 시스템 트레이로 숨깁니다. 로그를 보려면 끄세요.",
     "debugCamera": "자유 카메라",
     "debugCameraHint": "X 버튼을 누른 채 L3를 눌러 모드를 전환합니다(키보드: Space + Z).",
     "debugMenu": "디버그 메뉴",

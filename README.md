@@ -89,6 +89,7 @@ is adapted from [Leari](https://github.com/leari-mail/leari/tree/5876482); see
 
 ## During gameplay
 
-The launcher hides to the macOS menu bar/system tray while its game process runs, and returns
-when it exits. Use Show launcher or Stop game from the tray menu. Native lifecycle details and
+By default, the launcher hides to the macOS menu bar/system tray while its game process runs,
+and returns when it exits. Turn off **Advanced → Launcher → Hide launcher during gameplay**
+to keep the Log tab visible; the setting also applies immediately during a game. Use Show launcher or Stop game from the tray menu. Native lifecycle details and
 the isolated GUI smoke check are in [Launcher lifecycle](docs/LAUNCHER_LIFECYCLE.md).

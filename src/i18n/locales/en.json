@@ -193,6 +193,8 @@
     "saveFailed": "Could not save the patches"
   },
   "advanced": {
+    "hideLauncher": "Hide launcher during gameplay",
+    "hideLauncherHint": "Hide to the menu bar or system tray while the game runs. Turn off to keep logs visible.",
     "debugCamera": "Free camera",
     "debugCameraHint": "Hold Cross and press L3 to cycle modes (keyboard: Space + Z).",
     "debugMenu": "Debug menu",

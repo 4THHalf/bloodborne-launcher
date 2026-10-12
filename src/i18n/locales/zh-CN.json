@@ -79,6 +79,8 @@
     "saveFailed": "无法保存补丁"
   },
   "advanced": {
+    "hideLauncher": "游戏运行时隐藏启动器",
+    "hideLauncherHint": "游戏运行时隐藏到菜单栏或系统托盘。关闭此选项可查看日志。",
     "debugCamera": "自由镜头",
     "debugCameraHint": "按住叉键并按 L3 切换模式（键盘：空格 + Z）。",
     "debugMenu": "调试菜单",

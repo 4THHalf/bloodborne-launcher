@@ -1,8 +1,13 @@
 # Launcher window and game lifecycle
 
+**Advanced → Launcher → Hide launcher during gameplay** is enabled by default. Turn it off
+to keep the launcher and Log tab visible while playing. The preference is saved in
+`launcher.json` as `hide_launcher`; existing installations keep the default without a database
+migration. Changing it during gameplay immediately hides or restores the window.
+
 When a game process starts successfully, the launcher makes its menu-bar/system-tray icon
-visible and hides its window. On macOS it switches from Regular to Accessory activation policy,
-removing the launcher's Dock entry while the game runs. Windows/Linux use Tauri's taskbar
+visible. With automatic hiding enabled, it hides its window. When hidden on macOS, it switches
+from Regular to Accessory activation policy, removing the launcher's Dock entry. Windows/Linux use Tauri's taskbar
 visibility API; game integration on those platforms remains planned.
 
 The menu contains **Show launcher** and **Stop game**, translated with the launcher language.
@@ -49,6 +54,7 @@ cargo run --manifest-path src-tauri/Cargo.toml --example tray_lifecycle
 Tell the user before running it: it opens a small test window and tray icon. The harness has its
 own application identifier, loads only `about:blank`, and runs short-lived synthetic processes.
 It does not launch the game, open the profile database, write saves/settings or capture screens.
-It verifies native hiding/restoration, manual reopen/close, normal/nonzero/killed exits and rapid
-restart after reopening. The macOS check passed on 2026-10-12. Windows/Linux GUI behaviour has
-not been exercised here. Actual game loading is tested separately with runtime `tools/test_run.sh`.
+It verifies native hiding/restoration, disabled automatic hiding, live preference changes,
+explicit close with automatic hiding disabled, manual reopen/close, normal/nonzero/killed exits
+and rapid restart after reopening. The macOS check passed on 2026-10-12. Windows/Linux GUI
+behaviour has not been exercised here. Actual game loading is tested separately with runtime `tools/test_run.sh`.

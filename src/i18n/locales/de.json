@@ -79,6 +79,8 @@
     "saveFailed": "Patches konnten nicht gespeichert werden"
   },
   "advanced": {
+    "hideLauncher": "Launcher während des Spiels ausblenden",
+    "hideLauncherHint": "Während des Spiels in die Menüleiste oder den Infobereich ausblenden. Ausschalten, um die Logs zu verfolgen.",
     "debugCamera": "Freie Kamera",
     "debugCameraHint": "Kreuz halten und L3 drücken, um den Modus zu wechseln (Tastatur: Leertaste + Z).",
     "debugMenu": "Debug-Menü",

@@ -12,6 +12,7 @@ use tauri::{
 const TRAY_ID: &str = "game";
 struct TrayState {
     running: AtomicBool,
+    auto_hide: AtomicBool,
     last_running: AtomicBool,
     open: MenuItem<Wry>,
     stop: MenuItem<Wry>,
@@ -80,6 +81,7 @@ pub fn setup(
     tray.set_visible(false)?;
     app.manage(TrayState {
         running: AtomicBool::new(false),
+        auto_hide: AtomicBool::new(true),
         last_running: AtomicBool::new(false),
         open,
         stop,
@@ -115,6 +117,16 @@ pub fn game_changed(app: &AppHandle, running: bool) {
         state.last_running.store(!running, Ordering::SeqCst);
         state.running.store(running, Ordering::SeqCst);
         schedule(app, sync_current);
+    }
+}
+// Settings writes and launch call this under the child-state lock, after persistence.
+pub fn set_auto_hide(app: &AppHandle, enabled: bool) {
+    if let Some(state) = app.try_state::<TrayState>() {
+        if state.auto_hide.swap(enabled, Ordering::SeqCst) != enabled {
+            let running = state.running.load(Ordering::SeqCst);
+            state.last_running.store(!running, Ordering::SeqCst);
+            schedule(app, sync_current);
+        }
     }
 }
 fn dock_visible(app: &AppHandle, visible: bool) -> tauri::Result<()> {
@@ -164,8 +176,16 @@ fn sync_current(app: &AppHandle) {
         eprintln!("Tray menu: {error}");
     }
     if running {
-        if let Err(error) = background(app) {
-            eprintln!("Could not hide launcher: {error}");
+        let result = if state.auto_hide.load(Ordering::SeqCst) {
+            background(app)
+        } else {
+            // Keep the tray's Stop action available even when the window stays visible.
+            app.tray_by_id(TRAY_ID)
+                .map_or(Ok(()), |tray| tray.set_visible(true))
+                .and_then(|()| restore(app))
+        };
+        if let Err(error) = result {
+            eprintln!("Could not update launcher visibility: {error}");
             show_now(app);
         }
     } else if let Err(error) = restore(app) {

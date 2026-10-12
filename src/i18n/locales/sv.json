@@ -79,6 +79,8 @@
     "saveFailed": "Kunde inte spara patcharna"
   },
   "advanced": {
+    "hideLauncher": "Dölj launchern under spelet",
+    "hideLauncherHint": "Dölj i menyraden eller systemfältet medan spelet körs. Stäng av för att följa loggarna.",
     "debugCamera": "Fri kamera",
     "debugCameraHint": "Håll Kryss och tryck L3 för att byta läge (tangentbord: Mellanslag + Z).",
     "debugMenu": "Felsökningsmeny",

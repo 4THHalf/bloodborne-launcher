@@ -115,6 +115,7 @@ fn default_settings() -> Map<String, Value> {
         "preupload": "",
         "frame_stats": true,
         "save_log": false,
+        "hide_launcher": true,
         "crash_diag": false,
         "gpu_profile": false,
         "extra_env": "",
@@ -289,13 +290,19 @@ async fn load_config(state: State<'_ , AppState>) -> Result<Value, String> {
 }
 
 #[tauri::command]
-fn save_settings(state: State<AppState>, settings: Map<String, Value>) -> Result<(), String> {
+fn save_settings(app: AppHandle, state: State<AppState>, settings: Map<String, Value>) -> Result<(), String> {
     let game = state.game.lock().map_err(|e| e.to_string())?;
     if settings.contains_key("save_profile") || settings.contains_key("user_dir") { return Err("Manage profile ownership in the Profiles tab.".into()); }
     let _ = &game; // Serialize settings writes with profile changes and launch.
     let mut merged = load_settings(&state.paths);
+    if settings.get("hide_launcher").is_some_and(|v| !v.is_boolean()) {
+        return Err("hide_launcher must be a boolean.".into());
+    }
     merged.extend(settings);
-    write_settings(&state.paths, merged)
+    let auto_hide = bool_setting(&merged, "hide_launcher");
+    write_settings(&state.paths, merged)?;
+    tray::set_auto_hide(&app, auto_hide);
+    Ok(())
 }
 
 fn write_settings(p: &Paths, settings: Map<String, Value>) -> Result<(), String> {
@@ -673,6 +680,7 @@ fn start_game(app: &AppHandle, state: &AppState) -> Result<(), String> {
         });
     }
     game.child = Some(child);
+    tray::set_auto_hide(&app, bool_setting(&s, "hide_launcher"));
     tray::game_changed(&app, true);
     let _ = app.emit("game-state", json!({"running": true}));
     // Waits for the game to end without holding the lock.

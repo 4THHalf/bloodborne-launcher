@@ -79,6 +79,8 @@
     "saveFailed": "パッチを保存できませんでした"
   },
   "advanced": {
+    "hideLauncher": "ゲーム中にランチャーを隠す",
+    "hideLauncherHint": "ゲームの実行中はメニューバーまたはシステムトレイに隠します。ログを確認するにはオフにしてください。",
     "debugCamera": "フリーカメラ",
     "debugCameraHint": "×ボタンを押しながら L3 でモードを切り替えます（キーボード：Space + Z）。",
     "debugMenu": "デバッグメニュー",

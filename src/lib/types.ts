@@ -23,6 +23,8 @@ export type Settings = {
   preupload: string;
   frame_stats: boolean;
   save_log: boolean;
+  /** Automatically hide the launcher during gameplay; does not disable logging. */
+  hide_launcher: boolean;
   crash_diag: boolean;
   gpu_profile: boolean;
   extra_env: string;
