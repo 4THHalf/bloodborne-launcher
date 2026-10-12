@@ -114,6 +114,7 @@
     }
   },
   "saves": {
+    "editor": "Editor de dados guardados",
     "title": "Gravações",
     "subtitle": "Escolha o conjunto de gravações usado no próximo arranque.",
     "stopFirst": "Feche o jogo para gerir as gravações.",
@@ -135,6 +136,10 @@
     "restore": "Restaurar",
     "restoreHint": "Restaurar esta cópia? Primeiro será criada uma cópia da gravação atual.",
     "cancel": "Cancelar"
+  },
+  "tray": {
+    "show": "Mostrar o launcher",
+    "stop": "Parar o jogo"
   },
   "profiles": {
     "trophies": "Troféus",

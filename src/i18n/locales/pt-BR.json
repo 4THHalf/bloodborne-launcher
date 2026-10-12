@@ -289,6 +289,7 @@
     }
   },
   "saves": {
+    "editor": "Editor de saves",
     "title": "Saves",
     "subtitle": "Escolha o conjunto de saves usado na próxima inicialização.",
     "stopFirst": "Feche o jogo para gerenciar os saves.",
@@ -310,6 +311,10 @@
     "restore": "Restaurar",
     "restoreHint": "Restaurar este backup? Primeiro será feito um backup do save atual.",
     "cancel": "Cancelar"
+  },
+  "tray": {
+    "show": "Mostrar o launcher",
+    "stop": "Parar o jogo"
   },
   "profiles": {
     "trophies": "Troféus",

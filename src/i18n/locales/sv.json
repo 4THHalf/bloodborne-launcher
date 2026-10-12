@@ -114,6 +114,7 @@
     }
   },
   "saves": {
+    "editor": "Sparfilsredigerare",
     "title": "Sparfiler",
     "subtitle": "Välj sparfilerna som används vid nästa start.",
     "stopFirst": "Stäng spelet för att hantera sparfiler.",
@@ -135,6 +136,10 @@
     "restore": "Återställ",
     "restoreHint": "Återställ denna säkerhetskopia? Din nuvarande sparfil säkerhetskopieras först.",
     "cancel": "Avbryt"
+  },
+  "tray": {
+    "show": "Visa startprogrammet",
+    "stop": "Stoppa spelet"
   },
   "profiles": {
     "trophies": "Troféer",

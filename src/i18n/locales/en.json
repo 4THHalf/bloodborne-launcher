@@ -302,6 +302,7 @@
     }
   },
   "saves": {
+    "editor": "Save editor",
     "title": "Saves",
     "subtitle": "Choose the save set used at the next launch.",
     "stopFirst": "Stop the game to manage saves.",
@@ -323,6 +324,10 @@
     "restore": "Restore",
     "restoreHint": "Restore this backup? Your current save will be backed up first.",
     "cancel": "Cancel"
+  },
+  "tray": {
+    "show": "Show launcher",
+    "stop": "Stop game"
   },
   "profiles": {
     "trophies": "Trophies",

@@ -114,6 +114,7 @@
     }
   },
   "saves": {
+    "editor": "Edytor zapisów",
     "title": "Zapisy",
     "subtitle": "Wybierz zestaw zapisów na następne uruchomienie.",
     "stopFirst": "Zamknij grę, aby zarządzać zapisami.",
@@ -135,6 +136,10 @@
     "restore": "Przywróć",
     "restoreHint": "Przywrócić tę kopię? Najpierw powstanie kopia bieżącego zapisu.",
     "cancel": "Anuluj"
+  },
+  "tray": {
+    "show": "Pokaż launcher",
+    "stop": "Zatrzymaj grę"
   },
   "profiles": {
     "trophies": "Trofea",

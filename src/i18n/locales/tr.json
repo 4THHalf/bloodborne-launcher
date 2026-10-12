@@ -114,6 +114,7 @@
     }
   },
   "saves": {
+    "editor": "Kayıt düzenleyici",
     "title": "Kayıtlar",
     "subtitle": "Sonraki başlatmada kullanılacak kayıtları seçin.",
     "stopFirst": "Kayıtları yönetmek için oyunu kapatın.",
@@ -135,6 +136,10 @@
     "restore": "Geri yükle",
     "restoreHint": "Bu yedek geri yüklensin mi? Önce mevcut kaydınız yedeklenecek.",
     "cancel": "İptal"
+  },
+  "tray": {
+    "show": "Başlatıcıyı göster",
+    "stop": "Oyunu durdur"
   },
   "profiles": {
     "trophies": "Kupalar",

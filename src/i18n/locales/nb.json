@@ -114,6 +114,7 @@
     }
   },
   "saves": {
+    "editor": "Lagringsredigerer",
     "title": "Lagrede spill",
     "subtitle": "Velg de lagrede spillene for neste oppstart.",
     "stopFirst": "Lukk spillet for å administrere lagrede spill.",
@@ -135,6 +136,10 @@
     "restore": "Gjenopprett",
     "restoreHint": "Gjenopprette denne sikkerhetskopien? Det nåværende lagrede spillet sikkerhetskopieres først.",
     "cancel": "Avbryt"
+  },
+  "tray": {
+    "show": "Vis startprogrammet",
+    "stop": "Stopp spillet"
   },
   "profiles": {
     "trophies": "Trofeer",

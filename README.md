@@ -86,3 +86,9 @@ Database schema changes: `npm run db:generate`; register each generated migratio
 `src-tauri/src/database.rs`. Rust applies migrations before setup or Play. The SQL adapter
 is adapted from [Leari](https://github.com/leari-mail/leari/tree/5876482); see
 [Credits and license](docs/CREDITS.md). Trophy storage is prepared; runtime collection is planned.
+
+## During gameplay
+
+The launcher hides to the macOS menu bar/system tray while its game process runs, and returns
+when it exits. Use Show launcher or Stop game from the tray menu. Native lifecycle details and
+the isolated GUI smoke check are in [Launcher lifecycle](docs/LAUNCHER_LIFECYCLE.md).

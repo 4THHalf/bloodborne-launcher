@@ -114,6 +114,7 @@
     }
   },
   "saves": {
+    "editor": "存档编辑器",
     "title": "存档",
     "subtitle": "选择下次启动时使用的存档。",
     "stopFirst": "请关闭游戏后管理存档。",
@@ -135,6 +136,10 @@
     "restore": "恢复",
     "restoreHint": "恢复此备份？当前存档会先备份。",
     "cancel": "取消"
+  },
+  "tray": {
+    "show": "显示启动器",
+    "stop": "停止游戏"
   },
   "profiles": {
     "trophies": "奖杯",

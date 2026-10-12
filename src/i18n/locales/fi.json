@@ -114,6 +114,7 @@
     }
   },
   "saves": {
+    "editor": "Tallennuseditori",
     "title": "Tallennukset",
     "subtitle": "Valitse seuraavalla käynnistyskerralla käytettävät tallennukset.",
     "stopFirst": "Sulje peli tallennusten hallintaa varten.",
@@ -135,6 +136,10 @@
     "restore": "Palauta",
     "restoreHint": "Palautetaanko tämä varmuuskopio? Nykyinen tallennus varmuuskopioidaan ensin.",
     "cancel": "Peruuta"
+  },
+  "tray": {
+    "show": "Näytä käynnistin",
+    "stop": "Pysäytä peli"
   },
   "profiles": {
     "trophies": "Palkinnot",

@@ -12,6 +12,8 @@
 mod saves;
 mod profiles;
 mod database;
+mod tray;
+mod game_lifecycle;
 
 use serde::Serialize;
 use serde_json::{json, Map, Value};
@@ -254,6 +256,11 @@ async fn blocking<T: Send + 'static>(operation: impl FnOnce() -> Result<T,String
 async fn database_path(state: State<'_, AppState>) -> Result<String,String> {
     let data=state.paths.data.clone();
     blocking(move || { database::block(async { database::connect(&data).await?; Ok(()) })?; Ok(database::path(&data).to_string_lossy().into()) }).await
+}
+
+#[tauri::command]
+fn set_tray_labels(app: AppHandle, labels: tray::Labels) -> Result<(), String> {
+    tray::set_labels(&app, labels).map_err(|error| error.to_string())
 }
 
 // --- commands --------------------------------------------------------------------------------
@@ -666,26 +673,34 @@ fn start_game(app: &AppHandle, state: &AppState) -> Result<(), String> {
         });
     }
     game.child = Some(child);
+    tray::game_changed(&app, true);
     let _ = app.emit("game-state", json!({"running": true}));
     // Waits for the game to end without holding the lock.
     let shared = state.game.clone();
-    std::thread::spawn(move || loop {
-        std::thread::sleep(std::time::Duration::from_millis(300));
-        let mut g = match shared.lock() {
-            Ok(g) => g,
-            Err(_) => return,
-        };
-        let status = match g.child.as_mut().map(Child::try_wait) {
-            Some(Ok(Some(status))) => status,
-            Some(Ok(None)) => continue,
-            _ => {
-                g.child = None;
-                return;
-            }
-        };
-        g.child = None;
-        let _ = app.emit("game-state", json!({"running": false, "code": status.code()}));
-        return;
+    std::thread::spawn(move || {
+        let mut wait_error_reported = false;
+        loop {
+            std::thread::sleep(std::time::Duration::from_millis(300));
+            let mut g = match shared.lock() {
+                Ok(g) => g,
+                Err(error) => { eprintln!("Game monitor: {error}"); tray::show_launcher(&app); return; }
+            };
+            let code = match game_lifecycle::poll(g.child.as_mut()) {
+                game_lifecycle::Poll::Running => { wait_error_reported = false; continue; }
+                game_lifecycle::Poll::Failed(error) => {
+                    // Preserve the child handle and Stop action on a wait error. Restore the
+                    // launcher once for this error episode, then continue monitoring.
+                    if !wait_error_reported { eprintln!("Game monitor: {error}"); tray::show_launcher(&app); }
+                    wait_error_reported = true;
+                    continue;
+                }
+                game_lifecycle::Poll::Finished(code) => code,
+            };
+            g.child = None;
+            tray::game_changed(&app, false);
+            let _ = app.emit("game-state", json!({"running": false, "code": code}));
+            return;
+        }
     });
     Ok(())
 }
@@ -704,13 +719,16 @@ fn main() {
     let paths = Paths::find();
     tauri::Builder::default()
         .plugin(tauri_plugin_single_instance::init(|app, _arguments, _cwd| {
-            if let Some(window)=app.get_webview_window("main") { let _=window.show(); let _=window.set_focus(); }
+            tray::show_launcher(app);
         }))
         .plugin(tauri_plugin_sql::Builder::default().build())
         .plugin(tauri_plugin_dialog::init())
         .manage(AppState { paths, game: Arc::new(Mutex::new(Game { child: None })) })
         // `open Bloodborne.app --args --play`: start the game at once (shortcuts, scripted tests).
         .setup(|app| {
+            if let Err(error) = tray::setup(app.handle(), |app| {
+                if let Err(error) = stop(app.state::<AppState>()) { eprintln!("Stop game: {error}"); }
+            }) { eprintln!("Tray unavailable; launcher remains visible: {error}"); }
             let state = app.state::<AppState>();
             let game = state.game.lock().map_err(|e| std::io::Error::other(e.to_string()))?;
             if saves_idle(&game).is_ok() {
@@ -728,9 +746,19 @@ fn main() {
         })
         .invoke_handler(tauri::generate_handler![
             load_config, save_settings, save_ini, check_game, list_mods, save_mods, list_patches,
-            save_patches, list_gamepads, list_displays, read_input, open_path, open_launcher_data, launch, stop, list_saves, change_save, list_profiles, change_profile, database_path
+            save_patches, list_gamepads, list_displays, read_input, open_path, open_launcher_data, launch, stop, list_saves, change_save, list_profiles, change_profile, database_path, set_tray_labels
         ])
         .on_window_event(|window, event| {
+            if window.label() == "main" {
+                if let tauri::WindowEvent::CloseRequested { api, .. } = event {
+                    let running = window.app_handle().try_state::<AppState>()
+                        .and_then(|state| state.game.lock().ok().map(|game| game.child.is_some())).unwrap_or(false);
+                    if running && tray::available(window.app_handle()) {
+                        api.prevent_close();
+                        tray::hide_while_running(window.app_handle());
+                    }
+                }
+            }
             if let tauri::WindowEvent::Destroyed = event {
                 if let Some(state) = window.app_handle().try_state::<AppState>() {
                     if let Ok(game) = state.game.lock() {
@@ -741,8 +769,14 @@ fn main() {
                 }
             }
         })
-        .run(tauri::generate_context!())
-        .expect("error while running the launcher");
+        .build(tauri::generate_context!())
+        .expect("error while building the launcher")
+        .run(|app, event| {
+            #[cfg(target_os = "macos")]
+            if let tauri::RunEvent::Reopen { .. } = event { tray::show_launcher(app); }
+            #[cfg(not(target_os = "macos"))]
+            let _ = (app, event);
+        });
 }
 
 #[cfg(test)]

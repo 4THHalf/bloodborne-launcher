@@ -114,6 +114,7 @@
     }
   },
   "saves": {
+    "editor": "Editor de partidas",
     "title": "Partidas",
     "subtitle": "Elige el conjunto de partidas para el próximo inicio.",
     "stopFirst": "Cierra el juego para gestionar las partidas.",
@@ -135,6 +136,10 @@
     "restore": "Restaurar",
     "restoreHint": "¿Restaurar esta copia? Primero se creará una copia de la partida actual.",
     "cancel": "Cancelar"
+  },
+  "tray": {
+    "show": "Mostrar el launcher",
+    "stop": "Detener el juego"
   },
   "profiles": {
     "trophies": "Trofeos",

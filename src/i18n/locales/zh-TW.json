@@ -114,6 +114,7 @@
     }
   },
   "saves": {
+    "editor": "存檔編輯器",
     "title": "存檔",
     "subtitle": "選擇下次啟動時使用的存檔。",
     "stopFirst": "請關閉遊戲後管理存檔。",
@@ -135,6 +136,10 @@
     "restore": "還原",
     "restoreHint": "還原此備份？目前的存檔會先備份。",
     "cancel": "取消"
+  },
+  "tray": {
+    "show": "顯示啟動器",
+    "stop": "停止遊戲"
   },
   "profiles": {
     "trophies": "獎盃",

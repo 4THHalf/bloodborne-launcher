@@ -70,6 +70,7 @@ let profileSetup = false;
 const saves: SaveList = { active: "original", profiles: [{ id: "original", name: "", path: config.paths.saves, bytes: new URLSearchParams(window.location.search).has("fresh") ? 0 : 12582912, modified: 1720000000, backups: [] }] };
 
 export const mockApi = {
+  setTrayLabels: () => wait(undefined),
   listProfiles: (): Promise<ProfileList> => wait({ ...structuredClone(saves), setup_required: !profileSetup, has_existing_saves: saves.profiles.some((p) => p.bytes > 0), profiles: profileSetup ? structuredClone(saves.profiles) : [] }),
   changeProfile: (change: ProfileChange) => {
     const profile = saves.profiles.find((p) => p.id === change.id);

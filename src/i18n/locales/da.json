@@ -114,6 +114,7 @@
     }
   },
   "saves": {
+    "editor": "Editor til gemte spil",
     "title": "Gemte spil",
     "subtitle": "Vælg de gemte spil til næste start.",
     "stopFirst": "Luk spillet for at administrere gemte spil.",
@@ -135,6 +136,10 @@
     "restore": "Gendan",
     "restoreHint": "Gendan denne sikkerhedskopi? Dit nuværende gemte spil sikkerhedskopieres først.",
     "cancel": "Annuller"
+  },
+  "tray": {
+    "show": "Vis startprogrammet",
+    "stop": "Stop spillet"
   },
   "profiles": {
     "trophies": "Trofæer",

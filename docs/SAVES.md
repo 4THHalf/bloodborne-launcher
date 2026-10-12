@@ -27,6 +27,11 @@ Renaming a profile changes its displayed name without moving its files. Stop the
 changing profiles or managing saves. Each profile shows **Trophies — In development**. Trophy collection and viewing unlocks are
 not available yet; the placeholder has no counts or trophy actions.
 
+## Save editor
+
+The Saves tab shows **Save editor — In development**, matching the trophy status on profiles.
+It is informational; save editing and character previews are not available yet.
+
 ## Delete a profile
 
 Switch to a different profile first, then press **Delete** on the profile you want to remove.

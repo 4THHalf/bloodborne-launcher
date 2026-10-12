@@ -10,6 +10,7 @@ import type { Config, Display, GameCheck, Gamepad, GameState, Mod, Patch, Settin
 const inTauri = typeof window !== "undefined" && "__TAURI_INTERNALS__" in window;
 
 const tauriApi = {
+  setTrayLabels: (labels: { show: string; stop: string }) => invoke<void>("set_tray_labels", { labels }),
   listProfiles: profilesService.list,
   changeProfile: profilesService.change,
   listSaves: () => invoke<SaveList>("list_saves"),

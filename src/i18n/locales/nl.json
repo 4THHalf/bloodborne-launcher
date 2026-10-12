@@ -114,6 +114,7 @@
     }
   },
   "saves": {
+    "editor": "Opslageditor",
     "title": "Opgeslagen spellen",
     "subtitle": "Kies de opgeslagen spellen voor de volgende start.",
     "stopFirst": "Sluit het spel om opgeslagen spellen te beheren.",
@@ -135,6 +136,10 @@
     "restore": "Herstellen",
     "restoreHint": "Deze back-up herstellen? Eerst wordt een back-up van je huidige spel gemaakt.",
     "cancel": "Annuleren"
+  },
+  "tray": {
+    "show": "Launcher tonen",
+    "stop": "Spel stoppen"
   },
   "profiles": {
     "trophies": "Trofeeën",

@@ -11,3 +11,4 @@ export * from "@/hooks/useSetting";
 export * from "@/hooks/useSettingsData";
 export * from "@/hooks/useSaves";
 export * from "@/hooks/useProfiles";
+export * from "@/hooks/useTrayLabels";

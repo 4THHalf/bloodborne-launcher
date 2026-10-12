@@ -114,6 +114,7 @@
     }
   },
   "saves": {
+    "editor": "Spielstand-Editor",
     "title": "Spielstände",
     "subtitle": "Wähle die Spielstände für den nächsten Start.",
     "stopFirst": "Beende das Spiel, um Spielstände zu verwalten.",
@@ -135,6 +136,10 @@
     "restore": "Wiederherstellen",
     "restoreHint": "Diese Sicherung wiederherstellen? Dein aktueller Spielstand wird vorher gesichert.",
     "cancel": "Abbrechen"
+  },
+  "tray": {
+    "show": "Launcher anzeigen",
+    "stop": "Spiel beenden"
   },
   "profiles": {
     "trophies": "Trophäen",

@@ -25,3 +25,11 @@ launcher design. The [original MIT notice](licenses/leari-MIT.txt) is retained h
 using the project's base-nova registry. The Base UI component templates are from
 [shadcn-ui/ui, reference 30a58d4](https://github.com/shadcn-ui/ui/tree/30a58d4498f270af1c1e981a7d78a15cf5740841/apps/v4/registry/bases/base/ui).
 The [upstream MIT notice](licenses/shadcn-ui-MIT.txt) is retained here.
+
+## Leari menu-bar and window handling
+
+`src-tauri/src/tray.rs` adapts window restoration and Dock/taskbar handling from
+[leari-mail/leari 5876482](https://github.com/leari-mail/leari/tree/5876482/src-tauri/src)
+(MIT, Pablo Souza). Its tray/menu setup informed the game-driven lifecycle. The original MIT
+notice is already retained in `docs/licenses/leari-MIT.txt`. No Leari icon or other artwork was
+copied; the hunter's sigil is original launcher artwork.

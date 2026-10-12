@@ -114,6 +114,7 @@
     }
   },
   "saves": {
+    "editor": "Editor dei salvataggi",
     "title": "Salvataggi",
     "subtitle": "Scegli i salvataggi da usare al prossimo avvio.",
     "stopFirst": "Chiudi il gioco per gestire i salvataggi.",
@@ -135,6 +136,10 @@
     "restore": "Ripristina",
     "restoreHint": "Ripristinare questo backup? Prima verrà creato un backup del salvataggio attuale.",
     "cancel": "Annulla"
+  },
+  "tray": {
+    "show": "Mostra il launcher",
+    "stop": "Ferma il gioco"
   },
   "profiles": {
     "trophies": "Trofei",

@@ -139,7 +139,7 @@ the operation complete. Database-upgrade snapshots contain metadata, not copies 
 
 ## Validation and boundaries
 
-Twenty-seven native tests use temporary directories with synthetic data only. They cover migration rollback and retry, renamed/missing migration history, changed SQL,
+Thirty-one native tests use temporary directories with synthetic data only. They cover migration rollback and retry, renamed/missing migration history, changed SQL,
 unsupported newer versions, concurrent startup, WAL-aware upgrade snapshots and failed snapshot
 gates, schema mismatch, ownership validation,
 foreign keys, missing/corrupt storage, atomic adoption, completed-copy recovery, name uniqueness, fresh-save creation despite existing migrated saves,
@@ -151,5 +151,6 @@ save management, plus persistent configuration/database failures and successful 
 confirmed deletion and active/running-profile protection. They do not exercise the real game or capture screenshots.
 
 Profile cards show a Trophies row with an In development badge, without unlock counts or actions.
+Saves shows a Save editor row with the same badge, without an editing action.
 Character parsing, editing and actual trophy collection remain future work. Game-derived files
 and analysis are never committed. Tests never write the player's save or settings.

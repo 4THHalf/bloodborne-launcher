@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
-import { RefreshCw } from "lucide-react";
-import { Button } from "@/components/ui";
+import { FilePenLine, RefreshCw } from "lucide-react";
+import { Badge, Button } from "@/components/ui";
 import { FolderRow, PageHeader, SettingsSection } from "@/components/settings";
 import { useConfig, useSaves } from "@/hooks";
 import { SaveProfileCard } from "@/pages/saves/SaveProfileCard";
@@ -26,6 +26,13 @@ export function SavesPage() {
         ))}
       </SettingsSection>
 
+      <SettingsSection>
+        <div className="flex items-center gap-3 px-5 py-4 text-sm text-muted-foreground">
+          <FilePenLine className="size-5" aria-hidden="true" />
+          <span>{t("saves.editor")}</span>
+          <Badge variant="outline">{t("profiles.inDevelopment")}</Badge>
+        </div>
+      </SettingsSection>
       <SettingsSection>
         <FolderRow title={t("saves.backups")} path={data?.profiles.some((p) => p.backups.length > 0) ? `${config?.paths.data}/save-backups/${data?.active}` : ""} />
       </SettingsSection>
