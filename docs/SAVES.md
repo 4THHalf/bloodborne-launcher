@@ -13,6 +13,10 @@ profile starts empty. You can quit the launcher and finish setup later.
 
 ## Profiles
 
+Home shows the active profile prominently below Play, alongside **Trophies — In development**.
+Its Profiles and Saves buttons open identity management and the active save's backups.
+Changing the active profile updates this card.
+
 Open **Profiles** and press **New profile**. Enter a name in the modal, then press **Create**.
 Every new profile starts with empty saves and backups. Existing saves are adopted only during
 first-profile setup when upgrading from a launcher without profile ownership. Each profile has

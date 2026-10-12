@@ -6,7 +6,7 @@ Troubleshooting, experimental runtime controls and debug tools belong in Advance
 
 | Tab | Contents |
 |---|---|
-| Home | Game installation folder, edition/readiness and shortcuts to common settings |
+| Home | Active profile and trophy development status, profile/save shortcuts, game installation folder, edition/readiness and shortcuts to common settings |
 | Graphics | Output resolution, monitor, fullscreen, presentation, frame-rate mode/limit and FPS counter; upscaling, sharpening, motion vectors, model detail and all visual effects |
 | Controls | Controller selection and controller/keyboard bindings |
 | Game | Game language, skipping intro videos and the active profile's save-folder location |

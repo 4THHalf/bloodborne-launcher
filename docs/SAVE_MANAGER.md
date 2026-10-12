@@ -24,7 +24,8 @@ an error; it is not treated as a fresh installation.
 
 The Profiles tab creates, selects and renames identities. Creation uses a button and name modal. Each has exactly one complete
 save set, which can contain multiple characters. The Saves tab shows the active identity only.
-The active profile is also visible next to Play. Names are trimmed and normalized with Unicode lowercase for duplicate checks;
+The active profile is visible next to Play and in a prominent Home card, with trophy development
+status and links to Profiles and Saves. Names are trimmed and normalized with Unicode lowercase for duplicate checks;
 ids and save paths remain unchanged on rename. Every new profile starts with empty saves,
 backups and trophy history; the backend rejects copy requests. Existing saves are adopted only
 by the one-time migration from launchers without profile ownership. Inactive profiles can be deleted with a confirmation modal.
