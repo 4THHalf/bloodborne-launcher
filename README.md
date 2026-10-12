@@ -1,9 +1,12 @@
-# Bloodborne launcher (macOS)
+# bloodborne-launcher
+
+The independent launcher for [bloodborne-native](https://github.com/bloodborne-native).
+It is included as the `launcher/app/` submodule of bloodborne-mac.
+macOS game integration works today; Windows and Linux integration are planned.
 
 The launcher inside `Bloodborne.app`. It has a game folder check, graphics, controls (controller
 choice and button mapping), game options, save profiles and backups, mods, patches, advanced options and the game's log. It
-starts the game with the app's own bash and Python (`packaging/macos.sh` builds the app around
-it).
+starts the game with the app's own bash and Python ([bloodborne-mac packaging](https://github.com/bloodborne-native/bloodborne-mac/blob/main/packaging/macos.sh) builds the app around it).
 
 - **Interface:** React 19, TypeScript, Tailwind CSS 4, [shadcn/ui](https://ui.shadcn.com)
   (Base UI), lucide icons, react-i18next.
@@ -15,7 +18,7 @@ it).
 ```bash
 npm ci
 npm run dev          # the interface in a browser, with mock data (src/lib/mockApi.ts); #graphics etc. opens a tab
-npm run tauri dev    # the app, against a checkout's build (out/bb-probe; bash build.sh first)
+BB_REPO=/path/to/bloodborne-runtime npm run tauri dev  # standalone: runtime build required
 npm run check        # TypeScript, ESLint and the locales' keys
 npx tauri build      # Bloodborne.app (packaging/macos.sh adds the game to it)
 ```
@@ -70,5 +73,9 @@ cd src-tauri && cargo test && cargo clippy -- -D warnings
 ```
 
 File tests use synthetic data in temporary folders, never player saves. Browser previews use
-an in-memory save manager. [Save manager design](../../docs/SAVE_MANAGER.md) records the launch
+an in-memory save manager. [Save manager design](docs/SAVE_MANAGER.md) records the launch
 contract, recovery behavior and planned character previews and editing.
+
+## Credits
+
+The project is built on bbport and shadPS4. See [Credits and license](docs/CREDITS.md).
