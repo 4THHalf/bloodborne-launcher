@@ -83,9 +83,8 @@ export const mockApi = {
     } else if (change.action === "rename" && profile) profile.name = change.name ?? "";
     else if (change.action === "create") {
       if (saves.profiles.some((p) => p.name.toLowerCase() === change.name?.trim().toLowerCase())) return Promise.reject("A profile with this name already exists.");
-      const source = saves.profiles.find((p) => p.id === change.source);
       const id = `p-${++nextProfile}`;
-      saves.profiles.push({ id, name: change.name ?? "", path: `${config.paths.data}/save-profiles/${id}/user`, bytes: source?.bytes ?? 0, modified: null, backups: [] });
+      saves.profiles.push({ id, name: change.name ?? "", path: `${config.paths.data}/save-profiles/${id}/user`, bytes: 0, modified: null, backups: [] });
     }
     return wait(undefined);
   },

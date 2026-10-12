@@ -88,4 +88,4 @@ export type SaveList = { active: string; profiles: SaveProfile[] };
 export type SaveChange = { action: "backup" | "restore"; id: string; backup?: string };
 
 export type ProfileList = SaveList & { setup_required: boolean; has_existing_saves: boolean };
-export type ProfileChange = { action: "initialize" | "create" | "select" | "rename"; id: string; name?: string; source?: string };
+export type ProfileChange = { action: "initialize" | "create" | "select" | "rename"; id: string; name?: string };

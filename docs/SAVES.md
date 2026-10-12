@@ -13,14 +13,14 @@ profile starts empty. You can quit the launcher and finish setup later.
 
 ## Profiles
 
-Open **Profiles** to create, copy or rename a profile. Each profile has its own complete save
-set, which can contain multiple characters, and its own backups. Under **New profile**, choose
-**Fresh save** or an existing profile to copy its saves. Creating a profile does not change
-which one is active. Choose **Use profile**, or use the **Active profile** selector above Play.
+Open **Profiles** and press **New profile**. Enter a name in the modal, then press **Create**.
+Every new profile starts with empty saves and backups. Existing saves are adopted only during
+first-profile setup when upgrading from a launcher without profile ownership. Each profile has
+its own complete save set, which can contain multiple characters. Creating a profile does not
+change which one is active. Choose **Use profile**, or use the **Active profile** selector above Play.
 
 Renaming a profile changes its displayed name without moving its files. Stop the game before
-changing profiles or managing saves. Trophy history is planned; copying saves will not copy a
-profile's trophy history.
+changing profiles or managing saves. Trophy collection is planned; each profile owns its history.
 
 ## Saves and backups
 

@@ -259,12 +259,12 @@ pub fn change(
         }),
         "create" => {
             let name = name(new_name.unwrap_or_default(), &profiles, None)?;
-            if source.is_some_and(|s| !profiles.iter().any(|p| p.id == s)) {
-                return Err("Unknown source profile.".into());
+            if source.is_some() {
+                return Err("New profiles always start with empty saves.".into());
             }
-            let op = operation(data, source, "create_profile")?;
+            let op = operation(data, None, "create_profile")?;
             let result = (|| {
-                saves::create(data, &state.original_user_dir, &name, source)?;
+                saves::create(data, &state.original_user_dir, &name, None)?;
                 list(data, &state.original_user_dir)?;
                 Ok(())
             })();
@@ -331,6 +331,26 @@ mod tests {
         assert_eq!(selected(&f.0).unwrap().name, "Renamed");
         assert!(change(&f.0, "create", "", Some("pablo"), None).is_err());
         assert!(change(&f.0, "select", "../escape", None, None).is_err());
+    }
+    #[test]
+    fn new_profiles_never_copy_existing_saves() {
+        let f = Fixture::new();
+        let original = f.original();
+        fs::create_dir_all(original.join("savedata")).unwrap();
+        fs::write(original.join("savedata/data"), b"synthetic legacy save").unwrap();
+        initialize(&f.0, &original, "original", "Migrated").unwrap();
+        assert!(change(&f.0, "create", "", Some("Copy"), Some("original")).is_err());
+        change(&f.0, "create", "", Some("New"), None).unwrap();
+        let profiles = list(&f.0, &original).unwrap().profiles;
+        let fresh = profiles.iter().find(|p| p.name == "New").unwrap();
+        assert_eq!(fresh.bytes, 0);
+        assert!(fresh.backups.is_empty());
+        assert!(!fresh.path.join("savedata/data").exists());
+        assert_eq!(
+            fs::read(original.join("savedata/data")).unwrap(),
+            b"synthetic legacy save"
+        );
+        assert_eq!(profiles.len(), 2);
     }
     #[test]
     fn upgrade_adopts_custom_original_and_legacy_profiles_in_place() {

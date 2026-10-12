@@ -22,11 +22,12 @@ selected development profile remains active. Custom original save paths and old 
 retained. Setup cannot be repeated to overwrite established ownership. A damaged database reports
 an error; it is not treated as a fresh installation.
 
-The Profiles tab creates, copies, selects and renames identities. Each has exactly one complete
+The Profiles tab creates, selects and renames identities. Creation uses a button and name modal. Each has exactly one complete
 save set, which can contain multiple characters. The Saves tab shows the active identity only.
 The active profile is also visible next to Play. Names are trimmed and normalized with Unicode lowercase for duplicate checks;
-ids and save paths remain unchanged on rename. Copying a save creates another identity with
-separate saves and backups; trophy records are not copied. Profile deletion is not implemented.
+ids and save paths remain unchanged on rename. Every new profile starts with empty saves,
+backups and trophy history; the backend rejects copy requests. Existing saves are adopted only
+by the one-time migration from launchers without profile ownership. Profile deletion is not implemented.
 
 ## SQLite and Drizzle
 
@@ -112,14 +113,14 @@ pruned yet. Restoring a save leaves profile identity and trophy history intact.
 
 ## Validation and boundaries
 
-Twenty-one native tests use temporary directories with synthetic data only. They cover migration rollback and retry, renamed/missing migration history, changed SQL,
+Twenty-two native tests use temporary directories with synthetic data only. They cover migration rollback and retry, renamed/missing migration history, changed SQL,
 unsupported newer versions, concurrent startup, WAL-aware upgrade snapshots and failed snapshot
 gates, schema mismatch, ownership validation,
-foreign keys, missing/corrupt storage, atomic adoption, completed-copy recovery, name uniqueness,
+foreign keys, missing/corrupt storage, atomic adoption, completed-copy recovery, name uniqueness, fresh-save creation despite existing migrated saves,
 complete-set copying, pre-restore copies, interrupted restore, unsafe paths, active-save launch
 routing, and preservation of trophy history on restore. Browser checks use the in-memory preview
 backend for both fresh and upgrade setup, mandatory onboarding, identity operations and contextual
-save management, plus persistent configuration/database failures and successful manual retry. They do not exercise the real game or capture screenshots.
+save management, plus persistent configuration/database failures and successful manual retry. The creation modal is checked for focus, cancellation and duplicate-name retry. They do not exercise the real game or capture screenshots.
 
 Character parsing, editing and actual trophy collection remain future work. Game-derived files
 and analysis are never committed. Tests never write the player's save or settings.
