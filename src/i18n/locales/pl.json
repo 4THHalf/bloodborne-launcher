@@ -23,6 +23,12 @@
     "openData": "Zapisy i dane"
   },
   "graphics": {
+    "effects": "Efekty",
+    "effectsHint": "Wyłącz to, co ci się nie podoba, albo dla odrobiny wydajności.",
+    "frameRate": "Liczba klatek",
+    "fpsMode": "Tryb liczby klatek",
+    "fpsLimit": "Limit klatek",
+    "fpsLimitHint": "0 oznacza brak limitu.",
     "title": "Grafika", "subtitle": "Wspólne z menu w grze (F1 lub L3 + R3).", "display": "Ekran",
     "outputRes": "Rozdzielczość wyjściowa", "outputResHint": "Rozmiar obrazu na ekranie. Skalowanie go wypełnia.", "fullscreen": "Pełny ekran", "monitor": "Monitor", "monitorHint": "Gdzie otwiera się okno gry i pełny ekran.", "monitorMain": "Główny ekran",
     "presentMode": "Wyświetlanie klatek", "showFps": "Pokaż FPS", "upscaling": "Skalowanie",
@@ -49,14 +55,15 @@
     "or": "lub"
   },
   "game": {
-    "title": "Gra", "subtitle": "Łatki nakładane na grę przy uruchomieniu.", "language": "Język", "systemLanguage": "Język gry",
-    "systemLanguageHint": "Język systemu PS4 widziany przez grę.", "effects": "Efekty",
-    "effectsHint": "Wyłącz to, co ci się nie podoba, albo dla odrobiny wydajności.", "frameRate": "Liczba klatek",
-    "fpsMode": "Tryb liczby klatek", "fpsLimit": "Limit klatek", "fpsLimitHint": "0 oznacza brak limitu.",
-    "extras": "Dodatki", "skipIntro": "Pomiń filmy wprowadzające", "debugCamera": "Wolna kamera",
-    "debugCameraHint": "Przytrzymaj Krzyżyk i naciśnij L3, aby zmienić tryb (klawiatura: Spacja + Z).", "debugMenu": "Menu debugowania",
-    "debugMenuHint": "Wymaga DbgFont14h.ccm i DbgFont14h.tpf w dvdroot_ps4/font gry. Otwiera się lewą połową panelu dotykowego lub klawiszem Tab.",
-    "saves": "Zapisy", "savesFolder": "Folder zapisów"
+    "title": "Gra",
+    "subtitle": "Język, opcje uruchamiania i folder zapisów aktywnego profilu.",
+    "language": "Język",
+    "systemLanguage": "Język gry",
+    "systemLanguageHint": "Język systemu PS4 widziany przez grę.",
+    "extras": "Dodatki",
+    "skipIntro": "Pomiń filmy wprowadzające",
+    "saves": "Zapisy",
+    "savesFolder": "Folder zapisów"
   },
   "mods": {
     "title": "Mody", "subtitle": "Mody z luźnych plików, ładowane po kolei: późniejsze zastępują wcześniejsze. Folder gry nigdy nie jest zmieniany.",
@@ -72,6 +79,10 @@
     "saveFailed": "Nie udało się zapisać łatek"
   },
   "advanced": {
+    "debugCamera": "Wolna kamera",
+    "debugCameraHint": "Przytrzymaj Krzyżyk i naciśnij L3, aby zmienić tryb (klawiatura: Spacja + Z).",
+    "debugMenu": "Menu debugowania",
+    "debugMenuHint": "Wymaga DbgFont14h.ccm i DbgFont14h.tpf w dvdroot_ps4/font gry. Otwiera się lewą połową panelu dotykowego lub klawiszem Tab.",
     "title": "Zaawansowane", "subtitle": "Opcje do diagnostyki i testów.", "launcher": "Launcher", "launcherLanguage": "Język launchera",
     "launcherLanguageHint": "Menu w grze go naśladuje (angielski lub rosyjski).", "systemDefault": "Język systemu", "performance": "Wydajność",
     "drawPipe": "Dwuetapowy potok GPU", "readbacks": "Dane GPU odczytywane przez CPU", "preupload": "Przesyłanie w tle do pamięci GPU",

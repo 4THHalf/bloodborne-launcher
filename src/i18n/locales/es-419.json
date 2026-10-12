@@ -23,6 +23,12 @@
     "openData": "Partidas y datos"
   },
   "graphics": {
+    "effects": "Efectos",
+    "effectsHint": "Desactiva lo que no te guste, o para ganar algo de rendimiento.",
+    "frameRate": "Tasa de fotogramas",
+    "fpsMode": "Modo de tasa de fotogramas",
+    "fpsLimit": "Límite de fotogramas",
+    "fpsLimitHint": "0 significa sin límite.",
     "title": "Gráficos", "subtitle": "Compartidos con el menú del juego (F1 o L3 + R3).", "display": "Pantalla",
     "outputRes": "Resolución de salida", "outputResHint": "El tamaño de la imagen en pantalla. El escalador la rellena.", "fullscreen": "Pantalla completa", "monitor": "Monitor", "monitorHint": "Dónde se abren la ventana del juego y la pantalla completa.", "monitorMain": "Pantalla principal",
     "presentMode": "Presentación de fotogramas", "showFps": "Mostrar FPS", "upscaling": "Escalado",
@@ -49,14 +55,15 @@
     "or": "o"
   },
   "game": {
-    "title": "Juego", "subtitle": "Parches que se aplican al juego al iniciarse.", "language": "Idioma", "systemLanguage": "Idioma del juego",
-    "systemLanguageHint": "El idioma del sistema de PS4 que ve el juego.", "effects": "Efectos",
-    "effectsHint": "Desactiva lo que no te guste, o para ganar algo de rendimiento.", "frameRate": "Tasa de fotogramas",
-    "fpsMode": "Modo de tasa de fotogramas", "fpsLimit": "Límite de fotogramas", "fpsLimitHint": "0 significa sin límite.",
-    "extras": "Extras", "skipIntro": "Saltar los videos de introducción", "debugCamera": "Cámara libre",
-    "debugCameraHint": "Mantén Equis y presiona L3 para cambiar de modo (teclado: Espacio + Z).", "debugMenu": "Menú de depuración",
-    "debugMenuHint": "Necesita DbgFont14h.ccm y DbgFont14h.tpf en dvdroot_ps4/font del juego. Se abre con la mitad izquierda del panel táctil o Tab.",
-    "saves": "Partidas guardadas", "savesFolder": "Carpeta de partidas"
+    "title": "Juego",
+    "subtitle": "Idioma, opciones de inicio y carpeta de partidas del perfil activo.",
+    "language": "Idioma",
+    "systemLanguage": "Idioma del juego",
+    "systemLanguageHint": "El idioma del sistema de PS4 que ve el juego.",
+    "extras": "Extras",
+    "skipIntro": "Saltar los videos de introducción",
+    "saves": "Partidas guardadas",
+    "savesFolder": "Carpeta de partidas"
   },
   "mods": {
     "title": "Mods", "subtitle": "Mods de archivos sueltos, cargados en orden: los últimos sustituyen a los primeros. La carpeta del juego nunca se modifica.",
@@ -72,6 +79,10 @@
     "saveFailed": "No se pudieron guardar los parches"
   },
   "advanced": {
+    "debugCamera": "Cámara libre",
+    "debugCameraHint": "Mantén Equis y presiona L3 para cambiar de modo (teclado: Espacio + Z).",
+    "debugMenu": "Menú de depuración",
+    "debugMenuHint": "Necesita DbgFont14h.ccm y DbgFont14h.tpf en dvdroot_ps4/font del juego. Se abre con la mitad izquierda del panel táctil o Tab.",
     "title": "Avanzado", "subtitle": "Opciones para diagnóstico y pruebas.", "launcher": "Launcher", "launcherLanguage": "Idioma del launcher",
     "launcherLanguageHint": "El menú del juego lo sigue (inglés o ruso).", "systemDefault": "Predeterminado del sistema", "performance": "Rendimiento",
     "drawPipe": "Pipeline de GPU en dos etapas", "readbacks": "Datos de la GPU leídos por la CPU", "preupload": "Carga en segundo plano a la memoria de la GPU",

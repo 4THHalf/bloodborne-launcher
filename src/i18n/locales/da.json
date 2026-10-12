@@ -23,6 +23,12 @@
     "openData": "Gemte spil og data"
   },
   "graphics": {
+    "effects": "Effekter",
+    "effectsHint": "Slå det fra, du ikke kan lide, eller for lidt ekstra ydelse.",
+    "frameRate": "Billedhastighed",
+    "fpsMode": "Billedhastighedstilstand",
+    "fpsLimit": "Grænse for billedhastighed",
+    "fpsLimitHint": "0 betyder ingen grænse.",
     "title": "Grafik", "subtitle": "Delt med menuen i spillet (F1 eller L3 + R3).", "display": "Skærm",
     "outputRes": "Outputopløsning", "outputResHint": "Billedets størrelse på skærmen. Opskaleringen udfylder det.", "fullscreen": "Fuld skærm", "monitor": "Skærm", "monitorHint": "Hvor spilvinduet og fuld skærm åbner.", "monitorMain": "Hovedskærm",
     "presentMode": "Billedvisning", "showFps": "Vis FPS", "upscaling": "Opskalering",
@@ -49,14 +55,15 @@
     "or": "eller"
   },
   "game": {
-    "title": "Spil", "subtitle": "Patches, der anvendes på spillet, når det starter.", "language": "Sprog", "systemLanguage": "Spillets sprog",
-    "systemLanguageHint": "Det PS4-systemsprog, spillet ser.", "effects": "Effekter",
-    "effectsHint": "Slå det fra, du ikke kan lide, eller for lidt ekstra ydelse.", "frameRate": "Billedhastighed",
-    "fpsMode": "Billedhastighedstilstand", "fpsLimit": "Grænse for billedhastighed", "fpsLimitHint": "0 betyder ingen grænse.",
-    "extras": "Ekstra", "skipIntro": "Spring introvideoerne over", "debugCamera": "Fri kamera",
-    "debugCameraHint": "Hold Kryds nede, og tryk på L3 for at skifte tilstand (tastatur: Mellemrum + Z).", "debugMenu": "Fejlfindingsmenu",
-    "debugMenuHint": "Kræver DbgFont14h.ccm og DbgFont14h.tpf i spillets dvdroot_ps4/font. Åbnes med touchpaddens venstre halvdel eller Tab.",
-    "saves": "Gemte spil", "savesFolder": "Mappe til gemte spil"
+    "title": "Spil",
+    "subtitle": "Sprog, startindstillinger og det aktive profils mappe til gemte spil.",
+    "language": "Sprog",
+    "systemLanguage": "Spillets sprog",
+    "systemLanguageHint": "Det PS4-systemsprog, spillet ser.",
+    "extras": "Ekstra",
+    "skipIntro": "Spring introvideoerne over",
+    "saves": "Gemte spil",
+    "savesFolder": "Mappe til gemte spil"
   },
   "mods": {
     "title": "Mods", "subtitle": "Mods med løse filer, indlæst i rækkefølge: senere erstatter tidligere. Spilmappen ændres aldrig.",
@@ -72,6 +79,10 @@
     "saveFailed": "Kunne ikke gemme patches"
   },
   "advanced": {
+    "debugCamera": "Fri kamera",
+    "debugCameraHint": "Hold Kryds nede, og tryk på L3 for at skifte tilstand (tastatur: Mellemrum + Z).",
+    "debugMenu": "Fejlfindingsmenu",
+    "debugMenuHint": "Kræver DbgFont14h.ccm og DbgFont14h.tpf i spillets dvdroot_ps4/font. Åbnes med touchpaddens venstre halvdel eller Tab.",
     "title": "Avanceret", "subtitle": "Indstillinger til fejlfinding og test.", "launcher": "Launcher", "launcherLanguage": "Launcherens sprog",
     "launcherLanguageHint": "Menuen i spillet følger det (engelsk eller russisk).", "systemDefault": "Systemets sprog", "performance": "Ydelse",
     "drawPipe": "GPU-pipeline i to trin", "readbacks": "GPU-data læst af processoren", "preupload": "Upload til GPU-hukommelse i baggrunden",

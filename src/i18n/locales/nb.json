@@ -23,6 +23,12 @@
     "openData": "Lagrede spill og data"
   },
   "graphics": {
+    "effects": "Effekter",
+    "effectsHint": "Slå av det du ikke liker, eller for litt mer ytelse.",
+    "frameRate": "Bildefrekvens",
+    "fpsMode": "Bildefrekvensmodus",
+    "fpsLimit": "Grense for bildefrekvens",
+    "fpsLimitHint": "0 betyr ingen grense.",
     "title": "Grafikk", "subtitle": "Delt med menyen i spillet (F1 eller L3 + R3).", "display": "Skjerm",
     "outputRes": "Utdataoppløsning", "outputResHint": "Bildets størrelse på skjermen. Oppskaleringen fyller det.", "fullscreen": "Fullskjerm", "monitor": "Skjerm", "monitorHint": "Hvor spillvinduet og fullskjerm åpnes.", "monitorMain": "Hovedskjerm",
     "presentMode": "Bildevisning", "showFps": "Vis FPS", "upscaling": "Oppskalering",
@@ -49,14 +55,15 @@
     "or": "eller"
   },
   "game": {
-    "title": "Spill", "subtitle": "Patcher som brukes på spillet når det starter.", "language": "Språk", "systemLanguage": "Spillets språk",
-    "systemLanguageHint": "PS4-systemspråket spillet ser.", "effects": "Effekter",
-    "effectsHint": "Slå av det du ikke liker, eller for litt mer ytelse.", "frameRate": "Bildefrekvens",
-    "fpsMode": "Bildefrekvensmodus", "fpsLimit": "Grense for bildefrekvens", "fpsLimitHint": "0 betyr ingen grense.",
-    "extras": "Ekstra", "skipIntro": "Hopp over introvideoene", "debugCamera": "Fritt kamera",
-    "debugCameraHint": "Hold Kryss og trykk L3 for å bytte modus (tastatur: Mellomrom + Z).", "debugMenu": "Feilsøkingsmeny",
-    "debugMenuHint": "Krever DbgFont14h.ccm og DbgFont14h.tpf i spillets dvdroot_ps4/font. Åpnes med styreplatens venstre halvdel eller Tab.",
-    "saves": "Lagrede spill", "savesFolder": "Mappe for lagrede spill"
+    "title": "Spill",
+    "subtitle": "Språk, oppstartsalternativer og det aktive profilets lagringsmappe.",
+    "language": "Språk",
+    "systemLanguage": "Spillets språk",
+    "systemLanguageHint": "PS4-systemspråket spillet ser.",
+    "extras": "Ekstra",
+    "skipIntro": "Hopp over introvideoene",
+    "saves": "Lagrede spill",
+    "savesFolder": "Mappe for lagrede spill"
   },
   "mods": {
     "title": "Modder", "subtitle": "Modder med løse filer, lastet i rekkefølge: senere erstatter tidligere. Spillmappen endres aldri.",
@@ -72,6 +79,10 @@
     "saveFailed": "Kunne ikke lagre patchene"
   },
   "advanced": {
+    "debugCamera": "Fritt kamera",
+    "debugCameraHint": "Hold Kryss og trykk L3 for å bytte modus (tastatur: Mellomrom + Z).",
+    "debugMenu": "Feilsøkingsmeny",
+    "debugMenuHint": "Krever DbgFont14h.ccm og DbgFont14h.tpf i spillets dvdroot_ps4/font. Åpnes med styreplatens venstre halvdel eller Tab.",
     "title": "Avansert", "subtitle": "Alternativer for feilsøking og testing.", "launcher": "Oppstartsprogram", "launcherLanguage": "Språk i oppstartsprogrammet",
     "launcherLanguageHint": "Menyen i spillet følger det (engelsk eller russisk).", "systemDefault": "Systemspråk", "performance": "Ytelse",
     "drawPipe": "GPU-pipeline i to trinn", "readbacks": "GPU-data lest av prosessoren", "preupload": "Opplasting til GPU-minnet i bakgrunnen",

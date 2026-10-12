@@ -23,6 +23,12 @@
     "openData": "Tallennukset ja tiedot"
   },
   "graphics": {
+    "effects": "Tehosteet",
+    "effectsHint": "Poista käytöstä se, mistä et pidä, tai saadaksesi hieman suorituskykyä.",
+    "frameRate": "Kuvataajuus",
+    "fpsMode": "Kuvataajuustila",
+    "fpsLimit": "Kuvataajuuden raja",
+    "fpsLimitHint": "0 tarkoittaa ei rajaa.",
     "title": "Grafiikka", "subtitle": "Yhteiset pelin valikon kanssa (F1 tai L3 + R3).", "display": "Näyttö",
     "outputRes": "Lähtötarkkuus", "outputResHint": "Kuvan koko näytöllä. Skaalain täyttää sen.", "fullscreen": "Koko näyttö", "monitor": "Näyttö", "monitorHint": "Missä peli-ikkuna ja koko näyttö avautuvat.", "monitorMain": "Päänäyttö",
     "presentMode": "Kuvien esitys", "showFps": "Näytä FPS", "upscaling": "Skaalaus",
@@ -49,14 +55,15 @@
     "or": "tai"
   },
   "game": {
-    "title": "Peli", "subtitle": "Peliin käynnistyksessä tehtävät paikat.", "language": "Kieli", "systemLanguage": "Pelin kieli",
-    "systemLanguageHint": "PS4:n järjestelmäkieli, jonka peli näkee.", "effects": "Tehosteet",
-    "effectsHint": "Poista käytöstä se, mistä et pidä, tai saadaksesi hieman suorituskykyä.", "frameRate": "Kuvataajuus",
-    "fpsMode": "Kuvataajuustila", "fpsLimit": "Kuvataajuuden raja", "fpsLimitHint": "0 tarkoittaa ei rajaa.",
-    "extras": "Lisät", "skipIntro": "Ohita alkuvideot", "debugCamera": "Vapaa kamera",
-    "debugCameraHint": "Pidä Ristiä painettuna ja paina L3 vaihtaaksesi tilaa (näppäimistö: Välilyönti + Z).", "debugMenu": "Virheenkorjausvalikko",
-    "debugMenuHint": "Vaatii tiedostot DbgFont14h.ccm ja DbgFont14h.tpf pelin kansioon dvdroot_ps4/font. Avautuu kosketuslevyn vasemmalla puolella tai Tabilla.",
-    "saves": "Tallennukset", "savesFolder": "Tallennuskansio"
+    "title": "Peli",
+    "subtitle": "Kieli, käynnistysasetukset ja aktiivisen profiilin tallennuskansio.",
+    "language": "Kieli",
+    "systemLanguage": "Pelin kieli",
+    "systemLanguageHint": "PS4:n järjestelmäkieli, jonka peli näkee.",
+    "extras": "Lisät",
+    "skipIntro": "Ohita alkuvideot",
+    "saves": "Tallennukset",
+    "savesFolder": "Tallennuskansio"
   },
   "mods": {
     "title": "Modit", "subtitle": "Irtotiedostomodit ladataan järjestyksessä: myöhemmät korvaavat aiemmat. Pelikansiota ei koskaan muuteta.",
@@ -72,6 +79,10 @@
     "saveFailed": "Paikkoja ei voitu tallentaa"
   },
   "advanced": {
+    "debugCamera": "Vapaa kamera",
+    "debugCameraHint": "Pidä Ristiä painettuna ja paina L3 vaihtaaksesi tilaa (näppäimistö: Välilyönti + Z).",
+    "debugMenu": "Virheenkorjausvalikko",
+    "debugMenuHint": "Vaatii tiedostot DbgFont14h.ccm ja DbgFont14h.tpf pelin kansioon dvdroot_ps4/font. Avautuu kosketuslevyn vasemmalla puolella tai Tabilla.",
     "title": "Lisäasetukset", "subtitle": "Vianmääritys- ja testausasetukset.", "launcher": "Käynnistin", "launcherLanguage": "Käynnistimen kieli",
     "launcherLanguageHint": "Pelin valikko seuraa sitä (englanti tai venäjä).", "systemDefault": "Järjestelmän kieli", "performance": "Suorituskyky",
     "drawPipe": "Kaksivaiheinen GPU-liukuhihna", "readbacks": "Suorittimen lukemat GPU-tiedot", "preupload": "Taustalataus GPU-muistiin",

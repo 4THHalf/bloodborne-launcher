@@ -23,6 +23,12 @@
     "openData": "Spielstände und Daten"
   },
   "graphics": {
+    "effects": "Effekte",
+    "effectsHint": "Schalte aus, was dir nicht gefällt, oder für etwas mehr Leistung.",
+    "frameRate": "Bildrate",
+    "fpsMode": "Bildratenmodus",
+    "fpsLimit": "Bildratenbegrenzung",
+    "fpsLimitHint": "0 bedeutet keine Begrenzung.",
     "title": "Grafik", "subtitle": "Gemeinsam mit dem Menü im Spiel (F1 oder L3 + R3).", "display": "Anzeige",
     "outputRes": "Ausgabeauflösung", "outputResHint": "Die Größe des Bildes auf dem Bildschirm. Der Upscaler füllt sie.", "fullscreen": "Vollbild", "monitor": "Monitor", "monitorHint": "Wo das Spielfenster und der Vollbildmodus geöffnet werden.", "monitorMain": "Hauptbildschirm",
     "presentMode": "Bildausgabe", "showFps": "FPS anzeigen", "upscaling": "Hochskalierung",
@@ -49,14 +55,15 @@
     "or": "oder"
   },
   "game": {
-    "title": "Spiel", "subtitle": "Patches, die beim Start auf das Spiel angewendet werden.", "language": "Sprache", "systemLanguage": "Spielsprache",
-    "systemLanguageHint": "Die PS4-Systemsprache, die das Spiel sieht.", "effects": "Effekte",
-    "effectsHint": "Schalte aus, was dir nicht gefällt, oder für etwas mehr Leistung.", "frameRate": "Bildrate",
-    "fpsMode": "Bildratenmodus", "fpsLimit": "Bildratenbegrenzung", "fpsLimitHint": "0 bedeutet keine Begrenzung.",
-    "extras": "Extras", "skipIntro": "Intro-Videos überspringen", "debugCamera": "Freie Kamera",
-    "debugCameraHint": "Kreuz halten und L3 drücken, um den Modus zu wechseln (Tastatur: Leertaste + Z).", "debugMenu": "Debug-Menü",
-    "debugMenuHint": "Benötigt DbgFont14h.ccm und DbgFont14h.tpf in dvdroot_ps4/font des Spiels. Öffnet mit der linken Touchpad-Hälfte oder Tab.",
-    "saves": "Spielstände", "savesFolder": "Ordner der Spielstände"
+    "title": "Spiel",
+    "subtitle": "Sprache, Startoptionen und Spielstandordner des aktiven Profils.",
+    "language": "Sprache",
+    "systemLanguage": "Spielsprache",
+    "systemLanguageHint": "Die PS4-Systemsprache, die das Spiel sieht.",
+    "extras": "Extras",
+    "skipIntro": "Intro-Videos überspringen",
+    "saves": "Spielstände",
+    "savesFolder": "Ordner der Spielstände"
   },
   "mods": {
     "title": "Mods", "subtitle": "Mods aus losen Dateien, der Reihe nach geladen: spätere überschreiben frühere. Der Spielordner wird nie verändert.",
@@ -72,6 +79,10 @@
     "saveFailed": "Patches konnten nicht gespeichert werden"
   },
   "advanced": {
+    "debugCamera": "Freie Kamera",
+    "debugCameraHint": "Kreuz halten und L3 drücken, um den Modus zu wechseln (Tastatur: Leertaste + Z).",
+    "debugMenu": "Debug-Menü",
+    "debugMenuHint": "Benötigt DbgFont14h.ccm und DbgFont14h.tpf in dvdroot_ps4/font des Spiels. Öffnet mit der linken Touchpad-Hälfte oder Tab.",
     "title": "Erweitert", "subtitle": "Optionen zur Fehlersuche und zum Testen.", "launcher": "Launcher", "launcherLanguage": "Sprache des Launchers",
     "launcherLanguageHint": "Das Menü im Spiel folgt ihr (Englisch oder Russisch).", "systemDefault": "Systemsprache", "performance": "Leistung",
     "drawPipe": "Zweistufige GPU-Pipeline", "readbacks": "Von der CPU gelesene GPU-Daten", "preupload": "Upload in den GPU-Speicher im Hintergrund",

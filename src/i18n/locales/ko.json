@@ -23,6 +23,12 @@
     "openData": "저장 데이터와 데이터"
   },
   "graphics": {
+    "effects": "효과",
+    "effectsHint": "마음에 들지 않는 효과를 끄거나 성능을 조금 높이려면 끄세요.",
+    "frameRate": "프레임 레이트",
+    "fpsMode": "프레임 레이트 모드",
+    "fpsLimit": "프레임 레이트 제한",
+    "fpsLimitHint": "0은 제한 없음입니다.",
     "title": "그래픽", "subtitle": "게임 내 메뉴(F1 또는 L3 + R3)와 공유됩니다.", "display": "화면",
     "outputRes": "출력 해상도", "outputResHint": "화면에 표시되는 이미지 크기. 업스케일러가 채웁니다.", "fullscreen": "전체 화면", "monitor": "모니터", "monitorHint": "게임 창과 전체 화면이 열리는 화면입니다.", "monitorMain": "주 디스플레이",
     "presentMode": "프레임 표시 방식", "showFps": "FPS 표시", "upscaling": "업스케일링",
@@ -49,14 +55,15 @@
     "or": "또는"
   },
   "game": {
-    "title": "게임", "subtitle": "게임 시작 시 적용되는 패치입니다.", "language": "언어", "systemLanguage": "게임 언어",
-    "systemLanguageHint": "게임이 인식하는 PS4 시스템 언어.", "effects": "효과",
-    "effectsHint": "마음에 들지 않는 효과를 끄거나 성능을 조금 높이려면 끄세요.", "frameRate": "프레임 레이트",
-    "fpsMode": "프레임 레이트 모드", "fpsLimit": "프레임 레이트 제한", "fpsLimitHint": "0은 제한 없음입니다.",
-    "extras": "기타", "skipIntro": "오프닝 영상 건너뛰기", "debugCamera": "자유 카메라",
-    "debugCameraHint": "X 버튼을 누른 채 L3를 눌러 모드를 전환합니다(키보드: Space + Z).", "debugMenu": "디버그 메뉴",
-    "debugMenuHint": "게임의 dvdroot_ps4/font에 DbgFont14h.ccm과 DbgFont14h.tpf가 필요합니다. 터치패드 왼쪽 절반 또는 Tab으로 엽니다.",
-    "saves": "저장 데이터", "savesFolder": "저장 데이터 폴더"
+    "title": "게임",
+    "subtitle": "언어, 시작 옵션 및 활성 프로필의 저장 폴더.",
+    "language": "언어",
+    "systemLanguage": "게임 언어",
+    "systemLanguageHint": "게임이 인식하는 PS4 시스템 언어.",
+    "extras": "기타",
+    "skipIntro": "오프닝 영상 건너뛰기",
+    "saves": "저장 데이터",
+    "savesFolder": "저장 데이터 폴더"
   },
   "mods": {
     "title": "모드", "subtitle": "개별 파일 모드를 순서대로 불러옵니다. 나중 모드가 이전 모드를 덮어씁니다. 게임 폴더는 변경되지 않습니다.",
@@ -72,6 +79,10 @@
     "saveFailed": "패치를 저장하지 못했습니다"
   },
   "advanced": {
+    "debugCamera": "자유 카메라",
+    "debugCameraHint": "X 버튼을 누른 채 L3를 눌러 모드를 전환합니다(키보드: Space + Z).",
+    "debugMenu": "디버그 메뉴",
+    "debugMenuHint": "게임의 dvdroot_ps4/font에 DbgFont14h.ccm과 DbgFont14h.tpf가 필요합니다. 터치패드 왼쪽 절반 또는 Tab으로 엽니다.",
     "title": "고급", "subtitle": "문제 해결과 테스트용 옵션.", "launcher": "런처", "launcherLanguage": "런처 언어",
     "launcherLanguageHint": "게임 내 메뉴도 이를 따릅니다(영어 또는 러시아어).", "systemDefault": "시스템 언어", "performance": "성능",
     "drawPipe": "2단계 GPU 파이프라인", "readbacks": "CPU가 읽는 GPU 데이터", "preupload": "GPU 메모리로 백그라운드 업로드",

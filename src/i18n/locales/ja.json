@@ -23,6 +23,12 @@
     "openData": "セーブとデータ"
   },
   "graphics": {
+    "effects": "エフェクト",
+    "effectsHint": "好みでないものや、少しでも性能を上げたいときはオフにしてください。",
+    "frameRate": "フレームレート",
+    "fpsMode": "フレームレートモード",
+    "fpsLimit": "フレームレート上限",
+    "fpsLimitHint": "0 は上限なしです。",
     "title": "グラフィック", "subtitle": "ゲーム内メニュー（F1 または L3 + R3）と共有されます。", "display": "画面",
     "outputRes": "出力解像度", "outputResHint": "画面上の画像サイズ。アップスケーラーが埋めます。", "fullscreen": "フルスクリーン", "monitor": "モニター", "monitorHint": "ゲームのウィンドウとフルスクリーンを表示する画面。", "monitorMain": "メインディスプレイ",
     "presentMode": "フレームの表示方式", "showFps": "FPS を表示", "upscaling": "アップスケーリング",
@@ -49,14 +55,15 @@
     "or": "または"
   },
   "game": {
-    "title": "ゲーム", "subtitle": "起動時にゲームへ適用されるパッチです。", "language": "言語", "systemLanguage": "ゲームの言語",
-    "systemLanguageHint": "ゲームから見える PS4 のシステム言語。", "effects": "エフェクト",
-    "effectsHint": "好みでないものや、少しでも性能を上げたいときはオフにしてください。", "frameRate": "フレームレート",
-    "fpsMode": "フレームレートモード", "fpsLimit": "フレームレート上限", "fpsLimitHint": "0 は上限なしです。",
-    "extras": "その他", "skipIntro": "オープニングムービーをスキップ", "debugCamera": "フリーカメラ",
-    "debugCameraHint": "×ボタンを押しながら L3 でモードを切り替えます（キーボード：Space + Z）。", "debugMenu": "デバッグメニュー",
-    "debugMenuHint": "ゲームの dvdroot_ps4/font に DbgFont14h.ccm と DbgFont14h.tpf が必要です。タッチパッドの左半分または Tab で開きます。",
-    "saves": "セーブデータ", "savesFolder": "セーブデータのフォルダ"
+    "title": "ゲーム",
+    "subtitle": "言語、起動オプション、現在のプロフィールのセーブフォルダー。",
+    "language": "言語",
+    "systemLanguage": "ゲームの言語",
+    "systemLanguageHint": "ゲームから見える PS4 のシステム言語。",
+    "extras": "その他",
+    "skipIntro": "オープニングムービーをスキップ",
+    "saves": "セーブデータ",
+    "savesFolder": "セーブデータのフォルダ"
   },
   "mods": {
     "title": "MOD", "subtitle": "ファイル単位の MOD を順番に読み込みます。後のものが前のものを上書きします。ゲームフォルダは変更されません。",
@@ -72,6 +79,10 @@
     "saveFailed": "パッチを保存できませんでした"
   },
   "advanced": {
+    "debugCamera": "フリーカメラ",
+    "debugCameraHint": "×ボタンを押しながら L3 でモードを切り替えます（キーボード：Space + Z）。",
+    "debugMenu": "デバッグメニュー",
+    "debugMenuHint": "ゲームの dvdroot_ps4/font に DbgFont14h.ccm と DbgFont14h.tpf が必要です。タッチパッドの左半分または Tab で開きます。",
     "title": "詳細設定", "subtitle": "トラブルシューティングとテスト用のオプション。", "launcher": "ランチャー", "launcherLanguage": "ランチャーの言語",
     "launcherLanguageHint": "ゲーム内メニューもこれに従います（英語またはロシア語）。", "systemDefault": "システムの言語", "performance": "パフォーマンス",
     "drawPipe": "2 段階 GPU パイプライン", "readbacks": "CPU による GPU データの読み取り", "preupload": "GPU メモリへのバックグラウンド転送",

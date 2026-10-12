@@ -77,6 +77,12 @@
     "openData": "Saves and data"
   },
   "graphics": {
+    "effects": "Effects",
+    "effectsHint": "Turn off what you don't like, or to gain a little performance.",
+    "frameRate": "Frame rate",
+    "fpsMode": "Frame rate mode",
+    "fpsLimit": "Frame rate limit",
+    "fpsLimitHint": "0 means no limit.",
     "title": "Graphics",
     "subtitle": "Shared with the in-game menu (F1 or L3 + R3).",
     "display": "Display",
@@ -153,22 +159,12 @@
   },
   "game": {
     "title": "Game",
-    "subtitle": "Patches applied to the game when it starts.",
+    "subtitle": "Language, startup options and the active profile’s save folder.",
     "language": "Language",
     "systemLanguage": "Game language",
     "systemLanguageHint": "The PS4 system language the game sees.",
-    "effects": "Effects",
-    "effectsHint": "Turn off what you don't like, or to gain a little performance.",
-    "frameRate": "Frame rate",
-    "fpsMode": "Frame rate mode",
-    "fpsLimit": "Frame rate limit",
-    "fpsLimitHint": "0 means no limit.",
     "extras": "Extras",
     "skipIntro": "Skip the intro videos",
-    "debugCamera": "Free camera",
-    "debugCameraHint": "Hold Cross and press L3 to cycle modes (keyboard: Space + Z).",
-    "debugMenu": "Debug menu",
-    "debugMenuHint": "Needs DbgFont14h.ccm and DbgFont14h.tpf in the game's dvdroot_ps4/font. Opens with the left touchpad or Tab.",
     "saves": "Saves",
     "savesFolder": "Saves folder"
   },
@@ -197,6 +193,10 @@
     "saveFailed": "Could not save the patches"
   },
   "advanced": {
+    "debugCamera": "Free camera",
+    "debugCameraHint": "Hold Cross and press L3 to cycle modes (keyboard: Space + Z).",
+    "debugMenu": "Debug menu",
+    "debugMenuHint": "Needs DbgFont14h.ccm and DbgFont14h.tpf in the game's dvdroot_ps4/font. Opens with the left touchpad or Tab.",
     "title": "Advanced",
     "subtitle": "Options for troubleshooting and testing.",
     "launcher": "Launcher",

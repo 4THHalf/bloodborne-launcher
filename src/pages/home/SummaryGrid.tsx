@@ -31,7 +31,7 @@ export function SummaryGrid() {
           icon={<Gauge />}
           label={t("home.frameRate")}
           value={fps && !fps.literal ? t(fps.label) : settings.fps_mode}
-          onClick={() => setTab("game")}
+          onClick={() => setTab("graphics")}
         />
         <SummaryTile
           icon={<Gamepad2 />}

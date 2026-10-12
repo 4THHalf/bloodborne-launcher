@@ -28,7 +28,6 @@ export function SavesPage() {
 
       <SettingsSection>
         <FolderRow title={t("saves.backups")} path={data?.profiles.some((p) => p.backups.length > 0) ? `${config?.paths.data}/save-backups/${data?.active}` : ""} />
-        <FolderRow title={t("game.savesFolder")} path={selected?.path ?? ""} />
       </SettingsSection>
     </>
   );

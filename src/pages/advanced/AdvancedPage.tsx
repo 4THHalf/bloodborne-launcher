@@ -40,6 +40,10 @@ export function AdvancedPage() {
         />
       </SettingsSection>
       <SettingsSection title={t("advanced.diagnostics")}>
+        <SwitchRow title={t("advanced.debugCamera")} description={`${t("advanced.debugCameraHint")} ${t("common.restartNote")}`}
+          checked={ini.debug_camera === "1"} onChange={(v) => setIni("debug_camera", v ? "1" : "0")} />
+        <SwitchRow title={t("advanced.debugMenu")} description={`${t("advanced.debugMenuHint")} ${t("common.restartNote")}`}
+          checked={ini.debug_menu === "1"} onChange={(v) => setIni("debug_menu", v ? "1" : "0")} />
         <SwitchRow title={t("advanced.frameStats")} checked={settings.frame_stats} onChange={(v) => setSetting("frame_stats", v)} />
         <SwitchRow
           title={t("advanced.saveLog")}

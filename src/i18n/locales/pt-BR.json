@@ -64,6 +64,12 @@
     "openData": "Saves e dados"
   },
   "graphics": {
+    "effects": "Efeitos",
+    "effectsHint": "Desligue o que não gostar, ou para ganhar um pouco de desempenho.",
+    "frameRate": "Taxa de quadros",
+    "fpsMode": "Modo de taxa de quadros",
+    "fpsLimit": "Limite de taxa de quadros",
+    "fpsLimitHint": "0 significa sem limite.",
     "title": "Gráficos",
     "subtitle": "Compartilhados com o menu do jogo (F1 ou L3 + R3).",
     "display": "Tela",
@@ -140,22 +146,12 @@
   },
   "game": {
     "title": "Jogo",
-    "subtitle": "Patches aplicados ao jogo quando ele inicia.",
+    "subtitle": "Idioma, opções de inicialização e pasta de saves do perfil ativo.",
     "language": "Idioma",
     "systemLanguage": "Idioma do jogo",
     "systemLanguageHint": "O idioma de sistema do PS4 que o jogo vê.",
-    "effects": "Efeitos",
-    "effectsHint": "Desligue o que não gostar, ou para ganhar um pouco de desempenho.",
-    "frameRate": "Taxa de quadros",
-    "fpsMode": "Modo de taxa de quadros",
-    "fpsLimit": "Limite de taxa de quadros",
-    "fpsLimitHint": "0 significa sem limite.",
     "extras": "Extras",
     "skipIntro": "Pular os vídeos de abertura",
-    "debugCamera": "Câmera livre",
-    "debugCameraHint": "Segure X e pressione L3 para alternar os modos (teclado: Espaço + Z).",
-    "debugMenu": "Menu de depuração",
-    "debugMenuHint": "Precisa de DbgFont14h.ccm e DbgFont14h.tpf em dvdroot_ps4/font do jogo. Abre com a metade esquerda do touchpad ou Tab.",
     "saves": "Saves",
     "savesFolder": "Pasta de saves"
   },
@@ -184,6 +180,10 @@
     "saveFailed": "Não foi possível salvar os patches"
   },
   "advanced": {
+    "debugCamera": "Câmera livre",
+    "debugCameraHint": "Segure X e pressione L3 para alternar os modos (teclado: Espaço + Z).",
+    "debugMenu": "Menu de depuração",
+    "debugMenuHint": "Precisa de DbgFont14h.ccm e DbgFont14h.tpf em dvdroot_ps4/font do jogo. Abre com a metade esquerda do touchpad ou Tab.",
     "title": "Avançado",
     "subtitle": "Opções para diagnóstico e testes.",
     "launcher": "Launcher",

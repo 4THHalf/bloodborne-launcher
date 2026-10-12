@@ -23,6 +23,12 @@
     "openData": "存檔與資料"
   },
   "graphics": {
+    "effects": "效果",
+    "effectsHint": "關閉你不喜歡的效果，或用來稍微提升效能。",
+    "frameRate": "影格率",
+    "fpsMode": "影格率模式",
+    "fpsLimit": "影格率上限",
+    "fpsLimitHint": "0 表示不限制。",
     "title": "圖形", "subtitle": "與遊戲內選單（F1 或 L3 + R3）共用。", "display": "顯示",
     "outputRes": "輸出解析度", "outputResHint": "畫面上影像的尺寸，由超解析度填滿。", "fullscreen": "全螢幕", "monitor": "顯示器", "monitorHint": "遊戲視窗與全螢幕顯示的螢幕。", "monitorMain": "主顯示器",
     "presentMode": "影格呈現方式", "showFps": "顯示 FPS", "upscaling": "超解析度",
@@ -49,14 +55,15 @@
     "or": "或"
   },
   "game": {
-    "title": "遊戲", "subtitle": "遊戲啟動時套用的修補。", "language": "語言", "systemLanguage": "遊戲語言",
-    "systemLanguageHint": "遊戲看到的 PS4 系統語言。", "effects": "效果",
-    "effectsHint": "關閉你不喜歡的效果，或用來稍微提升效能。", "frameRate": "影格率",
-    "fpsMode": "影格率模式", "fpsLimit": "影格率上限", "fpsLimitHint": "0 表示不限制。",
-    "extras": "其他", "skipIntro": "略過開場影片", "debugCamera": "自由鏡頭",
-    "debugCameraHint": "按住叉叉鈕並按 L3 切換模式（鍵盤：空白鍵 + Z）。", "debugMenu": "除錯選單",
-    "debugMenuHint": "需要在遊戲的 dvdroot_ps4/font 中放入 DbgFont14h.ccm 和 DbgFont14h.tpf。以觸控板左半部或 Tab 開啟。",
-    "saves": "存檔", "savesFolder": "存檔資料夾"
+    "title": "遊戲",
+    "subtitle": "語言、啟動選項及目前個人檔案的存檔資料夾。",
+    "language": "語言",
+    "systemLanguage": "遊戲語言",
+    "systemLanguageHint": "遊戲看到的 PS4 系統語言。",
+    "extras": "其他",
+    "skipIntro": "略過開場影片",
+    "saves": "存檔",
+    "savesFolder": "存檔資料夾"
   },
   "mods": {
     "title": "模組", "subtitle": "散裝檔案模組依序載入：後載入的會覆蓋先載入的。遊戲資料夾永遠不會被修改。",
@@ -72,6 +79,10 @@
     "saveFailed": "無法儲存修補"
   },
   "advanced": {
+    "debugCamera": "自由鏡頭",
+    "debugCameraHint": "按住叉叉鈕並按 L3 切換模式（鍵盤：空白鍵 + Z）。",
+    "debugMenu": "除錯選單",
+    "debugMenuHint": "需要在遊戲的 dvdroot_ps4/font 中放入 DbgFont14h.ccm 和 DbgFont14h.tpf。以觸控板左半部或 Tab 開啟。",
     "title": "進階", "subtitle": "用於疑難排解和測試的選項。", "launcher": "啟動器", "launcherLanguage": "啟動器語言",
     "launcherLanguageHint": "遊戲內選單也會跟隨（英文或俄文）。", "systemDefault": "系統語言", "performance": "效能",
     "drawPipe": "兩階段 GPU 管線", "readbacks": "CPU 讀取的 GPU 資料", "preupload": "背景上傳至 GPU 記憶體",

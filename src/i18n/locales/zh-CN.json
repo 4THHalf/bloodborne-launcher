@@ -23,6 +23,12 @@
     "openData": "存档与数据"
   },
   "graphics": {
+    "effects": "效果",
+    "effectsHint": "关闭你不喜欢的效果，或用来稍微提升性能。",
+    "frameRate": "帧率",
+    "fpsMode": "帧率模式",
+    "fpsLimit": "帧率上限",
+    "fpsLimitHint": "0 表示不限制。",
     "title": "图形", "subtitle": "与游戏内菜单（F1 或 L3 + R3）共享。", "display": "显示",
     "outputRes": "输出分辨率", "outputResHint": "屏幕上图像的尺寸，由超分辨率填满。", "fullscreen": "全屏", "monitor": "显示器", "monitorHint": "游戏窗口和全屏显示的屏幕。", "monitorMain": "主显示器",
     "presentMode": "帧呈现方式", "showFps": "显示 FPS", "upscaling": "超分辨率",
@@ -49,14 +55,15 @@
     "or": "或"
   },
   "game": {
-    "title": "游戏", "subtitle": "游戏启动时应用的补丁。", "language": "语言", "systemLanguage": "游戏语言",
-    "systemLanguageHint": "游戏看到的 PS4 系统语言。", "effects": "效果",
-    "effectsHint": "关闭你不喜欢的效果，或用来稍微提升性能。", "frameRate": "帧率",
-    "fpsMode": "帧率模式", "fpsLimit": "帧率上限", "fpsLimitHint": "0 表示不限制。",
-    "extras": "其他", "skipIntro": "跳过开场视频", "debugCamera": "自由镜头",
-    "debugCameraHint": "按住叉键并按 L3 切换模式（键盘：空格 + Z）。", "debugMenu": "调试菜单",
-    "debugMenuHint": "需要在游戏的 dvdroot_ps4/font 中放入 DbgFont14h.ccm 和 DbgFont14h.tpf。用触摸板左半部分或 Tab 打开。",
-    "saves": "存档", "savesFolder": "存档文件夹"
+    "title": "游戏",
+    "subtitle": "语言、启动选项及当前个人档案的存档文件夹。",
+    "language": "语言",
+    "systemLanguage": "游戏语言",
+    "systemLanguageHint": "游戏看到的 PS4 系统语言。",
+    "extras": "其他",
+    "skipIntro": "跳过开场视频",
+    "saves": "存档",
+    "savesFolder": "存档文件夹"
   },
   "mods": {
     "title": "模组", "subtitle": "散装文件模组按顺序加载：后加载的会覆盖先加载的。游戏文件夹永远不会被修改。",
@@ -72,6 +79,10 @@
     "saveFailed": "无法保存补丁"
   },
   "advanced": {
+    "debugCamera": "自由镜头",
+    "debugCameraHint": "按住叉键并按 L3 切换模式（键盘：空格 + Z）。",
+    "debugMenu": "调试菜单",
+    "debugMenuHint": "需要在游戏的 dvdroot_ps4/font 中放入 DbgFont14h.ccm 和 DbgFont14h.tpf。用触摸板左半部分或 Tab 打开。",
     "title": "高级", "subtitle": "用于排查问题和测试的选项。", "launcher": "启动器", "launcherLanguage": "启动器语言",
     "launcherLanguageHint": "游戏内菜单也会跟随（英语或俄语）。", "systemDefault": "系统语言", "performance": "性能",
     "drawPipe": "两阶段 GPU 管线", "readbacks": "CPU 读取的 GPU 数据", "preupload": "后台上传到 GPU 内存",

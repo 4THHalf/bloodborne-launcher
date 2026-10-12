@@ -23,6 +23,12 @@
     "openData": "Sparfiler och data"
   },
   "graphics": {
+    "effects": "Effekter",
+    "effectsHint": "Stäng av det du inte gillar, eller för lite mer prestanda.",
+    "frameRate": "Bildfrekvens",
+    "fpsMode": "Bildfrekvensläge",
+    "fpsLimit": "Bildfrekvensgräns",
+    "fpsLimitHint": "0 betyder ingen gräns.",
     "title": "Grafik", "subtitle": "Delas med menyn i spelet (F1 eller L3 + R3).", "display": "Skärm",
     "outputRes": "Utdataupplösning", "outputResHint": "Bildens storlek på skärmen. Uppskalaren fyller den.", "fullscreen": "Helskärm", "monitor": "Skärm", "monitorHint": "Var spelfönstret och helskärm öppnas.", "monitorMain": "Huvudskärm",
     "presentMode": "Bildvisning", "showFps": "Visa FPS", "upscaling": "Uppskalning",
@@ -49,14 +55,15 @@
     "or": "eller"
   },
   "game": {
-    "title": "Spel", "subtitle": "Patchar som tillämpas på spelet när det startar.", "language": "Språk", "systemLanguage": "Spelets språk",
-    "systemLanguageHint": "PS4-systemspråket som spelet ser.", "effects": "Effekter",
-    "effectsHint": "Stäng av det du inte gillar, eller för lite mer prestanda.", "frameRate": "Bildfrekvens",
-    "fpsMode": "Bildfrekvensläge", "fpsLimit": "Bildfrekvensgräns", "fpsLimitHint": "0 betyder ingen gräns.",
-    "extras": "Extra", "skipIntro": "Hoppa över introvideorna", "debugCamera": "Fri kamera",
-    "debugCameraHint": "Håll Kryss och tryck L3 för att byta läge (tangentbord: Mellanslag + Z).", "debugMenu": "Felsökningsmeny",
-    "debugMenuHint": "Kräver DbgFont14h.ccm och DbgFont14h.tpf i spelets dvdroot_ps4/font. Öppnas med pekplattans vänstra halva eller Tab.",
-    "saves": "Sparfiler", "savesFolder": "Mapp för sparfiler"
+    "title": "Spel",
+    "subtitle": "Språk, startalternativ och den aktiva profilens sparmapp.",
+    "language": "Språk",
+    "systemLanguage": "Spelets språk",
+    "systemLanguageHint": "PS4-systemspråket som spelet ser.",
+    "extras": "Extra",
+    "skipIntro": "Hoppa över introvideorna",
+    "saves": "Sparfiler",
+    "savesFolder": "Mapp för sparfiler"
   },
   "mods": {
     "title": "Moddar", "subtitle": "Moddar med lösa filer, laddade i ordning: senare ersätter tidigare. Spelmappen ändras aldrig.",
@@ -72,6 +79,10 @@
     "saveFailed": "Kunde inte spara patcharna"
   },
   "advanced": {
+    "debugCamera": "Fri kamera",
+    "debugCameraHint": "Håll Kryss och tryck L3 för att byta läge (tangentbord: Mellanslag + Z).",
+    "debugMenu": "Felsökningsmeny",
+    "debugMenuHint": "Kräver DbgFont14h.ccm och DbgFont14h.tpf i spelets dvdroot_ps4/font. Öppnas med pekplattans vänstra halva eller Tab.",
     "title": "Avancerat", "subtitle": "Alternativ för felsökning och tester.", "launcher": "Startprogram", "launcherLanguage": "Startprogrammets språk",
     "launcherLanguageHint": "Menyn i spelet följer det (engelska eller ryska).", "systemDefault": "Systemets språk", "performance": "Prestanda",
     "drawPipe": "GPU-pipeline i två steg", "readbacks": "GPU-data som läses av processorn", "preupload": "Uppladdning till GPU-minnet i bakgrunden",

@@ -23,6 +23,12 @@
     "openData": "Kayıtlar ve veriler"
   },
   "graphics": {
+    "effects": "Efektler",
+    "effectsHint": "Beğenmediklerinizi ya da biraz performans için kapatın.",
+    "frameRate": "Kare hızı",
+    "fpsMode": "Kare hızı modu",
+    "fpsLimit": "Kare hızı sınırı",
+    "fpsLimitHint": "0 sınır yok demektir.",
     "title": "Grafik", "subtitle": "Oyun içi menüyle ortak (F1 veya L3 + R3).", "display": "Ekran",
     "outputRes": "Çıkış çözünürlüğü", "outputResHint": "Görüntünün ekrandaki boyutu. Ölçekleyici onu doldurur.", "fullscreen": "Tam ekran", "monitor": "Monitör", "monitorHint": "Oyun penceresinin ve tam ekranın açıldığı ekran.", "monitorMain": "Ana ekran",
     "presentMode": "Kare sunumu", "showFps": "FPS göster", "upscaling": "Ölçekleme",
@@ -49,14 +55,15 @@
     "or": "veya"
   },
   "game": {
-    "title": "Oyun", "subtitle": "Oyun başlarken uygulanan yamalar.", "language": "Dil", "systemLanguage": "Oyun dili",
-    "systemLanguageHint": "Oyunun gördüğü PS4 sistem dili.", "effects": "Efektler",
-    "effectsHint": "Beğenmediklerinizi ya da biraz performans için kapatın.", "frameRate": "Kare hızı",
-    "fpsMode": "Kare hızı modu", "fpsLimit": "Kare hızı sınırı", "fpsLimitHint": "0 sınır yok demektir.",
-    "extras": "Ekstralar", "skipIntro": "Giriş videolarını atla", "debugCamera": "Serbest kamera",
-    "debugCameraHint": "Çarpı'yı basılı tutup modlar arasında geçmek için L3'e basın (klavye: Boşluk + Z).", "debugMenu": "Hata ayıklama menüsü",
-    "debugMenuHint": "Oyunun dvdroot_ps4/font klasöründe DbgFont14h.ccm ve DbgFont14h.tpf gerekir. Dokunmatik yüzeyin sol yarısı veya Tab ile açılır.",
-    "saves": "Kayıtlar", "savesFolder": "Kayıt klasörü"
+    "title": "Oyun",
+    "subtitle": "Dil, başlangıç seçenekleri ve etkin profilin kayıt klasörü.",
+    "language": "Dil",
+    "systemLanguage": "Oyun dili",
+    "systemLanguageHint": "Oyunun gördüğü PS4 sistem dili.",
+    "extras": "Ekstralar",
+    "skipIntro": "Giriş videolarını atla",
+    "saves": "Kayıtlar",
+    "savesFolder": "Kayıt klasörü"
   },
   "mods": {
     "title": "Modlar", "subtitle": "Gevşek dosyalı modlar sırayla yüklenir: sonrakiler öncekilerin yerini alır. Oyun klasörü asla değiştirilmez.",
@@ -72,6 +79,10 @@
     "saveFailed": "Yamalar kaydedilemedi"
   },
   "advanced": {
+    "debugCamera": "Serbest kamera",
+    "debugCameraHint": "Çarpı'yı basılı tutup modlar arasında geçmek için L3'e basın (klavye: Boşluk + Z).",
+    "debugMenu": "Hata ayıklama menüsü",
+    "debugMenuHint": "Oyunun dvdroot_ps4/font klasöründe DbgFont14h.ccm ve DbgFont14h.tpf gerekir. Dokunmatik yüzeyin sol yarısı veya Tab ile açılır.",
     "title": "Gelişmiş", "subtitle": "Sorun giderme ve test seçenekleri.", "launcher": "Başlatıcı", "launcherLanguage": "Başlatıcı dili",
     "launcherLanguageHint": "Oyun içi menü bunu izler (İngilizce veya Rusça).", "systemDefault": "Sistem dili", "performance": "Performans",
     "drawPipe": "İki aşamalı GPU hattı", "readbacks": "CPU'nun okuduğu GPU verileri", "preupload": "GPU belleğine arka planda yükleme",

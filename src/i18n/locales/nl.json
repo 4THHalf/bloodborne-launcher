@@ -23,6 +23,12 @@
     "openData": "Opslagen en gegevens"
   },
   "graphics": {
+    "effects": "Effecten",
+    "effectsHint": "Zet uit wat je niet bevalt, of voor wat extra prestaties.",
+    "frameRate": "Framerate",
+    "fpsMode": "Framerate-modus",
+    "fpsLimit": "Framerate-limiet",
+    "fpsLimitHint": "0 betekent geen limiet.",
     "title": "Graphics", "subtitle": "Gedeeld met het menu in het spel (F1 of L3 + R3).", "display": "Beeld",
     "outputRes": "Uitvoerresolutie", "outputResHint": "De grootte van het beeld op het scherm. De upscaler vult het.", "fullscreen": "Volledig scherm", "monitor": "Monitor", "monitorHint": "Waar het spelvenster en volledig scherm openen.", "monitorMain": "Hoofdscherm",
     "presentMode": "Beeldweergave", "showFps": "FPS tonen", "upscaling": "Upscaling",
@@ -49,14 +55,15 @@
     "or": "of"
   },
   "game": {
-    "title": "Spel", "subtitle": "Patches die bij de start op het spel worden toegepast.", "language": "Taal", "systemLanguage": "Taal van het spel",
-    "systemLanguageHint": "De PS4-systeemtaal die het spel ziet.", "effects": "Effecten",
-    "effectsHint": "Zet uit wat je niet bevalt, of voor wat extra prestaties.", "frameRate": "Framerate",
-    "fpsMode": "Framerate-modus", "fpsLimit": "Framerate-limiet", "fpsLimitHint": "0 betekent geen limiet.",
-    "extras": "Extra's", "skipIntro": "Introvideo's overslaan", "debugCamera": "Vrije camera",
-    "debugCameraHint": "Houd Kruis vast en druk op L3 om van modus te wisselen (toetsenbord: Spatie + Z).", "debugMenu": "Debugmenu",
-    "debugMenuHint": "Vereist DbgFont14h.ccm en DbgFont14h.tpf in dvdroot_ps4/font van het spel. Opent met de linkerhelft van de touchpad of Tab.",
-    "saves": "Opslagen", "savesFolder": "Map met opslagen"
+    "title": "Spel",
+    "subtitle": "Taal, opstartopties en de opslagmap van het actieve profiel.",
+    "language": "Taal",
+    "systemLanguage": "Taal van het spel",
+    "systemLanguageHint": "De PS4-systeemtaal die het spel ziet.",
+    "extras": "Extra's",
+    "skipIntro": "Introvideo's overslaan",
+    "saves": "Opslagen",
+    "savesFolder": "Map met opslagen"
   },
   "mods": {
     "title": "Mods", "subtitle": "Mods met losse bestanden, op volgorde geladen: latere overschrijven eerdere. De spelmap wordt nooit gewijzigd.",
@@ -72,6 +79,10 @@
     "saveFailed": "Kon de patches niet opslaan"
   },
   "advanced": {
+    "debugCamera": "Vrije camera",
+    "debugCameraHint": "Houd Kruis vast en druk op L3 om van modus te wisselen (toetsenbord: Spatie + Z).",
+    "debugMenu": "Debugmenu",
+    "debugMenuHint": "Vereist DbgFont14h.ccm en DbgFont14h.tpf in dvdroot_ps4/font van het spel. Opent met de linkerhelft van de touchpad of Tab.",
     "title": "Geavanceerd", "subtitle": "Opties voor probleemoplossing en testen.", "launcher": "Launcher", "launcherLanguage": "Taal van de launcher",
     "launcherLanguageHint": "Het menu in het spel volgt deze (Engels of Russisch).", "systemDefault": "Systeemtaal", "performance": "Prestaties",
     "drawPipe": "GPU-pijplijn in twee fasen", "readbacks": "GPU-gegevens gelezen door de CPU", "preupload": "Uploaden naar GPU-geheugen op de achtergrond",

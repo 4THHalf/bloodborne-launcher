@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
-import { PageHeader, SelectRow, SettingsSection, SliderRow, SwitchRow } from "@/components/settings";
+import { NumberRow, PageHeader, SelectRow, SettingsSection, SliderRow, SwitchRow } from "@/components/settings";
 import { useIni, useSetting, useSettingsData } from "@/hooks";
-import { MODEL_LOD, OUTPUT_RES, PRESENT_MODES, PRESETS, UPSCALERS, renderSize } from "@/lib/data";
+import { EFFECTS, FPS_MODES, MODEL_LOD, OUTPUT_RES, PRESENT_MODES, PRESETS, UPSCALERS, renderSize } from "@/lib/data";
 import type { Option } from "@/lib";
 import { DisplayPicker } from "@/pages/graphics/DisplayPicker";
 
@@ -10,6 +10,7 @@ export function GraphicsPage() {
   const { settings, ini } = useSettingsData();
   const setIni = useIni();
   const setSetting = useSetting();
+  const flag = (key: string, fallback: boolean) => (key in ini ? ini[key] === "1" : fallback);
   const upscaler = ini.upscaler ?? "fsr3";
   const output = ini.output_res ?? "1920x1080";
   const preset = Number(ini.preset ?? 2);
@@ -38,6 +39,11 @@ export function GraphicsPage() {
           options={PRESENT_MODES}
           onChange={(v) => setSetting("present_mode", v)}
         />
+      </SettingsSection>
+      <SettingsSection title={t("graphics.frameRate")}>
+        <SelectRow title={t("graphics.fpsMode")} value={settings.fps_mode} options={FPS_MODES} onChange={(v) => setSetting("fps_mode", v)} />
+        <NumberRow title={t("graphics.fpsLimit")} description={t("graphics.fpsLimitHint")}
+          value={settings.fps_limit ?? 0} min={0} max={480} onChange={(v) => setSetting("fps_limit", v)} />
         <SwitchRow title={t("graphics.showFps")} checked={ini.show_fps !== "0"} onChange={(v) => setIni("show_fps", v ? "1" : "0")} />
       </SettingsSection>
       <SettingsSection title={t("graphics.upscaling")} description={t("graphics.upscalingHint")}>
@@ -82,6 +88,12 @@ export function GraphicsPage() {
           options={MODEL_LOD}
           onChange={(v) => setIni("model_lod", v)}
         />
+      </SettingsSection>
+      <SettingsSection title={t("graphics.effects")} description={`${t("graphics.effectsHint")} ${t("common.restartNote")}`}>
+        {EFFECTS.map((effect) => (
+          <SwitchRow key={effect.key} title={t(effect.label)} description={effect.hint && t(effect.hint)}
+            checked={flag(effect.key, effect.defaultOn)} onChange={(v) => setIni(effect.key, v ? "1" : "0")} />
+        ))}
       </SettingsSection>
     </>
   );
