@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "Apple Silicon için", "version": "v{{version}}" },
-  "nav": { "home": "Ana sayfa", "graphics": "Grafik", "controls": "Kontroller", "game": "Oyun", "mods": "Modlar", "patches": "Yamalar", "advanced": "Gelişmiş", "log": "Günlük", "saves": "Kayıtlar" },
+  "nav": { "home": "Ana sayfa", "graphics": "Grafik", "controls": "Kontroller", "game": "Oyun", "mods": "Modlar", "patches": "Yamalar", "advanced": "Gelişmiş", "log": "Günlük", "saves": "Kayıtlar", "profiles": "Profiller" },
   "play": {
     "play": "Oyna", "stop": "Durdur", "running": "Çalışıyor",
     "started": "Oyun başlıyor. İlk açılışta oyunun gölgelendiricileri derlenir, bu birkaç dakika sürer.",
@@ -124,5 +124,16 @@
     "restore": "Geri yükle",
     "restoreHint": "Bu yedek geri yüklensin mi? Önce mevcut kaydınız yedeklenecek.",
     "cancel": "İptal"
+  },
+  "profiles": {
+    "title": "Profiller",
+    "subtitle": "Her profil kendi karakterlerine ve kayıt yedeklerine sahiptir.",
+    "active": "Etkin profil",
+    "setupTitle": "İlk profilinizi oluşturun",
+    "setupExisting": "Profilinize bir ad verin. Mevcut kayıtlarınız ona bağlanacak ve yerlerinde kalacak.",
+    "setupFresh": "Karakterlerinizi ve yedeklerinizi bir arada tutmak için bir profil oluşturun.",
+    "setupCreate": "Profil oluştur",
+    "use": "Profili kullan",
+    "rename": "Yeniden adlandır"
   }
 }

@@ -12,7 +12,7 @@
     "mods": "Mods",
     "patches": "Patches",
     "advanced": "Advanced",
-    "log": "Log", "saves": "Saves"
+    "log": "Log", "saves": "Saves", "profiles": "Profiles"
   },
   "play": {
     "play": "Play",
@@ -323,5 +323,16 @@
     "restore": "Restore",
     "restoreHint": "Restore this backup? Your current save will be backed up first.",
     "cancel": "Cancel"
+  },
+  "profiles": {
+    "title": "Profiles",
+    "subtitle": "Each profile owns its characters and save backups.",
+    "active": "Active profile",
+    "setupTitle": "Create your first profile",
+    "setupExisting": "Name your profile. Your existing saves will belong to it and stay where they are.",
+    "setupFresh": "Create a profile to keep your characters and backups together.",
+    "setupCreate": "Create profile",
+    "use": "Use profile",
+    "rename": "Rename"
   }
 }

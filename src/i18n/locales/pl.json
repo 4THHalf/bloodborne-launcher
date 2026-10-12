@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "dla Apple Silicon", "version": "v{{version}}" },
-  "nav": { "home": "Start", "graphics": "Grafika", "controls": "Sterowanie", "game": "Gra", "mods": "Mody", "patches": "Łatki", "advanced": "Zaawansowane", "log": "Dziennik", "saves": "Zapisy" },
+  "nav": { "home": "Start", "graphics": "Grafika", "controls": "Sterowanie", "game": "Gra", "mods": "Mody", "patches": "Łatki", "advanced": "Zaawansowane", "log": "Dziennik", "saves": "Zapisy", "profiles": "Profile" },
   "play": {
     "play": "Graj", "stop": "Zatrzymaj", "running": "Uruchomiona",
     "started": "Gra się uruchamia. Pierwsze uruchomienie kompiluje shadery gry i trwa kilka minut.",
@@ -124,5 +124,16 @@
     "restore": "Przywróć",
     "restoreHint": "Przywrócić tę kopię? Najpierw powstanie kopia bieżącego zapisu.",
     "cancel": "Anuluj"
+  },
+  "profiles": {
+    "title": "Profile",
+    "subtitle": "Każdy profil ma własne postacie i kopie zapisów.",
+    "active": "Aktywny profil",
+    "setupTitle": "Utwórz swój pierwszy profil",
+    "setupExisting": "Nazwij profil. Obecne zapisy zostaną do niego przypisane i pozostaną na swoim miejscu.",
+    "setupFresh": "Utwórz profil dla swoich postaci i kopii zapasowych.",
+    "setupCreate": "Utwórz profil",
+    "use": "Użyj profilu",
+    "rename": "Zmień nazwę"
   }
 }

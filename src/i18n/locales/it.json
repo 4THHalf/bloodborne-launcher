@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "per Apple Silicon", "version": "v{{version}}" },
-  "nav": { "home": "Home", "graphics": "Grafica", "controls": "Comandi", "game": "Gioco", "mods": "Mod", "patches": "Patch", "advanced": "Avanzate", "log": "Registro", "saves": "Salvataggi" },
+  "nav": { "home": "Home", "graphics": "Grafica", "controls": "Comandi", "game": "Gioco", "mods": "Mod", "patches": "Patch", "advanced": "Avanzate", "log": "Registro", "saves": "Salvataggi", "profiles": "Profili" },
   "play": {
     "play": "Gioca", "stop": "Ferma", "running": "In esecuzione",
     "started": "Il gioco si sta avviando. Il primo avvio compila gli shader del gioco e richiede qualche minuto.",
@@ -124,5 +124,16 @@
     "restore": "Ripristina",
     "restoreHint": "Ripristinare questo backup? Prima verrà creato un backup del salvataggio attuale.",
     "cancel": "Annulla"
+  },
+  "profiles": {
+    "title": "Profili",
+    "subtitle": "Ogni profilo ha i propri personaggi e backup.",
+    "active": "Profilo attivo",
+    "setupTitle": "Crea il tuo primo profilo",
+    "setupExisting": "Dai un nome al profilo. I salvataggi esistenti gli apparterranno e resteranno dove sono.",
+    "setupFresh": "Crea un profilo per riunire personaggi e backup.",
+    "setupCreate": "Crea profilo",
+    "use": "Usa profilo",
+    "rename": "Rinomina"
   }
 }

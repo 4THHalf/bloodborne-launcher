@@ -3,5 +3,5 @@
   "identifier": "default",
   "description": "The launcher window",
   "windows": ["main"],
-  "permissions": ["core:default", "core:window:allow-start-dragging", "dialog:default"]
+  "permissions": ["core:default", "core:window:allow-start-dragging", "dialog:default", "sql:allow-load", "sql:allow-select"]
 }

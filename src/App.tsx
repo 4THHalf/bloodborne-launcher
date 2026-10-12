@@ -1,9 +1,12 @@
+import { ProfileSetup } from "@/components/profiles";
 import { AppWindow, LoadingScreen } from "@/components/window";
-import { useConfig, useGameConnection, useLanguageSync } from "@/hooks";
+import { useConfig, useProfiles, useGameConnection, useLanguageSync } from "@/hooks";
 
 export function App() {
   const { data } = useConfig();
+  const profiles = useProfiles();
   useLanguageSync();
   useGameConnection();
-  return data ? <AppWindow /> : <LoadingScreen />;
+  if (!data || profiles.isPending) return <LoadingScreen />;
+  return profiles.error || profiles.data?.setup_required ? <ProfileSetup /> : <AppWindow />;
 }

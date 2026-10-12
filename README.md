@@ -5,7 +5,7 @@ It is included as the `launcher/app/` submodule of bloodborne-mac.
 macOS game integration works today; Windows and Linux integration are planned.
 
 The launcher inside `Bloodborne.app`. It has a game folder check, graphics, controls (controller
-choice and button mapping), game options, save profiles and backups, mods, patches, advanced options and the game's log. It
+choice and button mapping), game options, user profiles, saves and backups, mods, patches, advanced options and the game's log. It
 starts the game with the app's own bash and Python ([bloodborne-mac packaging](https://github.com/bloodborne-native/bloodborne-mac/blob/main/packaging/macos.sh) builds the app around it).
 
 - **Interface:** React 19, TypeScript, Tailwind CSS 4, [shadcn/ui](https://ui.shadcn.com)
@@ -39,7 +39,7 @@ These are enforced by ESLint (`eslint.config.js`) where possible.
   pickers.
 - **State:**
   - Backend data goes through **TanStack Query** (`src/hooks`): the config, the game check,
-    mods, patches and controllers. Saves are mutations with optimistic updates.
+    mods, patches and controllers. Settings use optimistic mutations; file operations wait for native confirmation.
   - Client state goes in **Zustand** stores (`src/stores`): the game process and its log, and
     the current tab.
   - Keep component-local state in `useState`.
@@ -60,6 +60,8 @@ These are enforced by ESLint (`eslint.config.js`) where possible.
 | `src/stores` | Zustand stores |
 | `src/lib` | Backend calls (`api.ts`, `mockApi.ts`), types, query client, `data/` (options, controls) |
 | `src/i18n` | i18next setup and locales: the game's 20 languages (`scripts/check_locales.py` checks them against `en.json`) |
+| `src/db`, `src/services` | Drizzle schema/migrations and typed identity reads |
+| `src-tauri/src/database.rs`, `src-tauri/src/profiles.rs` | SQLite migrations, ownership and file-operation journal |
 | `src-tauri/src/saves.rs` | Complete save sets, profiles, backups and restore; synthetic file tests |
 | `src-tauri` | Rust backend, Tauri config, icons |
 | `scripts/make_icon.swift` | Draws the icon the app's icons are made from |
@@ -79,3 +81,8 @@ contract, recovery behavior and planned character previews and editing.
 ## Credits
 
 The project is built on bbport and shadPS4. See [Credits and license](docs/CREDITS.md).
+
+Database schema changes: `npm run db:generate`; register each generated migration in
+`src-tauri/src/database.rs`. Rust applies migrations before setup or Play. The SQL adapter
+is adapted from [Leari](https://github.com/leari-mail/leari/tree/5876482); see
+[Credits and license](docs/CREDITS.md). Trophy storage is prepared; runtime collection is planned.

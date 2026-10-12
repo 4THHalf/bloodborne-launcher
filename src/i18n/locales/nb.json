@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "for Apple Silicon", "version": "v{{version}}" },
-  "nav": { "home": "Hjem", "graphics": "Grafikk", "controls": "Kontroller", "game": "Spill", "mods": "Modder", "patches": "Patcher", "advanced": "Avansert", "log": "Logg", "saves": "Lagrede spill" },
+  "nav": { "home": "Hjem", "graphics": "Grafikk", "controls": "Kontroller", "game": "Spill", "mods": "Modder", "patches": "Patcher", "advanced": "Avansert", "log": "Logg", "saves": "Lagrede spill", "profiles": "Profiler" },
   "play": {
     "play": "Spill", "stop": "Stopp", "running": "Kjører",
     "started": "Spillet starter. Første oppstart kompilerer spillets shadere og tar noen minutter.",
@@ -124,5 +124,16 @@
     "restore": "Gjenopprett",
     "restoreHint": "Gjenopprette denne sikkerhetskopien? Det nåværende lagrede spillet sikkerhetskopieres først.",
     "cancel": "Avbryt"
+  },
+  "profiles": {
+    "title": "Profiler",
+    "subtitle": "Hver profil har egne figurer og sikkerhetskopier.",
+    "active": "Aktiv profil",
+    "setupTitle": "Opprett din første profil",
+    "setupExisting": "Gi profilen et navn. Lagrede spill knyttes til den og blir liggende på samme sted.",
+    "setupFresh": "Opprett en profil for figurene og sikkerhetskopiene dine.",
+    "setupCreate": "Opprett profil",
+    "use": "Bruk profil",
+    "rename": "Gi nytt navn"
   }
 }

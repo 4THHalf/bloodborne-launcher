@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "para Apple Silicon", "version": "v{{version}}" },
-  "nav": { "home": "Início", "graphics": "Gráficos", "controls": "Controlos", "game": "Jogo", "mods": "Mods", "patches": "Patches", "advanced": "Avançado", "log": "Registo", "saves": "Gravações" },
+  "nav": { "home": "Início", "graphics": "Gráficos", "controls": "Controlos", "game": "Jogo", "mods": "Mods", "patches": "Patches", "advanced": "Avançado", "log": "Registo", "saves": "Gravações", "profiles": "Perfis" },
   "play": {
     "play": "Jogar", "stop": "Parar", "running": "Em execução",
     "started": "O jogo está a iniciar. No primeiro arranque os shaders do jogo são compilados, o que demora alguns minutos.",
@@ -124,5 +124,16 @@
     "restore": "Restaurar",
     "restoreHint": "Restaurar esta cópia? Primeiro será criada uma cópia da gravação atual.",
     "cancel": "Cancelar"
+  },
+  "profiles": {
+    "title": "Perfis",
+    "subtitle": "Cada perfil tem as suas personagens e cópias das gravações.",
+    "active": "Perfil ativo",
+    "setupTitle": "Crie o seu primeiro perfil",
+    "setupExisting": "Dê um nome ao perfil. As gravações existentes ficam associadas a ele e mantêm-se no mesmo local.",
+    "setupFresh": "Crie um perfil para manter as personagens e cópias de segurança juntas.",
+    "setupCreate": "Criar perfil",
+    "use": "Usar perfil",
+    "rename": "Mudar nome"
   }
 }

@@ -11,3 +11,10 @@ runtime contributors remain in [bloodborne-runtime's credits](https://github.com
 The UI uses Tauri, React, shadcn/ui, Base UI, Tailwind CSS, TanStack Query, Zustand, i18next,
 Sonner, lucide, and the Cinzel and Inter fonts. Dependency licenses remain with their packages.
 No code from an external save editor has been adopted.
+
+## Leari database architecture
+
+The Drizzle-to-Tauri SQL adapter in `src/db/client.ts` is adapted from
+[leari-mail/leari, commit 5876482](https://github.com/leari-mail/leari/tree/5876482)
+by Pablo Souza (MIT). Its service/hook organization and shared SQLite access informed this
+launcher design. The [original MIT notice](licenses/leari-MIT.txt) is retained here.

@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "til Apple Silicon", "version": "v{{version}}" },
-  "nav": { "home": "Hjem", "graphics": "Grafik", "controls": "Styring", "game": "Spil", "mods": "Mods", "patches": "Patches", "advanced": "Avanceret", "log": "Log", "saves": "Gemte spil" },
+  "nav": { "home": "Hjem", "graphics": "Grafik", "controls": "Styring", "game": "Spil", "mods": "Mods", "patches": "Patches", "advanced": "Avanceret", "log": "Log", "saves": "Gemte spil", "profiles": "Profiler" },
   "play": {
     "play": "Spil", "stop": "Stop", "running": "Kører",
     "started": "Spillet starter. Første start kompilerer spillets shaders og tager et par minutter.",
@@ -124,5 +124,16 @@
     "restore": "Gendan",
     "restoreHint": "Gendan denne sikkerhedskopi? Dit nuværende gemte spil sikkerhedskopieres først.",
     "cancel": "Annuller"
+  },
+  "profiles": {
+    "title": "Profiler",
+    "subtitle": "Hver profil har egne figurer og sikkerhedskopier.",
+    "active": "Aktiv profil",
+    "setupTitle": "Opret din første profil",
+    "setupExisting": "Navngiv profilen. Dine gemte spil tilknyttes den og bliver på deres plads.",
+    "setupFresh": "Opret en profil til dine figurer og sikkerhedskopier.",
+    "setupCreate": "Opret profil",
+    "use": "Brug profil",
+    "rename": "Omdøb"
   }
 }

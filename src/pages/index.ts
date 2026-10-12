@@ -7,3 +7,4 @@ export * from "@/pages/log";
 export * from "@/pages/mods";
 export * from "@/pages/patches";
 export * from "@/pages/saves";
+export * from "@/pages/profiles";

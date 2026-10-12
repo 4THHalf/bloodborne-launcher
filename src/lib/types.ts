@@ -85,4 +85,7 @@ export type Option<T extends string | number> =
 export type SaveBackup = { id: string; created: number; bytes: number };
 export type SaveProfile = { id: string; name: string; path: string; bytes: number; modified: number | null; backups: SaveBackup[] };
 export type SaveList = { active: string; profiles: SaveProfile[] };
-export type SaveChange = { action: "select" | "create" | "duplicate" | "backup" | "restore"; id: string; name?: string; backup?: string };
+export type SaveChange = { action: "backup" | "restore"; id: string; backup?: string };
+
+export type ProfileList = SaveList & { setup_required: boolean; has_existing_saves: boolean };
+export type ProfileChange = { action: "initialize" | "create" | "select" | "rename"; id: string; name?: string; source?: string };

@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "Apple Silicon용", "version": "v{{version}}" },
-  "nav": { "home": "홈", "graphics": "그래픽", "controls": "조작", "game": "게임", "mods": "모드", "patches": "패치", "advanced": "고급", "log": "로그", "saves": "저장 데이터" },
+  "nav": { "home": "홈", "graphics": "그래픽", "controls": "조작", "game": "게임", "mods": "모드", "patches": "패치", "advanced": "고급", "log": "로그", "saves": "저장 데이터", "profiles": "프로필" },
   "play": {
     "play": "플레이", "stop": "중지", "running": "실행 중",
     "started": "게임을 시작하는 중입니다. 처음 실행할 때는 게임의 셰이더를 컴파일하므로 몇 분 걸립니다.",
@@ -124,5 +124,16 @@
     "restore": "복원",
     "restoreHint": "이 백업을 복원할까요? 현재 저장 데이터는 먼저 백업됩니다.",
     "cancel": "취소"
+  },
+  "profiles": {
+    "title": "프로필",
+    "subtitle": "각 프로필에 캐릭터와 저장 백업이 연결됩니다.",
+    "active": "사용 중인 프로필",
+    "setupTitle": "첫 프로필 만들기",
+    "setupExisting": "프로필 이름을 정하세요. 기존 저장 데이터는 이동하지 않고 이 프로필에 연결됩니다.",
+    "setupFresh": "캐릭터와 백업을 함께 관리할 프로필을 만드세요.",
+    "setupCreate": "프로필 만들기",
+    "use": "프로필 사용",
+    "rename": "이름 변경"
   }
 }

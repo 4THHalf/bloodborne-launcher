@@ -11,6 +11,7 @@
 
 mod saves;
 mod profiles;
+mod database;
 
 use serde::Serialize;
 use serde_json::{json, Map, Value};
@@ -152,6 +153,7 @@ struct Game {
     child: Option<Child>,
 }
 
+#[derive(Clone)]
 struct AppState {
     paths: Paths,
     game: Arc<Mutex<Game>>,
@@ -245,13 +247,24 @@ fn api(p: &Paths, args: &[&str]) -> Result<Value, String> {
     serde_json::from_slice(&out.stdout).map_err(|e| e.to_string())
 }
 
+async fn blocking<T: Send + 'static>(operation: impl FnOnce() -> Result<T,String> + Send + 'static) -> Result<T,String> {
+    tauri::async_runtime::spawn_blocking(operation).await.map_err(|e|e.to_string())?
+}
+#[tauri::command]
+async fn database_path(state: State<'_, AppState>) -> Result<String,String> {
+    let data=state.paths.data.clone();
+    blocking(move || { database::block(async { database::connect(&data).await?; Ok(()) })?; Ok(database::path(&data).to_string_lossy().into()) }).await
+}
+
 // --- commands --------------------------------------------------------------------------------
 
 #[tauri::command]
-fn load_config(state: State<AppState>) -> Value {
+async fn load_config(state: State<'_ , AppState>) -> Result<Value, String> {
+    let state=state.inner().clone();
+    blocking(move || {
     let p = &state.paths;
     let s = load_settings(p);
-    json!({
+    Ok(json!({
         "settings": s,
         "ini": load_ini(p),
         "paths": {
@@ -264,7 +277,8 @@ fn load_config(state: State<AppState>) -> Value {
         "bundled": p.bundled,
         "version": env!("CARGO_PKG_VERSION"),
         "running": state.game.lock().map(|g| g.child.is_some()).unwrap_or(false),
-    })
+    }))
+    }).await
 }
 
 #[tauri::command]
@@ -300,13 +314,18 @@ fn saves_idle(game: &Game) -> Result<(), String> {
     Ok(())
 }
 #[tauri::command]
-fn list_profiles(state: State<AppState>) -> Result<profiles::ProfileList, String> {
+async fn list_profiles(state: State<'_, AppState>) -> Result<profiles::ProfileList, String> {
+    let state=state.inner().clone();
+    blocking(move || {
     let _game = state.game.lock().map_err(|e| e.to_string())?;
     let s = load_settings(&state.paths);
     profiles::list(&state.paths.data, &original_user_dir(&state.paths, &s))
+    }).await
 }
 #[tauri::command]
-fn change_profile(state: State<AppState>, action: String, id: String, name: Option<String>, source: Option<String>) -> Result<(), String> {
+async fn change_profile(state: State<'_, AppState>, action: String, id: String, name: Option<String>, source: Option<String>) -> Result<(), String> {
+    let state=state.inner().clone();
+    blocking(move || {
     let game = state.game.lock().map_err(|e| e.to_string())?;
     saves_idle(&game)?;
     let p = &state.paths;
@@ -314,26 +333,41 @@ fn change_profile(state: State<AppState>, action: String, id: String, name: Opti
         let s = load_settings(p);
         profiles::initialize(&p.data, &original_user_dir(p, &s), &str_setting(&s, "save_profile"), name.as_deref().unwrap_or_default())
     } else { profiles::change(&p.data, &action, &id, name.as_deref(), source.as_deref()) }
+    }).await
 }
 #[tauri::command]
-fn list_saves(state: State<AppState>) -> Result<Value, String> {
+async fn list_saves(state: State<'_, AppState>) -> Result<Value, String> {
+    let state=state.inner().clone();
+    blocking(move || {
     let _game = state.game.lock().map_err(|e| e.to_string())?;
     let selected = profiles::selected(&state.paths.data)?;
     Ok(json!({"active": selected.id, "profiles": [selected]}))
+    }).await
 }
 #[tauri::command]
-fn change_save(state: State<AppState>, action: String, id: String, backup: Option<String>) -> Result<(), String> {
+async fn change_save(state: State<'_, AppState>, action: String, id: String, backup: Option<String>) -> Result<(), String> {
+    let state=state.inner().clone();
+    blocking(move || {
     let game = state.game.lock().map_err(|e| e.to_string())?;
     saves_idle(&game)?;
     let p = &state.paths;
-    let registry = profiles::require(&p.data)?;
-    let selected = profiles::selected(&p.data)?;
-    if id != selected.id { return Err("Choose the owning profile before managing its saves.".into()); }
-    match action.as_str() {
-        "backup" => { saves::backup(&p.data, &registry.original_user_dir, &id)?; Ok(()) },
-        "restore" => saves::restore(&p.data, &registry.original_user_dir, &id, backup.as_deref().unwrap_or_default()),
-        _ => Err("Manage identities in the Profiles tab.".into()),
-    }
+    save_operation(p, &id, &action, backup.as_deref())
+    }).await
+}
+
+fn save_operation(p: &Paths, id: &str, action: &str, backup: Option<&str>) -> Result<(), String> {
+    if action != "backup" && action != "restore" { return Err("Manage identities in the Profiles tab.".into()); }
+    let registry=profiles::require(&p.data)?;
+    if profiles::selected(&p.data)?.id != id { return Err("Choose the owning profile before managing its saves.".into()); }
+    let operation=profiles::operation(&p.data, Some(id), action)?;
+    let result=(|| {
+        if action == "backup" { saves::backup(&p.data, &registry.original_user_dir, id)?; }
+        else { saves::restore(&p.data, &registry.original_user_dir, id, backup.unwrap_or_default())?; }
+        profiles::list(&p.data, &registry.original_user_dir)?;
+        Ok(())
+    })();
+    profiles::finish(&p.data, &operation, &result)?;
+    result
 }
 
 /// Sets bbport.ini keys (null removes the line: the default applies), keeping the other lines.
@@ -483,6 +517,12 @@ fn open_path(path: String) -> Result<(), String> {
     Command::new("open").arg(path).spawn().map(|_| ()).map_err(|e| e.to_string())
 }
 
+// GUI names may be long; keep the guest value within a 16-byte caller buffer including NUL.
+fn guest_profile_name(name: &str) -> String {
+    let end = name.char_indices().map(|(start,c)|start+c.len_utf8()).take_while(|end|*end<=15).last().unwrap_or(0);
+    name[..end].to_string()
+}
+
 fn game_environment(p: &Paths, s: &Map<String, Value>) -> Result<Vec<(String, String)>, String> {
     let mut env: Vec<(String, String)> = Vec::new();
     let mut set = |k: &str, v: String| env.push((k.to_string(), v));
@@ -545,7 +585,7 @@ fn game_environment(p: &Paths, s: &Map<String, Value>) -> Result<Vec<(String, St
     // stay in the original user directory, shared by all profiles.
     set("BB_USER_DIR", selected_user_dir(p)?.to_string_lossy().into());
     set("BB_GPU_USER_DIR", profiles::require(&p.data)?.original_user_dir.to_string_lossy().into());
-    set("BB_USER_NAME", profiles::selected(&p.data)?.name);
+    set("BB_USER_NAME", guest_profile_name(&profiles::selected(&p.data)?.name));
     Ok(env)
 }
 
@@ -568,8 +608,9 @@ fn system_language() -> String {
 }
 
 #[tauri::command]
-fn launch(app: AppHandle, state: State<AppState>) -> Result<(), String> {
-    start_game(&app, &state)
+async fn launch(app: AppHandle, state: State<'_, AppState>) -> Result<(), String> {
+    let state=state.inner().clone();
+    blocking(move || start_game(&app, &state)).await
 }
 
 fn start_game(app: &AppHandle, state: &AppState) -> Result<(), String> {
@@ -585,7 +626,7 @@ fn start_game(app: &AppHandle, state: &AppState) -> Result<(), String> {
     let registry = profiles::require(&p.data)?;
     fs::create_dir_all(&registry.original_user_dir).map_err(|e| e.to_string())?;
     // Back up the complete set before launch. Failure prevents starting without a recovery copy.
-    saves::backup(&p.data, &registry.original_user_dir, &registry.active)?;
+    save_operation(&p, &registry.active, "backup", None)?;
     fs::create_dir_all(p.data.join("logs")).map_err(|e| e.to_string())?;
     let log_path = p.data.join("logs/last.log");
     let mut cmd = Command::new(&p.bash);
@@ -656,10 +697,15 @@ fn stop(state: State<AppState>) -> Result<(), String> {
 fn main() {
     let paths = Paths::find();
     tauri::Builder::default()
+        .plugin(tauri_plugin_single_instance::init(|app, _arguments, _cwd| {
+            if let Some(window)=app.get_webview_window("main") { let _=window.show(); let _=window.set_focus(); }
+        }))
+        .plugin(tauri_plugin_sql::Builder::default().build())
         .plugin(tauri_plugin_dialog::init())
         .manage(AppState { paths, game: Arc::new(Mutex::new(Game { child: None })) })
         // `open Bloodborne.app --args --play`: start the game at once (shortcuts, scripted tests).
         .setup(|app| {
+            if let Err(error) = profiles::recover_operations(&app.state::<AppState>().paths.data) { eprintln!("Profile recovery: {error}"); }
             if std::env::args().any(|a| a == "--play") {
                 let handle = app.handle().clone();
                 let state = app.state::<AppState>();
@@ -671,7 +717,7 @@ fn main() {
         })
         .invoke_handler(tauri::generate_handler![
             load_config, save_settings, save_ini, check_game, list_mods, save_mods, list_patches,
-            save_patches, list_gamepads, list_displays, read_input, open_path, launch, stop, list_saves, change_save, list_profiles, change_profile
+            save_patches, list_gamepads, list_displays, read_input, open_path, launch, stop, list_saves, change_save, list_profiles, change_profile, database_path
         ])
         .on_window_event(|window, event| {
             if let tauri::WindowEvent::Destroyed = event {
@@ -693,6 +739,13 @@ mod save_tests {
     use super::*;
 
     #[test]
+    fn guest_profile_name_fits_small_buffers_without_splitting_utf8() {
+        assert_eq!(guest_profile_name("Pablo"), "Pablo");
+        let long=guest_profile_name("日本語の長いプロフィール名");
+        assert!(long.len() < 16);
+        assert!("日本語の長いプロフィール名".starts_with(&long));
+    }
+    #[test]
     fn save_changes_are_rejected_while_launcher_child_runs() {
         let child = Command::new("sleep").arg("30").spawn().unwrap();
         let mut game = Game { child: Some(child) };
@@ -713,7 +766,10 @@ mod save_tests {
         profiles::initialize(&root, &root.join("user"), "original", "First").unwrap();
         assert_eq!(selected_user_dir(&p).unwrap(), root.join("user"));
         let id = saves::create(&root, &root.join("user"), "Synthetic", None).unwrap();
+        assert!(save_operation(&p, &id, "backup", None).is_err());
         profiles::change(&root, "select", &id, None, None).unwrap();
+        save_operation(&p, &id, "backup", None).unwrap();
+        assert_eq!(profiles::selected(&root).unwrap().backups.len(), 1);
         settings.insert("extra_env".into(), json!("BB_USER_DIR=/wrong BB_GPU_USER_DIR=/wrong BB_USER_NAME=wrong"));
         let env: BTreeMap<_,_> = game_environment(&p, &settings).unwrap().into_iter().collect();
         assert_eq!(env["BB_USER_DIR"], root.join("save-profiles").join(&id).join("user").to_string_lossy());

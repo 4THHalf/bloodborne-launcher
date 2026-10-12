@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
-import { Archive, Gamepad2, House, MonitorCog, Package, ScrollText, Settings2, Swords, Wrench } from "lucide-react";
+import { Archive, Users, Gamepad2, House, MonitorCog, Package, ScrollText, Settings2, Swords, Wrench } from "lucide-react";
 import { Moon } from "@/components/brand";
+import { ActiveProfile } from "@/components/profiles";
 import { PlayButton } from "@/components/sidebar/PlayButton";
 import { SidebarNavItem } from "@/components/sidebar/SidebarNavItem";
 import { useConfig } from "@/hooks";
@@ -13,6 +14,7 @@ const TABS: { id: Tab; icon: ReactNode }[] = [
   { id: "graphics", icon: <MonitorCog /> },
   { id: "controls", icon: <Gamepad2 /> },
   { id: "game", icon: <Swords /> },
+  { id: "profiles", icon: <Users /> },
   { id: "saves", icon: <Archive /> },
   { id: "mods", icon: <Package /> },
   { id: "patches", icon: <Wrench /> },
@@ -50,6 +52,7 @@ export function Sidebar() {
         ))}
       </nav>
       <div className="no-drag mt-auto">
+        <ActiveProfile />
         <PlayButton />
         <div className="mt-3 text-center text-[11px] text-muted-foreground">{t("app.version", { version: config?.version ?? "" })}</div>
       </div>

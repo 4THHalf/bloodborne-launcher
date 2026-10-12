@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "voor Apple Silicon", "version": "v{{version}}" },
-  "nav": { "home": "Start", "graphics": "Graphics", "controls": "Besturing", "game": "Spel", "mods": "Mods", "patches": "Patches", "advanced": "Geavanceerd", "log": "Logboek", "saves": "Opgeslagen spellen" },
+  "nav": { "home": "Start", "graphics": "Graphics", "controls": "Besturing", "game": "Spel", "mods": "Mods", "patches": "Patches", "advanced": "Geavanceerd", "log": "Logboek", "saves": "Opgeslagen spellen", "profiles": "Profielen" },
   "play": {
     "play": "Spelen", "stop": "Stoppen", "running": "Actief",
     "started": "Het spel start. De eerste start compileert de shaders van het spel en duurt een paar minuten.",
@@ -124,5 +124,16 @@
     "restore": "Herstellen",
     "restoreHint": "Deze back-up herstellen? Eerst wordt een back-up van je huidige spel gemaakt.",
     "cancel": "Annuleren"
+  },
+  "profiles": {
+    "title": "Profielen",
+    "subtitle": "Elk profiel heeft eigen personages en opslagback-ups.",
+    "active": "Actief profiel",
+    "setupTitle": "Maak je eerste profiel",
+    "setupExisting": "Geef je profiel een naam. Je bestaande opgeslagen spellen worden eraan gekoppeld en blijven op hun plek.",
+    "setupFresh": "Maak een profiel voor je personages en back-ups.",
+    "setupCreate": "Profiel maken",
+    "use": "Profiel gebruiken",
+    "rename": "Naam wijzigen"
   }
 }

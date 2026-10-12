@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "Apple Silicon 版", "version": "v{{version}}" },
-  "nav": { "home": "首頁", "graphics": "圖形", "controls": "操作", "game": "遊戲", "mods": "模組", "patches": "修補", "advanced": "進階", "log": "記錄", "saves": "存檔" },
+  "nav": { "home": "首頁", "graphics": "圖形", "controls": "操作", "game": "遊戲", "mods": "模組", "patches": "修補", "advanced": "進階", "log": "記錄", "saves": "存檔", "profiles": "使用者設定檔" },
   "play": {
     "play": "開始遊戲", "stop": "停止", "running": "執行中",
     "started": "遊戲正在啟動。首次啟動會編譯遊戲的著色器，需要幾分鐘。",
@@ -124,5 +124,16 @@
     "restore": "還原",
     "restoreHint": "還原此備份？目前的存檔會先備份。",
     "cancel": "取消"
+  },
+  "profiles": {
+    "title": "使用者設定檔",
+    "subtitle": "每個設定檔都有自己的角色和存檔備份。",
+    "active": "目前設定檔",
+    "setupTitle": "建立第一個使用者設定檔",
+    "setupExisting": "為設定檔命名。現有存檔會歸屬於它，並保留在原位置。",
+    "setupFresh": "建立設定檔，將角色和備份集中管理。",
+    "setupCreate": "建立設定檔",
+    "use": "使用此設定檔",
+    "rename": "重新命名"
   }
 }

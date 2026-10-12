@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "Apple Silicon 版", "version": "v{{version}}" },
-  "nav": { "home": "主页", "graphics": "图形", "controls": "操作", "game": "游戏", "mods": "模组", "patches": "补丁", "advanced": "高级", "log": "日志", "saves": "存档" },
+  "nav": { "home": "主页", "graphics": "图形", "controls": "操作", "game": "游戏", "mods": "模组", "patches": "补丁", "advanced": "高级", "log": "日志", "saves": "存档", "profiles": "用户资料" },
   "play": {
     "play": "开始游戏", "stop": "停止", "running": "运行中",
     "started": "游戏正在启动。首次启动会编译游戏的着色器，需要几分钟。",
@@ -124,5 +124,16 @@
     "restore": "恢复",
     "restoreHint": "恢复此备份？当前存档会先备份。",
     "cancel": "取消"
+  },
+  "profiles": {
+    "title": "用户资料",
+    "subtitle": "每个用户资料拥有自己的角色和存档备份。",
+    "active": "当前用户资料",
+    "setupTitle": "创建第一个用户资料",
+    "setupExisting": "为用户资料命名。现有存档会归属于它，并保留在原位置。",
+    "setupFresh": "创建用户资料，将角色和备份集中管理。",
+    "setupCreate": "创建用户资料",
+    "use": "使用此用户资料",
+    "rename": "重命名"
   }
 }

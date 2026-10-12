@@ -1,7 +1,7 @@
 import { LoaderCircle, Play, Square } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui";
-import { useConfig, useGameCheck } from "@/hooks";
+import { useConfig, useProfiles, useGameCheck } from "@/hooks";
 import { cn } from "@/lib";
 import { useGameStore } from "@/stores";
 
@@ -12,6 +12,7 @@ export function PlayButton({ className }: { className?: string }) {
   const { data: config } = useConfig();
   const check = useGameCheck(config?.settings.game_dir);
   const { running, play, stop } = useGameStore();
+  const profiles = useProfiles();
   const problem = check.data?.problem;
 
   if (running) {
@@ -32,7 +33,7 @@ export function PlayButton({ className }: { className?: string }) {
     <button
       type="button"
       onClick={play}
-      disabled={check.isPending || !!problem}
+      disabled={check.isPending || !!problem || profiles.busy || !profiles.data || profiles.data.setup_required}
       className={cn(
         "flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-blood-500 to-blood-700 py-3 font-display text-sm font-semibold tracking-[0.25em] text-parchment shadow-lg shadow-blood-700/40 transition hover:from-blood-400 hover:to-blood-600 disabled:cursor-not-allowed disabled:from-night-700 disabled:to-night-700 disabled:text-muted-foreground disabled:shadow-none",
         className,

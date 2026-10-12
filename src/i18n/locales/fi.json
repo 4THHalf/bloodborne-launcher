@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "Apple Siliconille", "version": "v{{version}}" },
-  "nav": { "home": "Koti", "graphics": "Grafiikka", "controls": "Ohjaimet", "game": "Peli", "mods": "Modit", "patches": "Paikat", "advanced": "Lisäasetukset", "log": "Loki", "saves": "Tallennukset" },
+  "nav": { "home": "Koti", "graphics": "Grafiikka", "controls": "Ohjaimet", "game": "Peli", "mods": "Modit", "patches": "Paikat", "advanced": "Lisäasetukset", "log": "Loki", "saves": "Tallennukset", "profiles": "Profiilit" },
   "play": {
     "play": "Pelaa", "stop": "Pysäytä", "running": "Käynnissä",
     "started": "Peli käynnistyy. Ensimmäinen käynnistys kääntää pelin varjostimet ja kestää muutaman minuutin.",
@@ -124,5 +124,16 @@
     "restore": "Palauta",
     "restoreHint": "Palautetaanko tämä varmuuskopio? Nykyinen tallennus varmuuskopioidaan ensin.",
     "cancel": "Peruuta"
+  },
+  "profiles": {
+    "title": "Profiilit",
+    "subtitle": "Jokaisella profiililla on omat hahmot ja tallennusten varmuuskopiot.",
+    "active": "Aktiivinen profiili",
+    "setupTitle": "Luo ensimmäinen profiilisi",
+    "setupExisting": "Nimeä profiilisi. Nykyiset tallennukset liitetään siihen ja säilyvät paikoillaan.",
+    "setupFresh": "Luo profiili hahmoille ja varmuuskopioille.",
+    "setupCreate": "Luo profiili",
+    "use": "Käytä profiilia",
+    "rename": "Nimeä uudelleen"
   }
 }

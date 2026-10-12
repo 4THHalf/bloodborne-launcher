@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "für Apple Silicon", "version": "v{{version}}" },
-  "nav": { "home": "Start", "graphics": "Grafik", "controls": "Steuerung", "game": "Spiel", "mods": "Mods", "patches": "Patches", "advanced": "Erweitert", "log": "Protokoll", "saves": "Spielstände" },
+  "nav": { "home": "Start", "graphics": "Grafik", "controls": "Steuerung", "game": "Spiel", "mods": "Mods", "patches": "Patches", "advanced": "Erweitert", "log": "Protokoll", "saves": "Spielstände", "profiles": "Profile" },
   "play": {
     "play": "Spielen", "stop": "Beenden", "running": "Läuft",
     "started": "Das Spiel startet. Beim ersten Start werden die Shader des Spiels kompiliert, das dauert einige Minuten.",
@@ -124,5 +124,16 @@
     "restore": "Wiederherstellen",
     "restoreHint": "Diese Sicherung wiederherstellen? Dein aktueller Spielstand wird vorher gesichert.",
     "cancel": "Abbrechen"
+  },
+  "profiles": {
+    "title": "Profile",
+    "subtitle": "Jedes Profil hat eigene Charaktere und Spielstandsicherungen.",
+    "active": "Aktives Profil",
+    "setupTitle": "Erstelle dein erstes Profil",
+    "setupExisting": "Benenne dein Profil. Deine bisherigen Spielstände werden ihm zugeordnet und bleiben an ihrem Ort.",
+    "setupFresh": "Erstelle ein Profil für deine Charaktere und Sicherungen.",
+    "setupCreate": "Profil erstellen",
+    "use": "Profil verwenden",
+    "rename": "Umbenennen"
   }
 }

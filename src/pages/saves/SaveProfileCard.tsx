@@ -21,13 +21,13 @@ export function SaveProfileCard({ profile, active, disabled, onChange }: {
       <div className="flex flex-wrap items-center gap-3 px-5">
         <Archive className="size-5 text-blood-400" />
         <div className="min-w-0 flex-1">
-          <h2 className="font-medium">{profile.id === "original" ? t("saves.original") : profile.name}</h2>
+          <h2 className="font-medium">{profile.name}</h2>
           <p className="mt-1 text-xs text-muted-foreground">
             {profile.bytes ? size(profile.bytes) : t("saves.empty")}
             {profile.modified !== null && <> · {date(profile.modified)}</>}
           </p>
         </div>
-        {active ? <Badge>{t("saves.active")}</Badge> : <Button size="sm" variant="secondary" disabled={disabled} onClick={() => run({ action: "select", id: profile.id })}>{t("saves.use")}</Button>}
+        {active && <Badge>{t("saves.active")}</Badge>}
         <Button size="sm" variant="secondary" disabled={disabled} onClick={() => run({ action: "backup", id: profile.id })}>{t("saves.backup")}</Button>
         <Button variant="ghost" size="icon-sm" title={t("common.showInFinder")} onClick={() => api.openPath(profile.path)}><FolderOpen /></Button>
       </div>

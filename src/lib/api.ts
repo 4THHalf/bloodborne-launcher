@@ -2,6 +2,7 @@
 // TanStack Query hooks (@/hooks) or the game store (@/stores/game).
 import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
+import { profilesService } from "@/services";
 import { mockApi } from "@/lib/mockApi";
 import type { Config, Display, GameCheck, Gamepad, GameState, Mod, Patch, Settings, SaveList, SaveChange } from "@/lib/types";
 
@@ -9,6 +10,8 @@ import type { Config, Display, GameCheck, Gamepad, GameState, Mod, Patch, Settin
 const inTauri = typeof window !== "undefined" && "__TAURI_INTERNALS__" in window;
 
 const tauriApi = {
+  listProfiles: profilesService.list,
+  changeProfile: profilesService.change,
   listSaves: () => invoke<SaveList>("list_saves"),
   changeSave: (change: SaveChange) => invoke<void>("change_save", change),
   loadConfig: () => invoke<Config>("load_config"),

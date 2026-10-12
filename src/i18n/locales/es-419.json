@@ -1,6 +1,6 @@
 {
   "app": { "name": "Bloodborne", "tagline": "para Apple Silicon", "version": "v{{version}}" },
-  "nav": { "home": "Inicio", "graphics": "Gráficos", "controls": "Controles", "game": "Juego", "mods": "Mods", "patches": "Parches", "advanced": "Avanzado", "log": "Registro", "saves": "Partidas" },
+  "nav": { "home": "Inicio", "graphics": "Gráficos", "controls": "Controles", "game": "Juego", "mods": "Mods", "patches": "Parches", "advanced": "Avanzado", "log": "Registro", "saves": "Partidas", "profiles": "Perfiles" },
   "play": {
     "play": "Jugar", "stop": "Detener", "running": "En ejecución",
     "started": "El juego se está iniciando. El primer inicio compila los shaders del juego y tarda unos minutos.",
@@ -124,5 +124,16 @@
     "restore": "Restaurar",
     "restoreHint": "¿Restaurar este respaldo? Primero se respaldará la partida actual.",
     "cancel": "Cancelar"
+  },
+  "profiles": {
+    "title": "Perfiles",
+    "subtitle": "Cada perfil tiene sus personajes y respaldos de partidas.",
+    "active": "Perfil activo",
+    "setupTitle": "Crea tu primer perfil",
+    "setupExisting": "Ponle nombre al perfil. Tus partidas existentes le pertenecerán y permanecerán donde están.",
+    "setupFresh": "Crea un perfil para reunir tus personajes y respaldos.",
+    "setupCreate": "Crear perfil",
+    "use": "Usar perfil",
+    "rename": "Cambiar nombre"
   }
 }

@@ -9,6 +9,9 @@ planned. Keep profile/save logic independent of the platform and renderer.
 - `src/`: frontend. Follow `README.md` conventions: one component per file, `@/` imports,
   folder exports, TanStack Query for backend data, Zustand for local state, all text in i18n.
 - `src-tauri/src/`: Rust backend; synthetic save tests use temporary folders, never player data.
+- `src/db/`: Drizzle schema and generated migrations; reads through `src/services/`. Rust owns
+  transactions, migration application and file operations. Register new migrations in
+  `src-tauri/src/database.rs`; `npm run db:generate` generates SQL. No component queries SQL directly.
 - `docs/`: profile/save design and roadmap. Keep this repository's wiki in step.
 - `npm ci && npm run check && npm run build`.
 - `cd src-tauri && cargo test && cargo clippy -- -D warnings`.

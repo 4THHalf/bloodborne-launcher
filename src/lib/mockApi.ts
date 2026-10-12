@@ -1,6 +1,6 @@
 // Browser preview (npm run dev outside Tauri): the backend's answers, in memory, so the
 // interface can be developed and screenshotted in any browser. Never used in the app.
-import type { Config, Display, GameCheck, Gamepad, GameState, Mod, Patch, Settings, SaveChange, SaveList } from "@/lib/types";
+import type { Config, Display, GameCheck, Gamepad, GameState, Mod, Patch, Settings, SaveChange, SaveList, ProfileList, ProfileChange } from "@/lib/types";
 
 const config: Config = {
   settings: {
@@ -65,25 +65,40 @@ let patches: Patch[] = [
 const wait = <T,>(value: T) => new Promise<T>((resolve) => setTimeout(() => resolve(value), 120));
 
 let nextProfile = 0;
-const saves: SaveList = { active: "original", profiles: [{ id: "original", name: "", path: config.paths.saves, bytes: 12582912, modified: 1720000000, backups: [] }] };
+let nextBackup = 0;
+let profileSetup = false;
+const saves: SaveList = { active: "original", profiles: [{ id: "original", name: "", path: config.paths.saves, bytes: new URLSearchParams(window.location.search).has("fresh") ? 0 : 12582912, modified: 1720000000, backups: [] }] };
 
 export const mockApi = {
-  listSaves: () => wait(structuredClone(saves)),
+  listProfiles: (): Promise<ProfileList> => wait({ ...structuredClone(saves), setup_required: !profileSetup, has_existing_saves: saves.profiles.some((p) => p.bytes > 0), profiles: profileSetup ? structuredClone(saves.profiles) : [] }),
+  changeProfile: (change: ProfileChange) => {
+    const profile = saves.profiles.find((p) => p.id === change.id);
+    if (change.action === "initialize") {
+      if (profileSetup) return Promise.reject("Profile setup is already complete.");
+      saves.profiles[0].name = change.name ?? "";
+      profileSetup = true;
+    } else if (!profileSetup) return Promise.reject("Create your first profile.");
+    else if (change.action === "select" && profile) {
+      saves.active = profile.id; config.paths.saves = profile.path;
+    } else if (change.action === "rename" && profile) profile.name = change.name ?? "";
+    else if (change.action === "create") {
+      if (saves.profiles.some((p) => p.name.toLowerCase() === change.name?.trim().toLowerCase())) return Promise.reject("A profile with this name already exists.");
+      const source = saves.profiles.find((p) => p.id === change.source);
+      const id = `p-${++nextProfile}`;
+      saves.profiles.push({ id, name: change.name ?? "", path: `${config.paths.data}/save-profiles/${id}/user`, bytes: source?.bytes ?? 0, modified: null, backups: [] });
+    }
+    return wait(undefined);
+  },
+  listSaves: () => wait({ active: saves.active, profiles: structuredClone(saves.profiles.filter((p) => p.id === saves.active)) }),
   changeSave: (change: SaveChange) => {
     const profile = saves.profiles.find((p) => p.id === change.id);
-    if (change.action === "select" && profile) {
-      saves.active = profile.id;
-      config.settings.save_profile = profile.id;
-      config.paths.saves = profile.path;
-    } else if (change.action === "create" || change.action === "duplicate") {
-      const id = `p-${++nextProfile}`;
-      saves.profiles.push({ id, name: change.name ?? "", path: `${config.paths.data}/save-profiles/${id}/user`, bytes: change.action === "duplicate" ? profile?.bytes ?? 0 : 0, modified: null, backups: [] });
-    } else if (change.action === "backup" && profile) {
-      profile.backups.unshift({ id: `b-${Date.now()}`, created: Math.floor(Date.now() / 1000), bytes: profile.bytes });
-    } else if (change.action === "restore" && profile) {
+    if (!profile || change.id !== saves.active) return Promise.reject("Choose the owning profile.");
+    if (change.action === "backup") {
+      profile.backups.unshift({ id: `b-${++nextBackup}`, created: Math.floor(Date.now() / 1000), bytes: profile.bytes });
+    } else if (change.action === "restore") {
       const backup = profile.backups.find((b) => b.id === change.backup);
       if (backup) {
-        profile.backups.unshift({ id: `b-${Date.now()}`, created: Math.floor(Date.now() / 1000), bytes: profile.bytes });
+        profile.backups.unshift({ id: `b-${++nextBackup}`, created: Math.floor(Date.now() / 1000), bytes: profile.bytes });
         profile.bytes = backup.bytes;
       }
     }
