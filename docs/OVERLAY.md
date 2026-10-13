@@ -267,7 +267,8 @@ The valid pair lost 1.9 FPS (4.3%) and added 1.3 ms to p90 with the helper. This
 one comparison, not proof of a persistent cost. Notifications default off; local trophy
 recording and the launcher view stay active. The maintainer saw all five fullscreen cups,
 names, descriptions and the DLC label. The later grade-tinted, more translucent CSS change
-has passed a frontend build but has not had another game-window visual check. No natural
+passed the frontend build and was accepted by the maintainer in a standalone desktop
+preview. It has not had another game-window visual check. No natural
 unlock was observed; the previews did not alter trophy history.
 
 A 25-second standalone desktop preview of the release helper showed three English cards
@@ -285,3 +286,8 @@ without a fault. Two previews were sent late in the run. A metadata sampler repo
 VS Code frontmost in all 36 samples, despite an attempted game activation, and never
 reported the helper frontmost. The game-focus result remains inconclusive; this is
 not another off/on performance comparison.
+
+The repeated 35-second English desktop preview sent all five cards and exited cleanly.
+The maintainer reported that the revised transparency and material colors looked right.
+The helper was reported frontmost in 14 of 33 metadata samples; input-focus behavior
+was not verified in this desktop test.
