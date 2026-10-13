@@ -190,6 +190,17 @@
     "edited": "Düzenlenmiş kayıt: yeni kupalar devre dışı.",
     "id": "Kupa {{id}}",
     "local": "Yalnızca yerel kayıt. Önceki ilerleme içe aktarılmaz.",
-    "error": "Kupalar içe aktarılamadı."
+    "error": "Kupalar içe aktarılamadı.",
+    "earned": "Kupa kazanıldı",
+    "platinum": "Platin",
+    "gold": "Altın",
+    "silver": "Gümüş",
+    "bronze": "Bronz",
+    "unknown": "Kupa",
+    "other": "Diğer oyunlar",
+    "base": "Bloodborne",
+    "old_hunters": "The Old Hunters",
+    "notifications": "Kupa bildirimleri",
+    "notificationsHint": "Yeni kupaları oyunun üzerinde göster. Bildirimler kapalıyken kayıt devam eder. Sonraki açılışta uygulanır."
   }
 }

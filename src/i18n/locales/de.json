@@ -190,6 +190,17 @@
     "edited": "Bearbeiteter Spielstand: neue Trophäen deaktiviert.",
     "id": "Trophäe {{id}}",
     "local": "Nur lokale Erfassung. Früherer Spielfortschritt wird nicht importiert.",
-    "error": "Trophäenimport fehlgeschlagen."
+    "error": "Trophäenimport fehlgeschlagen.",
+    "earned": "Trophäe erhalten",
+    "platinum": "Platin",
+    "gold": "Gold",
+    "silver": "Silber",
+    "bronze": "Bronze",
+    "unknown": "Trophäe",
+    "other": "Andere Spiele",
+    "base": "Bloodborne",
+    "old_hunters": "The Old Hunters",
+    "notifications": "Trophäenbenachrichtigungen",
+    "notificationsHint": "Zeigt neue Trophäen über dem Spiel. Die Erfassung bleibt aktiv. Gilt ab dem nächsten Start."
   }
 }

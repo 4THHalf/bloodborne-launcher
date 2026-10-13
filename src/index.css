@@ -117,3 +117,10 @@
 @utility no-drag {
   -webkit-app-region: no-drag;
 }
+
+.trophy-grade { font-size: .75rem; white-space: nowrap; }
+.trophy-grade-platinum { color: #89ccec; }
+.trophy-grade-gold { color: #dfb762; }
+.trophy-grade-silver { color: #c4ceda; }
+.trophy-grade-bronze { color: #cf956f; }
+.trophy-grade-unknown { color: var(--muted-foreground); }

@@ -1,10 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { Trophy } from "lucide-react";
 import { Button, Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui";
+import { TrophyGroup } from "@/components/trophies/TrophyGroup";
 import type { SaveProfile } from "@/lib";
 
 export function TrophySummary({ profile }: { profile: SaveProfile }) {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   return <div className="space-y-2 text-sm">
     <div className="flex items-center gap-2"><Trophy className="size-4" aria-hidden="true" />
       <span>{t("trophies.recordedCount", { count: profile.trophy_unlocks.length })}</span>
@@ -19,12 +20,10 @@ export function TrophySummary({ profile }: { profile: SaveProfile }) {
           <DialogDescription>{t("trophies.local")}</DialogDescription>
         </DialogHeader>
         {!profile.trophies_eligible && <p className="text-sm text-blood-400">{t("trophies.edited")}</p>}
-        <div className="max-h-80 overflow-y-auto">
-          {profile.trophy_unlocks.length === 0 ? <p className="text-sm text-muted-foreground">{t("trophies.empty")}</p> :
-            <ul className="divide-y divide-border">{profile.trophy_unlocks.map((unlock) => <li key={`${unlock.title_id}:${unlock.trophy_id}`} className="flex justify-between gap-4 py-3 text-sm">
-              <span>{t("trophies.id", { id: unlock.trophy_id })}<span className="block text-xs text-muted-foreground">{unlock.title_id}</span></span>
-              <time dateTime={new Date(unlock.unlocked_at * 1000).toISOString()}>{new Date(unlock.unlocked_at * 1000).toLocaleString(i18n.resolvedLanguage)}</time>
-            </li>)}</ul>}
+        <div className="max-h-96 space-y-5 overflow-y-auto">
+          <TrophyGroup group="base" unlocks={profile.trophy_unlocks.filter((u) => u.group === "base")} />
+          <TrophyGroup group="old_hunters" unlocks={profile.trophy_unlocks.filter((u) => u.group === "old_hunters")} />
+          {profile.trophy_unlocks.some((u) => !u.group) && <TrophyGroup group="other" unlocks={profile.trophy_unlocks.filter((u) => !u.group)} />}
         </div>
       </DialogContent>
     </Dialog>

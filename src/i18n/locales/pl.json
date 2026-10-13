@@ -190,6 +190,17 @@
     "edited": "Edytowany zapis: nowe trofea wyłączone.",
     "id": "Trofeum {{id}}",
     "local": "Tylko zapis lokalny. Wcześniejszy postęp nie jest importowany.",
-    "error": "Import trofeów nie powiódł się."
+    "error": "Import trofeów nie powiódł się.",
+    "earned": "Zdobyto trofeum",
+    "platinum": "Platyna",
+    "gold": "Złoto",
+    "silver": "Srebro",
+    "bronze": "Brąz",
+    "unknown": "Trofeum",
+    "other": "Inne gry",
+    "base": "Bloodborne",
+    "old_hunters": "The Old Hunters",
+    "notifications": "Powiadomienia o trofeach",
+    "notificationsHint": "Pokazuj nowe trofea nad grą. Rejestrowanie działa bez powiadomień. Od następnego uruchomienia."
   }
 }

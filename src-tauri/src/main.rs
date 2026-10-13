@@ -12,6 +12,7 @@
 mod saves;
 mod profiles;
 mod trophies;
+mod trophy_catalog;
 mod database;
 mod tray;
 mod game_lifecycle;
@@ -126,6 +127,7 @@ fn default_settings() -> Map<String, Value> {
         "frame_stats": true,
         "save_log": false,
         "hide_launcher": true,
+        "trophy_notifications": false,
         "check_updates": true,
         "crash_diag": false,
         "gpu_profile": false,
@@ -308,6 +310,9 @@ fn save_settings(app: AppHandle, state: State<AppState>, settings: Map<String, V
     let mut merged = load_settings(&state.paths);
     if settings.get("check_updates").is_some_and(|v| !v.is_boolean()) {
         return Err("check_updates must be a boolean.".into());
+    }
+    if settings.get("trophy_notifications").is_some_and(|v| !v.is_boolean()) {
+        return Err("trophy_notifications must be a boolean.".into());
     }
     if settings.get("hide_launcher").is_some_and(|v| !v.is_boolean()) {
         return Err("hide_launcher must be a boolean.".into());
@@ -615,11 +620,19 @@ fn game_environment(p: &Paths, s: &Map<String, Value>) -> Result<Vec<(String, St
             set(k, v.to_string());
         }
     }
+    set("BB_TROPHY_OVERLAY", if bool_setting(s,"trophy_notifications") {"1"} else {"0"}.into());
     // The selected profile wins over inherited and extra environment save paths. GPU caches
     // stay in the original user directory, shared by all profiles.
     let user=selected_user_dir(p)?;
     set("BB_TROPHIES_ELIGIBLE", if trophies::eligible(&user) { "1" } else { "0" }.into());
     set("BB_USER_DIR", user.to_string_lossy().into());
+    #[cfg(target_os = "macos")]
+    if let Ok(exe)=std::env::current_exe() {
+        if let Some(dir)=exe.parent() {
+            let helper=dir.join("bloodborne-overlay");
+            if helper.is_file() { set("BB_OVERLAY_HELPER",helper.to_string_lossy().into()); }
+        }
+    }
     set("BB_GPU_USER_DIR", profiles::require(&p.data)?.original_user_dir.to_string_lossy().into());
     set("BB_USER_NAME", guest_profile_name(&profiles::selected(&p.data)?.name));
     Ok(env)

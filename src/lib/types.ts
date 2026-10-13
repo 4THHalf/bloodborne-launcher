@@ -25,6 +25,7 @@ export type Settings = {
   save_log: boolean;
   /** Automatically hide the launcher during gameplay; does not disable logging. */
   hide_launcher: boolean;
+  trophy_notifications: boolean;
   check_updates: boolean;
   crash_diag: boolean;
   gpu_profile: boolean;
@@ -86,7 +87,7 @@ export type Option<T extends string | number> =
 
 /** Complete runtime save sets, kept separate from shader caches. Times are Unix seconds. */
 export type SaveBackup = { id: string; created: number; bytes: number };
-export type TrophyUnlock = { title_id: string; trophy_id: number; unlocked_at: number };
+export type TrophyUnlock = { translations: Record<string, { name: string; description?: string | null }>; name: string | null; description: string | null; grade: "platinum" | "gold" | "silver" | "bronze" | "unknown"; group: "base" | "old_hunters" | null; title_id: string; trophy_id: number; unlocked_at: number };
 export type SaveProfile = { trophies_eligible: boolean; trophy_unlocks: TrophyUnlock[]; trophy_error: string | null; id: string; name: string; path: string; bytes: number; modified: number | null; backups: SaveBackup[] };
 export type SaveList = { active: string; profiles: SaveProfile[] };
 export type SaveChange = { action: "backup" | "restore"; id: string; backup?: string };

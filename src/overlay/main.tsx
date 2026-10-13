@@ -3,7 +3,7 @@ import "@/index.css";
 import { i18n } from "@/i18n";
 import "@/overlay/overlay.css";
 import { OverlayCard } from "@/overlay/OverlayCard";
-// Synthetic acceptance tests use English; live localization is a later protocol feature.
+// English until the helper supplies the session language; unverified catalog text falls back.
 void i18n.changeLanguage("en");
 document.documentElement.lang = "en";
 document.documentElement.classList.add("dark");

@@ -25,6 +25,7 @@ const config: Config = {
     frame_stats: true,
     save_log: false,
     hide_launcher: true,
+    trophy_notifications: false,
     check_updates: true,
     crash_diag: false,
     gpu_profile: false,

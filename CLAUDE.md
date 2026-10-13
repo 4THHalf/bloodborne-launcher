@@ -61,3 +61,8 @@ profile trophies remain. See docs/SAVE_MANAGER.md for eligibility and recovery r
 Runtime generation and launcher import gates exist for marked saves; the editor and its
 confirmation are still planned. Online access policy for edited saves is undecided; only
 trophies are blocked. Do not claim external-edit detection or PSN synchronization.
+
+Public trophy names/grades may be used, per the maintainer. Keep their source per locale in
+`trophy_catalog.json`; use English fallback until a translation is verified. Descriptions are
+original public-requirement summaries. Never extract trophy files/artwork or ship keys.
+Keep Bloodborne and The Old Hunters separate; only base-game trophies determine platinum.

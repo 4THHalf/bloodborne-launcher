@@ -33,6 +33,12 @@ export function AdvancedPage() {
           checked={settings.hide_launcher ?? true}
           onChange={(v) => setSetting("hide_launcher", v)}
         />
+        <SwitchRow
+          title={t("trophies.notifications")}
+          description={t("trophies.notificationsHint")}
+          checked={settings.trophy_notifications ?? false}
+          onChange={(v) => setSetting("trophy_notifications", v)}
+        />
       </SettingsSection>
       <UpdateSettings />
       <SettingsSection title={t("advanced.performance")}>

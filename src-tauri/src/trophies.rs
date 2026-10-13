@@ -9,6 +9,11 @@ use std::{fs, io::Read, path::Path};
 pub struct Unlock {
     pub title_id: String,
     pub trophy_id: i32,
+    pub translations: std::collections::BTreeMap<String, crate::trophy_catalog::Text>,
+    pub name: Option<String>,
+    pub description: Option<String>,
+    pub grade: crate::trophy_catalog::Grade,
+    pub group: Option<String>,
     pub unlocked_at: i64, // Unix seconds, matching the runtime event protocol.
 }
 pub fn eligible(user: &Path) -> bool {
@@ -20,7 +25,12 @@ pub fn eligible(user: &Path) -> bool {
     }
     matches!(fs::symlink_metadata(save.join(".bb-edited")), Err(e) if e.kind()==std::io::ErrorKind::NotFound)
 }
-fn events(user: &Path) -> db::Result<Vec<Unlock>> {
+struct Event {
+    title_id: String,
+    trophy_id: i32,
+    unlocked_at: i64,
+}
+fn events(user: &Path) -> db::Result<Vec<Event>> {
     let path = user.join("trophies-v1.log");
     match fs::symlink_metadata(&path) {
         Err(e) if e.kind() == std::io::ErrorKind::NotFound => return Ok(Vec::new()),
@@ -43,7 +53,7 @@ fn events(user: &Path) -> db::Result<Vec<Unlock>> {
     }
     let end = bytes.iter().rposition(|b| *b == b'\n').map_or(0, |i| i + 1);
     let text = std::str::from_utf8(&bytes[..end]).map_err(db::err)?;
-    let mut result = Vec::new();
+    let mut result = std::collections::BTreeMap::<(String, i32), i64>::new();
     for line in text.lines() {
         let fields: Vec<_> = line.split_whitespace().collect();
         if fields.len() != 4 || fields[0] != "v1" {
@@ -64,13 +74,19 @@ fn events(user: &Path) -> db::Result<Vec<Unlock>> {
         {
             continue;
         }
-        result.push(Unlock {
-            title_id: title.into(),
-            trophy_id: id,
-            unlocked_at: timestamp,
-        });
+        result
+            .entry((title.into(), id))
+            .and_modify(|at| *at = (*at).min(timestamp))
+            .or_insert(timestamp);
     }
-    Ok(result)
+    Ok(result
+        .into_iter()
+        .map(|((title_id, trophy_id), unlocked_at)| Event {
+            title_id,
+            trophy_id,
+            unlocked_at,
+        })
+        .collect())
 }
 pub async fn refresh(
     connection: &mut SqliteConnection,
@@ -100,9 +116,19 @@ pub async fn refresh(
     profile.trophy_unlocks = rows
         .into_iter()
         .map(|row| {
+            let title: String = row.try_get("title_id").map_err(db::err)?;
+            let id: i32 = row.try_get("trophy_id").map_err(db::err)?;
+            let trophy = u8::try_from(id)
+                .ok()
+                .and_then(|id| crate::trophy_catalog::find(&title, id));
             Ok(Unlock {
-                title_id: row.try_get("title_id").map_err(db::err)?,
-                trophy_id: row.try_get("trophy_id").map_err(db::err)?,
+                translations: trophy.map(|t| t.translations.clone()).unwrap_or_default(),
+                name: trophy.map(|t| t.text("en").name.clone()),
+                description: trophy.and_then(|t| t.text("en").description.clone()),
+                grade: trophy.map_or(crate::trophy_catalog::Grade::Unknown, |t| t.grade),
+                group: trophy.map(|t| t.group.clone()),
+                title_id: title,
+                trophy_id: id,
                 unlocked_at: row.try_get("unlocked_at").map_err(db::err)?,
             })
         })

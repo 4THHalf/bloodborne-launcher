@@ -365,6 +365,17 @@
     "edited": "Save editado: novos troféus desativados.",
     "id": "Troféu {{id}}",
     "local": "Apenas registro local. O progresso anterior do save não é importado.",
-    "error": "Falha ao importar troféus."
+    "error": "Falha ao importar troféus.",
+    "earned": "Troféu conquistado",
+    "platinum": "Platina",
+    "gold": "Ouro",
+    "silver": "Prata",
+    "bronze": "Bronze",
+    "unknown": "Troféu",
+    "other": "Outros títulos",
+    "base": "Bloodborne",
+    "old_hunters": "The Old Hunters",
+    "notifications": "Notificações de troféus",
+    "notificationsHint": "Mostra novos troféus sobre o jogo. O registro continua quando desativado. Aplica-se na próxima execução."
   }
 }

@@ -190,6 +190,17 @@
     "edited": "已编辑存档：禁用新奖杯解锁。",
     "id": "奖杯 {{id}}",
     "local": "仅本地记录。不导入之前的存档进度。",
-    "error": "奖杯导入失败。"
+    "error": "奖杯导入失败。",
+    "earned": "已获得奖杯",
+    "platinum": "白金",
+    "gold": "金",
+    "silver": "银",
+    "bronze": "铜",
+    "unknown": "奖杯",
+    "other": "其他游戏",
+    "base": "Bloodborne",
+    "old_hunters": "The Old Hunters",
+    "notifications": "奖杯通知",
+    "notificationsHint": "在游戏上方显示新奖杯。关闭通知后仍会记录。下次启动时生效。"
   }
 }

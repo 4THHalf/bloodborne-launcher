@@ -190,6 +190,17 @@
     "edited": "Redigert lagring: nye trofeer deaktivert.",
     "id": "Trofé {{id}}",
     "local": "Kun lokal registrering. Tidligere fremgang importeres ikke.",
-    "error": "Import av trofeer mislyktes."
+    "error": "Import av trofeer mislyktes.",
+    "earned": "Trofé opptjent",
+    "platinum": "Platina",
+    "gold": "Gull",
+    "silver": "Sølv",
+    "bronze": "Bronse",
+    "unknown": "Trofé",
+    "other": "Andre spill",
+    "base": "Bloodborne",
+    "old_hunters": "The Old Hunters",
+    "notifications": "Trofévarsler",
+    "notificationsHint": "Vis nye trofeer over spillet. Registrering fortsetter uten varsler. Fra neste oppstart."
   }
 }

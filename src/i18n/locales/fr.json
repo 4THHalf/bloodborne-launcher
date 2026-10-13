@@ -190,6 +190,17 @@
     "edited": "Sauvegarde modifiée : nouveaux trophées désactivés.",
     "id": "Trophée {{id}}",
     "local": "Suivi local uniquement. La progression antérieure n’est pas importée.",
-    "error": "Échec de l’importation des trophées."
+    "error": "Échec de l’importation des trophées.",
+    "earned": "Trophée obtenu",
+    "platinum": "Platine",
+    "gold": "Or",
+    "silver": "Argent",
+    "bronze": "Bronze",
+    "unknown": "Trophée",
+    "other": "Autres titres",
+    "base": "Bloodborne",
+    "old_hunters": "The Old Hunters",
+    "notifications": "Notifications de trophées",
+    "notificationsHint": "Affiche les nouveaux trophées au-dessus du jeu. Le suivi continue sans notifications. Au prochain lancement."
   }
 }

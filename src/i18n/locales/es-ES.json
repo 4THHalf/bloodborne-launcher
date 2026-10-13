@@ -190,6 +190,17 @@
     "edited": "Partida editada: nuevos trofeos desactivados.",
     "id": "Trofeo {{id}}",
     "local": "Solo registro local. No se importa el progreso anterior.",
-    "error": "Error al importar trofeos."
+    "error": "Error al importar trofeos.",
+    "earned": "Trofeo conseguido",
+    "platinum": "Platino",
+    "gold": "Oro",
+    "silver": "Plata",
+    "bronze": "Bronce",
+    "unknown": "Trofeo",
+    "other": "Otros títulos",
+    "base": "Bloodborne",
+    "old_hunters": "The Old Hunters",
+    "notifications": "Notificaciones de trofeos",
+    "notificationsHint": "Muestra los nuevos trofeos sobre el juego. El registro sigue activo sin notificaciones. Desde el próximo inicio."
   }
 }

@@ -190,6 +190,17 @@
     "edited": "Salvataggio modificato: nuovi trofei disattivati.",
     "id": "Trofeo {{id}}",
     "local": "Solo registrazione locale. I progressi precedenti non vengono importati.",
-    "error": "Importazione dei trofei non riuscita."
+    "error": "Importazione dei trofei non riuscita.",
+    "earned": "Trofeo ottenuto",
+    "platinum": "Platino",
+    "gold": "Oro",
+    "silver": "Argento",
+    "bronze": "Bronzo",
+    "unknown": "Trofeo",
+    "other": "Altri titoli",
+    "base": "Bloodborne",
+    "old_hunters": "The Old Hunters",
+    "notifications": "Notifiche dei trofei",
+    "notificationsHint": "Mostra i nuovi trofei sopra il gioco. Il tracciamento continua anche senza notifiche. Dal prossimo avvio."
   }
 }

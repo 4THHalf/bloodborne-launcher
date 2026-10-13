@@ -378,6 +378,17 @@
     "edited": "Edited save: new trophies disabled.",
     "id": "Trophy {{id}}",
     "local": "Local tracking only. Earlier save progress is not imported.",
-    "error": "Trophy import failed."
+    "error": "Trophy import failed.",
+    "earned": "Trophy earned",
+    "platinum": "Platinum",
+    "gold": "Gold",
+    "silver": "Silver",
+    "bronze": "Bronze",
+    "unknown": "Trophy",
+    "other": "Other titles",
+    "base": "Bloodborne",
+    "old_hunters": "The Old Hunters",
+    "notifications": "Trophy notifications",
+    "notificationsHint": "Show new trophies above the game. Tracking continues when off. Applies next launch."
   }
 }

@@ -190,6 +190,17 @@
     "edited": "편집된 저장 파일: 새 트로피 획득이 비활성화됩니다.",
     "id": "트로피 {{id}}",
     "local": "로컬 기록만 지원합니다. 이전 저장 진행 상황은 가져오지 않습니다.",
-    "error": "트로피 가져오기에 실패했습니다."
+    "error": "트로피 가져오기에 실패했습니다.",
+    "earned": "트로피 획득",
+    "platinum": "플래티넘",
+    "gold": "골드",
+    "silver": "실버",
+    "bronze": "브론즈",
+    "unknown": "트로피",
+    "other": "다른 게임",
+    "base": "Bloodborne",
+    "old_hunters": "The Old Hunters",
+    "notifications": "트로피 알림",
+    "notificationsHint": "새 트로피를 게임 위에 표시합니다. 알림을 꺼도 기록은 계속됩니다. 다음 실행부터 적용됩니다."
   }
 }

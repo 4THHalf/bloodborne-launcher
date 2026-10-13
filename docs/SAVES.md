@@ -25,9 +25,11 @@ its own complete save set, which can contain multiple characters. Creating a pro
 change which one is active. Choose **Use profile**, or use the **Active profile** selector above Play.
 
 Renaming a profile changes its displayed name without moving its files. Stop the game before
-changing profiles or managing saves. Each profile shows a recorded trophy count. **View trophies** opens a modal with trophy ids
-and unlock timestamps. Tracking is local and starts with this runtime; previous save progression
-is not imported. Trophy names, icons and automatic platinum awarding are not included yet.
+changing profiles or managing saves. Each profile shows a recorded trophy count. **View trophies**
+opens a modal with unlock dates. Tracking is local and starts with this runtime; previous save
+progression is not imported. Development main shows public trophy names, original requirement
+summaries and grade cups. The runtime awards local platinum after the other 33 base-game
+trophies are recorded.
 
 ## Save editor
 
@@ -95,3 +97,18 @@ profile and trophy count. Previously earned trophies remain. Backups retain the 
 restoring a clean pre-edit backup restores its own eligibility. The editor remains planned and
 will warn before applying edits. External edits are not automatically detected. Online access
 policy for edited saves has not been decided; this restriction applies to trophies only.
+
+## Trophy details and notifications (development main)
+
+**View trophies** separates Bloodborne from The Old Hunters and shows names, grades, short
+requirement summaries and recorded dates. The 33 non-platinum base-game trophies determine
+local platinum; DLC trophies do not. Names have verified public translations in 15 locales,
+with English fallback for missing translations. Summaries currently support English,
+Brazilian Portuguese and French; other locales use English until verified text is available.
+No game artwork or extracted trophy files are included.
+
+Enable **Advanced → Launcher → Trophy notifications** to show accepted unlocks above the
+focused macOS game. This optional setting defaults off while overhead checks remain open.
+All four grades use one cup emblem with different metallic finishes; platinum stays visible
+for seven seconds, other grades for five. Notifications hide when the game loses focus or is minimized. An unavailable
+helper leaves earned history recorded. Local tracking does not synchronize with PSN.

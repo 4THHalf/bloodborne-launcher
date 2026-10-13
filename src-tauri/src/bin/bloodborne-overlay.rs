@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
-//! Opt-in, synthetic notification helper. No profile database, game files or launcher startup.
+//! Standalone notification helper. No profile database, game files or launcher startup.
+#[path = "../trophy_catalog.rs"]
+mod trophy_catalog;
 use serde::{Deserialize, Serialize};
 use std::{
     io::{BufRead, Read},
@@ -14,6 +16,22 @@ use tauri::{Emitter, Manager};
 #[derive(Clone, Debug, Deserialize, Serialize)]
 #[serde(deny_unknown_fields)]
 struct Notice {
+    #[serde(default)]
+    kind: String,
+    #[serde(default)]
+    title: Option<String>,
+    #[serde(skip_deserializing)]
+    translations: std::collections::BTreeMap<String, trophy_catalog::Text>,
+    #[serde(skip_deserializing)]
+    name: Option<String>,
+    #[serde(skip_deserializing)]
+    description: Option<String>,
+    #[serde(skip_deserializing)]
+    grade: trophy_catalog::Grade,
+    #[serde(skip_deserializing)]
+    group: Option<String>,
+    #[serde(skip_deserializing)]
+    preview: bool,
     v: u8,
     seq: u64,
     id: u8,
@@ -30,15 +48,34 @@ fn parse(line: &[u8]) -> Result<Notice, String> {
     if line.len() > 4096 {
         return Err("message exceeds 4096 bytes".into());
     }
-    let n: Notice = serde_json::from_slice(line).map_err(|e| e.to_string())?;
+    let mut n: Notice = serde_json::from_slice(line).map_err(|e| e.to_string())?;
     if n.v != 1
         || n.seq == 0
+        || !matches!(n.kind.as_str(), "" | "window")
+        || n.title.as_ref().is_some_and(|s| {
+            s.len() > 16
+                || s.is_empty()
+                || !s
+                    .bytes()
+                    .all(|b| b.is_ascii_uppercase() || b.is_ascii_digit())
+        })
         || n.id >= 128
         || n.x.abs_diff(0) > 100_000
         || n.y.abs_diff(0) > 100_000
         || !(1000..=10_000).contains(&n.duration_ms)
     {
         return Err("invalid notification fields".into());
+    }
+    if let Some(trophy) = n
+        .title
+        .as_deref()
+        .and_then(|title| trophy_catalog::find(title, n.id))
+    {
+        n.translations = trophy.translations.clone();
+        n.name = Some(trophy.text("en").name.clone());
+        n.description = trophy.text("en").description.clone();
+        n.grade = trophy.grade;
+        n.group = Some(trophy.group.clone());
     }
     Ok(n)
 }
@@ -49,6 +86,10 @@ fn overlay_ready(window: tauri::WebviewWindow) -> Result<(), String> {
     }
     println!("{{\"v\":1,\"type\":\"ready\"}}");
     Ok(())
+}
+#[tauri::command]
+fn overlay_language() -> String {
+    std::env::var("BB_UI_LANGUAGE").unwrap_or_else(|_| "en".into())
 }
 #[cfg(target_os = "macos")]
 fn configure_native(window: &tauri::WebviewWindow) -> tauri::Result<()> {
@@ -82,16 +123,17 @@ fn show_without_focus(window: &tauri::WebviewWindow) -> tauri::Result<()> {
 }
 
 fn main() {
-    if !std::env::args().any(|a| a == "--prototype") {
-        eprintln!("This synthetic helper requires --prototype and JSON lines on stdin.");
+    let prototype = std::env::args().any(|a| a == "--prototype");
+    if !prototype && !std::env::args().any(|a| a == "--runtime") {
+        eprintln!("This helper requires --runtime or --prototype and JSON lines on stdin.");
         std::process::exit(2);
     }
     let mut context = tauri::generate_context!();
     context.config_mut().app.windows.clear();
-    context.config_mut().identifier = "io.github.bloodborne-native.overlay-prototype".into();
+    context.config_mut().identifier = "io.github.bloodborne-native.overlay".into();
     let generation = Arc::new(AtomicU64::new(0));
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![overlay_ready])
+        .invoke_handler(tauri::generate_handler![overlay_ready, overlay_language])
         .setup(move |app| {
             #[cfg(target_os = "macos")]
             app.set_activation_policy(tauri::ActivationPolicy::Accessory);
@@ -100,8 +142,8 @@ fn main() {
                 "overlay",
                 tauri::WebviewUrl::App("overlay.html".into()),
             )
-            .title("Bloodborne notification prototype")
-            .inner_size(460.0, 140.0)
+            .title("Bloodborne notifications")
+            .inner_size(460.0, 220.0)
             .incognito(true)
             .decorations(false)
             .transparent(true)
@@ -136,7 +178,7 @@ fn main() {
                         }
                         _ => {}
                     }
-                    let notice = match parse(&line) {
+                    let mut notice = match parse(&line) {
                         Ok(n) if n.seq > last => n,
                         Ok(_) => continue,
                         Err(e) => {
@@ -144,6 +186,7 @@ fn main() {
                             continue;
                         }
                     };
+                    notice.preview = prototype;
                     last = notice.seq;
                     if let Err(error) = sender.try_send(notice) {
                         match error {
@@ -158,6 +201,7 @@ fn main() {
             });
             std::thread::spawn(move || {
                 let mut deadline: Option<std::time::Instant> = None;
+                let mut active = false;
                 loop {
                     let received = match deadline {
                         Some(at) => receiver
@@ -168,6 +212,25 @@ fn main() {
                     };
                     match received {
                         Ok(notice) => {
+                            if notice.kind == "window" {
+                                let app = handle.clone();
+                                let showing = active && notice.visible;
+                                let _ = handle.run_on_main_thread(move || {
+                                    if let Some(window) = app.get_webview_window("overlay") {
+                                        let _ = window.set_position(tauri::LogicalPosition::new(
+                                            notice.x as f64,
+                                            notice.y as f64,
+                                        ));
+                                        if showing {
+                                            let _ = show_without_focus(&window);
+                                        } else {
+                                            let _ = window.hide();
+                                        }
+                                    }
+                                });
+                                continue;
+                            }
+                            active = notice.visible;
                             let seq = notice.seq;
                             generation.store(seq, Ordering::SeqCst);
                             deadline = Some(
@@ -194,7 +257,7 @@ fn main() {
                                                 notice.y as f64,
                                             ))
                                             .and_then(|()| {
-                                                window.emit("prototype-notification", &notice)
+                                                window.emit("trophy-notification", &notice)
                                             })
                                             .and_then(|()| show_without_focus(&window));
                                         match result {
@@ -211,6 +274,7 @@ fn main() {
                             }
                         }
                         Err(std::sync::mpsc::RecvTimeoutError::Timeout) => {
+                            active = false;
                             deadline = None;
                             let seq = generation.load(Ordering::SeqCst);
                             let current = generation.clone();
@@ -250,6 +314,12 @@ mod tests {
             assert!(parse(value.as_bytes()).is_err());
         }
         assert!(parse(&vec![b' '; 4097]).is_err());
+        let dlc =
+            parse(br#"{"v":1,"seq":1,"id":35,"title":"CUSA03173","x":0,"y":0,"duration_ms":5000}"#)
+                .unwrap();
+        assert_eq!(dlc.grade, trophy_catalog::Grade::Silver);
+        assert_eq!(dlc.group.as_deref(), Some("old_hunters"));
+        assert!(dlc.description.is_some());
         let hidden =
             parse(br#"{"v":1,"seq":2,"id":7,"x":0,"y":0,"duration_ms":1000,"visible":false}"#)
                 .unwrap();

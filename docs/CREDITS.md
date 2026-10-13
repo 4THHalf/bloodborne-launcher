@@ -43,7 +43,17 @@ copied; the hunter's sigil is original launcher artwork.
 The runtime event persistence follows the approach in
 [Supermedo/bloodborne_pc `79d44f0`](https://github.com/Supermedo/bloodborne_pc/commit/79d44f0eecc2eed45c1e33b48996e53626adca48)
 by Ambrose (GPL-2.0-or-later). The launcher importer, eligibility checks and React UI are
-project code; no Python trophy catalog, game descriptions or icons were copied.
+project code. The public ID/grade/base-DLC mapping is now adapted from that commit,
+with English names checked against [PSN100](https://psn100.net/game/3609-bloodborne).
+Localized names come from [Exophase’s public lists](https://www.exophase.com/game/bloodborne-ps4/trophies/);
+`trophy_catalog.json` records each locale’s source. The English public list has one UK/US
+spelling difference at ID 2; the default English spelling follows PSN100.
+
+Requirement descriptions are original summaries, based on public requirements in
+[Gamepressure](https://www.gamepressure.com/bloodborne/list-of-all-trophies/z7aad1), PSN100 and
+[the Brazilian Portuguese guide](https://magnaway.com.br/guias/38082/guia-de-trofeus-bloodborne/).
+No extracted game metadata, decryption key, game description text or game artwork is included.
+Grade emblems use the existing lucide-react dependency; the notification styling is original.
 
 The opt-in overlay helper uses direct `objc2-app-kit` bindings (Zlib OR Apache-2.0 OR MIT)
 for its macOS window adapter, as a package dependency. No tauri-nspanel or browser-engine

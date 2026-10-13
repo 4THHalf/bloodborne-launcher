@@ -190,6 +190,17 @@
     "edited": "Redigerad sparfil: nya troféer inaktiverade.",
     "id": "Trofé {{id}}",
     "local": "Endast lokal registrering. Tidigare framsteg importeras inte.",
-    "error": "Import av troféer misslyckades."
+    "error": "Import av troféer misslyckades.",
+    "earned": "Trofé upplåst",
+    "platinum": "Platina",
+    "gold": "Guld",
+    "silver": "Silver",
+    "bronze": "Brons",
+    "unknown": "Trofé",
+    "other": "Andra spel",
+    "base": "Bloodborne",
+    "old_hunters": "The Old Hunters",
+    "notifications": "Troféaviseringar",
+    "notificationsHint": "Visa nya troféer över spelet. Registrering fortsätter utan aviseringar. Från nästa start."
   }
 }

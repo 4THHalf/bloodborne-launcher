@@ -6,8 +6,9 @@ Recommendation, revised after the maintainer’s process suggestion: the launche
 owns a small Tauri/React overlay helper executable. The runtime starts it and owns its session
 and event delivery. The helper owns window lifetime, styling and animation. Start with trophy
 notifications. The first opt-in synthetic helper prototype is implemented and was visually accepted in
-windowed and fullscreen tests on this Mac. Runtime spawning and real unlock delivery are
-still planned; Windows/Linux behavior and production overhead are not accepted.
+windowed and fullscreen tests on this Mac. Runtime spawning, accepted unlock delivery and
+SDL geometry are now implemented on development main. The new gameplay gates are recorded
+below; Windows/Linux overlay behavior remains unaccepted.
 
 The runtime already has an ImGui overlay drawn into the Vulkan swapchain by
 `BbOverlay::Render`, after the game frame. It currently covers settings, text entry and FPS.
@@ -38,8 +39,8 @@ by the launcher or standalone run script. The main launcher need not be running.
 another copy of the main onboarding/profile UI to show a notification: use a dedicated helper
 mode or executable with separate single-instance identity and minimal initialization.
 
-Use an inherited local pipe for versioned, bounded messages, including a session identifier,
-trophy identity and window state. The helper needs no game files, SQL access or network.
+Use an inherited local pipe for versioned, bounded messages, with increasing sequence numbers, trophy identity and window state. Each inherited pipe
+belongs to one runtime session; no shared/global notification socket is used. The helper needs no game files, SQL access or network.
 The launcher continues importing the durable event log into SQLite independently. Notifications
 must not mutate history or compete with the launcher for ownership transactions.
 
@@ -81,15 +82,15 @@ card at a time. Hide the whole window when idle and stop animation timers. Respe
 motion and provide a notification setting plus a synthetic preview.
 
 Animate opacity and translation with CSS. A new animation package is unnecessary for this
-first card. Share theme tokens with the launcher, while keeping the overlay page small. Until
-metadata extraction exists, display localized generic trophy text and its id; do not embed a
-game trophy catalog or game icons in any repository.
+first card. Share theme tokens with the launcher, while keeping the overlay page small. The public
+trophy catalog supplies verified names and grades; original requirement summaries use English
+fallback where no verified localization exists. No game trophy files, artwork or keys are shipped.
 
 ## Platform handling
 
 - macOS: the pinned Tauri 2.12.0 source gates transparent windows behind `macos-private-api`;
-  the launcher currently does not enable that feature. Evaluate a non-activating AppKit panel
-  for fullscreen Spaces, without changing the launcher's application activation during a toast.
+  the helper now enables that feature. Its macOS adapter presents the unfocused window in
+  fullscreen Spaces without activating the launcher.
   Apple's [fullScreenAuxiliary behavior](https://developer.apple.com/documentation/appkit/nswindow/collectionbehavior-swift.struct/fullscreenauxiliary)
   and [tauri-nspanel](https://github.com/ahkohd/tauri-nspanel) are relevant implementation
   references, not proof that our cross-process fullscreen case works. Keep any AppKit code
@@ -115,8 +116,9 @@ game trophy catalog or game icons in any repository.
    overlay and visible animation. Record regressions before changing the default.
 
 The initial source review required no game runs. The prototype checks below cover this Mac
-only. Real unlock delivery, full lifecycle integration and matched production performance
-gates remain open. Keep the helper opt-in; N4 remains paused.
+only. The accepted-event bridge and lifecycle are implemented. Natural gameplay unlocks remain
+unobserved, and one valid matched performance pair was slower with the helper. Keep it opt-in;
+N4 remains paused.
 
 ## Synthetic helper prototype (2026-10-13)
 
@@ -129,8 +131,7 @@ English. The main launcher remains the default executable.
 Input is newline-delimited JSON with `v`, increasing `seq`, trophy `id`, logical `x`/`y` and
 `duration_ms`; optional `visible=false` hides the window. Messages are capped at 4,096 bytes,
 queued in an eight-entry channel, and validated for version, id, position and duration.
-There is one expiry worker. This prototype replaces the displayed card with the latest
-notice; production sequential trophy delivery is still planned. Closing stdin ends the helper.
+There is one expiry worker. The runtime now paces accepted notifications sequentially. Closing stdin ends the helper.
 Only its event-listen permissions and readiness command are exposed. The helper needs no SQL
 or filesystem plugin. It uses the direct objc2 AppKit bindings inside a macOS adapter.
 
@@ -174,7 +175,7 @@ RSS. The fullscreen helper averaged 0.39% and reached 75.6 MiB. These exclude We
 the test host and compositor cost; they are not total overlay resource use. An initial desktop
 preview reached 122.9 MiB main-process RSS. Debug/test conditions differ.
 
-Frontend checks/build, all 43 launcher tests, the helper's protocol test and Clippy for all
+Frontend checks/build, 44 launcher tests, two helper tests and Clippy for all
 targets pass locally on macOS. Linux frontend CI and macOS native CI will check the push;
 Windows/Linux native helper behavior is untested.
 
@@ -192,4 +193,89 @@ python3 tools/test_overlay.py --helper src-tauri/target/debug/bloodborne-overlay
 This opens test previews. For a game target, start the game only with the runtime's
 `tools/test_run.sh`, checking `pgrep -x bb-probe` first and announcing the batch. Supply that
 owned game's PID with `--pid`; the host does not start or stop the game. Use English
-(`BB_LANGUAGE=1 BB_UI_LANGUAGE=en`). The packaged helper and runtime launch path are not yet wired.
+(`BB_LANGUAGE=1 BB_UI_LANGUAGE=en`). The packaged helper and runtime launch path are described below.
+
+## Accepted unlock bridge (2026-10-13)
+
+The runtime starts the standalone `bloodborne-overlay --runtime` executable when
+`BB_OVERLAY_HELPER` names an absolute executable and `BB_TROPHY_OVERLAY` is not zero.
+The macOS launcher discovers its sibling executable when Trophy notifications is enabled;
+the optional setting defaults off while overhead gates remain open. packaging builds it with
+`tauri/custom-protocol`, copies it into Contents/MacOS and signs it. It embeds the production
+React assets and needs no Vite server. Standalone runtime launches may set the path explicitly.
+
+One host worker owns spawn, readiness and pipes. Accepted unlocks are queued only after the
+append and fsync succeed, with startup history used to suppress duplicates. A 16-entry queue
+paces cards five/seven seconds apart with a one-second gap; stale notifications expire after
+30 seconds. Full queues affect only display. Startup has a 20-second readiness budget;
+broken pipes cannot signal SIGPIPE on guest threads. The worker holds no guest or renderer
+lock while creating the UI process. The helper receives IDs/title and window metadata only;
+it needs no profile database, game dump, key, network or save access. EOF ends its owned session.
+
+The SDL event thread reports geometry/focus every 250 ms. The core bridge only copies those
+values under its own mutex; a host worker sends pipe messages. Moving, fullscreen switching,
+minimizing and losing focus update placement/visibility without restarting a card’s lifetime.
+Positions use SDL desktop logical coordinates on macOS. Wayland placement is disabled;
+Windows/Linux coordinate/focus adapters still require verification before normal integration.
+No screen pixels or game memory are captured.
+
+The public catalog keeps ID, grade and base/DLC group independent of each trophy’s locale
+translations. Verified names cover en, de, it, es-ES, es-419, ru, pl, nl, fi, nb, tr, zh-CN,
+zh-TW, pt-BR and fr. The Latin American Spanish UI uses the public es-MX list; nb uses the
+public Norwegian list. English, pt-BR and fr have original short requirement summaries.
+Missing names/descriptions fall back independently to English. Grade labels and notification
+headings follow the launcher’s 20 UI locales. All acceptance tests use English.
+The catalog’s 40 names per listed locale were checked against the trophy rows by ID; an
+earlier import that skipped rows and included page navigation labels was corrected.
+
+Bronze, silver, gold and platinum use one lucide cup emblem with original metallic gradients and grade labels. Platinum uses seven
+seconds; other grades use five. The launcher’s trophy details separate 34 base-game trophies
+from six Old Hunters trophies. No game icons, extracted metadata or decryption keys are shipped.
+The local runtime awards platinum only after all 33 other base-game IDs are recorded.
+Notification backgrounds carry the matching metal tint at 35–45% opacity, with a text shadow
+for contrast over gameplay.
+
+`BB_TROPHY_OVERLAY_PREVIEW=1` starts the helper in clearly labelled preview mode and schedules
+five public-ID previews (four grades, plus a DLC trophy) through the same SDL/pipe bridge.
+It does not call the trophy service or append test unlocks. `tools/test_overlay.py` remains a
+standalone synthetic visual host. A fake helper in normal runtime tests verifies readiness,
+geometry and delivery after durable unlocks, with duplicate and edited-save suppression.
+Catalog tests check counts, grouping, sources, localized names and English fallback.
+Game-preview checks do not establish that a trophy was earned naturally during gameplay.
+
+Development `npm run tauri dev` builds the matching debug helper before starting Vite and the
+launcher. Browser-only `npm run dev` is unchanged. The helper’s Tauri context includes only its
+own window and two narrow readiness/language commands, with event-listener permissions;
+profile, database and launcher commands are not registered. No new database migration is needed.
+
+## Live bridge checks (2026-10-13)
+
+Four English, untraced, isolated copied-save game runs alternated notifications off/on.
+The first windowed pair had stable draw counts near 1,268 per frame and is the valid
+throughput comparison. The second pair checked fullscreen appearance; the off run had
+frontend development activity during its hold, and the on run changed from 823 to 1,340
+draws per frame, so neither establishes a performance gain.
+
+| Run | Mode | FPS | p90 ms | Game CPU % | Stage-B us/draw | Result |
+|---|---|---:|---:|---:|---:|---|
+| `trophy_live_off1` | Windowed, off | 44.7 | 25.3 | 498 | 4.83 | No fault or assertion |
+| `trophy_live_on1` | Windowed, on | 42.8 | 26.6 | 491 | 5.08 | Five previews sent; no fault or assertion |
+| `trophy_live_off2` | Fullscreen, off | 45.8 | 24.6 | 500 | 4.81 | Development activity during hold; excluded |
+| `trophy_live_on2` | Fullscreen, on | 50.7 | 22.9 | 491 | 5.27 | Variable draw count; visual check only |
+
+The valid pair lost 1.9 FPS (4.3%) and added 1.3 ms to p90 with the helper. This is
+one comparison, not proof of a persistent cost. Notifications default off; local trophy
+recording and the launcher view stay active. The maintainer saw all five fullscreen cups,
+names, descriptions and the DLC label. The later grade-tinted, more translucent CSS change
+has passed a frontend build but has not had another game-window visual check. No natural
+unlock was observed; the previews did not alter trophy history.
+
+A 25-second standalone desktop preview of the release helper showed three English cards
+and exited cleanly. Its main process was reported as frontmost in 23 of 24 metadata
+samples, unlike earlier game-target prototypes; keyboard-focus behavior was not verified.
+A further isolated copied-save run, `trophy_focus_final`, completed at 46.7 FPS and p90
+23.2 ms without a fault. The chat app stayed frontmost in all 40 window samples, so the
+helper correctly sent no previews. This run is inconclusive for game-target focus and is
+not a performance pair. The earlier fullscreen visual report remains the game-target
+appearance check. Keep notifications optional and off by default while focus behavior and
+overhead are investigated.

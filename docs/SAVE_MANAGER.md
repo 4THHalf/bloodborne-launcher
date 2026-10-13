@@ -175,7 +175,7 @@ backend for both fresh and upgrade setup, mandatory onboarding, identity operati
 save management, plus persistent configuration/database failures and successful manual retry. The shadcn creation and deletion modals are checked for focus, cancellation, duplicate-name retry,
 confirmed deletion and active/running-profile protection. They do not exercise the real game or capture screenshots.
 
-Home, Profiles and Saves show recorded trophy counts and a details modal with ids and timestamps.
+Home, Profiles and Saves show recorded trophy counts and a details modal with names, grade emblems, requirement summaries and timestamps. Bloodborne (34) and The Old Hunters (6) have separate sections.
 The runtime writes versioned events under the active profile user directory; Rust imports them
 into the existing table, retaining the earliest timestamp and rejecting current edited-save
 imports. The runtime prevents generation while marked edited, including direct launches and
@@ -186,21 +186,31 @@ Read failures appear beside trophies and preserve existing history. Incomplete t
 retry on refresh; malformed records are ignored. Event reads are capped at 32 MiB without
 truncation. Profiles refresh every five seconds while playing and once on game state changes.
 This does not detect external edits or provide an anti-cheat boundary. Existing save progression
-is not backfilled; no trophy catalog, icons or automatic platinum are included.
+is not backfilled. A public catalog supplies CUSA03173’s 40 verified trophy IDs and grades.
+It has verified names in 15 locales; original requirement summaries are available in English,
+Brazilian Portuguese and French. Each trophy has a `translations` map, separate from its
+stable ID, grade and group. Select the UI locale, then its language, then English, independently
+for the name and description. Missing public translations remain English; no unofficial names
+are synthesized. The runtime awards local platinum after the 33 other base-game trophies have
+been durably recorded. The DLC is excluded. Other title IDs retain numeric details until their
+mapping is verified.
 
 Synthetic tests cover duplicates, earliest timestamps, incomplete records, cross-profile
 isolation, edited/clean backup restoration, retained history, deletion cleanup, read errors
 and launch override resistance. Browser DOM checks passed for Home counts, empty and populated
-modals and the edited warning, without screenshots. `npm run check`, `npm run build`, all 43
+modals and the edited warning, without screenshots. `npm run check`, `npm run build`, all 44
 native tests and Clippy passed. One copied-save runtime smoke check passed; it did not earn a
 real trophy. Runtime [tracking documentation](https://github.com/bloodborne-native/bloodborne-runtime/blob/main/docs/TROPHIES.md)
-records the protocol and game-check measurements. Names/icons, character parsing and editing
-remain future work. Game-derived files and analysis are never committed. Tests never write the
+records the protocol and game-check measurements. Character parsing and editing remain future work. Game-derived files and analysis are never committed. Tests never write the
 player's save or settings.
 
 ## Notification overlay
 
-A runtime-started React/Tauri overlay helper maintained in the launcher repository is proposed in [OVERLAY.md](OVERLAY.md).
-The fullscreen and focus prototype comes before live trophy notifications. Its opt-in synthetic prototype was visually accepted in windowed and fullscreen tests on
-this Mac. Runtime delivery, production geometry and matched overhead gates remain open;
-N4 remains paused.
+A runtime-started React/Tauri overlay helper maintained in this repository is implemented in
+[OVERLAY.md](OVERLAY.md). Durable accepted unlocks queue a grade-specific notification;
+duplicate and edited-save calls do not. SDL supplies focus, visibility and desktop bounds,
+including fullscreen, without capturing pixels. The helper has its own session pipe and exits
+on EOF. Main launcher profile/database initialization is never started in the helper.
+Advanced → Launcher has an optional Trophy notifications switch, off by default while overhead gates remain open. The packaged macOS app includes and signs the executable; direct development runs can use
+`BB_OVERLAY_HELPER`. `BB_TROPHY_OVERLAY=0` disables only notifications.
+N4 remains paused. Game acceptance and its measured limits are recorded in OVERLAY.md.

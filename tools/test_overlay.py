@@ -45,7 +45,7 @@ def main():
             if state['found'] and (args.pid == 0 or args.preview_unfocused or state['front_pid'] == args.pid) and time.monotonic() >= next_notice:
                 seq += 1
                 sent += 1
-                message = {'v':1,'seq':seq,'id':7,'x':round(state['x']+state['width']-480),'y':round(state['y']+24),'duration_ms':4000}
+                message = {'v':1,'seq':seq,'id':[21,7,1,0,35][(sent-1)%5],'title':'CUSA03173','x':round(state['x']+state['width']-480),'y':round(state['y']+24),'duration_ms':4000}
                 helper.stdin.write(json.dumps(message)+'\n')
                 helper.stdin.flush()
                 next_notice = time.monotonic() + 8

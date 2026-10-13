@@ -190,6 +190,17 @@
     "edited": "Bewerkt spelbestand: nieuwe trofeeën uitgeschakeld.",
     "id": "Trofee {{id}}",
     "local": "Alleen lokale registratie. Eerdere voortgang wordt niet geïmporteerd.",
-    "error": "Trofeeën importeren mislukt."
+    "error": "Trofeeën importeren mislukt.",
+    "earned": "Trofee behaald",
+    "platinum": "Platina",
+    "gold": "Goud",
+    "silver": "Zilver",
+    "bronze": "Brons",
+    "unknown": "Trofee",
+    "other": "Andere titels",
+    "base": "Bloodborne",
+    "old_hunters": "The Old Hunters",
+    "notifications": "Trofeemeldingen",
+    "notificationsHint": "Toon nieuwe trofeeën boven het spel. Registratie blijft actief zonder meldingen. Vanaf de volgende start."
   }
 }

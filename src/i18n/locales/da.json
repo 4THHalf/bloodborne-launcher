@@ -190,6 +190,17 @@
     "edited": "Redigeret gemt spil: nye trofæer deaktiveret.",
     "id": "Trofæ {{id}}",
     "local": "Kun lokal registrering. Tidligere fremskridt importeres ikke.",
-    "error": "Import af trofæer mislykkedes."
+    "error": "Import af trofæer mislykkedes.",
+    "earned": "Trofæ opnået",
+    "platinum": "Platin",
+    "gold": "Guld",
+    "silver": "Sølv",
+    "bronze": "Bronze",
+    "unknown": "Trofæ",
+    "other": "Andre titler",
+    "base": "Bloodborne",
+    "old_hunters": "The Old Hunters",
+    "notifications": "Trofænotifikationer",
+    "notificationsHint": "Vis nye trofæer over spillet. Registrering fortsætter uden notifikationer. Fra næste start."
   }
 }

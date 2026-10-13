@@ -190,6 +190,17 @@
     "edited": "Gravação editada: novos troféus desativados.",
     "id": "Troféu {{id}}",
     "local": "Apenas registo local. O progresso anterior da gravação não é importado.",
-    "error": "Falha ao importar troféus."
+    "error": "Falha ao importar troféus.",
+    "earned": "Troféu conquistado",
+    "platinum": "Platina",
+    "gold": "Ouro",
+    "silver": "Prata",
+    "bronze": "Bronze",
+    "unknown": "Troféu",
+    "other": "Outros títulos",
+    "base": "Bloodborne",
+    "old_hunters": "The Old Hunters",
+    "notifications": "Notificações de troféus",
+    "notificationsHint": "Mostra novos troféus sobre o jogo. O registo continua quando desativado. Aplica-se no próximo arranque."
   }
 }

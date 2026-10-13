@@ -190,6 +190,17 @@
     "edited": "已編輯存檔：停用新獎盃解鎖。",
     "id": "獎盃 {{id}}",
     "local": "僅本機記錄。不匯入之前的存檔進度。",
-    "error": "獎盃匯入失敗。"
+    "error": "獎盃匯入失敗。",
+    "earned": "已獲得獎盃",
+    "platinum": "白金",
+    "gold": "金",
+    "silver": "銀",
+    "bronze": "銅",
+    "unknown": "獎盃",
+    "other": "其他遊戲",
+    "base": "Bloodborne",
+    "old_hunters": "The Old Hunters",
+    "notifications": "獎盃通知",
+    "notificationsHint": "在遊戲上方顯示新獎盃。關閉通知後仍會記錄。下次啟動時生效。"
   }
 }
