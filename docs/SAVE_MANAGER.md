@@ -197,3 +197,9 @@ real trophy. Runtime [tracking documentation](https://github.com/bloodborne-nati
 records the protocol and game-check measurements. Names/icons, character parsing and editing
 remain future work. Game-derived files and analysis are never committed. Tests never write the
 player's save or settings.
+
+## Notification overlay
+
+A launcher-owned React/Tauri notification window is proposed in [OVERLAY.md](OVERLAY.md).
+The fullscreen and focus prototype comes before live trophy notifications. It is not
+implemented or measured yet; N4 remains paused.
