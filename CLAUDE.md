@@ -50,3 +50,11 @@ comment naming
 the source repository and commit. Docs use plain, precise English and measured numbers. Status
 progress bars have 20 blocks, one per 5%. Do not claim Windows/Linux game integration or trophy
 persistence before they are implemented and tested.
+
+## Save editor and trophies
+
+When implementing editing, warn before applying changes and persist edited-save lineage.
+Playing an edited save must not unlock trophies: enforce this in the runtime and reject
+ineligible session events in the launcher. Copies/backups retain the edited marker; existing
+profile trophies remain. See docs/SAVE_MANAGER.md for eligibility and recovery requirements.
+This policy is required before enabling the editor; it is not implemented today.

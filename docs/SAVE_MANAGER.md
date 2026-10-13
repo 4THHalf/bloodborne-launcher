@@ -139,6 +139,28 @@ running. Cleanup failure reports the file error and asks for a restart after res
 the deleted profile stays hidden and other profiles remain usable. Successful cleanup marks
 the operation complete. Database-upgrade snapshots contain metadata, not copies of game saves.
 
+## Save editing and trophy eligibility
+
+Requirement approved on 2026-10-13: playing an edited save must not unlock trophies.
+Before applying the first edit, show a confirmation explaining that the edited save will be
+ineligible for new trophy unlocks. Show that status in Saves and beside the active profile.
+Previously earned trophies remain in the profile history.
+
+Track eligibility with the save lineage, not only the profile or a session setting. Persist
+an edited marker before publishing an edited save; copies, exports, imports and backups of
+that edited save retain it. Failure or interruption must not publish an edited save as eligible.
+Restoring a verified pre-edit backup or starting a fresh save can use its own eligibility;
+do not offer a toggle that makes edited saves eligible again. Unknown provenance needs an
+explicit policy before import is implemented; do not silently claim it is unedited.
+
+At launch, pass the selected save's eligibility to the runtime through authoritative profile
+routing. The runtime must suppress trophy unlocks while an edited save is active, and the
+launcher must also reject trophy events from ineligible sessions. Cover direct runtime starts
+and interrupted operations in the implementation design; a launcher-only UI warning is
+insufficient. Validate edit/backup/restore/import lineage, session attribution and unlock
+suppression with synthetic data before enabling the editor. This is a future requirement;
+editing and its eligibility enforcement are not implemented yet.
+
 ## Validation and boundaries
 
 Thirty-two native tests use temporary directories with synthetic data only. They cover migration rollback and retry, renamed/missing migration history, changed SQL,
