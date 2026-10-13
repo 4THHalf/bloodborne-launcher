@@ -37,3 +37,10 @@ The [upstream MIT notice](licenses/shadcn-ui-MIT.txt) is retained here.
 (MIT, Pablo Souza). Its tray/menu setup informed the game-driven lifecycle. The original MIT
 notice is already retained in `docs/licenses/leari-MIT.txt`. No Leari icon or other artwork was
 copied; the hunter's sigil is original launcher artwork.
+
+## Trophy tracking
+
+The runtime event persistence follows the approach in
+[Supermedo/bloodborne_pc `79d44f0`](https://github.com/Supermedo/bloodborne_pc/commit/79d44f0eecc2eed45c1e33b48996e53626adca48)
+by Ambrose (GPL-2.0-or-later). The launcher importer, eligibility checks and React UI are
+project code; no Python trophy catalog, game descriptions or icons were copied.

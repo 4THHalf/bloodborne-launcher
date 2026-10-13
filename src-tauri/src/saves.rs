@@ -21,6 +21,9 @@ pub struct Profile {
     pub bytes: u64,
     pub modified: Option<u64>,
     pub backups: Vec<Backup>,
+    pub trophies_eligible: bool,
+    pub trophy_unlocks: Vec<crate::trophies::Unlock>,
+    pub trophy_error: Option<String>,
 }
 #[derive(Serialize)]
 pub struct Backup {
@@ -265,6 +268,9 @@ pub fn list_excluding(data: &Path, original: &Path, excluded: &[String]) -> Resu
             }
             backups.sort_by(|a, b| b.id.cmp(&a.id));
             Ok(Profile {
+                trophies_eligible: crate::trophies::eligible(&path),
+                trophy_unlocks: Vec::new(),
+                trophy_error: None,
                 id,
                 name,
                 path,
@@ -283,6 +289,16 @@ pub fn delete_profile_files(data: &Path, original: &Path, id: &str) -> Result<()
     } else {
         data.join("save-profiles").join(id)
     };
+    if id == "original" {
+        let events=original.join("trophies-v1.log");
+        check_ancestors(original)?;
+        match fs::symlink_metadata(&events) {
+            Ok(meta) if !meta.is_file() || meta.file_type().is_symlink() => return Err("Invalid trophy event file.".into()),
+            Ok(_) => fs::remove_file(events).map_err(fail)?,
+            Err(e) if e.kind()==std::io::ErrorKind::NotFound => {},
+            Err(e) => return Err(fail(e)),
+        }
+    }
     for folder in [saves, data.join("save-backups").join(id)] {
         check_ancestors(&folder)?;
         match fs::symlink_metadata(&folder) {

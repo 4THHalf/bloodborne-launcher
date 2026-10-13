@@ -181,5 +181,14 @@
     "openFailed": "Die Release-Seite konnte nicht geöffnet werden.",
     "changelog": "Änderungen",
     "noNotes": "Für diese Version wurden keine Änderungsnotizen veröffentlicht."
+  },
+  "trophies": {
+    "recordedCount": "Erfasste Freischaltungen: {{count}}",
+    "view": "Trophäen anzeigen",
+    "empty": "Noch keine Freischaltungen erfasst.",
+    "edited": "Bearbeiteter Spielstand: neue Trophäen deaktiviert.",
+    "id": "Trophäe {{id}}",
+    "local": "Nur lokale Erfassung. Früherer Spielfortschritt wird nicht importiert.",
+    "error": "Trophäenimport fehlgeschlagen."
   }
 }

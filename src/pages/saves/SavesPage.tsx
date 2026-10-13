@@ -3,6 +3,7 @@ import { FilePenLine, RefreshCw } from "lucide-react";
 import { Badge, Button } from "@/components/ui";
 import { FolderRow, PageHeader, SettingsSection } from "@/components/settings";
 import { useConfig, useSaves } from "@/hooks";
+import { TrophySummary } from "@/components/trophies";
 import { SaveProfileCard } from "@/pages/saves/SaveProfileCard";
 
 export function SavesPage() {
@@ -26,6 +27,7 @@ export function SavesPage() {
         ))}
       </SettingsSection>
 
+      {selected && <SettingsSection><div className="px-5 py-4"><TrophySummary profile={selected} /></div></SettingsSection>}
       <SettingsSection>
         <div className="flex items-center gap-3 px-5 py-4 text-sm text-muted-foreground">
           <FilePenLine className="size-5" aria-hidden="true" />

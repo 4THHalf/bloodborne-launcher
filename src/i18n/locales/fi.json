@@ -181,5 +181,14 @@
     "openFailed": "Julkaisusivua ei voitu avata.",
     "changelog": "Muutosloki",
     "noNotes": "Tälle julkaisulle ei ole muutoslokia."
+  },
+  "trophies": {
+    "recordedCount": "Tallennetut avaukset: {{count}}",
+    "view": "Näytä pokaalit",
+    "empty": "Avauksia ei ole vielä tallennettu.",
+    "edited": "Muokattu tallennus: uudet pokaalit poistettu käytöstä.",
+    "id": "Pokaali {{id}}",
+    "local": "Vain paikallinen seuranta. Aiempi edistyminen ei siirry.",
+    "error": "Pokaalien tuonti epäonnistui."
   }
 }

@@ -356,5 +356,14 @@
     "openFailed": "Não foi possível abrir a página da versão.",
     "changelog": "Novidades",
     "noNotes": "Nenhum registro de alterações foi fornecido para esta versão."
+  },
+  "trophies": {
+    "recordedCount": "Troféus registrados: {{count}}",
+    "view": "Ver troféus",
+    "empty": "Nenhum troféu registrado ainda.",
+    "edited": "Save editado: novos troféus desativados.",
+    "id": "Troféu {{id}}",
+    "local": "Apenas registro local. O progresso anterior do save não é importado.",
+    "error": "Falha ao importar troféus."
   }
 }

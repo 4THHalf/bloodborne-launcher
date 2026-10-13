@@ -181,5 +181,14 @@
     "openFailed": "De releasepagina kon niet worden geopend.",
     "changelog": "Wijzigingen",
     "noNotes": "Er zijn geen wijzigingsnotities voor deze release."
+  },
+  "trophies": {
+    "recordedCount": "Vastgelegde ontgrendelingen: {{count}}",
+    "view": "Trofeeën bekijken",
+    "empty": "Nog geen ontgrendelingen vastgelegd.",
+    "edited": "Bewerkt spelbestand: nieuwe trofeeën uitgeschakeld.",
+    "id": "Trofee {{id}}",
+    "local": "Alleen lokale registratie. Eerdere voortgang wordt niet geïmporteerd.",
+    "error": "Trofeeën importeren mislukt."
   }
 }

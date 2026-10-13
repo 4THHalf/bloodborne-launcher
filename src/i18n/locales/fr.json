@@ -181,5 +181,14 @@
     "openFailed": "Impossible d’ouvrir la page de la version.",
     "changelog": "Notes de version",
     "noNotes": "Aucune note de version disponible pour cette publication."
+  },
+  "trophies": {
+    "recordedCount": "Déblocages enregistrés : {{count}}",
+    "view": "Voir les trophées",
+    "empty": "Aucun déblocage enregistré.",
+    "edited": "Sauvegarde modifiée : nouveaux trophées désactivés.",
+    "id": "Trophée {{id}}",
+    "local": "Suivi local uniquement. La progression antérieure n’est pas importée.",
+    "error": "Échec de l’importation des trophées."
   }
 }

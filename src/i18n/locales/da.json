@@ -181,5 +181,14 @@
     "openFailed": "Kunne ikke åbne udgivelsessiden.",
     "changelog": "Ændringer",
     "noNotes": "Der er ingen ændringsnoter til denne udgivelse."
+  },
+  "trophies": {
+    "recordedCount": "Registrerede oplåsninger: {{count}}",
+    "view": "Vis trofæer",
+    "empty": "Ingen oplåsninger registreret endnu.",
+    "edited": "Redigeret gemt spil: nye trofæer deaktiveret.",
+    "id": "Trofæ {{id}}",
+    "local": "Kun lokal registrering. Tidligere fremskridt importeres ikke.",
+    "error": "Import af trofæer mislykkedes."
   }
 }

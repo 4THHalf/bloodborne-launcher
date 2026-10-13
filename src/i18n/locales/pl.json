@@ -181,5 +181,14 @@
     "openFailed": "Nie udało się otworzyć strony wydania.",
     "changelog": "Lista zmian",
     "noNotes": "Nie podano listy zmian dla tego wydania."
+  },
+  "trophies": {
+    "recordedCount": "Zapisane odblokowania: {{count}}",
+    "view": "Pokaż trofea",
+    "empty": "Brak zapisanych odblokowań.",
+    "edited": "Edytowany zapis: nowe trofea wyłączone.",
+    "id": "Trofeum {{id}}",
+    "local": "Tylko zapis lokalny. Wcześniejszy postęp nie jest importowany.",
+    "error": "Import trofeów nie powiódł się."
   }
 }

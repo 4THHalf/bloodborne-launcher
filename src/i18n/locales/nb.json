@@ -181,5 +181,14 @@
     "openFailed": "Kunne ikke åpne utgivelsessiden.",
     "changelog": "Endringslogg",
     "noNotes": "Ingen endringslogg er oppgitt for denne utgivelsen."
+  },
+  "trophies": {
+    "recordedCount": "Registrerte opplåsinger: {{count}}",
+    "view": "Vis trofeer",
+    "empty": "Ingen opplåsinger registrert ennå.",
+    "edited": "Redigert lagring: nye trofeer deaktivert.",
+    "id": "Trofé {{id}}",
+    "local": "Kun lokal registrering. Tidligere fremgang importeres ikke.",
+    "error": "Import av trofeer mislyktes."
   }
 }

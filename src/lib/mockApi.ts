@@ -69,7 +69,7 @@ const wait = <T,>(value: T) => new Promise<T>((resolve) => setTimeout(() => reso
 let nextProfile = 0;
 let nextBackup = 0;
 let profileSetup = false;
-const saves: SaveList = { active: "original", profiles: [{ id: "original", name: "", path: config.paths.saves, bytes: new URLSearchParams(window.location.search).has("fresh") ? 0 : 12582912, modified: 1720000000, backups: [] }] };
+const saves: SaveList = { active: "original", profiles: [{ id: "original", name: "", path: config.paths.saves, bytes: new URLSearchParams(window.location.search).has("fresh") ? 0 : 12582912, modified: 1720000000, backups: [], trophies_eligible: true, trophy_unlocks: [], trophy_error: null }] };
 
 export const mockApi = {
   setTrayLabels: () => wait(undefined),
@@ -91,7 +91,7 @@ export const mockApi = {
     else if (change.action === "create") {
       if (saves.profiles.some((p) => p.name.toLowerCase() === change.name?.trim().toLowerCase())) return Promise.reject("A profile with this name already exists.");
       const id = `p-${++nextProfile}`;
-      saves.profiles.push({ id, name: change.name ?? "", path: `${config.paths.data}/save-profiles/${id}/user`, bytes: 0, modified: null, backups: [] });
+      saves.profiles.push({ id, name: change.name ?? "", path: `${config.paths.data}/save-profiles/${id}/user`, bytes: 0, modified: null, backups: [], trophies_eligible: true, trophy_unlocks: [], trophy_error: null });
     }
     return wait(undefined);
   },

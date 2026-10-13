@@ -86,7 +86,8 @@ export type Option<T extends string | number> =
 
 /** Complete runtime save sets, kept separate from shader caches. Times are Unix seconds. */
 export type SaveBackup = { id: string; created: number; bytes: number };
-export type SaveProfile = { id: string; name: string; path: string; bytes: number; modified: number | null; backups: SaveBackup[] };
+export type TrophyUnlock = { title_id: string; trophy_id: number; unlocked_at: number };
+export type SaveProfile = { trophies_eligible: boolean; trophy_unlocks: TrophyUnlock[]; trophy_error: string | null; id: string; name: string; path: string; bytes: number; modified: number | null; backups: SaveBackup[] };
 export type SaveList = { active: string; profiles: SaveProfile[] };
 export type SaveChange = { action: "backup" | "restore"; id: string; backup?: string };
 

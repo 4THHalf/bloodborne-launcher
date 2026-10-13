@@ -1,6 +1,7 @@
 # Profiles and saves
 
-Profile and save management is included in 0.6.0.
+Profile and save management is included in 0.6.0. Local trophy tracking is on development
+main after that release; 0.6.0 still shows the trophy development badge.
 
 ## Your first profile
 
@@ -13,7 +14,7 @@ profile starts empty. You can quit the launcher and finish setup later.
 
 ## Profiles
 
-Home shows the active profile prominently below Play, alongside **Trophies — In development**.
+Home shows the active profile prominently below Play, alongside the recorded trophy count and **View trophies**.
 Its Profiles and Saves buttons open identity management and the active save's backups.
 Changing the active profile updates this card.
 
@@ -24,12 +25,13 @@ its own complete save set, which can contain multiple characters. Creating a pro
 change which one is active. Choose **Use profile**, or use the **Active profile** selector above Play.
 
 Renaming a profile changes its displayed name without moving its files. Stop the game before
-changing profiles or managing saves. Each profile shows **Trophies — In development**. Trophy collection and viewing unlocks are
-not available yet; the placeholder has no counts or trophy actions.
+changing profiles or managing saves. Each profile shows a recorded trophy count. **View trophies** opens a modal with trophy ids
+and unlock timestamps. Tracking is local and starts with this runtime; previous save progression
+is not imported. Trophy names, icons and automatic platinum awarding are not included yet.
 
 ## Save editor
 
-The Saves tab shows **Save editor — In development**, matching the trophy status on profiles.
+The Saves tab shows **Save editor — In development**.
 It is informational; save editing and character previews are not available yet.
 
 ## Delete a profile
@@ -64,7 +66,7 @@ starting a different save.
 
 Under `~/Library/Application Support/bloodborne_mac/`:
 
-- `launcher.db`: profile ownership, active selection, backup metadata and future trophy records.
+- `launcher.db`: profile ownership, active selection, backup metadata and trophy records.
 - `user/`: original saves, unless you had configured a custom directory.
 - `save-profiles/<id>/user/savedata/`: each additional profile's save set.
 - `save-backups/<id>/<backup-id>/savedata/`: complete recovery copies.
@@ -81,7 +83,15 @@ from a newer launcher, install the latest version. The fixed launcher automatica
 the initial migration's former name; it does not recreate existing tables.
 
 Do not delete `launcher.db` or create replacement profiles to bypass an error. Your identity,
-save ownership and future trophy history live there. For an unexpected schema or ownership
+save ownership and trophy history live there. For an unexpected schema or ownership
 error, retain the data folder and report the full message. Quit the launcher before copying the
 folder for recovery, including any `launcher.db-wal` and `launcher.db-shm` files. Schema-upgrade
 snapshots are kept in `database-backups/`; they are separate from your game-save backups.
+
+## Edited saves and trophies
+
+Edited saves cannot earn new trophies. A marked edited save shows a warning alongside its
+profile and trophy count. Previously earned trophies remain. Backups retain the edited marker;
+restoring a clean pre-edit backup restores its own eligibility. The editor remains planned and
+will warn before applying edits. External edits are not automatically detected. Online access
+policy for edited saves has not been decided; this restriction applies to trophies only.

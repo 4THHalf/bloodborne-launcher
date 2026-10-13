@@ -11,6 +11,7 @@
 
 mod saves;
 mod profiles;
+mod trophies;
 mod database;
 mod tray;
 mod game_lifecycle;
@@ -616,7 +617,9 @@ fn game_environment(p: &Paths, s: &Map<String, Value>) -> Result<Vec<(String, St
     }
     // The selected profile wins over inherited and extra environment save paths. GPU caches
     // stay in the original user directory, shared by all profiles.
-    set("BB_USER_DIR", selected_user_dir(p)?.to_string_lossy().into());
+    let user=selected_user_dir(p)?;
+    set("BB_TROPHIES_ELIGIBLE", if trophies::eligible(&user) { "1" } else { "0" }.into());
+    set("BB_USER_DIR", user.to_string_lossy().into());
     set("BB_GPU_USER_DIR", profiles::require(&p.data)?.original_user_dir.to_string_lossy().into());
     set("BB_USER_NAME", guest_profile_name(&profiles::selected(&p.data)?.name));
     Ok(env)
@@ -856,11 +859,17 @@ mod save_tests {
         profiles::change(&root, "select", &id, None, None).unwrap();
         save_operation(&p, &id, "backup", None).unwrap();
         assert_eq!(profiles::selected(&root).unwrap().backups.len(), 1);
-        settings.insert("extra_env".into(), json!("BB_USER_DIR=/wrong BB_GPU_USER_DIR=/wrong BB_USER_NAME=wrong"));
+        settings.insert("extra_env".into(), json!("BB_USER_DIR=/wrong BB_GPU_USER_DIR=/wrong BB_USER_NAME=wrong BB_TROPHIES_ELIGIBLE=1"));
         let env: BTreeMap<_,_> = game_environment(&p, &settings).unwrap().into_iter().collect();
         assert_eq!(env["BB_USER_DIR"], root.join("save-profiles").join(&id).join("user").to_string_lossy());
         assert_eq!(env["BB_GPU_USER_DIR"], root.join("user").to_string_lossy());
         assert_eq!(env["BB_USER_NAME"], "Synthetic");
+        assert_eq!(env["BB_TROPHIES_ELIGIBLE"], "1");
+        let user=selected_user_dir(&p).unwrap();
+        fs::create_dir_all(user.join("savedata")).unwrap();
+        fs::write(user.join("savedata/.bb-edited"),"edited-v1\n").unwrap();
+        let env: BTreeMap<_,_> = game_environment(&p, &settings).unwrap().into_iter().collect();
+        assert_eq!(env["BB_TROPHIES_ELIGIBLE"], "0");
         // Configuration and original save files are never moved by profile creation/selection.
         assert!(!root.join("user").exists());
         fs::remove_dir_all(root.join("save-profiles").join(&id)).unwrap();

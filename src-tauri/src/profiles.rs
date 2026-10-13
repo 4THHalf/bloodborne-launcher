@@ -138,6 +138,9 @@ async fn owned(
         return Err("The active profile is missing.".into());
     }
     tx.commit().await.map_err(err)?;
+    for profile in &mut physical {
+        crate::trophies::refresh(connection, profile).await?;
+    }
     Ok(physical)
 }
 pub fn list(data: &Path, original: &Path) -> Result<ProfileList> {

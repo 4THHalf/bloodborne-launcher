@@ -181,5 +181,14 @@
     "openFailed": "Kunde inte öppna utgåvans sida.",
     "changelog": "Ändringar",
     "noNotes": "Inga ändringsnoteringar har angetts för denna utgåva."
+  },
+  "trophies": {
+    "recordedCount": "Registrerade upplåsningar: {{count}}",
+    "view": "Visa troféer",
+    "empty": "Inga upplåsningar registrerade ännu.",
+    "edited": "Redigerad sparfil: nya troféer inaktiverade.",
+    "id": "Trofé {{id}}",
+    "local": "Endast lokal registrering. Tidigare framsteg importeras inte.",
+    "error": "Import av troféer misslyckades."
   }
 }

@@ -181,5 +181,14 @@
     "openFailed": "Impossibile aprire la pagina della versione.",
     "changelog": "Novità",
     "noNotes": "Non sono state fornite note sulle modifiche per questa versione."
+  },
+  "trophies": {
+    "recordedCount": "Sblocchi registrati: {{count}}",
+    "view": "Mostra trofei",
+    "empty": "Nessuno sblocco registrato.",
+    "edited": "Salvataggio modificato: nuovi trofei disattivati.",
+    "id": "Trofeo {{id}}",
+    "local": "Solo registrazione locale. I progressi precedenti non vengono importati.",
+    "error": "Importazione dei trofei non riuscita."
   }
 }

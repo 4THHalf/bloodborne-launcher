@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { ArrowRight, Trophy, UserRound } from "lucide-react";
-import { Badge, Button, Card, CardContent } from "@/components/ui";
+import { Button, Card, CardContent } from "@/components/ui";
+import { TrophySummary } from "@/components/trophies";
 import { useProfiles } from "@/hooks";
 import { useUiStore } from "@/stores";
 
@@ -35,7 +36,7 @@ export function HomeProfileCard() {
             <Trophy className="size-8 shrink-0 text-parchment/70" aria-hidden="true" />
             <div>
               <p className="mb-2 font-medium">{t("profiles.trophies")}</p>
-              <Badge variant="outline">{t("profiles.inDevelopment")}</Badge>
+              <TrophySummary profile={profile} />
             </div>
           </div>
         </CardContent>

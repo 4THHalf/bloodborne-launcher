@@ -1,6 +1,6 @@
 # Profiles and saves
 
-## Roadmap (2026-10-12)
+## Roadmap (2026-10-13)
 
 Completed stages: **1/4 (25%)** `█████░░░░░░░░░░░░░░░`
 This counts completed stages, not estimated development time.
@@ -10,7 +10,7 @@ This counts completed stages, not estimated development time.
 | S0 | Profile ownership, first-profile setup, complete save sets, active selection, backup and restore | Implemented; SQLite, native tests and browser checks |
 | S1 | Read-only character preview: verified names, level, attributes, playtime and progression | Planned |
 | S2 | Import/export and backup history management | Planned |
-| S3 | Editor for verified fields, copied-save validation, runtime trophy capture and profile trophy view | Planned |
+| S3 | Editor for verified fields, copied-save validation, runtime trophy capture and profile trophy view | Trophy capture/view implemented; editor planned |
 
 ## Ownership and first setup
 
@@ -43,7 +43,7 @@ transaction. A test checks that the native migration list matches Drizzle's jour
 | `save_sets` | Required profile foreign key, unique profile and user directory |
 | `launcher_state` | One active-profile record and the original/shared-cache directory |
 | `backups` | Required save-set foreign key, published path, timestamp and size |
-| `trophy_unlocks` | Unique profile/title/trophy key and timestamp; collection is not implemented |
+| `trophy_unlocks` | Unique profile/title/trophy key and earliest Unix-second timestamp; runtime events imported |
 | `pending_operations` | File-operation journal with pending, complete, failed or interrupted status |
 
 The structure follows Leari: Drizzle schema and typed service reads, TanStack Query hooks and UI;
@@ -158,12 +158,13 @@ routing. The runtime must suppress trophy unlocks while an edited save is active
 launcher must also reject trophy events from ineligible sessions. Cover direct runtime starts
 and interrupted operations in the implementation design; a launcher-only UI warning is
 insufficient. Validate edit/backup/restore/import lineage, session attribution and unlock
-suppression with synthetic data before enabling the editor. This is a future requirement;
-editing and its eligibility enforcement are not implemented yet.
+suppression with synthetic data before enabling the editor. Runtime recording and launcher import suppression are implemented for marked saves. The
+editor, its confirmation warning and import/export provenance checks remain planned. Online
+access policy for edited saves is undecided; only trophies are blocked, per the maintainer.
 
 ## Validation and boundaries
 
-Thirty-two native tests use temporary directories with synthetic data only. They cover migration rollback and retry, renamed/missing migration history, changed SQL,
+Forty-three native tests use temporary directories with synthetic data only. They cover migration rollback and retry, renamed/missing migration history, changed SQL,
 unsupported newer versions, concurrent startup, WAL-aware upgrade snapshots and failed snapshot
 gates, schema mismatch, ownership validation,
 foreign keys, missing/corrupt storage, atomic adoption, completed-copy recovery, name uniqueness, fresh-save creation despite existing migrated saves,
@@ -174,7 +175,25 @@ backend for both fresh and upgrade setup, mandatory onboarding, identity operati
 save management, plus persistent configuration/database failures and successful manual retry. The shadcn creation and deletion modals are checked for focus, cancellation, duplicate-name retry,
 confirmed deletion and active/running-profile protection. They do not exercise the real game or capture screenshots.
 
-Profile cards show a Trophies row with an In development badge, without unlock counts or actions.
-Saves shows a Save editor row with the same badge, without an editing action.
-Character parsing, editing and actual trophy collection remain future work. Game-derived files
-and analysis are never committed. Tests never write the player's save or settings.
+Home, Profiles and Saves show recorded trophy counts and a details modal with ids and timestamps.
+The runtime writes versioned events under the active profile user directory; Rust imports them
+into the existing table, retaining the earliest timestamp and rejecting current edited-save
+imports. The runtime prevents generation while marked edited, including direct launches and
+online-module mode. No schema migration was needed. History survives restores; deletion also
+removes the original profile's event file without removing shared caches.
+
+Read failures appear beside trophies and preserve existing history. Incomplete trailing records
+retry on refresh; malformed records are ignored. Event reads are capped at 32 MiB without
+truncation. Profiles refresh every five seconds while playing and once on game state changes.
+This does not detect external edits or provide an anti-cheat boundary. Existing save progression
+is not backfilled; no trophy catalog, icons or automatic platinum are included.
+
+Synthetic tests cover duplicates, earliest timestamps, incomplete records, cross-profile
+isolation, edited/clean backup restoration, retained history, deletion cleanup, read errors
+and launch override resistance. Browser DOM checks passed for Home counts, empty and populated
+modals and the edited warning, without screenshots. `npm run check`, `npm run build`, all 43
+native tests and Clippy passed. One copied-save runtime smoke check passed; it did not earn a
+real trophy. Runtime [tracking documentation](https://github.com/bloodborne-native/bloodborne-runtime/blob/main/docs/TROPHIES.md)
+records the protocol and game-check measurements. Names/icons, character parsing and editing
+remain future work. Game-derived files and analysis are never committed. Tests never write the
+player's save or settings.

@@ -369,5 +369,14 @@
     "openFailed": "Could not open the release page.",
     "changelog": "Changelog",
     "noNotes": "No changelog was provided for this release."
+  },
+  "trophies": {
+    "recordedCount": "Recorded unlocks: {{count}}",
+    "view": "View trophies",
+    "empty": "No unlocks recorded yet.",
+    "edited": "Edited save: new trophies disabled.",
+    "id": "Trophy {{id}}",
+    "local": "Local tracking only. Earlier save progress is not imported.",
+    "error": "Trophy import failed."
   }
 }

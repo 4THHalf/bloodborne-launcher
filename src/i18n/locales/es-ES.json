@@ -181,5 +181,14 @@
     "openFailed": "No se pudo abrir la página de la versión.",
     "changelog": "Novedades",
     "noNotes": "No se han proporcionado notas de cambios para esta versión."
+  },
+  "trophies": {
+    "recordedCount": "Desbloqueos registrados: {{count}}",
+    "view": "Ver trofeos",
+    "empty": "Aún no hay desbloqueos registrados.",
+    "edited": "Partida editada: nuevos trofeos desactivados.",
+    "id": "Trofeo {{id}}",
+    "local": "Solo registro local. No se importa el progreso anterior.",
+    "error": "Error al importar trofeos."
   }
 }

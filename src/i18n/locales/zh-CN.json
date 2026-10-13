@@ -181,5 +181,14 @@
     "openFailed": "无法打开发行页面。",
     "changelog": "更新日志",
     "noNotes": "此版本未提供更新日志。"
+  },
+  "trophies": {
+    "recordedCount": "已记录解锁：{{count}}",
+    "view": "查看奖杯",
+    "empty": "尚无解锁记录。",
+    "edited": "已编辑存档：禁用新奖杯解锁。",
+    "id": "奖杯 {{id}}",
+    "local": "仅本地记录。不导入之前的存档进度。",
+    "error": "奖杯导入失败。"
   }
 }
