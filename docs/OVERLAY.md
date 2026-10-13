@@ -279,3 +279,9 @@ helper correctly sent no previews. This run is inconclusive for game-target focu
 not a performance pair. The earlier fullscreen visual report remains the game-target
 appearance check. Keep notifications optional and off by default while focus behavior and
 overhead are investigated.
+
+A second isolated hold, `trophy_focus_active`, completed at 46.9 FPS and p90 22.5 ms
+without a fault. Two previews were sent late in the run. A metadata sampler reported
+VS Code frontmost in all 36 samples, despite an attempted game activation, and never
+reported the helper frontmost. The game-focus result remains inconclusive; this is
+not another off/on performance comparison.
