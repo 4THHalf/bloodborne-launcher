@@ -25,6 +25,7 @@ const config: Config = {
     frame_stats: true,
     save_log: false,
     hide_launcher: true,
+    check_updates: true,
     crash_diag: false,
     gpu_profile: false,
     extra_env: "",
@@ -40,7 +41,7 @@ const config: Config = {
     saves: "~/Library/Application Support/bloodborne_mac/user",
   },
   bundled: false,
-  version: "0.3.0",
+  version: "0.5.1",
   running: false,
 };
 
@@ -109,6 +110,10 @@ export const mockApi = {
     }
     return wait(undefined);
   },
+  checkRelease: () => wait(new URLSearchParams(window.location.search).has("update")
+    ? { version: "0.5.2", tag: "v0.5.2", newer: true }
+    : { version: "0.5.1", tag: "v0.5.1", newer: false }),
+  openRelease: (_tag: string) => wait(undefined),
   loadConfig: () => wait(structuredClone(config)),
   saveSettings: (settings: Partial<Settings>) => wait(void Object.assign(config.settings, settings)),
   saveIni: (values: Record<string, string | null>) =>

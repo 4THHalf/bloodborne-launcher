@@ -1,0 +1,11 @@
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
+import { api } from "@/lib";
+import { i18n } from "@/i18n";
+
+export function useOpenRelease() {
+  return useMutation({
+    mutationFn: api.openRelease,
+    onError: () => toast.error(i18n.t("updates.openFailed")),
+  });
+}

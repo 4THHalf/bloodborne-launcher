@@ -162,5 +162,22 @@
     "setupCreate": "Opprett profil",
     "use": "Bruk profil",
     "rename": "Gi nytt navn"
+  },
+  "updates": {
+    "title": "Oppdateringer",
+    "automatic": "Se automatisk etter nye versjoner",
+    "automaticHint": "Sjekker GitHub ved oppstart og hver sjette time. Nedlastinger installeres manuelt.",
+    "installed": "Installert: {{version}}",
+    "checkNow": "Sjekk nå",
+    "checking": "Sjekker…",
+    "unavailable": "Kunne ikke sjekke. Prøv igjen senere.",
+    "notChecked": "Ikke sjekket ennå.",
+    "noRelease": "Ingen stabil utgivelse tilgjengelig.",
+    "current": "Du har den nyeste stabile versjonen.",
+    "available": "Versjon {{version}} er tilgjengelig",
+    "downloadHint": "Les utgivelsesnotatene og last ned den nye appen.",
+    "viewRelease": "Vis utgivelse",
+    "dismiss": "Lukk",
+    "openFailed": "Kunne ikke åpne utgivelsessiden."
   }
 }

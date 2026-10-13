@@ -14,6 +14,7 @@ mod profiles;
 mod database;
 mod tray;
 mod game_lifecycle;
+mod updates;
 
 use serde::Serialize;
 use serde_json::{json, Map, Value};
@@ -116,6 +117,7 @@ fn default_settings() -> Map<String, Value> {
         "frame_stats": true,
         "save_log": false,
         "hide_launcher": true,
+        "check_updates": true,
         "crash_diag": false,
         "gpu_profile": false,
         "extra_env": "",
@@ -295,6 +297,9 @@ fn save_settings(app: AppHandle, state: State<AppState>, settings: Map<String, V
     if settings.contains_key("save_profile") || settings.contains_key("user_dir") { return Err("Manage profile ownership in the Profiles tab.".into()); }
     let _ = &game; // Serialize settings writes with profile changes and launch.
     let mut merged = load_settings(&state.paths);
+    if settings.get("check_updates").is_some_and(|v| !v.is_boolean()) {
+        return Err("check_updates must be a boolean.".into());
+    }
     if settings.get("hide_launcher").is_some_and(|v| !v.is_boolean()) {
         return Err("hide_launcher must be a boolean.".into());
     }
@@ -731,6 +736,7 @@ fn main() {
         }))
         .plugin(tauri_plugin_sql::Builder::default().build())
         .plugin(tauri_plugin_dialog::init())
+        .plugin(tauri_plugin_opener::init())
         .manage(AppState { paths, game: Arc::new(Mutex::new(Game { child: None })) })
         // `open Bloodborne.app --args --play`: start the game at once (shortcuts, scripted tests).
         .setup(|app| {
@@ -753,6 +759,8 @@ fn main() {
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
+            updates::check_release,
+            updates::open_release,
             load_config, save_settings, save_ini, check_game, list_mods, save_mods, list_patches,
             save_patches, list_gamepads, list_displays, read_input, open_path, open_launcher_data, launch, stop, list_saves, change_save, list_profiles, change_profile, database_path, set_tray_labels
         ])

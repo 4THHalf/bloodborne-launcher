@@ -162,5 +162,22 @@
     "setupCreate": "Crear perfil",
     "use": "Usar perfil",
     "rename": "Cambiar nombre"
+  },
+  "updates": {
+    "title": "Actualizaciones",
+    "automatic": "Buscar nuevas versiones automáticamente",
+    "automaticHint": "Consulta GitHub al iniciar y cada seis horas. La instalación es manual.",
+    "installed": "Instalada: {{version}}",
+    "checkNow": "Comprobar ahora",
+    "checking": "Comprobando…",
+    "unavailable": "No se pudo comprobar. Inténtalo más tarde.",
+    "notChecked": "Todavía no comprobado.",
+    "noRelease": "No hay una versión estable disponible.",
+    "current": "Tienes la última versión estable.",
+    "available": "La versión {{version}} está disponible",
+    "downloadHint": "Lee las notas y descarga la nueva aplicación.",
+    "viewRelease": "Ver versión",
+    "dismiss": "Descartar",
+    "openFailed": "No se pudo abrir la página de la versión."
   }
 }

@@ -162,5 +162,22 @@
     "setupCreate": "Skapa profil",
     "use": "Använd profil",
     "rename": "Byt namn"
+  },
+  "updates": {
+    "title": "Uppdateringar",
+    "automatic": "Sök automatiskt efter nya versioner",
+    "automaticHint": "Kontrollerar GitHub vid start och var sjätte timme. Hämtningar installeras manuellt.",
+    "installed": "Installerad: {{version}}",
+    "checkNow": "Kontrollera nu",
+    "checking": "Kontrollerar…",
+    "unavailable": "Kunde inte kontrollera. Försök igen senare.",
+    "notChecked": "Inte kontrollerat ännu.",
+    "noRelease": "Ingen stabil utgåva tillgänglig.",
+    "current": "Du har den senaste stabila versionen.",
+    "available": "Version {{version}} är tillgänglig",
+    "downloadHint": "Läs versionsinformationen och hämta den nya appen.",
+    "viewRelease": "Visa utgåva",
+    "dismiss": "Stäng",
+    "openFailed": "Kunde inte öppna utgåvans sida."
   }
 }

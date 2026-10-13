@@ -162,5 +162,22 @@
     "setupCreate": "Luo profiili",
     "use": "Käytä profiilia",
     "rename": "Nimeä uudelleen"
+  },
+  "updates": {
+    "title": "Päivitykset",
+    "automatic": "Tarkista uudet versiot automaattisesti",
+    "automaticHint": "Tarkistaa GitHubin käynnistyksessä ja kuuden tunnin välein. Asennus tehdään käsin.",
+    "installed": "Asennettu: {{version}}",
+    "checkNow": "Tarkista nyt",
+    "checking": "Tarkistetaan…",
+    "unavailable": "Tarkistus epäonnistui. Yritä myöhemmin uudelleen.",
+    "notChecked": "Ei vielä tarkistettu.",
+    "noRelease": "Vakaata julkaisua ei ole saatavilla.",
+    "current": "Käytössäsi on uusin vakaa versio.",
+    "available": "Versio {{version}} on saatavilla",
+    "downloadHint": "Lue julkaisutiedot ja lataa uusi sovellus.",
+    "viewRelease": "Näytä julkaisu",
+    "dismiss": "Sulje",
+    "openFailed": "Julkaisusivua ei voitu avata."
   }
 }

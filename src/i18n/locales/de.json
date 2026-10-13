@@ -162,5 +162,22 @@
     "setupCreate": "Profil erstellen",
     "use": "Profil verwenden",
     "rename": "Umbenennen"
+  },
+  "updates": {
+    "title": "Updates",
+    "automatic": "Automatisch nach neuen Versionen suchen",
+    "automaticHint": "Prüft GitHub beim Start und alle sechs Stunden. Downloads werden manuell installiert.",
+    "installed": "Installiert: {{version}}",
+    "checkNow": "Jetzt prüfen",
+    "checking": "Wird geprüft…",
+    "unavailable": "Prüfung fehlgeschlagen. Später erneut versuchen.",
+    "notChecked": "Noch nicht geprüft.",
+    "noRelease": "Keine stabile Version verfügbar.",
+    "current": "Die neueste stabile Version ist installiert.",
+    "available": "Version {{version}} ist verfügbar",
+    "downloadHint": "Versionshinweise lesen und die neue App herunterladen.",
+    "viewRelease": "Version ansehen",
+    "dismiss": "Schließen",
+    "openFailed": "Die Release-Seite konnte nicht geöffnet werden."
   }
 }

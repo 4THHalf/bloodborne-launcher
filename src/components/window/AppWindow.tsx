@@ -1,3 +1,4 @@
+import { UpdateNotice } from "@/components/updates";
 import { Sidebar } from "@/components/sidebar";
 import { PageOutlet } from "@/components/window/PageOutlet";
 import { TitleBar } from "@/components/window/TitleBar";
@@ -10,6 +11,7 @@ export function AppWindow() {
       <main className="relative flex flex-1 flex-col overflow-y-auto bg-[radial-gradient(ellipse_at_top_right,rgba(122,20,24,0.18),transparent_55%)]">
         <TitleBar />
         <div className="mx-auto w-full max-w-4xl px-10 pb-12">
+          <UpdateNotice />
           <PageOutlet />
         </div>
       </main>

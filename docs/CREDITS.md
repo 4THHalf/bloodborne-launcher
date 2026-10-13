@@ -10,7 +10,9 @@ runtime contributors remain in [bloodborne-runtime's credits](https://github.com
 
 The UI uses Tauri, React, shadcn/ui, Base UI, Tailwind CSS, TanStack Query, Zustand, i18next,
 Sonner, lucide, and the Cinzel and Inter fonts. Dependency licenses remain with their packages.
-No code from an external save editor has been adopted.
+Release checking also uses reqwest, rustls, semver and Tauri’s opener plugin. These are package
+dependencies; their licenses remain with their packages. No external update-checker source code
+was copied. No code from an external save editor has been adopted.
 
 ## Leari database architecture
 

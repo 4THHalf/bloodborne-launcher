@@ -162,5 +162,22 @@
     "setupCreate": "Profil oluştur",
     "use": "Profili kullan",
     "rename": "Yeniden adlandır"
+  },
+  "updates": {
+    "title": "Güncellemeler",
+    "automatic": "Yeni sürümleri otomatik denetle",
+    "automaticHint": "Başlangıçta ve altı saatte bir GitHub’ı denetler. İndirmeler elle kurulur.",
+    "installed": "Kurulu: {{version}}",
+    "checkNow": "Şimdi denetle",
+    "checking": "Denetleniyor…",
+    "unavailable": "Denetlenemedi. Daha sonra tekrar deneyin.",
+    "notChecked": "Henüz denetlenmedi.",
+    "noRelease": "Kararlı sürüm yok.",
+    "current": "En son kararlı sürüme sahipsiniz.",
+    "available": "{{version}} sürümü mevcut",
+    "downloadHint": "Sürüm notlarını okuyun ve yeni uygulamayı indirin.",
+    "viewRelease": "Sürümü görüntüle",
+    "dismiss": "Kapat",
+    "openFailed": "Sürüm sayfası açılamadı."
   }
 }

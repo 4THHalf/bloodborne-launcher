@@ -350,5 +350,22 @@
     "setupCreate": "Create profile",
     "use": "Use profile",
     "rename": "Rename"
+  },
+  "updates": {
+    "title": "Updates",
+    "automatic": "Check for new versions automatically",
+    "automaticHint": "Checks GitHub on startup and every six hours. Downloads are installed manually.",
+    "installed": "Installed: {{version}}",
+    "checkNow": "Check now",
+    "checking": "Checking…",
+    "unavailable": "Could not check. Try again later.",
+    "notChecked": "Not checked yet.",
+    "noRelease": "No stable release is available.",
+    "current": "You have the latest stable version.",
+    "available": "Version {{version}} is available",
+    "downloadHint": "Read the release notes and download the new app.",
+    "viewRelease": "View release",
+    "dismiss": "Dismiss",
+    "openFailed": "Could not open the release page."
   }
 }

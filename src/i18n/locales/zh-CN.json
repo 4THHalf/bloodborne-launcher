@@ -162,5 +162,22 @@
     "setupCreate": "创建用户资料",
     "use": "使用此用户资料",
     "rename": "重命名"
+  },
+  "updates": {
+    "title": "更新",
+    "automatic": "自动检查新版本",
+    "automaticHint": "启动时及每六小时检查 GitHub。下载后需手动安装。",
+    "installed": "已安装：{{version}}",
+    "checkNow": "立即检查",
+    "checking": "正在检查…",
+    "unavailable": "无法检查，请稍后重试。",
+    "notChecked": "尚未检查。",
+    "noRelease": "没有可用的稳定版本。",
+    "current": "您正在使用最新稳定版本。",
+    "available": "版本 {{version}} 已发布",
+    "downloadHint": "查看发行说明并下载新应用。",
+    "viewRelease": "查看版本",
+    "dismiss": "关闭",
+    "openFailed": "无法打开发行页面。"
   }
 }

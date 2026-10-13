@@ -25,6 +25,7 @@ export type Settings = {
   save_log: boolean;
   /** Automatically hide the launcher during gameplay; does not disable logging. */
   hide_launcher: boolean;
+  check_updates: boolean;
   crash_diag: boolean;
   gpu_profile: boolean;
   extra_env: string;
@@ -91,3 +92,5 @@ export type SaveChange = { action: "backup" | "restore"; id: string; backup?: st
 
 export type ProfileList = SaveList & { setup_required: boolean; has_existing_saves: boolean };
 export type ProfileChange = { action: "initialize" | "create" | "select" | "rename" | "delete"; id: string; name?: string };
+
+export type ReleaseInfo = { version: string; tag: string; newer: boolean };

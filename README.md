@@ -94,3 +94,9 @@ By default, the launcher hides to the macOS menu bar/system tray while its game 
 and returns when it exits. Turn off **Advanced → Launcher → Hide launcher during gameplay**
 to keep the Log tab visible; the setting also applies immediately during a game. Use Show launcher or Stop game from the tray menu. Native lifecycle details and
 the isolated GUI smoke check are in [Launcher lifecycle](docs/LAUNCHER_LIFECYCLE.md).
+
+## New-version notifications
+
+The launcher checks bloodborne-mac’s stable GitHub releases and shows a dismissible banner
+when a newer app is available. Advanced includes automatic-check preferences and a manual check.
+Downloads and installation remain manual. See [Updates](docs/UPDATES.md).

@@ -162,5 +162,22 @@
     "setupCreate": "프로필 만들기",
     "use": "프로필 사용",
     "rename": "이름 변경"
+  },
+  "updates": {
+    "title": "업데이트",
+    "automatic": "새 버전 자동 확인",
+    "automaticHint": "시작 시와 6시간마다 GitHub를 확인합니다. 설치는 수동으로 진행합니다.",
+    "installed": "설치된 버전: {{version}}",
+    "checkNow": "지금 확인",
+    "checking": "확인 중…",
+    "unavailable": "확인할 수 없습니다. 나중에 다시 시도하세요.",
+    "notChecked": "아직 확인하지 않았습니다.",
+    "noRelease": "안정 버전이 없습니다.",
+    "current": "최신 안정 버전을 사용하고 있습니다.",
+    "available": "{{version}} 버전을 사용할 수 있습니다",
+    "downloadHint": "릴리스 노트를 읽고 새 앱을 다운로드하세요.",
+    "viewRelease": "릴리스 보기",
+    "dismiss": "닫기",
+    "openFailed": "릴리스 페이지를 열 수 없습니다."
   }
 }

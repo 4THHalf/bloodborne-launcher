@@ -162,5 +162,22 @@
     "setupCreate": "Profiel maken",
     "use": "Profiel gebruiken",
     "rename": "Naam wijzigen"
+  },
+  "updates": {
+    "title": "Updates",
+    "automatic": "Automatisch naar nieuwe versies zoeken",
+    "automaticHint": "Controleert GitHub bij het starten en elke zes uur. Downloads worden handmatig geïnstalleerd.",
+    "installed": "Geïnstalleerd: {{version}}",
+    "checkNow": "Nu controleren",
+    "checking": "Controleren…",
+    "unavailable": "Controle mislukt. Probeer het later opnieuw.",
+    "notChecked": "Nog niet gecontroleerd.",
+    "noRelease": "Geen stabiele versie beschikbaar.",
+    "current": "Je hebt de nieuwste stabiele versie.",
+    "available": "Versie {{version}} is beschikbaar",
+    "downloadHint": "Lees de releaseopmerkingen en download de nieuwe app.",
+    "viewRelease": "Release bekijken",
+    "dismiss": "Sluiten",
+    "openFailed": "De releasepagina kon niet worden geopend."
   }
 }

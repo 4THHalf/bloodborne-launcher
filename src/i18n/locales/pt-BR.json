@@ -337,5 +337,22 @@
     "setupCreate": "Criar perfil",
     "use": "Usar perfil",
     "rename": "Renomear"
+  },
+  "updates": {
+    "title": "Atualizações",
+    "automatic": "Buscar novas versões automaticamente",
+    "automaticHint": "Consulta o GitHub ao iniciar e a cada seis horas. A instalação é manual.",
+    "installed": "Instalada: {{version}}",
+    "checkNow": "Verificar agora",
+    "checking": "Verificando…",
+    "unavailable": "Não foi possível verificar. Tente mais tarde.",
+    "notChecked": "Ainda não verificado.",
+    "noRelease": "Não há uma versão estável disponível.",
+    "current": "Você tem a versão estável mais recente.",
+    "available": "A versão {{version}} está disponível",
+    "downloadHint": "Leia as notas e baixe o novo aplicativo.",
+    "viewRelease": "Ver versão",
+    "dismiss": "Dispensar",
+    "openFailed": "Não foi possível abrir a página da versão."
   }
 }

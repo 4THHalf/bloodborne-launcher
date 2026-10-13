@@ -14,7 +14,7 @@ Troubleshooting, experimental runtime controls and debug tools belong in Advance
 | Saves | Active save information, backup/restore and backup-folder location |
 | Mods | Mod loading, load order and mod-folder location |
 | Patches | Third-party patches and their folder |
-| Advanced | Launcher language and hiding during gameplay; experimental draw pipeline, readbacks, preupload and live resolution; free camera/debug menu, logs, profiling, extra environment variables and launcher data-folder location |
+| Advanced | Launcher language and hiding during gameplay; new-version checks and release links; experimental draw pipeline, readbacks, preupload and live resolution; free camera/debug menu, logs, profiling, extra environment variables and launcher data-folder location |
 | Log | Game output |
 
 The Home frame-rate shortcut opens Graphics. Save folders remain owned by profiles: the Game
@@ -25,3 +25,5 @@ Moving a control does not change its stored setting key, default or runtime beha
 translations move with their controls in all 20 locales. Experimental live-resolution controls
 stay in Advanced because they are used for troubleshooting the renderer; ordinary output
 resolution remains in Graphics.
+
+See [New-version notifications](UPDATES.md) for automatic and manual release checks.

@@ -1,7 +1,8 @@
 import { QueryClient } from "@tanstack/react-query";
 
 // Backend data is local and changes only through this app (or the game's menu, between
-// starts): no polling, no refetch on focus.
+// starts): no polling, no refetch on focus. The remote release hook overrides freshness
+// and its polling interval.
 export const queryClient = new QueryClient({
   defaultOptions: {
     // Error views also observe these queries. Retry-on-mount would remount them in a loop.
@@ -10,6 +11,7 @@ export const queryClient = new QueryClient({
 });
 
 export const queryKeys = {
+  release: ["release"] as const,
   profiles: ["profiles"] as const,
   saves: ["saves"] as const,
   config: ["config"] as const,

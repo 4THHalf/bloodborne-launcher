@@ -4,12 +4,14 @@ import { invoke } from "@tauri-apps/api/core";
 import { listen } from "@tauri-apps/api/event";
 import { profilesService } from "@/services";
 import { mockApi } from "@/lib/mockApi";
-import type { Config, Display, GameCheck, Gamepad, GameState, Mod, Patch, Settings, SaveList, SaveChange } from "@/lib/types";
+import type { ReleaseInfo, Config, Display, GameCheck, Gamepad, GameState, Mod, Patch, Settings, SaveList, SaveChange } from "@/lib/types";
 
 /** Running inside the Tauri app (else a browser preview with mock data). */
 const inTauri = typeof window !== "undefined" && "__TAURI_INTERNALS__" in window;
 
 const tauriApi = {
+  checkRelease: () => invoke<ReleaseInfo | null>("check_release"),
+  openRelease: (tag: string) => invoke<void>("open_release", { tag }),
   setTrayLabels: (labels: { show: string; stop: string }) => invoke<void>("set_tray_labels", { labels }),
   listProfiles: profilesService.list,
   changeProfile: profilesService.change,

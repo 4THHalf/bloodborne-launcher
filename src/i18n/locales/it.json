@@ -162,5 +162,22 @@
     "setupCreate": "Crea profilo",
     "use": "Usa profilo",
     "rename": "Rinomina"
+  },
+  "updates": {
+    "title": "Aggiornamenti",
+    "automatic": "Cerca automaticamente nuove versioni",
+    "automaticHint": "Controlla GitHub all’avvio e ogni sei ore. Installazione manuale.",
+    "installed": "Installata: {{version}}",
+    "checkNow": "Controlla ora",
+    "checking": "Controllo…",
+    "unavailable": "Impossibile controllare. Riprova più tardi.",
+    "notChecked": "Non ancora controllato.",
+    "noRelease": "Nessuna versione stabile disponibile.",
+    "current": "Hai l’ultima versione stabile.",
+    "available": "È disponibile la versione {{version}}",
+    "downloadHint": "Leggi le note e scarica la nuova applicazione.",
+    "viewRelease": "Visualizza versione",
+    "dismiss": "Chiudi",
+    "openFailed": "Impossibile aprire la pagina della versione."
   }
 }

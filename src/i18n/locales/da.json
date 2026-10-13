@@ -162,5 +162,22 @@
     "setupCreate": "Opret profil",
     "use": "Brug profil",
     "rename": "Omdøb"
+  },
+  "updates": {
+    "title": "Opdateringer",
+    "automatic": "Søg automatisk efter nye versioner",
+    "automaticHint": "Tjekker GitHub ved start og hver sjette time. Downloads installeres manuelt.",
+    "installed": "Installeret: {{version}}",
+    "checkNow": "Tjek nu",
+    "checking": "Tjekker…",
+    "unavailable": "Kunne ikke tjekke. Prøv igen senere.",
+    "notChecked": "Ikke tjekket endnu.",
+    "noRelease": "Ingen stabil udgivelse tilgængelig.",
+    "current": "Du har den nyeste stabile version.",
+    "available": "Version {{version}} er tilgængelig",
+    "downloadHint": "Læs udgivelsesnoterne og download den nye app.",
+    "viewRelease": "Se udgivelse",
+    "dismiss": "Luk",
+    "openFailed": "Kunne ikke åbne udgivelsessiden."
   }
 }

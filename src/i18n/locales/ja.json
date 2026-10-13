@@ -162,5 +162,22 @@
     "setupCreate": "プロフィールを作成",
     "use": "このプロフィールを使用",
     "rename": "名前を変更"
+  },
+  "updates": {
+    "title": "更新",
+    "automatic": "新しいバージョンを自動確認",
+    "automaticHint": "起動時と6時間ごとにGitHubを確認します。インストールは手動です。",
+    "installed": "インストール済み：{{version}}",
+    "checkNow": "今すぐ確認",
+    "checking": "確認中…",
+    "unavailable": "確認できませんでした。後でもう一度お試しください。",
+    "notChecked": "未確認です。",
+    "noRelease": "安定版リリースはありません。",
+    "current": "最新の安定版を使用しています。",
+    "available": "バージョン{{version}}が利用可能です",
+    "downloadHint": "リリースノートを読んで新しいアプリをダウンロードしてください。",
+    "viewRelease": "リリースを見る",
+    "dismiss": "閉じる",
+    "openFailed": "リリースページを開けませんでした。"
   }
 }

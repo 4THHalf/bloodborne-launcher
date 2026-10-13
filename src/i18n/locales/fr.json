@@ -162,5 +162,22 @@
     "setupCreate": "Créer un profil",
     "use": "Utiliser ce profil",
     "rename": "Renommer"
+  },
+  "updates": {
+    "title": "Mises à jour",
+    "automatic": "Rechercher automatiquement les nouvelles versions",
+    "automaticHint": "Consulte GitHub au démarrage et toutes les six heures. Installation manuelle.",
+    "installed": "Version installée : {{version}}",
+    "checkNow": "Vérifier maintenant",
+    "checking": "Vérification…",
+    "unavailable": "Vérification impossible. Réessayez plus tard.",
+    "notChecked": "Pas encore vérifié.",
+    "noRelease": "Aucune version stable disponible.",
+    "current": "Vous avez la dernière version stable.",
+    "available": "La version {{version}} est disponible",
+    "downloadHint": "Consultez les notes et téléchargez la nouvelle application.",
+    "viewRelease": "Voir la version",
+    "dismiss": "Masquer",
+    "openFailed": "Impossible d’ouvrir la page de la version."
   }
 }
