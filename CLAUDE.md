@@ -19,6 +19,8 @@ planned. Keep profile/save logic independent of the platform and renderer.
   player guides into bloodborne-mac's docs and wiki.
 - `npm ci && npm run check && npm run build`.
 - `cd src-tauri && cargo test && cargo clippy -- -D warnings`.
+- Packaged QA: `BB_LAUNCHER_DATA_DIR` selects an absolute synthetic data directory; empty/relative
+  overrides fail before initialization. Keep player data outside every test.
 - Standalone development: set `BB_REPO` to a bloodborne-runtime checkout for `npm run tauri dev`.
   Browser preview (`npm run dev`) uses an in-memory backend and does not need the game.
 

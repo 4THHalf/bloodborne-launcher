@@ -42,7 +42,7 @@ Window restoration and Dock/taskbar handling follow
 ## Verification
 
 `cargo test --manifest-path src-tauri/Cargo.toml` includes process polling tests for successful,
-nonzero and killed processes, a missing handle and a retryable wait error. There are 37 native
+nonzero and killed processes, a missing handle and a retryable wait error. There are 39 native
 tests in total; profile/save tests continue to use synthetic temporary data.
 
 For a native GUI smoke check on a logged-in desktop:
@@ -58,3 +58,16 @@ It verifies native hiding/restoration, disabled automatic hiding, live preferenc
 explicit close with automatic hiding disabled, manual reopen/close, normal/nonzero/killed exits
 and rapid restart after reopening. The macOS check passed on 2026-10-12. Windows/Linux GUI
 behaviour has not been exercised here. Actual game loading is tested separately with runtime `tools/test_run.sh`.
+
+### Packaged launcher QA
+
+Set `BB_LAUNCHER_DATA_DIR` to an absolute synthetic directory before launching a QA copy of
+the packaged launcher. Its profile database, saves and settings then use that directory; the
+normal location is unchanged when the variable is absent. Empty/relative overrides are
+rejected before initialization, rather than falling back to player data. Never set it to a
+player directory for testing. The test suite covers default selection and invalid overrides.
+
+On 2026-10-13 the packaged 0.6.0 launcher opened with a fresh synthetic data directory.
+The maintainer created “Release QA” and confirmed Home, the active profile and version 0.6.0.
+The synthetic database contained that profile with no foreign-key violations. All 39 native
+tests and frontend checks/build passed. This check does not cover Gatekeeper on another Mac.

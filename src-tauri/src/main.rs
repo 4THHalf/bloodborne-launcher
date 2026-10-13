@@ -41,10 +41,9 @@ struct Paths {
 }
 
 impl Paths {
-    fn find() -> Paths {
+    fn find(data: PathBuf) -> Paths {
         let exe = std::env::current_exe().unwrap_or_default();
         let macos = exe.parent().map(Path::to_path_buf).unwrap_or_default();
-        let data = dirs_data().join("bloodborne_mac");
         let resources = macos.parent().map(|c| c.join("Resources")).unwrap_or_default();
         if resources.join("game/run.sh").is_file() {
             return Paths {
@@ -91,6 +90,15 @@ fn dirs_data() -> PathBuf {
     std::env::var_os("HOME")
         .map(|h| PathBuf::from(h).join("Library/Application Support"))
         .unwrap_or_else(|| PathBuf::from("."))
+}
+
+/// QA can select synthetic data without changing HOME or touching player files.
+fn launcher_data_dir(override_path: Option<PathBuf>) -> Result<PathBuf, String> {
+    match override_path {
+        Some(path) if path.is_absolute() => Ok(path),
+        Some(_) => Err("BB_LAUNCHER_DATA_DIR must be an absolute path.".into()),
+        None => Ok(dirs_data().join("bloodborne_mac")),
+    }
 }
 
 /// Start-up options (launcher.json) and their defaults; unknown keys are kept.
@@ -729,7 +737,11 @@ fn stop(state: State<AppState>) -> Result<(), String> {
 }
 
 fn main() {
-    let paths = Paths::find();
+    let data = match launcher_data_dir(std::env::var_os("BB_LAUNCHER_DATA_DIR").map(PathBuf::from)) {
+        Ok(data) => data,
+        Err(error) => { eprintln!("Launcher data: {error}"); std::process::exit(1); }
+    };
+    let paths = Paths::find(data);
     tauri::Builder::default()
         .plugin(tauri_plugin_single_instance::init(|app, _arguments, _cwd| {
             tray::show_launcher(app);
@@ -797,6 +809,19 @@ fn main() {
 
 #[cfg(test)]
 mod save_tests {
+    #[test]
+    fn launcher_data_defaults_and_absolute_override_are_explicit() {
+        assert_eq!(super::launcher_data_dir(None).unwrap(), super::dirs_data().join("bloodborne_mac"));
+        let synthetic = std::env::temp_dir().join("bloodborne-launcher-data-test");
+        assert_eq!(super::launcher_data_dir(Some(synthetic.clone())).unwrap(), synthetic);
+    }
+    #[test]
+    fn invalid_data_override_never_falls_back_to_player_data() {
+        for path in [std::path::PathBuf::new(), std::path::PathBuf::from("relative/qa")] {
+            assert!(super::launcher_data_dir(Some(path)).is_err());
+        }
+    }
+
     use super::*;
 
     #[test]

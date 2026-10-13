@@ -1,6 +1,6 @@
 # Profiles and saves
 
-This feature is in the development launcher; v0.5.1 does not include it.
+Profile and save management is included in 0.6.0.
 
 ## Your first profile
 
