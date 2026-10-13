@@ -183,6 +183,7 @@
     "noNotes": "Aucune note de version disponible pour cette publication."
   },
   "trophies": {
+    "preview": "Aperçu de notification",
     "recordedCount": "Déblocages enregistrés : {{count}}",
     "view": "Voir les trophées",
     "empty": "Aucun déblocage enregistré.",

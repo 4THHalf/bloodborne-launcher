@@ -1,0 +1,7 @@
+html, body, #root { background: transparent !important; overflow: hidden; pointer-events: none; }
+.overlay-card { margin: 16px; display: flex; align-items: center; gap: 18px; padding: 22px 24px; border: 1px solid #a4885870; border-radius: 12px; background: linear-gradient(115deg, #181015f5, #09080df5); box-shadow: 0 8px 24px #0006; color: #dfd6bd; animation: trophy-toast linear both; }
+.overlay-emblem { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; border: 1px solid #a4885860; color: #c9ad73; background: #a4885810; }
+.overlay-heading { font-size: 11px; text-transform: uppercase; letter-spacing: .2em; color: #bcab8e; }
+.overlay-name { margin-top: 5px; font-size: 20px; font-family: "Cinzel Variable", serif; }
+@keyframes trophy-toast { 0% { opacity: 0; transform: translateX(18px); } 6%, 94% { opacity: 1; transform: translateX(0); } 100% { opacity: 0; transform: translateX(12px); } }
+@media (prefers-reduced-motion: reduce) { .overlay-card { animation-name: trophy-fade; } @keyframes trophy-fade { 0%, 100% { opacity: 0; } 6%, 94% { opacity: 1; } } }

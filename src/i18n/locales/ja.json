@@ -183,6 +183,7 @@
     "noNotes": "このリリースの変更履歴はありません。"
   },
   "trophies": {
+    "preview": "通知プレビュー",
     "recordedCount": "記録された解除数: {{count}}",
     "view": "トロフィーを表示",
     "empty": "解除記録はまだありません。",

@@ -371,6 +371,7 @@
     "noNotes": "No changelog was provided for this release."
   },
   "trophies": {
+    "preview": "Notification preview",
     "recordedCount": "Recorded unlocks: {{count}}",
     "view": "View trophies",
     "empty": "No unlocks recorded yet.",

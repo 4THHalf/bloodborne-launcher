@@ -44,3 +44,7 @@ The runtime event persistence follows the approach in
 [Supermedo/bloodborne_pc `79d44f0`](https://github.com/Supermedo/bloodborne_pc/commit/79d44f0eecc2eed45c1e33b48996e53626adca48)
 by Ambrose (GPL-2.0-or-later). The launcher importer, eligibility checks and React UI are
 project code; no Python trophy catalog, game descriptions or icons were copied.
+
+The opt-in overlay helper uses direct `objc2-app-kit` bindings (Zlib OR Apache-2.0 OR MIT)
+for its macOS window adapter, as a package dependency. No tauri-nspanel or browser-engine
+implementation source was copied. CSS and helper protocol code are project-owned.

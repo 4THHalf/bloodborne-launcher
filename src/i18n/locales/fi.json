@@ -183,6 +183,7 @@
     "noNotes": "Tälle julkaisulle ei ole muutoslokia."
   },
   "trophies": {
+    "preview": "Ilmoituksen esikatselu",
     "recordedCount": "Tallennetut avaukset: {{count}}",
     "view": "Näytä pokaalit",
     "empty": "Avauksia ei ole vielä tallennettu.",

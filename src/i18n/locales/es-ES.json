@@ -183,6 +183,7 @@
     "noNotes": "No se han proporcionado notas de cambios para esta versión."
   },
   "trophies": {
+    "preview": "Vista previa de notificación",
     "recordedCount": "Desbloqueos registrados: {{count}}",
     "view": "Ver trofeos",
     "empty": "Aún no hay desbloqueos registrados.",

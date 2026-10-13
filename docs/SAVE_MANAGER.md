@@ -201,5 +201,6 @@ player's save or settings.
 ## Notification overlay
 
 A runtime-started React/Tauri overlay helper maintained in the launcher repository is proposed in [OVERLAY.md](OVERLAY.md).
-The fullscreen and focus prototype comes before live trophy notifications. It is not
-implemented or measured yet; N4 remains paused.
+The fullscreen and focus prototype comes before live trophy notifications. Its opt-in synthetic prototype was visually accepted in windowed and fullscreen tests on
+this Mac. Runtime delivery, production geometry and matched overhead gates remain open;
+N4 remains paused.

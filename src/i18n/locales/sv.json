@@ -183,6 +183,7 @@
     "noNotes": "Inga ändringsnoteringar har angetts för denna utgåva."
   },
   "trophies": {
+    "preview": "Förhandsvisning av avisering",
     "recordedCount": "Registrerade upplåsningar: {{count}}",
     "view": "Visa troféer",
     "empty": "Inga upplåsningar registrerade ännu.",

@@ -183,6 +183,7 @@
     "noNotes": "Der er ingen ændringsnoter til denne udgivelse."
   },
   "trophies": {
+    "preview": "Forhåndsvisning af besked",
     "recordedCount": "Registrerede oplåsninger: {{count}}",
     "view": "Vis trofæer",
     "empty": "Ingen oplåsninger registreret endnu.",

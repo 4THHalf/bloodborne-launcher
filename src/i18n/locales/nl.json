@@ -183,6 +183,7 @@
     "noNotes": "Er zijn geen wijzigingsnotities voor deze release."
   },
   "trophies": {
+    "preview": "Meldingsvoorbeeld",
     "recordedCount": "Vastgelegde ontgrendelingen: {{count}}",
     "view": "Trofeeën bekijken",
     "empty": "Nog geen ontgrendelingen vastgelegd.",

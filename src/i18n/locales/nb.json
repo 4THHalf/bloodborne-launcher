@@ -183,6 +183,7 @@
     "noNotes": "Ingen endringslogg er oppgitt for denne utgivelsen."
   },
   "trophies": {
+    "preview": "Forhåndsvisning av varsel",
     "recordedCount": "Registrerte opplåsinger: {{count}}",
     "view": "Vis trofeer",
     "empty": "Ingen opplåsinger registrert ennå.",

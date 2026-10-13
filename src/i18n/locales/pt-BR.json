@@ -358,6 +358,7 @@
     "noNotes": "Nenhum registro de alterações foi fornecido para esta versão."
   },
   "trophies": {
+    "preview": "Prévia de notificação",
     "recordedCount": "Troféus registrados: {{count}}",
     "view": "Ver troféus",
     "empty": "Nenhum troféu registrado ainda.",

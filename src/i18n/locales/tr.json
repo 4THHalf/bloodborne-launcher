@@ -183,6 +183,7 @@
     "noNotes": "Bu sürüm için değişiklik notları sağlanmadı."
   },
   "trophies": {
+    "preview": "Bildirim önizlemesi",
     "recordedCount": "Kaydedilen açılımlar: {{count}}",
     "view": "Kupaları görüntüle",
     "empty": "Henüz açılım kaydedilmedi.",

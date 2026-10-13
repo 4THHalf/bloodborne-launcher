@@ -11,3 +11,6 @@ src-tauri/gen/
 # Editors and macOS
 .DS_Store
 *.log
+
+# Python test hosts
+__pycache__/

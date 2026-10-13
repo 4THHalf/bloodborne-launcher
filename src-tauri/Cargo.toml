@@ -1,5 +1,6 @@
 [package]
 name = "bloodborne-launcher"
+default-run = "bloodborne-launcher"
 version = "0.6.0"
 edition = "2021"
 license = "GPL-2.0-or-later"
@@ -9,7 +10,7 @@ description = "Launcher for bloodborne_mac"
 tauri-build = { version = "2", features = [] }
 
 [dependencies]
-tauri = { version = "2", features = ["tray-icon", "image-png"] }
+tauri = { version = "2", features = ["tray-icon", "image-png", "macos-private-api"] }
 tauri-plugin-dialog = "2"
 tauri-plugin-opener = "2"
 reqwest = { version = "0.13", default-features = false, features = ["rustls"] }
@@ -21,6 +22,9 @@ sqlx = { version = "0.8", default-features = false, features = ["sqlite", "runti
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 tokio = { version = "1", features = ["time"] }
+
+[target.'cfg(target_os = "macos")'.dependencies]
+objc2-app-kit = { version = "0.3", default-features = false, features = ["std", "NSWindow"] }
 
 [profile.release]
 opt-level = "s"

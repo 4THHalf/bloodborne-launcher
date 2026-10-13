@@ -183,6 +183,7 @@
     "noNotes": "Nie podano listy zmian dla tego wydania."
   },
   "trophies": {
+    "preview": "Podgląd powiadomienia",
     "recordedCount": "Zapisane odblokowania: {{count}}",
     "view": "Pokaż trofea",
     "empty": "Brak zapisanych odblokowań.",

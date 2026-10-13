@@ -38,6 +38,7 @@ short; bodies explain what changed, why and measured results, with the session's
 Never write the player's saves/settings while testing. File tests use synthetic temporary data.
 Game tests use bloodborne-runtime's `tools/test_run.sh NAME [VAR=...]` only, which copies saves.
 Check `pgrep -x bb-probe` first, one game at a time. Tell the user before batches; stop when asked.
+All tests use English (`BB_LANGUAGE=1 BB_UI_LANGUAGE=en`, and English launcher/helper UI).
 Never capture the user's screen. Only the runtime's `tools/grab.sh` may capture game frames.
 No game code, generated/decompiled game code, game files or game-memory records in Git or wikis.
 No `rm -rf` on variable shell paths; no `xargs ... sh -c`.

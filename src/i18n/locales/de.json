@@ -183,6 +183,7 @@
     "noNotes": "Für diese Version wurden keine Änderungsnotizen veröffentlicht."
   },
   "trophies": {
+    "preview": "Benachrichtigungsvorschau",
     "recordedCount": "Erfasste Freischaltungen: {{count}}",
     "view": "Trophäen anzeigen",
     "empty": "Noch keine Freischaltungen erfasst.",

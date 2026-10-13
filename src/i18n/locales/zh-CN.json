@@ -183,6 +183,7 @@
     "noNotes": "此版本未提供更新日志。"
   },
   "trophies": {
+    "preview": "通知预览",
     "recordedCount": "已记录解锁：{{count}}",
     "view": "查看奖杯",
     "empty": "尚无解锁记录。",
