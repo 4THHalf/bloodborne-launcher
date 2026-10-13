@@ -178,6 +178,8 @@
     "downloadHint": "Les utgivelsesnotatene og last ned den nye appen.",
     "viewRelease": "Vis utgivelse",
     "dismiss": "Lukk",
-    "openFailed": "Kunne ikke åpne utgivelsessiden."
+    "openFailed": "Kunne ikke åpne utgivelsessiden.",
+    "changelog": "Endringslogg",
+    "noNotes": "Ingen endringslogg er oppgitt for denne utgivelsen."
   }
 }

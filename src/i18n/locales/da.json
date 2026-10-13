@@ -178,6 +178,8 @@
     "downloadHint": "Læs udgivelsesnoterne og download den nye app.",
     "viewRelease": "Se udgivelse",
     "dismiss": "Luk",
-    "openFailed": "Kunne ikke åbne udgivelsessiden."
+    "openFailed": "Kunne ikke åbne udgivelsessiden.",
+    "changelog": "Ændringer",
+    "noNotes": "Der er ingen ændringsnoter til denne udgivelse."
   }
 }

@@ -178,6 +178,8 @@
     "downloadHint": "Läs versionsinformationen och hämta den nya appen.",
     "viewRelease": "Visa utgåva",
     "dismiss": "Stäng",
-    "openFailed": "Kunde inte öppna utgåvans sida."
+    "openFailed": "Kunde inte öppna utgåvans sida.",
+    "changelog": "Ändringar",
+    "noNotes": "Inga ändringsnoteringar har angetts för denna utgåva."
   }
 }

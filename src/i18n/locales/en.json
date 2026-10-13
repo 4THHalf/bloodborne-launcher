@@ -366,6 +366,8 @@
     "downloadHint": "Read the release notes and download the new app.",
     "viewRelease": "View release",
     "dismiss": "Dismiss",
-    "openFailed": "Could not open the release page."
+    "openFailed": "Could not open the release page.",
+    "changelog": "Changelog",
+    "noNotes": "No changelog was provided for this release."
   }
 }

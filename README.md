@@ -97,6 +97,6 @@ the isolated GUI smoke check are in [Launcher lifecycle](docs/LAUNCHER_LIFECYCLE
 
 ## New-version notifications
 
-The launcher checks bloodborne-mac’s stable GitHub releases and shows a dismissible banner
-when a newer app is available. Advanced includes automatic-check preferences and a manual check.
+The launcher checks bloodborne-mac’s stable GitHub releases and opens a changelog modal with a dismissible banner
+when a newer app is available. The modal links to the GitHub release page. Advanced includes automatic-check preferences and a manual check.
 Downloads and installation remain manual. See [Updates](docs/UPDATES.md).

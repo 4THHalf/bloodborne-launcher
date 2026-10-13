@@ -178,6 +178,8 @@
     "downloadHint": "Lees de releaseopmerkingen en download de nieuwe app.",
     "viewRelease": "Release bekijken",
     "dismiss": "Sluiten",
-    "openFailed": "De releasepagina kon niet worden geopend."
+    "openFailed": "De releasepagina kon niet worden geopend.",
+    "changelog": "Wijzigingen",
+    "noNotes": "Er zijn geen wijzigingsnotities voor deze release."
   }
 }

@@ -178,6 +178,8 @@
     "downloadHint": "Przeczytaj informacje o wydaniu i pobierz nową aplikację.",
     "viewRelease": "Zobacz wydanie",
     "dismiss": "Zamknij",
-    "openFailed": "Nie udało się otworzyć strony wydania."
+    "openFailed": "Nie udało się otworzyć strony wydania.",
+    "changelog": "Lista zmian",
+    "noNotes": "Nie podano listy zmian dla tego wydania."
   }
 }

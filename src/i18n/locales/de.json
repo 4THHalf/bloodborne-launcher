@@ -178,6 +178,8 @@
     "downloadHint": "Versionshinweise lesen und die neue App herunterladen.",
     "viewRelease": "Version ansehen",
     "dismiss": "Schließen",
-    "openFailed": "Die Release-Seite konnte nicht geöffnet werden."
+    "openFailed": "Die Release-Seite konnte nicht geöffnet werden.",
+    "changelog": "Änderungen",
+    "noNotes": "Für diese Version wurden keine Änderungsnotizen veröffentlicht."
   }
 }

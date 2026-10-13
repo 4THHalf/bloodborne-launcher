@@ -15,6 +15,8 @@ struct GithubRelease {
     tag_name: String,
     draft: bool,
     prerelease: bool,
+    #[serde(default)]
+    body: Option<String>,
 }
 
 #[derive(Debug, Serialize)]
@@ -22,6 +24,7 @@ pub struct ReleaseInfo {
     version: String,
     tag: String,
     newer: bool,
+    notes: String,
 }
 
 fn stable_version(tag: &str) -> Result<Version, String> {
@@ -56,6 +59,7 @@ fn decode_release(
         newer: version.cmp_precedence(&installed) == Ordering::Greater,
         version: version.to_string(),
         tag: release.tag_name,
+        notes: release.body.unwrap_or_default(),
     }))
 }
 
@@ -158,6 +162,34 @@ mod tests {
         assert!(decode_release(StatusCode::NOT_FOUND, &[], "0.5.1")
             .unwrap()
             .is_none());
+    }
+    #[test]
+    fn release_notes_preserve_markdown_and_allow_missing_content() {
+        let mut value: serde_json::Value = serde_json::from_slice(&release("v0.5.2")).unwrap();
+        for notes in [
+            serde_json::Value::Null,
+            "## Changes\n- Fixed playback\n".into(),
+        ] {
+            value["body"] = notes.clone();
+            let result = decode_release(
+                StatusCode::OK,
+                &serde_json::to_vec(&value).unwrap(),
+                "0.5.1",
+            )
+            .unwrap()
+            .unwrap();
+            assert_eq!(result.notes, notes.as_str().unwrap_or_default());
+        }
+        value.as_object_mut().unwrap().remove("body");
+        assert!(decode_release(
+            StatusCode::OK,
+            &serde_json::to_vec(&value).unwrap(),
+            "0.5.1"
+        )
+        .unwrap()
+        .unwrap()
+        .notes
+        .is_empty());
     }
     #[test]
     fn browser_links_cannot_escape_the_app_release_page() {

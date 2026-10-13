@@ -111,8 +111,8 @@ export const mockApi = {
     return wait(undefined);
   },
   checkRelease: () => wait(new URLSearchParams(window.location.search).has("update")
-    ? { version: "0.5.2", tag: "v0.5.2", newer: true }
-    : { version: "0.5.1", tag: "v0.5.1", newer: false }),
+    ? { version: "0.5.2", tag: "v0.5.2", newer: true, notes: new URLSearchParams(window.location.search).has("empty-notes") ? "" : "## What’s new\n\n- Improved opening-video playback.\n- Profile and save management in the launcher.\n\nRead the **release notes** before installing. [GitHub](https://github.com)\n\n<script>window.untrustedReleaseScript = true</script>\n![Remote image](https://example.com/image.png)" }
+    : { version: "0.5.1", tag: "v0.5.1", newer: false, notes: "" }),
   openRelease: (_tag: string) => wait(undefined),
   loadConfig: () => wait(structuredClone(config)),
   saveSettings: (settings: Partial<Settings>) => wait(void Object.assign(config.settings, settings)),

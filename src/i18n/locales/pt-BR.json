@@ -353,6 +353,8 @@
     "downloadHint": "Leia as notas e baixe o novo aplicativo.",
     "viewRelease": "Ver versão",
     "dismiss": "Dispensar",
-    "openFailed": "Não foi possível abrir a página da versão."
+    "openFailed": "Não foi possível abrir a página da versão.",
+    "changelog": "Novidades",
+    "noNotes": "Nenhum registro de alterações foi fornecido para esta versão."
   }
 }

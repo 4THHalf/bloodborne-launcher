@@ -178,6 +178,8 @@
     "downloadHint": "Lue julkaisutiedot ja lataa uusi sovellus.",
     "viewRelease": "Näytä julkaisu",
     "dismiss": "Sulje",
-    "openFailed": "Julkaisusivua ei voitu avata."
+    "openFailed": "Julkaisusivua ei voitu avata.",
+    "changelog": "Muutosloki",
+    "noNotes": "Tälle julkaisulle ei ole muutoslokia."
   }
 }

@@ -7,11 +7,15 @@ version precedence. Launcher repository commits do not trigger notifications. Dr
 prereleases are excluded; build metadata does not make an otherwise equal version newer.
 
 After profile setup, the launcher checks automatically on startup and every six hours while
-visible. A newer release shows a banner above the current tab. **View release** opens that
-release's GitHub page in the default browser. Read the notes, download the app and install it
+visible. A newer release opens a changelog modal and shows a banner above the current tab. The modal
+displays the release notes published on GitHub, with Markdown headings, lists and emphasis.
+If no notes were provided, it says so. **View release** opens that release’s GitHub page in the
+default browser. Read the notes, download the app and install it
 manually; the launcher does not replace its own files or change saves.
 
-Dismiss hides that release's banner until the launcher window is reloaded. **Advanced →
+Closing the modal leaves the banner available; its **Changelog** button reopens the notes.
+The modal opens automatically once per new release tag during the window session. Dismiss on
+the banner hides that release’s notification until the launcher window is reloaded. **Advanced →
 Updates** shows the installed version and check status, and provides **Check now** and a release
 link. Turn off **Check for new versions automatically** to stop automatic requests; manual
 checks remain available. The preference is stored as `check_updates` in `launcher.json` and
@@ -28,8 +32,8 @@ with reqwest and rustls. TanStack Query shares the result between the banner and
 a six-hour freshness period. Opening links uses Tauri's cross-platform opener plugin; only
 validated stable version tags under the app repository's release page are accepted.
 
-Four native tests cover numeric version ordering, equal build metadata, draft/prerelease
-exclusion, failed/malformed responses and restricted release links. The normal `cargo test`
+Five native tests cover numeric version ordering, equal build metadata, draft/prerelease
+exclusion, failed/malformed responses, missing release notes and restricted release links. The normal `cargo test`
 flow includes these tests. Browser preview `?update&lang=en` supplies a synthetic newer release
 without network access or player data.
 
@@ -39,3 +43,9 @@ the newer banner, dismissal, installed version, release link, manual checks with
 checks disabled, offline status, retry, current version and no-release state. No player files
 or screenshots were used. The live GitHub endpoint accepted the request headers and returned
 `v0.5.1`. A packaged-app update-link check remains part of release acceptance.
+
+The changelog addition passed all 37 native tests, Clippy, frontend checks and the production
+build on 2026-10-13. An isolated browser check verified automatic opening, Markdown headings
+and lists, the release button’s exact tag, dismissal/reopening, no reopening for the same tag,
+a different release tag, and empty notes. Raw HTML, remote images and embedded links are not
+rendered as active content; the modal’s release button remains the browser entry point.

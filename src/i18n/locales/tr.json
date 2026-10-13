@@ -178,6 +178,8 @@
     "downloadHint": "Sürüm notlarını okuyun ve yeni uygulamayı indirin.",
     "viewRelease": "Sürümü görüntüle",
     "dismiss": "Kapat",
-    "openFailed": "Sürüm sayfası açılamadı."
+    "openFailed": "Sürüm sayfası açılamadı.",
+    "changelog": "Değişiklikler",
+    "noNotes": "Bu sürüm için değişiklik notları sağlanmadı."
   }
 }

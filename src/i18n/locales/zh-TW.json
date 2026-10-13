@@ -178,6 +178,8 @@
     "downloadHint": "查看版本說明並下載新應用程式。",
     "viewRelease": "查看版本",
     "dismiss": "關閉",
-    "openFailed": "無法開啟版本頁面。"
+    "openFailed": "無法開啟版本頁面。",
+    "changelog": "更新日誌",
+    "noNotes": "此版本未提供更新日誌。"
   }
 }

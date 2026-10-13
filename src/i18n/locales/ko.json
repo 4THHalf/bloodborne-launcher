@@ -178,6 +178,8 @@
     "downloadHint": "릴리스 노트를 읽고 새 앱을 다운로드하세요.",
     "viewRelease": "릴리스 보기",
     "dismiss": "닫기",
-    "openFailed": "릴리스 페이지를 열 수 없습니다."
+    "openFailed": "릴리스 페이지를 열 수 없습니다.",
+    "changelog": "변경 사항",
+    "noNotes": "이 릴리스의 변경 사항이 제공되지 않았습니다."
   }
 }
