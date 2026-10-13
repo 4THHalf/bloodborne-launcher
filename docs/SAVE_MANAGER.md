@@ -200,6 +200,6 @@ player's save or settings.
 
 ## Notification overlay
 
-A launcher-owned React/Tauri notification window is proposed in [OVERLAY.md](OVERLAY.md).
+A runtime-started React/Tauri overlay helper maintained in the launcher repository is proposed in [OVERLAY.md](OVERLAY.md).
 The fullscreen and focus prototype comes before live trophy notifications. It is not
 implemented or measured yet; N4 remains paused.

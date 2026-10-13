@@ -2,9 +2,10 @@
 
 ## Investigation (2026-10-13)
 
-Recommendation: the launcher owns a second Tauri webview window and a small React entry point
-for notifications. Rust owns delivery, eligibility and window lifetime; React owns styling
-and animation. Start with trophy notifications. This is a proposed design, not a working
+Recommendation, revised after the maintainer’s process suggestion: the launcher repository
+owns a small Tauri/React overlay helper executable. The runtime starts it and owns its session
+and event delivery. The helper owns window lifetime, styling and animation. Start with trophy
+notifications. This is a proposed design, not a working
 fullscreen overlay. No performance or compatibility measurements have been made.
 
 The runtime already has an ImGui overlay drawn into the Vulkan swapchain by
@@ -17,7 +18,7 @@ adds no dependency to the renderer and does not resume N4.
 
 | Approach | Fit | Limits |
 |---|---|---|
-| Launcher Tauri window with React | Recommended prototype. Reuses the launcher's webview, locale and styling stack; independent of the GPU backend. | Separate-window fullscreen, focus and placement need platform adapters and measured acceptance. Requires the launcher to be running. |
+| Runtime-started Tauri/React helper, maintained in the launcher repo | Recommended prototype. Shares source assets, locale and styling with the launcher; independent of the GPU backend and main launcher process. | Separate-window fullscreen, focus and placement need platform adapters and measured acceptance. Adds a UI process and webview whose overhead needs measurement. |
 | Runtime ImGui notification | Existing path can draw into the game frame, with native animation and no webview dependency. | UI belongs to the runtime; later Metal presentation needs its own ImGui backend. |
 | Offscreen browser composited into the game | Could render React directly into the game frame. | Adds browser hosting, texture import/copy and lifetime integration. CEF offers paint callbacks, but this is a larger renderer task than a notification toast. Defer. |
 
@@ -31,17 +32,33 @@ resource handling. No browser engine or third-party panel implementation has bee
 ## Ownership and event delivery
 
 The runtime remains authoritative for accepting an unlock and recording the durable event.
-The launcher must capture the profile and process generation at launch. Before playing, import
-previous events so historical unlocks do not produce fresh notifications. Add a versioned live
-notification envelope on the owned child's output after a successful event write. Parse it in
-Rust with bounds and type checks, persist/reconcile the unlock, then enqueue a toast only for a
-new profile/title/id key. Historical refreshes and duplicate calls must not replay toasts.
+It starts one helper for its own game session, using the packaged executable path configured
+by the launcher or standalone run script. The main launcher need not be running. Do not launch
+another copy of the main onboarding/profile UI to show a notification: use a dedicated helper
+mode or executable with separate single-instance identity and minimal initialization.
 
-An edited save never generates an accepted trophy event. The launcher independently checks
-eligibility before delivery. Online-module mode uses the same local trophy gate. Online access
-policy remains undecided. UI acknowledgement is separate from event persistence: an unavailable
-window must not lose or undo an earned trophy. Direct runtime launches still record history;
-the initial launcher overlay only accompanies a launcher-owned game session.
+Use an inherited local pipe for versioned, bounded messages, including a session identifier,
+trophy identity and window state. The helper needs no game files, SQL access or network.
+The launcher continues importing the durable event log into SQLite independently. Notifications
+must not mutate history or compete with the launcher for ownership transactions.
+
+Only newly earned, eligible trophies may notify. Before producing live events, establish known
+unlocks from the profile-owned event history. Duplicate calls and historical reloads must not
+replay notifications. If history cannot be trusted or a write fails, do not claim a newly earned
+persisted trophy. Keep this decision in the runtime, not in a renderer callback or UI animation.
+Edited saves generate no accepted trophy events. Online-module mode uses the same local gate;
+online access policy remains undecided.
+
+Move helper spawning and pipe writes onto host notification work, away from guest execution
+and present threads. Use a bounded queue; an unavailable or slow helper cannot stall gameplay
+or undo an earned trophy. Log startup/pipe failures and bound retries. Close the pipe on exit;
+the helper exits on EOF and discards stale queued session events. Killing either launcher or
+helper must leave the game and durable trophy history usable. The runtime owns its helper,
+including direct starts; never terminate an unrelated process by executable name.
+
+Start the prototype helper hidden before gameplay, so the first toast can use a ready page.
+Measure its idle CPU/memory and startup delay. Lazy startup is an alternative if those costs
+warrant it; no zero-cost or instant-start claim is made.
 
 Window geometry, display scale, visibility and focus are window-system metadata. The runtime
 may report them through an opt-in host event bridge from its SDL window thread. Do not inspect
@@ -87,9 +104,9 @@ game trophy catalog or game icons in any repository.
 
 ## Implementation order and acceptance
 
-1. Build an opt-in launcher-only synthetic toast prototype. Verify windowed placement,
+1. Build an opt-in standalone helper with a synthetic host sending events over a pipe. Verify windowed placement,
    fullscreen Spaces, focus, cursor passthrough and main-window tray behavior on this Mac.
-2. Add the optional SDL geometry/live-event bridge and session-bound Rust queue. Use synthetic
+2. Add runtime helper lifecycle, the optional SDL geometry/live-event bridge and session queue. Use synthetic
    tests for duplicate events, edited saves, stale sessions, failures and rapid exit/relaunch.
 3. Connect the React card to live unlocks, with notification settings and reduced motion.
 4. Run announced isolated game checks, alternating overlay off/on. Compare FPS, frame-time
