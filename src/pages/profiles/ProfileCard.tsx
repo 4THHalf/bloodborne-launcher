@@ -12,8 +12,8 @@ export function ProfileCard({ profile, active, disabled, busy, onChange }: {
   const [editing, setEditing] = useState(false);
   const [name, setName] = useState(profile.name);
   return (<div className="px-5 py-4">
-    <div className="flex items-center gap-3">
-      <h2 className="flex-1 font-medium">{profile.name}</h2>
+    <div className="flex flex-wrap items-center gap-3">
+      <h2 className="min-w-0 flex-1 break-words font-medium">{profile.name}</h2>
       {active ? <Badge>{t("saves.active")}</Badge> : <Button size="sm" disabled={disabled} onClick={() => onChange({ action: "select", id: profile.id }).catch(() => {})}>{t("profiles.use")}</Button>}
       <Button size="sm" variant="secondary" disabled={disabled} onClick={() => { setName(profile.name); setEditing(true); }}>{t("profiles.rename")}</Button>
       <DeleteProfileDialog profile={profile} active={active} disabled={disabled} busy={busy}

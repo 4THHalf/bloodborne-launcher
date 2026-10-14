@@ -291,6 +291,8 @@
     }
   },
   "saves": {
+    "current": "Save atual",
+    "noBackups": "Nenhum backup ainda.",
     "editor": "Editor de saves",
     "title": "Saves",
     "subtitle": "Escolha o conjunto de saves usado na próxima inicialização.",

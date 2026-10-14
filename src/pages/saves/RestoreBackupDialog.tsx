@@ -1,0 +1,37 @@
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Button, Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui";
+
+export function RestoreBackupDialog({ label, disabled, onRestore }: {
+  label: string; disabled: boolean; onRestore: () => Promise<void>;
+}) {
+  const { t } = useTranslation();
+  const [open, setOpen] = useState(false);
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState<string>();
+  return <Dialog open={open} onOpenChange={(next, details) => {
+    if (pending) { details.cancel(); return; }
+    setOpen(next);
+    setError(undefined);
+  }}>
+    <DialogTrigger render={<Button variant="secondary" size="sm" disabled={disabled} />}>{t("saves.restore")}</DialogTrigger>
+    <DialogContent showCloseButton={!pending}>
+      <DialogHeader>
+        <DialogTitle>{t("saves.restore")}</DialogTitle>
+        <DialogDescription>{t("saves.restoreHint")}</DialogDescription>
+      </DialogHeader>
+      <p className="text-sm text-muted-foreground">{label}</p>
+      {error && <p role="alert" className="break-words text-sm text-destructive">{error}</p>}
+      <DialogFooter>
+        <Button variant="outline" disabled={pending} onClick={() => setOpen(false)}>{t("saves.cancel")}</Button>
+        <Button variant="destructive" disabled={disabled || pending} onClick={async () => {
+          setPending(true);
+          setError(undefined);
+          try { await onRestore(); setOpen(false); }
+          catch (failure) { setError(String(failure)); }
+          finally { setPending(false); }
+        }}>{t("saves.restore")}</Button>
+      </DialogFooter>
+    </DialogContent>
+  </Dialog>;
+}

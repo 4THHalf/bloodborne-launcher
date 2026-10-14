@@ -214,3 +214,26 @@ on EOF. Main launcher profile/database initialization is never started in the he
 Advanced → Launcher has an optional Trophy notifications switch, off by default while overhead gates remain open. The packaged macOS app includes and signs the executable; direct development runs can use
 `BB_OVERLAY_HELPER`. `BB_TROPHY_OVERLAY=0` disables only notifications.
 N4 remains paused. Game acceptance and its measured limits are recorded in OVERLAY.md.
+
+## Profile and save layout (development main, 2026-10-14)
+
+Home and each profile use one clickable trophy summary: one cup, the Trophies label and the
+recorded count. Selecting it opens the existing trophy details modal, including separate
+Bloodborne and The Old Hunters groups. Edited-save and read-error notices remain visible.
+Profiles places New profile in the page header, using the same secondary button style as
+other tab actions. Profile cards start with the identity name, without another Profiles title.
+
+Saves shows the current save's size and modification time, with Back up and folder access.
+A separate Backups list shows each copy's date, size and Restore action. Restore opens a
+confirmation modal and preserves the current save in a backup before replacement. Empty
+profiles cannot create an empty backup. The save-editor development indicator is a compact
+footer; trophy management stays on Home and Profiles. Backup directory access is under
+Advanced → Data, alongside the launcher data directory. No storage ownership or database
+schema changed.
+
+Validation: TypeScript, ESLint, all 20 locale key checks and the production build pass.
+An isolated English browser preview with mock data verified the single trophy summary and
+modal, header profile creation, empty-backup state, backup/restore confirmation, gameplay
+mutation guards and Advanced folder access. Profiles has no horizontal overflow at an
+800-pixel viewport. No player data or screen captures were used; native file-operation code
+was unchanged.

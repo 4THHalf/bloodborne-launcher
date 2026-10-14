@@ -116,6 +116,8 @@
     }
   },
   "saves": {
+    "current": "Partida actual",
+    "noBackups": "Todavía no hay copias de seguridad.",
     "editor": "Editor de partidas",
     "title": "Partidas",
     "subtitle": "Elige el conjunto de partidas para el próximo inicio.",

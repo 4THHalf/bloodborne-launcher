@@ -116,6 +116,8 @@
     }
   },
   "saves": {
+    "current": "Mevcut kayıt",
+    "noBackups": "Henüz yedek yok.",
     "editor": "Kayıt düzenleyici",
     "title": "Kayıtlar",
     "subtitle": "Sonraki başlatmada kullanılacak kayıtları seçin.",

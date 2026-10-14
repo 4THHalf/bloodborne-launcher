@@ -304,6 +304,8 @@
     }
   },
   "saves": {
+    "current": "Current save",
+    "noBackups": "No backups yet.",
     "editor": "Save editor",
     "title": "Saves",
     "subtitle": "Choose the save set used at the next launch.",

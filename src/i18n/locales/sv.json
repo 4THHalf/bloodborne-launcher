@@ -116,6 +116,8 @@
     }
   },
   "saves": {
+    "current": "Aktuell sparfil",
+    "noBackups": "Inga säkerhetskopior ännu.",
     "editor": "Sparfilsredigerare",
     "title": "Sparfiler",
     "subtitle": "Välj sparfilerna som används vid nästa start.",

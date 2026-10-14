@@ -116,6 +116,8 @@
     }
   },
   "saves": {
+    "current": "Huidige spelopslag",
+    "noBackups": "Nog geen back-ups.",
     "editor": "Opslageditor",
     "title": "Opgeslagen spellen",
     "subtitle": "Kies de opgeslagen spellen voor de volgende start.",

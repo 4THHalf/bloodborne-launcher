@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { ArrowRight, Trophy, UserRound } from "lucide-react";
+import { ArrowRight, UserRound } from "lucide-react";
 import { Button, Card, CardContent } from "@/components/ui";
 import { TrophySummary } from "@/components/trophies";
 import { useProfiles } from "@/hooks";
@@ -33,11 +33,7 @@ export function HomeProfileCard() {
             </div>
           </div>
           <div className="flex items-center gap-4 border-t border-border pt-4 md:border-l md:border-t-0 md:pl-6 md:pt-0">
-            <Trophy className="size-8 shrink-0 text-parchment/70" aria-hidden="true" />
-            <div>
-              <p className="mb-2 font-medium">{t("profiles.trophies")}</p>
-              <TrophySummary profile={profile} />
-            </div>
+            <TrophySummary profile={profile} />
           </div>
         </CardContent>
       </Card>

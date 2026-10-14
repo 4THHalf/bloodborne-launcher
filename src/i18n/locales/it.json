@@ -116,6 +116,8 @@
     }
   },
   "saves": {
+    "current": "Salvataggio attuale",
+    "noBackups": "Nessuna copia di backup disponibile.",
     "editor": "Editor dei salvataggi",
     "title": "Salvataggi",
     "subtitle": "Scegli i salvataggi da usare al prossimo avvio.",

@@ -9,14 +9,13 @@ export function ProfilesPage() {
   const { data, change, busy, running, error } = useProfiles();
   const disabled = busy || running;
   return (<>
-    <PageHeader title={t("profiles.title")} subtitle={t("profiles.subtitle")} />
-    {running && <p className="mb-4 text-sm text-blood-400">{t("saves.stopFirst")}</p>}
-    {error && <p role="alert">{String(error)}</p>}
-    <div className="mb-4">
+    <PageHeader title={t("profiles.title")} subtitle={t("profiles.subtitle")} actions={
       <CreateProfileDialog disabled={disabled || !data} busy={busy}
         onCreate={(name) => change({ action: "create", id: "", name })} />
-    </div>
-    <SettingsSection title={t("profiles.title")}>
+    } />
+    {running && <p className="mb-4 text-sm text-blood-400">{t("saves.stopFirst")}</p>}
+    {error && <p role="alert">{String(error)}</p>}
+    <SettingsSection>
       {data?.profiles.map((profile) => <ProfileCard key={profile.id} profile={profile} active={profile.id === data.active} disabled={disabled} busy={busy} onChange={change} />)}
     </SettingsSection>
   </>);

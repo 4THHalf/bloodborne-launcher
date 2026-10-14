@@ -116,6 +116,8 @@
     }
   },
   "saves": {
+    "current": "Nykyinen tallennus",
+    "noBackups": "Ei vielä varmuuskopioita.",
     "editor": "Tallennuseditori",
     "title": "Tallennukset",
     "subtitle": "Valitse seuraavalla käynnistyskerralla käytettävät tallennukset.",

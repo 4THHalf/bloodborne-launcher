@@ -1,3 +1,4 @@
+import { Plus } from "lucide-react";
 import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Input, Label, Dialog, DialogTrigger, DialogContent, DialogTitle, DialogDescription, DialogClose, DialogHeader, DialogFooter } from "@/components/ui";
@@ -19,7 +20,7 @@ export function CreateProfileDialog({ disabled, busy, onCreate }: {
       setOpen(next);
       if (!next) { setName(""); setError(undefined); }
     }}>
-      <DialogTrigger render={<Button disabled={disabled} />}>{t("saves.newProfile")}</DialogTrigger>
+      <DialogTrigger render={<Button variant="secondary" size="sm" disabled={disabled} />}><Plus aria-hidden="true" />{t("saves.newProfile")}</DialogTrigger>
       <DialogContent initialFocus={input} showCloseButton={false}>
         <DialogHeader>
           <DialogTitle>{t("saves.newProfile")}</DialogTitle>

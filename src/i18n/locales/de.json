@@ -116,6 +116,8 @@
     }
   },
   "saves": {
+    "current": "Aktueller Spielstand",
+    "noBackups": "Noch keine Sicherungskopien.",
     "editor": "Spielstand-Editor",
     "title": "Spielstände",
     "subtitle": "Wähle die Spielstände für den nächsten Start.",

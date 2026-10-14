@@ -116,6 +116,8 @@
     }
   },
   "saves": {
+    "current": "Bieżący zapis",
+    "noBackups": "Brak kopii zapasowych.",
     "editor": "Edytor zapisów",
     "title": "Zapisy",
     "subtitle": "Wybierz zestaw zapisów na następne uruchomienie.",

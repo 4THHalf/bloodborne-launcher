@@ -86,6 +86,7 @@ export function AdvancedPage() {
           description={t("advanced.dataFolderHint")}
           path={config?.paths.data ?? ""}
         />
+        <FolderRow title={t("saves.backups")} path={config?.paths.data ? `${config.paths.data}/save-backups` : ""} />
       </SettingsSection>
     </>
   );

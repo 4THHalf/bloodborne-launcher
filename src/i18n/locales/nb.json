@@ -116,6 +116,8 @@
     }
   },
   "saves": {
+    "current": "Nåværende lagring",
+    "noBackups": "Ingen sikkerhetskopier ennå.",
     "editor": "Lagringsredigerer",
     "title": "Lagrede spill",
     "subtitle": "Velg de lagrede spillene for neste oppstart.",

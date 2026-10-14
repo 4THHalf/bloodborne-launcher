@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Trophy } from "lucide-react";
+import { ArrowRight, Trophy } from "lucide-react";
 import { Button, Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui";
 import { TrophyGroup } from "@/components/trophies/TrophyGroup";
 import type { SaveProfile } from "@/lib";
@@ -7,13 +7,13 @@ import type { SaveProfile } from "@/lib";
 export function TrophySummary({ profile }: { profile: SaveProfile }) {
   const { t } = useTranslation();
   return <div className="space-y-2 text-sm">
-    <div className="flex items-center gap-2"><Trophy className="size-4" aria-hidden="true" />
-      <span>{t("trophies.recordedCount", { count: profile.trophy_unlocks.length })}</span>
-    </div>
-    {!profile.trophies_eligible && <p className="text-blood-400">{t("trophies.edited")}</p>}
-    {profile.trophy_error && <p role="alert" className="text-destructive">{t("trophies.error")} {profile.trophy_error}</p>}
     <Dialog>
-      <DialogTrigger render={<Button variant="outline" size="sm" />}>{t("trophies.view")}</DialogTrigger>
+      <DialogTrigger render={<Button variant="ghost" className="h-auto justify-start gap-3 px-2 py-2" aria-label={t("trophies.view")} />}>
+        <Trophy className="size-5 text-parchment/70" aria-hidden="true" />
+        <span>{t("profiles.trophies")}</span>
+        <span className="rounded-md bg-secondary px-2 py-0.5 tabular-nums" aria-label={t("trophies.recordedCount", { count: profile.trophy_unlocks.length })}>{profile.trophy_unlocks.length}</span>
+        <ArrowRight className="size-4 text-muted-foreground" aria-hidden="true" />
+      </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{profile.name} · {t("profiles.trophies")}</DialogTitle>
@@ -27,5 +27,7 @@ export function TrophySummary({ profile }: { profile: SaveProfile }) {
         </div>
       </DialogContent>
     </Dialog>
+    {!profile.trophies_eligible && <p className="text-blood-400">{t("trophies.edited")}</p>}
+    {profile.trophy_error && <p role="alert" className="text-destructive">{t("trophies.error")} {profile.trophy_error}</p>}
   </div>;
 }

@@ -116,6 +116,8 @@
     }
   },
   "saves": {
+    "current": "Save atual",
+    "noBackups": "Ainda não há backups.",
     "editor": "Editor de dados guardados",
     "title": "Gravações",
     "subtitle": "Escolha o conjunto de gravações usado no próximo arranque.",

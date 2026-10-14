@@ -116,6 +116,8 @@
     }
   },
   "saves": {
+    "current": "Sauvegarde actuelle",
+    "noBackups": "Aucune copie de sauvegarde pour le moment.",
     "editor": "Éditeur de sauvegardes",
     "title": "Sauvegardes",
     "subtitle": "Choisissez les sauvegardes utilisées au prochain lancement.",

@@ -116,6 +116,8 @@
     }
   },
   "saves": {
+    "current": "当前存档",
+    "noBackups": "暂无备份。",
     "editor": "存档编辑器",
     "title": "存档",
     "subtitle": "选择下次启动时使用的存档。",
