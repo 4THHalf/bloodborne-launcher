@@ -15,7 +15,7 @@ const tauriApi = {
   setTrayLabels: (labels: { show: string; stop: string }) => invoke<void>("set_tray_labels", { labels }),
   listProfiles: profilesService.list,
   changeProfile: profilesService.change,
-  listSaves: () => invoke<SaveList>("list_saves"),
+  listSaves: (id?: string) => invoke<SaveList>("list_saves", { id }),
   changeSave: (change: SaveChange) => invoke<void>("change_save", change),
   loadConfig: () => invoke<Config>("load_config"),
   saveSettings: (settings: Partial<Settings>) => invoke<void>("save_settings", { settings }),

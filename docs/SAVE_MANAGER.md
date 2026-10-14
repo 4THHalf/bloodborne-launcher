@@ -237,3 +237,29 @@ modal, header profile creation, empty-backup state, backup/restore confirmation,
 mutation guards and Advanced folder access. Profiles has no horizontal overflow at an
 800-pixel viewport. No player data or screen captures were used; native file-operation code
 was unchanged.
+
+## Profile detail navigation (development main, 2026-10-14)
+
+Saves is now inside Profiles rather than a separate sidebar tab. Click a profile name to open
+its Saves and Backups section; the back button returns to the profile list. Home's Saves
+shortcut opens the active profile directly. Opening another profile does not select it for
+Play. Backup and restore act on the opened registered profile while the game is stopped;
+unknown or deleted identities are rejected. Save queries include the viewed identity in their
+cache key and mutations refresh profile inventory. Legacy `#saves` links open Profiles.
+
+On Home and profile rows, the trophy shortcut is only a cup and the recorded count, beside
+the name, with an accessible label. It opens the Trophies section of that profile's detail
+page. The shared public catalog lists all 40 entries, separated into Bloodborne (34) and
+The Old Hunters (6), with localized names, descriptions, grade emblems and Locked/Unlocked
+status. Only matching local records mark entries unlocked and supply an unlock date. Earlier
+save progression is not inferred. Edited-save and import-error notices remain visible.
+Native metadata and the page read one catalog at `src/lib/trophy-text/trophy_catalog.json`;
+no extracted game files or trophy artwork are used.
+
+Validation: frontend checks and production build pass. Native tests pass (44 launcher tests
+and 2 helper tests), and Clippy passes with warnings denied. Synthetic native data verifies
+inactive-profile backup/restore content and unchanged active selection, and rejects unknown
+identities. English browser mock checks cover profile-specific save navigation, backup/restore,
+gameplay guards, Home/back navigation, locked catalog entries, one simulated unlock/date,
+base/DLC groups and no horizontal overflow at 800 pixels. No player data or screen captures
+were used.

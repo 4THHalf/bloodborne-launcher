@@ -185,6 +185,8 @@
     "noNotes": "此版本未提供更新日誌。"
   },
   "trophies": {
+    "unlocked": "已解鎖",
+    "locked": "未解鎖",
     "preview": "通知預覽",
     "recordedCount": "已記錄解鎖：{{count}}",
     "view": "查看獎盃",

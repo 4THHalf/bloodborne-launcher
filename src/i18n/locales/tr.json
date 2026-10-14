@@ -185,6 +185,8 @@
     "noNotes": "Bu sürüm için değişiklik notları sağlanmadı."
   },
   "trophies": {
+    "unlocked": "Açıldı",
+    "locked": "Kilitli",
     "preview": "Bildirim önizlemesi",
     "recordedCount": "Kaydedilen açılımlar: {{count}}",
     "view": "Kupaları görüntüle",

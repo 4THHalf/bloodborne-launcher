@@ -185,6 +185,8 @@
     "noNotes": "Nie podano listy zmian dla tego wydania."
   },
   "trophies": {
+    "unlocked": "Odblokowane",
+    "locked": "Zablokowane",
     "preview": "Podgląd powiadomienia",
     "recordedCount": "Zapisane odblokowania: {{count}}",
     "view": "Pokaż trofea",

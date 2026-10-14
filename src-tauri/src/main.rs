@@ -369,12 +369,11 @@ async fn change_profile(state: State<'_, AppState>, action: String, id: String, 
     }).await
 }
 #[tauri::command]
-async fn list_saves(state: State<'_, AppState>) -> Result<Value, String> {
+async fn list_saves(state: State<'_, AppState>, id: Option<String>) -> Result<Value, String> {
     let state=state.inner().clone();
     blocking(move || {
     let _game = state.game.lock().map_err(|e| e.to_string())?;
-    let selected = profiles::selected(&state.paths.data)?;
-    Ok(json!({"active": selected.id, "profiles": [selected]}))
+    profile_saves(&state.paths, id.as_deref())
     }).await
 }
 #[tauri::command]
@@ -388,10 +387,20 @@ async fn change_save(state: State<'_, AppState>, action: String, id: String, bac
     }).await
 }
 
+fn profile_saves(p: &Paths, id: Option<&str>) -> Result<Value, String> {
+    let registry = profiles::require(&p.data)?;
+    let inventory = profiles::list(&p.data, &registry.original_user_dir)?;
+    let target = id.unwrap_or(&inventory.active);
+    let profile = inventory.profiles.iter().find(|profile| profile.id == target)
+        .ok_or("Unknown profile.")?;
+    Ok(json!({"active": inventory.active, "profiles": [profile]}))
+}
+
 fn save_operation(p: &Paths, id: &str, action: &str, backup: Option<&str>) -> Result<(), String> {
     if action != "backup" && action != "restore" { return Err("Manage identities in the Profiles tab.".into()); }
     let registry=profiles::require(&p.data)?;
-    if profiles::selected(&p.data)?.id != id { return Err("Choose the owning profile before managing its saves.".into()); }
+    // Browsing an identity does not select it for Play. Only registered live owners may mutate.
+    profile_saves(p, Some(id))?;
     let operation=profiles::operation(&p.data, Some(id), action)?;
     let result=(|| {
         if action == "backup" { saves::backup(&p.data, &registry.original_user_dir, id)?; }
@@ -868,10 +877,22 @@ mod save_tests {
         profiles::initialize(&root, &root.join("user"), "original", "First").unwrap();
         assert_eq!(selected_user_dir(&p).unwrap(), root.join("user"));
         let id = saves::create(&root, &root.join("user"), "Synthetic", None).unwrap();
-        assert!(save_operation(&p, &id, "backup", None).is_err());
+        let inactive_user = saves::user_dir(&root, &root.join("user"), &id).unwrap();
+        fs::create_dir_all(inactive_user.join("savedata")).unwrap();
+        fs::write(inactive_user.join("savedata/synthetic"), b"before").unwrap();
+        save_operation(&p, &id, "backup", None).unwrap();
+        let backup = profile_saves(&p, Some(&id)).unwrap()["profiles"][0]["backups"][0]["id"]
+            .as_str().unwrap().to_owned();
+        fs::write(inactive_user.join("savedata/synthetic"), b"after").unwrap();
+        save_operation(&p, &id, "restore", Some(&backup)).unwrap();
+        assert_eq!(fs::read(inactive_user.join("savedata/synthetic")).unwrap(), b"before");
+        assert_eq!(profiles::selected(&root).unwrap().id, "original");
+        assert_eq!(profile_saves(&p, Some(&id)).unwrap()["profiles"][0]["id"], id);
+        assert!(save_operation(&p, "missing-profile", "backup", None).is_err());
+        assert!(profile_saves(&p, Some("missing-profile")).is_err());
         profiles::change(&root, "select", &id, None, None).unwrap();
         save_operation(&p, &id, "backup", None).unwrap();
-        assert_eq!(profiles::selected(&root).unwrap().backups.len(), 1);
+        assert_eq!(profiles::selected(&root).unwrap().backups.len(), 3);
         settings.insert("extra_env".into(), json!("BB_USER_DIR=/wrong BB_GPU_USER_DIR=/wrong BB_USER_NAME=wrong BB_TROPHIES_ELIGIBLE=1"));
         let env: BTreeMap<_,_> = game_environment(&p, &settings).unwrap().into_iter().collect();
         assert_eq!(env["BB_USER_DIR"], root.join("save-profiles").join(&id).join("user").to_string_lossy());

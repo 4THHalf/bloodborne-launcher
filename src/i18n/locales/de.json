@@ -185,6 +185,8 @@
     "noNotes": "Für diese Version wurden keine Änderungsnotizen veröffentlicht."
   },
   "trophies": {
+    "unlocked": "Freigeschaltet",
+    "locked": "Gesperrt",
     "preview": "Benachrichtigungsvorschau",
     "recordedCount": "Erfasste Freischaltungen: {{count}}",
     "view": "Trophäen anzeigen",

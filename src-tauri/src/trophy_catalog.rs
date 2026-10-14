@@ -54,7 +54,7 @@ struct Catalog {
 fn catalog() -> &'static Catalog {
     static CATALOG: std::sync::OnceLock<Catalog> = std::sync::OnceLock::new();
     CATALOG.get_or_init(|| {
-        let catalog: Catalog = serde_json::from_str(include_str!("trophy_catalog.json"))
+        let catalog: Catalog = serde_json::from_str(include_str!("../../src/lib/trophy-text/trophy_catalog.json"))
             .expect("checked public catalog");
         assert_eq!(catalog.schema_version, 1);
         assert!(catalog.trophies.iter().all(|t| t

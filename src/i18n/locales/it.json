@@ -185,6 +185,8 @@
     "noNotes": "Non sono state fornite note sulle modifiche per questa versione."
   },
   "trophies": {
+    "unlocked": "Sbloccato",
+    "locked": "Bloccato",
     "preview": "Anteprima notifica",
     "recordedCount": "Sblocchi registrati: {{count}}",
     "view": "Mostra trofei",

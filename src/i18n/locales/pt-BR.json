@@ -360,6 +360,8 @@
     "noNotes": "Nenhum registro de alterações foi fornecido para esta versão."
   },
   "trophies": {
+    "unlocked": "Desbloqueado",
+    "locked": "Bloqueado",
     "preview": "Prévia de notificação",
     "recordedCount": "Troféus registrados: {{count}}",
     "view": "Ver troféus",

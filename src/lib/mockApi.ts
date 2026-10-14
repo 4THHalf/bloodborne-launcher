@@ -96,10 +96,10 @@ export const mockApi = {
     }
     return wait(undefined);
   },
-  listSaves: () => wait({ active: saves.active, profiles: structuredClone(saves.profiles.filter((p) => p.id === saves.active)) }),
+  listSaves: (id?: string) => wait({ active: saves.active, profiles: structuredClone(saves.profiles.filter((p) => p.id === (id ?? saves.active))) }),
   changeSave: (change: SaveChange) => {
     const profile = saves.profiles.find((p) => p.id === change.id);
-    if (!profile || change.id !== saves.active) return Promise.reject("Choose the owning profile.");
+    if (!profile) return Promise.reject("Unknown profile.");
     if (change.action === "backup") {
       profile.backups.unshift({ id: `b-${++nextBackup}`, created: Math.floor(Date.now() / 1000), bytes: profile.bytes });
     } else if (change.action === "restore") {

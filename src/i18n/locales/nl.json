@@ -185,6 +185,8 @@
     "noNotes": "Er zijn geen wijzigingsnotities voor deze release."
   },
   "trophies": {
+    "unlocked": "Ontgrendeld",
+    "locked": "Vergrendeld",
     "preview": "Meldingsvoorbeeld",
     "recordedCount": "Vastgelegde ontgrendelingen: {{count}}",
     "view": "Trofeeën bekijken",

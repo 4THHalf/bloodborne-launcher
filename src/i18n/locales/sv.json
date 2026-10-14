@@ -185,6 +185,8 @@
     "noNotes": "Inga ändringsnoteringar har angetts för denna utgåva."
   },
   "trophies": {
+    "unlocked": "Upplåst",
+    "locked": "Låst",
     "preview": "Förhandsvisning av avisering",
     "recordedCount": "Registrerade upplåsningar: {{count}}",
     "view": "Visa troféer",

@@ -185,6 +185,8 @@
     "noNotes": "Ingen endringslogg er oppgitt for denne utgivelsen."
   },
   "trophies": {
+    "unlocked": "Låst opp",
+    "locked": "Låst",
     "preview": "Forhåndsvisning av varsel",
     "recordedCount": "Registrerte opplåsinger: {{count}}",
     "view": "Vis trofeer",

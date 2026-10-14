@@ -185,6 +185,8 @@
     "noNotes": "このリリースの変更履歴はありません。"
   },
   "trophies": {
+    "unlocked": "獲得済み",
+    "locked": "未獲得",
     "preview": "通知プレビュー",
     "recordedCount": "記録された解除数: {{count}}",
     "view": "トロフィーを表示",

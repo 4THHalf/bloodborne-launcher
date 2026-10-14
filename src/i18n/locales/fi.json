@@ -185,6 +185,8 @@
     "noNotes": "Tälle julkaisulle ei ole muutoslokia."
   },
   "trophies": {
+    "unlocked": "Avattu",
+    "locked": "Lukittu",
     "preview": "Ilmoituksen esikatselu",
     "recordedCount": "Tallennetut avaukset: {{count}}",
     "view": "Näytä pokaalit",

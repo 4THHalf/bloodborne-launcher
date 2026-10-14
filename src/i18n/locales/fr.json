@@ -185,6 +185,8 @@
     "noNotes": "Aucune note de version disponible pour cette publication."
   },
   "trophies": {
+    "unlocked": "Débloqué",
+    "locked": "Verrouillé",
     "preview": "Aperçu de notification",
     "recordedCount": "Déblocages enregistrés : {{count}}",
     "view": "Voir les trophées",
