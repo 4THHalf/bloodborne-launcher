@@ -17,7 +17,7 @@ export function HomeProfileCard() {
   return (
     <section aria-labelledby="home-profile-title" className="mb-6">
       <Card className="border border-blood-700/40 bg-card/80 shadow-lg shadow-black/20">
-        <CardContent className="space-y-3">
+        <CardContent className="grid grid-cols-[minmax(0,1fr)_auto] gap-x-6 gap-y-3">
           <div className="flex min-w-0 items-start gap-4">
             <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-blood-700/20 text-blood-400">
               <UserRound className="size-6" aria-hidden="true" />
@@ -26,7 +26,6 @@ export function HomeProfileCard() {
               <p className="text-xs text-muted-foreground">{t("profiles.active")}</p>
               <div className="mt-1 flex flex-wrap items-center gap-3">
                 <h2 id="home-profile-title" className="break-words font-display text-2xl font-semibold text-parchment">{profile.name}</h2>
-                <TrophySummary profile={profile} />
               </div>
               <div className="mt-3 flex flex-wrap gap-2">
                 <Button variant="secondary" size="sm" onClick={() => setTab("profiles")}>
@@ -36,7 +35,10 @@ export function HomeProfileCard() {
               </div>
             </div>
           </div>
-          <TrophyStatus profile={profile} />
+          <div className="flex items-center border-l border-border pl-6">
+            <TrophySummary profile={profile} large />
+          </div>
+          <div className="col-span-2"><TrophyStatus profile={profile} /></div>
         </CardContent>
       </Card>
     </section>

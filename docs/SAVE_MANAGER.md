@@ -268,3 +268,8 @@ Locked trophies use a grayscale cup at 35% opacity, a 60% title/grade row and a 
 description. Their lock-status badge remains at full opacity. Unlocked rows retain metallic
 grades and full text opacity, with a subtle background and check-status badge. This styling
 changes no unlock state or eligibility rules.
+
+Home places a large trophy cup and count together in the right-hand column of the active
+profile card, aligned vertically and separated from profile details by a divider. The whole
+shortcut opens that profile’s Trophies section. Profile-list shortcuts remain compact beside
+the names; neither shortcut repeats the visible Trophies label.
