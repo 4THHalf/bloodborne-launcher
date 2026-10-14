@@ -263,3 +263,8 @@ identities. English browser mock checks cover profile-specific save navigation, 
 gameplay guards, Home/back navigation, locked catalog entries, one simulated unlock/date,
 base/DLC groups and no horizontal overflow at 800 pixels. No player data or screen captures
 were used.
+
+Locked trophies use a grayscale cup at 35% opacity, a 60% title/grade row and a 65%
+description. Their lock-status badge remains at full opacity. Unlocked rows retain metallic
+grades and full text opacity, with a subtle background and check-status badge. This styling
+changes no unlock state or eligibility rules.
