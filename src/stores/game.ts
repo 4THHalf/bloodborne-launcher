@@ -2,10 +2,12 @@
 // ("game-output", "game-state") feed it; lines are batched a few times a second.
 import { create } from "zustand";
 import { toast } from "sonner";
-import { api } from "@/lib";
+import { api, queryClient, queryKeys } from "@/lib";
 import { i18n } from "@/i18n";
 
 const MAX_LOG_LINES = 5000;
+/** The runtime's line for a recorded unlock ("Runtime: trophy 21 unlocked (recorded locally)"). */
+const TROPHY_RECORDED = /^Runtime: trophy \d+ unlocked/;
 
 type GameStore = {
   running: boolean;
@@ -50,7 +52,12 @@ export const useGameStore = create<GameStore>((set) => ({
         return { log: log.length > MAX_LOG_LINES ? log.slice(log.length - MAX_LOG_LINES) : log };
       });
     }, 200);
-    const output = api.onOutput((line) => pending.push(line));
+    const output = api.onOutput((line) => {
+      pending.push(line);
+      // Import the unlock now, also while the launcher is hidden in the menu bar (timed
+      // refetches pause then): Home and the profile's Trophies page show it at once.
+      if (TROPHY_RECORDED.test(line)) void queryClient.invalidateQueries({ queryKey: queryKeys.profiles });
+    });
     const state = api.onState(({ running, code }) => {
       set(running ? { running } : { running, lastExit: code ?? null, startedAt: null });
       if (!running && code !== 0 && code !== undefined && code !== null) {

@@ -200,7 +200,7 @@ owned game's PID with `--pid`; the host does not start or stop the game. Use Eng
 The runtime starts the standalone `bloodborne-overlay --runtime` executable when
 `BB_OVERLAY_HELPER` names an absolute executable and `BB_TROPHY_OVERLAY` is not zero.
 The macOS launcher discovers its sibling executable when Trophy notifications is enabled;
-the optional setting defaults off while overhead gates remain open. packaging builds it with
+the setting is on by default since 0.7.0. packaging builds it with
 `tauri/custom-protocol`, copies it into Contents/MacOS and signs it. It embeds the production
 React assets and needs no Vite server. Standalone runtime launches may set the path explicitly.
 
@@ -278,7 +278,7 @@ A further isolated copied-save run, `trophy_focus_final`, completed at 46.7 FPS 
 23.2 ms without a fault. The chat app stayed frontmost in all 40 window samples, so the
 helper correctly sent no previews. This run is inconclusive for game-target focus and is
 not a performance pair. The earlier fullscreen visual report remains the game-target
-appearance check. Keep notifications optional and off by default while focus behavior and
+appearance check. Keep notifications optional (on by default since 0.7.0) while focus behavior and
 overhead are investigated.
 
 A second isolated hold, `trophy_focus_active`, completed at 46.9 FPS and p90 22.5 ms

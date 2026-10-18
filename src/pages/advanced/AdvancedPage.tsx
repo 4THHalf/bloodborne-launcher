@@ -36,7 +36,7 @@ export function AdvancedPage() {
         <SwitchRow
           title={t("trophies.notifications")}
           description={t("trophies.notificationsHint")}
-          checked={settings.trophy_notifications ?? false}
+          checked={settings.trophy_notifications ?? true}
           onChange={(v) => setSetting("trophy_notifications", v)}
         />
       </SettingsSection>

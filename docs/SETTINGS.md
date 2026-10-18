@@ -14,7 +14,7 @@ Troubleshooting, experimental runtime controls and debug tools belong in Advance
 | Saves | Active save information, backup/restore and backup-folder location |
 | Mods | Mod loading, load order and mod-folder location |
 | Patches | Third-party patches and their folder |
-| Advanced | Launcher language and hiding during gameplay; new-version checks and release links; experimental draw pipeline, readbacks, preupload and live resolution; free camera/debug menu, logs, profiling, extra environment variables and launcher data-folder location; optional trophy notifications (off by default) |
+| Advanced | Launcher language and hiding during gameplay; new-version checks and release links; experimental draw pipeline, readbacks, preupload and live resolution; free camera/debug menu, logs, profiling, extra environment variables and launcher data-folder location; trophy notifications (on by default) |
 | Log | Game output |
 
 The Home frame-rate shortcut opens Graphics. Save folders remain owned by profiles: the Game

@@ -105,8 +105,8 @@ with English fallback for missing translations. Summaries currently support Engl
 Brazilian Portuguese and French; other locales use English until verified text is available.
 No game artwork or extracted trophy files are included.
 
-Enable **Advanced → Launcher → Trophy notifications** to show accepted unlocks above the
-focused macOS game. This optional setting defaults off while overhead checks remain open.
+**Advanced → Launcher → Trophy notifications** shows accepted unlocks above the focused macOS
+game. It is on by default since 0.7.0; turn it off to save about 2 FPS (one measured pair).
 All four grades use one cup emblem with different metallic finishes; platinum stays visible
 for seven seconds, other grades for five. Notifications hide when the game loses focus or is minimized. An unavailable
 helper leaves earned history recorded. Local tracking does not synchronize with PSN.

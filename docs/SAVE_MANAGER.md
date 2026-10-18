@@ -211,7 +211,7 @@ A runtime-started React/Tauri overlay helper maintained in this repository is im
 duplicate and edited-save calls do not. SDL supplies focus, visibility and desktop bounds,
 including fullscreen, without capturing pixels. The helper has its own session pipe and exits
 on EOF. Main launcher profile/database initialization is never started in the helper.
-Advanced → Launcher has an optional Trophy notifications switch, off by default while overhead gates remain open. The packaged macOS app includes and signs the executable; direct development runs can use
+Advanced → Launcher has a Trophy notifications switch, on by default since 0.7.0. The packaged macOS app includes and signs the executable; direct development runs can use
 `BB_OVERLAY_HELPER`. `BB_TROPHY_OVERLAY=0` disables only notifications.
 N4 remains paused. Game acceptance and its measured limits are recorded in OVERLAY.md.
 
