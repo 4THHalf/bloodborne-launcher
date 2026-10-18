@@ -1,6 +1,6 @@
 # New-version notifications
 
-The launcher in 0.6.0 checks stable GitHub releases of
+The launcher since 0.6.0 checks stable GitHub releases of
 [bloodborne-native/bloodborne-mac](https://github.com/bloodborne-native/bloodborne-mac/releases).
 It compares the release tag with the version built into the installed app, using semantic
 version precedence. Launcher repository commits do not trigger notifications. Drafts and
