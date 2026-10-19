@@ -1,7 +1,7 @@
 # bloodborne-launcher
 
 The independent launcher for [bloodborne-native](https://github.com/bloodborne-native).
-Its source is included as the `launcher/app/` submodule of
+Its source is included as the `launcher/` submodule of
 [bloodborne-mac](https://github.com/bloodborne-native/bloodborne-mac), which packages it as the macOS app.
 macOS game integration works today; Windows and Linux integration are planned.
 Player guides and the roadmap are in the [launcher wiki](https://github.com/bloodborne-native/bloodborne-launcher/wiki).

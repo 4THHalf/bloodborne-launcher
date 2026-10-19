@@ -26,7 +26,7 @@ planned. Keep profile/save logic independent of the platform and renderer.
 
 ## Repositories and ownership
 
-The launcher is independent, included as `launcher/app/` in bloodborne-mac. That app also owns
+The launcher is independent, included as `launcher/` in bloodborne-mac. That app also owns
 `runtime/` (bloodborne-runtime), which owns `recomp/` (bloodborne-recomp). Before editing this
 submodule, checkout `main` and pull. Commit and push in the repository owning the files, then
 bump the submodule pointer in the parent app and push it. Before every push, run

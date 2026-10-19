@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
-//! bloodborne_mac launcher: the Tauri backend behind the React interface (launcher/app/src).
+//! bloodborne_mac launcher: the Tauri backend behind the React interface (src/).
 //!
 //! It keeps two files in the data directory (~/Library/Application Support/bloodborne_mac):
 //! launcher.json (start-up options passed to run.sh as environment variables) and bbport.ini

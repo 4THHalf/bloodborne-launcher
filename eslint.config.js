@@ -1,4 +1,4 @@
-// Launcher lint rules (npm run lint). Conventions: launcher/app/README.md.
+// Launcher lint rules (npm run lint). Conventions: README.md.
 import js from "@eslint/js";
 import tseslint from "typescript-eslint";
 import react from "eslint-plugin-react";
