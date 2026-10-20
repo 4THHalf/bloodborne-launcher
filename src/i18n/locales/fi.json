@@ -115,7 +115,7 @@
   "options": {
     "upscaler": { "fsr3": "AMD FSR 3.1", "fsr3Hint": "Renderöi lähtöä pienemmällä ja rakentaa kuvan uudelleen", "off": "Pois", "offHint": "Natiivitarkkuus" },
     "preset": { "0": "Native AA", "1": "Laatu", "2": "Tasapainoinen", "3": "Suorituskyky", "4": "Ultrasuorituskyky" },
-    "fps": { "uncap": "Rajoittamaton", "uncapHint": "Kuva-aikapaikka: mikä tahansa kuvataajuus", "60": "60", "90": "90", "30": "30", "30Hint": "Kuten PS4:llä" },
+    "fps": { "uncap": "Rajoittamaton", "uncapHint": "Jokaisen ruudun todellinen aika: mikä tahansa ruudunpäivitys, fysiikka pysyy oikeana", "60": "60", "90": "90", "30": "30", "30Hint": "Kuten PS4:llä" },
     "fpsSize": { "small": "Pieni", "big": "Suuri" },
     "fpsPosition": { "top_left": "Ylhäällä vasemmalla", "top_center": "Ylhäällä keskellä", "top_right": "Ylhäällä oikealla", "bottom_left": "Alhaalla vasemmalla", "bottom_center": "Alhaalla keskellä", "bottom_right": "Alhaalla oikealla" },
     "lod": { "-2": "Korkein", "0": "Kuten pelissä", "1": "Matalampi", "2": "Matalin" },

@@ -115,7 +115,7 @@
   "options": {
     "upscaler": { "fsr3": "AMD FSR 3.1", "fsr3Hint": "Rendu sous la sortie, image reconstruite", "off": "Désactivé", "offHint": "Résolution native" },
     "preset": { "0": "Native AA", "1": "Qualité", "2": "Équilibré", "3": "Performance", "4": "Ultra performance" },
-    "fps": { "uncap": "Illimitée", "uncapHint": "Patch de temps d'image : toute fréquence", "60": "60", "90": "90", "30": "30", "30Hint": "Comme sur PS4" },
+    "fps": { "uncap": "Illimitée", "uncapHint": "Le temps réel de chaque image : toute fréquence, physique correcte", "60": "60", "90": "90", "30": "30", "30Hint": "Comme sur PS4" },
     "fpsSize": { "small": "Petit", "big": "Grand" },
     "fpsPosition": { "top_left": "En haut à gauche", "top_center": "En haut au centre", "top_right": "En haut à droite", "bottom_left": "En bas à gauche", "bottom_center": "En bas au centre", "bottom_right": "En bas à droite" },
     "lod": { "-2": "Maximal", "0": "Comme dans le jeu", "1": "Réduit", "2": "Minimal" },

@@ -115,7 +115,7 @@
   "options": {
     "upscaler": { "fsr3": "AMD FSR 3.1", "fsr3Hint": "Renderar under utdata och återskapar bilden", "off": "Av", "offHint": "Inbyggd upplösning" },
     "preset": { "0": "Native AA", "1": "Kvalitet", "2": "Balanserad", "3": "Prestanda", "4": "Ultraprestanda" },
-    "fps": { "uncap": "Obegränsad", "uncapHint": "Bildtidspatch: valfri bildfrekvens", "60": "60", "90": "90", "30": "30", "30Hint": "Som på PS4" },
+    "fps": { "uncap": "Obegränsad", "uncapHint": "Varje bildrutas verkliga tid: valfri bildfrekvens, fysiken stämmer", "60": "60", "90": "90", "30": "30", "30Hint": "Som på PS4" },
     "fpsSize": { "small": "Liten", "big": "Stor" },
     "fpsPosition": { "top_left": "Uppe till vänster", "top_center": "Uppe i mitten", "top_right": "Uppe till höger", "bottom_left": "Nere till vänster", "bottom_center": "Nere i mitten", "bottom_right": "Nere till höger" },
     "lod": { "-2": "Högst", "0": "Som i spelet", "1": "Lägre", "2": "Lägst" },

@@ -32,7 +32,8 @@ export function ControlsPage() {
       <SettingsSection>
         <GamepadPicker />
       </SettingsSection>
-      <Tabs defaultValue="pad">
+      {/* ?keys (browser preview, screenshots): the keyboard's tab first. */}
+      <Tabs defaultValue={new URLSearchParams(window.location.search).has("keys") ? "key" : "pad"}>
         <TabsList className="mb-3">
           <TabsTrigger value="pad">
             <Gamepad2 /> {t("controls.gamepad")}

@@ -115,7 +115,7 @@
   "options": {
     "upscaler": { "fsr3": "AMD FSR 3.1", "fsr3Hint": "以低于输出的分辨率渲染并重建图像", "off": "关", "offHint": "原生分辨率" },
     "preset": { "0": "Native AA", "1": "质量", "2": "平衡", "3": "性能", "4": "极致性能" },
-    "fps": { "uncap": "不限", "uncapHint": "帧时间补丁：任意帧率", "60": "60", "90": "90", "30": "30", "30Hint": "与 PS4 相同" },
+    "fps": { "uncap": "不限", "uncapHint": "按每帧的实际时间推进：任意帧率，物理保持正确", "60": "60", "90": "90", "30": "30", "30Hint": "与 PS4 相同" },
     "fpsSize": { "small": "小", "big": "大" },
     "fpsPosition": { "top_left": "左上", "top_center": "顶部居中", "top_right": "右上", "bottom_left": "左下", "bottom_center": "底部居中", "bottom_right": "右下" },
     "lod": { "-2": "最高", "0": "游戏默认", "1": "较低", "2": "最低" },
