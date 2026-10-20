@@ -30,7 +30,7 @@
     "fpsLimit": "Kare hızı sınırı",
     "fpsLimitHint": "0 sınır yok demektir.",
     "title": "Grafik", "subtitle": "Oyun içi menüyle ortak (F1 veya L3 + R3).", "display": "Ekran",
-    "outputRes": "Çıkış çözünürlüğü", "outputResHint": "Görüntünün ekrandaki boyutu. Ölçekleyici onu doldurur.", "fullscreen": "Tam ekran", "monitor": "Monitör", "monitorHint": "Oyun penceresinin ve tam ekranın açıldığı ekran.", "monitorMain": "Ana ekran",
+    "outputRes": "Çıkış çözünürlüğü", "outputResHint": "Görüntünün ekrandaki boyutu. Ölçekleyici onu doldurur.", "aspectRatio": "En boy oranı", "aspectRatioHint": "Daha geniş ekranlar yanlarda, daha yüksek ekranlar üstte ve altta daha fazlasını gösterir; HUD kenarlarda kalır.", "aspectAuto": "Otomatik (bu monitör)", "fullscreen": "Tam ekran", "monitor": "Monitör", "monitorHint": "Oyun penceresinin ve tam ekranın açıldığı ekran.", "monitorMain": "Ana ekran",
     "memory": "Tahmini bellek",
     "memoryHint": "Bu ayarlarla bir sonraki başlatmada oyunun ve grafiklerin belleği.",
     "memoryHigh": "Bu bilgisayarın belleğinin dörtte üçünden fazla: oyun yavaşlayabilir veya durabilir. Daha düşük bir çözünürlük veya ön ayar seçin.",

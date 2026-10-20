@@ -35,7 +35,7 @@ const config: Config = {
     // ?lang=en sets the launcher language in the browser preview (screenshots).
     ui_language: new URLSearchParams(window.location.search).get("lang") ?? "",
   },
-  ini: { upscaler: "fsr3", preset: "2", sharpen: "1", sharpness: "0.50", object_motion: "0", show_fps: "1", output_res: "1920x1080" },
+  ini: { upscaler: "fsr3", preset: "2", sharpen: "1", sharpness: "0.50", object_motion: "0", show_fps: "1", output_res: "1920x1080", aspect_ratio: "16:9" },
   paths: {
     data: "~/Library/Application Support/bloodborne_mac",
     mods: "~/Library/Application Support/bloodborne_mac/mods",

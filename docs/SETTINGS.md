@@ -25,7 +25,7 @@ default or effect; translations move with it in all 20 locales.
 | Tab | Contents |
 |---|---|
 | Home | Active profile and trophies, Profiles/Saves shortcuts, game folder and edition, a summary of the main settings |
-| Graphics | Output resolution with the memory estimate, monitor, fullscreen, presentation, frame-rate mode and limit, FPS counter (size, position), Metal HUD; upscaling, sharpening, motion vectors, model detail, effects (all but SSR switch while the game runs) |
+| Graphics | Aspect ratio (Auto, 4:3, 16:10, 16:9, 21:9, 32:9) and the output resolutions of that ratio, with the memory estimate; monitor, fullscreen, presentation, frame-rate mode and limit, FPS counter (size, position), Metal HUD; upscaling, sharpening, motion vectors, model detail, effects (all but SSR switch while the game runs) |
 | Controls | Controller choice and controller/keyboard bindings |
 | Game | Game language, skipping intro videos, the active profile's save folder |
 | Profiles | Profiles, each with Saves · Backups and Trophies |

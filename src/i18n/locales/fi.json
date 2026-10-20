@@ -30,7 +30,7 @@
     "fpsLimit": "Kuvataajuuden raja",
     "fpsLimitHint": "0 tarkoittaa ei rajaa.",
     "title": "Grafiikka", "subtitle": "Yhteiset pelin valikon kanssa (F1 tai L3 + R3).", "display": "Näyttö",
-    "outputRes": "Lähtötarkkuus", "outputResHint": "Kuvan koko näytöllä. Skaalain täyttää sen.", "fullscreen": "Koko näyttö", "monitor": "Näyttö", "monitorHint": "Missä peli-ikkuna ja koko näyttö avautuvat.", "monitorMain": "Päänäyttö",
+    "outputRes": "Lähtötarkkuus", "outputResHint": "Kuvan koko näytöllä. Skaalain täyttää sen.", "aspectRatio": "Kuvasuhde", "aspectRatioHint": "Leveämmät näytöt näyttävät enemmän sivuille ja korkeammat enemmän ylös ja alas; HUD pysyy reunoilla.", "aspectAuto": "Automaattinen (tämä näyttö)", "fullscreen": "Koko näyttö", "monitor": "Näyttö", "monitorHint": "Missä peli-ikkuna ja koko näyttö avautuvat.", "monitorMain": "Päänäyttö",
     "memory": "Arvioitu muisti",
     "memoryHint": "Pelin ja grafiikan muisti seuraavassa käynnistyksessä näillä asetuksilla.",
     "memoryHigh": "Yli kolme neljäsosaa tietokoneen muistista: peli voi hidastua tai pysähtyä. Valitse pienempi tarkkuus tai esiasetus.",

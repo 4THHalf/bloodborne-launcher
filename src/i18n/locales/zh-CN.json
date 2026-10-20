@@ -30,7 +30,7 @@
     "fpsLimit": "帧率上限",
     "fpsLimitHint": "0 表示不限制。",
     "title": "图形", "subtitle": "与游戏内菜单（F1 或 L3 + R3）共享。", "display": "显示",
-    "outputRes": "输出分辨率", "outputResHint": "屏幕上图像的尺寸，由超分辨率填满。", "fullscreen": "全屏", "monitor": "显示器", "monitorHint": "游戏窗口和全屏显示的屏幕。", "monitorMain": "主显示器",
+    "outputRes": "输出分辨率", "outputResHint": "屏幕上图像的尺寸，由超分辨率填满。", "aspectRatio": "宽高比", "aspectRatioHint": "更宽的屏幕可看到更多两侧，更高的屏幕可看到更多上下；HUD 保持在屏幕边缘。", "aspectAuto": "自动（此显示器）", "fullscreen": "全屏", "monitor": "显示器", "monitorHint": "游戏窗口和全屏显示的屏幕。", "monitorMain": "主显示器",
     "memory": "预计内存",
     "memoryHint": "使用这些设置下次启动时游戏和图形所用的内存。",
     "memoryHigh": "超过这台电脑内存的四分之三：游戏可能变慢或停止。请选择更低的输出分辨率或预设。",

@@ -30,7 +30,7 @@
     "fpsLimit": "影格率上限",
     "fpsLimitHint": "0 表示不限制。",
     "title": "圖形", "subtitle": "與遊戲內選單（F1 或 L3 + R3）共用。", "display": "顯示",
-    "outputRes": "輸出解析度", "outputResHint": "畫面上影像的尺寸，由超解析度填滿。", "fullscreen": "全螢幕", "monitor": "顯示器", "monitorHint": "遊戲視窗與全螢幕顯示的螢幕。", "monitorMain": "主顯示器",
+    "outputRes": "輸出解析度", "outputResHint": "畫面上影像的尺寸，由超解析度填滿。", "aspectRatio": "長寬比", "aspectRatioHint": "更寬的螢幕可看到更多兩側，更高的螢幕可看到更多上下；HUD 保持在螢幕邊緣。", "aspectAuto": "自動（此顯示器）", "fullscreen": "全螢幕", "monitor": "顯示器", "monitorHint": "遊戲視窗與全螢幕顯示的螢幕。", "monitorMain": "主顯示器",
     "memory": "預估記憶體",
     "memoryHint": "使用這些設定下次啟動時遊戲與圖形所用的記憶體。",
     "memoryHigh": "超過這台電腦記憶體的四分之三：遊戲可能變慢或停止。請選擇較低的輸出解析度或預設。",

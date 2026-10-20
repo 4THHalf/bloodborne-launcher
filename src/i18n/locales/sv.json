@@ -30,7 +30,7 @@
     "fpsLimit": "Bildfrekvensgräns",
     "fpsLimitHint": "0 betyder ingen gräns.",
     "title": "Grafik", "subtitle": "Delas med menyn i spelet (F1 eller L3 + R3).", "display": "Skärm",
-    "outputRes": "Utdataupplösning", "outputResHint": "Bildens storlek på skärmen. Uppskalaren fyller den.", "fullscreen": "Helskärm", "monitor": "Skärm", "monitorHint": "Var spelfönstret och helskärm öppnas.", "monitorMain": "Huvudskärm",
+    "outputRes": "Utdataupplösning", "outputResHint": "Bildens storlek på skärmen. Uppskalaren fyller den.", "aspectRatio": "Bildförhållande", "aspectRatioHint": "Bredare skärmar visar mer åt sidorna och högre mer uppåt och nedåt; HUD:en stannar vid kanterna.", "aspectAuto": "Automatiskt (den här skärmen)", "fullscreen": "Helskärm", "monitor": "Skärm", "monitorHint": "Var spelfönstret och helskärm öppnas.", "monitorMain": "Huvudskärm",
     "memory": "Uppskattat minne",
     "memoryHint": "Minne för spelet och grafiken vid nästa start med de här inställningarna.",
     "memoryHigh": "Mer än tre fjärdedelar av datorns minne: spelet kan bli långsamt eller stanna. Välj en lägre upplösning eller förinställning.",

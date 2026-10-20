@@ -30,7 +30,7 @@
     "fpsLimit": "Grense for bildefrekvens",
     "fpsLimitHint": "0 betyr ingen grense.",
     "title": "Grafikk", "subtitle": "Delt med menyen i spillet (F1 eller L3 + R3).", "display": "Skjerm",
-    "outputRes": "Utdataoppløsning", "outputResHint": "Bildets størrelse på skjermen. Oppskaleringen fyller det.", "fullscreen": "Fullskjerm", "monitor": "Skjerm", "monitorHint": "Hvor spillvinduet og fullskjerm åpnes.", "monitorMain": "Hovedskjerm",
+    "outputRes": "Utdataoppløsning", "outputResHint": "Bildets størrelse på skjermen. Oppskaleringen fyller det.", "aspectRatio": "Bildeformat", "aspectRatioHint": "Bredere skjermer viser mer til sidene og høyere mer opp og ned; HUD-en blir ved kantene.", "aspectAuto": "Automatisk (denne skjermen)", "fullscreen": "Fullskjerm", "monitor": "Skjerm", "monitorHint": "Hvor spillvinduet og fullskjerm åpnes.", "monitorMain": "Hovedskjerm",
     "memory": "Anslått minne",
     "memoryHint": "Minne for spillet og grafikken ved neste start med disse innstillingene.",
     "memoryHigh": "Mer enn tre firedeler av datamaskinens minne: spillet kan gå tregt eller stoppe. Velg en lavere oppløsning eller forhåndsinnstilling.",

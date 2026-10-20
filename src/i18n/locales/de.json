@@ -30,7 +30,7 @@
     "fpsLimit": "Bildratenbegrenzung",
     "fpsLimitHint": "0 bedeutet keine Begrenzung.",
     "title": "Grafik", "subtitle": "Gemeinsam mit dem Menü im Spiel (F1 oder L3 + R3).", "display": "Anzeige",
-    "outputRes": "Ausgabeauflösung", "outputResHint": "Die Größe des Bildes auf dem Bildschirm. Der Upscaler füllt sie.", "fullscreen": "Vollbild", "monitor": "Monitor", "monitorHint": "Wo das Spielfenster und der Vollbildmodus geöffnet werden.", "monitorMain": "Hauptbildschirm",
+    "outputRes": "Ausgabeauflösung", "outputResHint": "Die Größe des Bildes auf dem Bildschirm. Der Upscaler füllt sie.", "aspectRatio": "Seitenverhältnis", "aspectRatioHint": "Breitere Bildschirme zeigen mehr an den Seiten, höhere mehr oben und unten; das HUD bleibt an den Rändern.", "aspectAuto": "Automatisch (dieser Monitor)", "fullscreen": "Vollbild", "monitor": "Monitor", "monitorHint": "Wo das Spielfenster und der Vollbildmodus geöffnet werden.", "monitorMain": "Hauptbildschirm",
     "memory": "Geschätzter Speicher",
     "memoryHint": "Speicher für Spiel und Grafik beim nächsten Start mit diesen Einstellungen.",
     "memoryHigh": "Mehr als drei Viertel des Speichers dieses Computers: Das Spiel kann langsam werden oder abbrechen. Wähle eine niedrigere Auflösung oder Voreinstellung.",

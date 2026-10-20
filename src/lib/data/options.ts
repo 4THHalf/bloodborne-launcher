@@ -14,12 +14,46 @@ export const PRESETS: { value: number; label: TKey; scale: number }[] = [
   { value: 4, label: "options.preset.4", scale: 3.0 },
 ];
 
-export const OUTPUT_RES: Option<string>[] = [
-  { value: "1280x720", label: "1280 × 720", literal: true },
-  { value: "1920x1080", label: "1920 × 1080", literal: true },
-  { value: "2560x1440", label: "2560 × 1440", literal: true },
-  { value: "3840x2160", label: "3840 × 2160", literal: true },
+/** Output aspect ratios (bbport.ini aspect_ratio). The game's camera, HUD and UI follow the
+ *  output's shape (the runtime's game hooks, from bbport 0.6). Auto: the game picks the group of
+ *  the monitor it is on. */
+export const ASPECT_RATIOS: Option<string>[] = [
+  { value: "auto", label: "graphics.aspectAuto" },
+  { value: "4:3", label: "4:3", literal: true },
+  { value: "16:10", label: "16:10", literal: true },
+  { value: "16:9", label: "16:9", literal: true },
+  { value: "21:9", label: "21:9", literal: true },
+  { value: "32:9", label: "32:9", literal: true },
 ];
+
+/** Each aspect ratio's outputs, as the runtime's (bbport_settings.cpp Groups). Auto lists 16:9's;
+ *  the game picks the monitor's group when it starts. */
+const OUTPUTS: Record<string, [number, number][]> = {
+  "4:3": [[640, 480], [800, 600], [1024, 768], [1280, 960], [1440, 1080], [1600, 1200], [2048, 1536], [2880, 2160]],
+  "16:10": [[640, 400], [960, 600], [1280, 800], [1440, 900], [1680, 1050], [1920, 1200], [2560, 1600], [3840, 2400]],
+  "16:9": [[640, 360], [854, 480], [960, 540], [1280, 720], [1600, 900], [1920, 1080], [2560, 1440], [3200, 1800], [3840, 2160]],
+  "21:9": [[860, 360], [1280, 540], [1720, 720], [2560, 1080], [3440, 1440], [3840, 1600], [5120, 2160]],
+  "32:9": [[1280, 360], [1920, 540], [2560, 720], [3840, 1080], [5120, 1440], [7680, 2160]],
+};
+
+/** The output choices of an aspect ratio, with `current` added when it is another size. */
+export function outputOptions(aspect: string, current: string): Option<string>[] {
+  const sizes = OUTPUTS[aspect] ?? OUTPUTS["16:9"];
+  const options: Option<string>[] = sizes.map(([w, h]) => ({ value: `${w}x${h}`, label: `${w} × ${h}`, literal: true as const }));
+  if (!options.some((o) => o.value === current)) {
+    const [w, h] = current.split("x");
+    options.push({ value: current, label: `${w} × ${h}`, literal: true });
+  }
+  return options;
+}
+
+/** The output of `aspect` nearest `current` in height (another aspect ratio keeps the height). */
+export function nearestOutput(aspect: string, current: string): string {
+  const height = Number(current.split("x")[1]) || 1080;
+  const sizes = OUTPUTS[aspect] ?? OUTPUTS["16:9"];
+  const [w, h] = sizes.reduce((best, s) => (Math.abs(s[1] - height) < Math.abs(best[1] - height) ? s : best));
+  return `${w}x${h}`;
+}
 
 /** The scene size an output and preset render at (scripts/patches.py: even sizes). */
 export function renderSize(output: string, preset: number, upscaler: string): string {

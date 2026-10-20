@@ -30,7 +30,7 @@
     "fpsLimit": "Framerate-limiet",
     "fpsLimitHint": "0 betekent geen limiet.",
     "title": "Graphics", "subtitle": "Gedeeld met het menu in het spel (F1 of L3 + R3).", "display": "Beeld",
-    "outputRes": "Uitvoerresolutie", "outputResHint": "De grootte van het beeld op het scherm. De upscaler vult het.", "fullscreen": "Volledig scherm", "monitor": "Monitor", "monitorHint": "Waar het spelvenster en volledig scherm openen.", "monitorMain": "Hoofdscherm",
+    "outputRes": "Uitvoerresolutie", "outputResHint": "De grootte van het beeld op het scherm. De upscaler vult het.", "aspectRatio": "Beeldverhouding", "aspectRatioHint": "Bredere schermen tonen meer aan de zijkanten en hogere meer boven en onder; de HUD blijft aan de randen.", "aspectAuto": "Automatisch (dit scherm)", "fullscreen": "Volledig scherm", "monitor": "Monitor", "monitorHint": "Waar het spelvenster en volledig scherm openen.", "monitorMain": "Hoofdscherm",
     "memory": "Geschat geheugen",
     "memoryHint": "Geheugen voor de game en de graphics bij de volgende start met deze instellingen.",
     "memoryHigh": "Meer dan driekwart van het geheugen van deze computer: de game kan traag worden of stoppen. Kies een lagere resolutie of voorinstelling.",

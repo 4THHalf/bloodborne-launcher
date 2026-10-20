@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { NumberRow, PageHeader, SelectRow, SettingsSection, SliderRow, SwitchRow } from "@/components/settings";
 import { useConfig, useIni, useSetting, useSettingsData } from "@/hooks";
-import { EFFECTS, FPS_MODES, FPS_POSITIONS, FPS_SIZES, MODEL_LOD, OUTPUT_RES, PRESENT_MODES, PRESETS, UPSCALERS, renderSize } from "@/lib/data";
+import { ASPECT_RATIOS, EFFECTS, FPS_MODES, FPS_POSITIONS, FPS_SIZES, MODEL_LOD, PRESENT_MODES, PRESETS, UPSCALERS, nearestOutput, outputOptions, renderSize } from "@/lib/data";
 import type { Option } from "@/lib";
 import { DisplayPicker } from "@/pages/graphics/DisplayPicker";
 import { MemoryEstimate } from "@/pages/graphics/MemoryEstimate";
@@ -15,6 +15,7 @@ export function GraphicsPage() {
   const flag = (key: string, fallback: boolean) => (key in ini ? ini[key] === "1" : fallback);
   const upscaler = ini.upscaler ?? "fsr3";
   const output = ini.output_res ?? "1920x1080";
+  const aspect = ini.aspect_ratio ?? "16:9";
   const preset = Number(ini.preset ?? 2);
   const fsrOff = upscaler === "off";
   const presets: Option<number>[] = PRESETS.map((p) => ({
@@ -27,10 +28,20 @@ export function GraphicsPage() {
       <PageHeader title={t("graphics.title")} subtitle={t("graphics.subtitle")} />
       <SettingsSection title={t("graphics.display")}>
         <SelectRow
+          title={t("graphics.aspectRatio")}
+          description={t("graphics.aspectRatioHint")}
+          value={aspect}
+          options={ASPECT_RATIOS}
+          onChange={(v) => {
+            setIni("aspect_ratio", v);
+            setIni("output_res", nearestOutput(v, output));
+          }}
+        />
+        <SelectRow
           title={t("graphics.outputRes")}
           description={`${t("graphics.outputResHint")} ${t("common.restartNote")}`}
           value={output}
-          options={OUTPUT_RES}
+          options={outputOptions(aspect, output)}
           onChange={(v) => setIni("output_res", v)}
         />
         <MemoryEstimate />

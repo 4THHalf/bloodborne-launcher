@@ -30,7 +30,7 @@
     "fpsLimit": "Limite fotogrammi",
     "fpsLimitHint": "0 significa nessun limite.",
     "title": "Grafica", "subtitle": "Condivise con il menu del gioco (F1 o L3 + R3).", "display": "Schermo",
-    "outputRes": "Risoluzione di uscita", "outputResHint": "La dimensione dell'immagine sullo schermo. L'upscaler la riempie.", "fullscreen": "Schermo intero", "monitor": "Monitor", "monitorHint": "Dove si aprono la finestra del gioco e lo schermo intero.", "monitorMain": "Schermo principale",
+    "outputRes": "Risoluzione di uscita", "outputResHint": "La dimensione dell'immagine sullo schermo. L'upscaler la riempie.", "aspectRatio": "Proporzioni", "aspectRatioHint": "Gli schermi più larghi mostrano di più ai lati e quelli più alti di più sopra e sotto; l'HUD resta ai bordi.", "aspectAuto": "Automatiche (questo monitor)", "fullscreen": "Schermo intero", "monitor": "Monitor", "monitorHint": "Dove si aprono la finestra del gioco e lo schermo intero.", "monitorMain": "Schermo principale",
     "memory": "Memoria stimata",
     "memoryHint": "Memoria del gioco e della grafica al prossimo avvio con queste impostazioni.",
     "memoryHigh": "Più di tre quarti della memoria di questo computer: il gioco può rallentare o fermarsi. Scegli una risoluzione o un preset più basso.",

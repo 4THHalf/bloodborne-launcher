@@ -30,7 +30,7 @@
     "fpsLimit": "フレームレート上限",
     "fpsLimitHint": "0 は上限なしです。",
     "title": "グラフィック", "subtitle": "ゲーム内メニュー（F1 または L3 + R3）と共有されます。", "display": "画面",
-    "outputRes": "出力解像度", "outputResHint": "画面上の画像サイズ。アップスケーラーが埋めます。", "fullscreen": "フルスクリーン", "monitor": "モニター", "monitorHint": "ゲームのウィンドウとフルスクリーンを表示する画面。", "monitorMain": "メインディスプレイ",
+    "outputRes": "出力解像度", "outputResHint": "画面上の画像サイズ。アップスケーラーが埋めます。", "aspectRatio": "アスペクト比", "aspectRatioHint": "横長の画面では左右が、縦長の画面では上下がより多く見えます。HUD は画面の端に表示されます。", "aspectAuto": "自動（このモニター）", "fullscreen": "フルスクリーン", "monitor": "モニター", "monitorHint": "ゲームのウィンドウとフルスクリーンを表示する画面。", "monitorMain": "メインディスプレイ",
     "memory": "推定メモリ使用量",
     "memoryHint": "この設定で次回起動したときのゲームとグラフィックのメモリ。",
     "memoryHigh": "このコンピュータのメモリの4分の3を超えています。ゲームが遅くなったり停止したりすることがあります。出力解像度かプリセットを下げてください。",

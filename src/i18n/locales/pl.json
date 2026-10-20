@@ -30,7 +30,7 @@
     "fpsLimit": "Limit klatek",
     "fpsLimitHint": "0 oznacza brak limitu.",
     "title": "Grafika", "subtitle": "Wspólne z menu w grze (F1 lub L3 + R3).", "display": "Ekran",
-    "outputRes": "Rozdzielczość wyjściowa", "outputResHint": "Rozmiar obrazu na ekranie. Skalowanie go wypełnia.", "fullscreen": "Pełny ekran", "monitor": "Monitor", "monitorHint": "Gdzie otwiera się okno gry i pełny ekran.", "monitorMain": "Główny ekran",
+    "outputRes": "Rozdzielczość wyjściowa", "outputResHint": "Rozmiar obrazu na ekranie. Skalowanie go wypełnia.", "aspectRatio": "Proporcje obrazu", "aspectRatioHint": "Szersze ekrany pokazują więcej po bokach, a wyższe więcej u góry i u dołu; HUD zostaje przy krawędziach.", "aspectAuto": "Automatyczne (ten monitor)", "fullscreen": "Pełny ekran", "monitor": "Monitor", "monitorHint": "Gdzie otwiera się okno gry i pełny ekran.", "monitorMain": "Główny ekran",
     "memory": "Szacowana pamięć",
     "memoryHint": "Pamięć gry i grafiki przy następnym uruchomieniu z tymi ustawieniami.",
     "memoryHigh": "Ponad trzy czwarte pamięci tego komputera: gra może zwolnić lub się zatrzymać. Wybierz niższą rozdzielczość lub ustawienie wstępne.",

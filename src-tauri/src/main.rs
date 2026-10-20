@@ -152,6 +152,7 @@ fn default_ini() -> BTreeMap<String, String> {
         ("fps_size", "small"),
         ("fps_position", "top_center"),
         ("output_res", "1920x1080"),
+        ("aspect_ratio", "16:9"),
         ("model_lod", "0"),
         ("live_resolution", "0"),
         ("effect_chromatic_aberration", "1"),
