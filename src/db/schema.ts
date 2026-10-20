@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { check, index, integer, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core";
+import { check, index, integer, primaryKey, sqliteTable, text, uniqueIndex } from "drizzle-orm/sqlite-core";
 
 export const profiles = sqliteTable("profiles", {
   id: text("id").primaryKey(),
@@ -39,3 +39,15 @@ export const pendingOperations = sqliteTable("pending_operations", {
   error: text("error"),
   createdAt: integer("created_at").notNull(),
 }, (table) => [index("unfinished_operations").on(table.status, table.createdAt)]);
+// Settings, shared by all profiles: the launcher's options (scope "launcher", JSON values, once
+// launcher.json) and the game's (scope "game", bbport.ini's keys and text values). bbport.ini is
+// written from here when the game starts; the in-game menu sends its changes here.
+export const settings = sqliteTable("settings", {
+  scope: text("scope").notNull(),
+  key: text("key").notNull(),
+  value: text("value").notNull(),
+  updatedAt: integer("updated_at").notNull(),
+}, (table) => [
+  primaryKey({ columns: [table.scope, table.key] }),
+  check("settings_scope", sql`${table.scope} IN ('launcher', 'game')`),
+]);

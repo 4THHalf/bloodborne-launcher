@@ -1,8 +1,8 @@
 # Launcher window and game lifecycle
 
 **Advanced → Launcher → Hide launcher during gameplay** is enabled by default. Turn it off
-to keep the launcher and Log tab visible while playing. The preference is saved in
-`launcher.json` as `hide_launcher`; existing installations keep the default without a database
+to keep the launcher and Log tab visible while playing. The preference is saved as
+`hide_launcher` (launcher settings, in the database and `launcher.json`); existing installations keep the default without a database
 migration. Changing it during gameplay immediately hides or restores the window.
 
 When a game process starts successfully, the launcher makes its menu-bar/system-tray icon

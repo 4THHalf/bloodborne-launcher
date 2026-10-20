@@ -1,13 +1,15 @@
 import { useTranslation } from "react-i18next";
 import { NumberRow, PageHeader, SelectRow, SettingsSection, SliderRow, SwitchRow } from "@/components/settings";
-import { useIni, useSetting, useSettingsData } from "@/hooks";
-import { EFFECTS, FPS_MODES, MODEL_LOD, OUTPUT_RES, PRESENT_MODES, PRESETS, UPSCALERS, renderSize } from "@/lib/data";
+import { useConfig, useIni, useSetting, useSettingsData } from "@/hooks";
+import { EFFECTS, FPS_MODES, FPS_POSITIONS, FPS_SIZES, MODEL_LOD, OUTPUT_RES, PRESENT_MODES, PRESETS, UPSCALERS, renderSize } from "@/lib/data";
 import type { Option } from "@/lib";
 import { DisplayPicker } from "@/pages/graphics/DisplayPicker";
+import { MemoryEstimate } from "@/pages/graphics/MemoryEstimate";
 
 export function GraphicsPage() {
   const { t } = useTranslation();
   const { settings, ini } = useSettingsData();
+  const { data: config } = useConfig();
   const setIni = useIni();
   const setSetting = useSetting();
   const flag = (key: string, fallback: boolean) => (key in ini ? ini[key] === "1" : fallback);
@@ -31,6 +33,7 @@ export function GraphicsPage() {
           options={OUTPUT_RES}
           onChange={(v) => setIni("output_res", v)}
         />
+        <MemoryEstimate />
         <DisplayPicker />
         <SwitchRow title={t("graphics.fullscreen")} checked={settings.fullscreen} onChange={(v) => setSetting("fullscreen", v)} />
         <SelectRow
@@ -45,6 +48,14 @@ export function GraphicsPage() {
         <NumberRow title={t("graphics.fpsLimit")} description={t("graphics.fpsLimitHint")}
           value={settings.fps_limit ?? 0} min={0} max={480} onChange={(v) => setSetting("fps_limit", v)} />
         <SwitchRow title={t("graphics.showFps")} checked={ini.show_fps !== "0"} onChange={(v) => setIni("show_fps", v ? "1" : "0")} />
+        <SelectRow title={t("graphics.fpsSize")} value={ini.fps_size ?? "small"} options={FPS_SIZES}
+          onChange={(v) => setIni("fps_size", v)} disabled={ini.show_fps === "0"} />
+        <SelectRow title={t("graphics.fpsPosition")} value={ini.fps_position ?? "top_center"} options={FPS_POSITIONS}
+          onChange={(v) => setIni("fps_position", v)} disabled={ini.show_fps === "0"} />
+        {config?.platform === "macos" && (
+          <SwitchRow title={t("graphics.metalHud")} description={t("graphics.metalHudHint")}
+            checked={settings.metal_hud ?? false} onChange={(v) => setSetting("metal_hud", v)} />
+        )}
       </SettingsSection>
       <SettingsSection title={t("graphics.upscaling")} description={t("graphics.upscalingHint")}>
         <SelectRow title={t("graphics.upscaler")} value={upscaler} options={UPSCALERS} onChange={(v) => setIni("upscaler", v)} />

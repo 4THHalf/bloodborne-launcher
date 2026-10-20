@@ -17,6 +17,7 @@ mod database;
 mod tray;
 mod game_lifecycle;
 mod updates;
+mod settings_store;
 
 use serde::Serialize;
 use serde_json::{json, Map, Value};
@@ -128,6 +129,7 @@ fn default_settings() -> Map<String, Value> {
         "save_log": false,
         "hide_launcher": true,
         "trophy_notifications": true,
+        "metal_hud": false,
         "check_updates": true,
         "crash_diag": false,
         "gpu_profile": false,
@@ -146,6 +148,8 @@ fn default_ini() -> BTreeMap<String, String> {
         ("sharpness", "0.50"),
         ("object_motion", "0"),
         ("show_fps", "1"),
+        ("fps_size", "small"),
+        ("fps_position", "top_center"),
         ("output_res", "1920x1080"),
         ("model_lod", "0"),
         ("live_resolution", "0"),
@@ -167,6 +171,8 @@ fn default_ini() -> BTreeMap<String, String> {
 
 struct Game {
     child: Option<Child>,
+    /// The game's input: settings changed in the launcher while it runs ("BBSET key=value").
+    input: Option<std::process::ChildStdin>,
 }
 
 #[derive(Clone)]
@@ -182,11 +188,22 @@ fn ini_file(p: &Paths) -> PathBuf {
     p.data.join("bbport.ini")
 }
 
+/// The launcher's options: defaults, then the database (launcher.json if it cannot be read).
 fn load_settings(p: &Paths) -> Map<String, Value> {
     let mut settings = default_settings();
-    if let Ok(text) = fs::read_to_string(settings_file(p)) {
-        if let Ok(Value::Object(saved)) = serde_json::from_str::<Value>(&text) {
-            settings.extend(saved);
+    match settings_store::load(&p.data, settings_store::LAUNCHER) {
+        Ok(stored) => {
+            for (key, value) in stored {
+                settings.insert(key, serde_json::from_str(&value).unwrap_or(Value::String(value)));
+            }
+        }
+        Err(error) => {
+            eprintln!("Settings: database unavailable ({error}); reading launcher.json");
+            if let Ok(text) = fs::read_to_string(settings_file(p)) {
+                if let Ok(Value::Object(saved)) = serde_json::from_str::<Value>(&text) {
+                    settings.extend(saved);
+                }
+            }
         }
     }
     settings
@@ -205,8 +222,16 @@ fn ini_key(line: &str) -> Option<&str> {
     line.split_once('=').map(|(k, _)| k.trim())
 }
 
+/// The game's settings: defaults, then the database (bbport.ini if it cannot be read).
 fn load_ini(p: &Paths) -> BTreeMap<String, String> {
     let mut values = default_ini();
+    match settings_store::load(&p.data, settings_store::GAME) {
+        Ok(stored) => {
+            values.extend(stored);
+            return values;
+        }
+        Err(error) => eprintln!("Settings: database unavailable ({error}); reading bbport.ini"),
+    }
     for line in read_ini_lines(p) {
         if let Some((k, v)) = line.split_once('=') {
             if !k.trim_start().starts_with('#') {
@@ -297,19 +322,50 @@ async fn load_config(state: State<'_ , AppState>) -> Result<Value, String> {
         },
         "bundled": p.bundled,
         "version": env!("CARGO_PKG_VERSION"),
+        "platform": std::env::consts::OS,
+        "memory_mb": system_memory_mb(),
         "running": state.game.lock().map(|g| g.child.is_some()).unwrap_or(false),
     }))
     }).await
 }
 
+/// The computer's memory in MiB (0 when unknown), for the Graphics page's memory estimate.
+fn system_memory_mb() -> u64 {
+    #[cfg(target_os = "macos")]
+    {
+        Command::new("/usr/sbin/sysctl")
+            .args(["-n", "hw.memsize"])
+            .output()
+            .ok()
+            .and_then(|o| String::from_utf8(o.stdout).ok())
+            .and_then(|t| t.trim().parse::<u64>().ok())
+            .map_or(0, |bytes| bytes >> 20)
+    }
+    #[cfg(target_os = "linux")]
+    {
+        fs::read_to_string("/proc/meminfo")
+            .ok()
+            .and_then(|t| t.lines().find_map(|l| l.strip_prefix("MemTotal:").map(str::to_string)))
+            .and_then(|v| v.trim().trim_end_matches("kB").trim().parse::<u64>().ok())
+            .map_or(0, |kib| kib >> 10)
+    }
+    #[cfg(not(any(target_os = "macos", target_os = "linux")))]
+    {
+        0
+    }
+}
+
 #[tauri::command]
 fn save_settings(app: AppHandle, state: State<AppState>, settings: Map<String, Value>) -> Result<(), String> {
-    let game = state.game.lock().map_err(|e| e.to_string())?;
+    let mut game = state.game.lock().map_err(|e| e.to_string())?;
     if settings.contains_key("save_profile") || settings.contains_key("user_dir") { return Err("Manage profile ownership in the Profiles tab.".into()); }
-    let _ = &game; // Serialize settings writes with profile changes and launch.
+    // The lock serializes settings writes with profile changes and launch.
     let mut merged = load_settings(&state.paths);
     if settings.get("check_updates").is_some_and(|v| !v.is_boolean()) {
         return Err("check_updates must be a boolean.".into());
+    }
+    if settings.get("metal_hud").is_some_and(|v| !v.is_boolean()) {
+        return Err("metal_hud must be a boolean.".into());
     }
     if settings.get("trophy_notifications").is_some_and(|v| !v.is_boolean()) {
         return Err("trophy_notifications must be a boolean.".into());
@@ -317,14 +373,42 @@ fn save_settings(app: AppHandle, state: State<AppState>, settings: Map<String, V
     if settings.get("hide_launcher").is_some_and(|v| !v.is_boolean()) {
         return Err("hide_launcher must be a boolean.".into());
     }
+    let sent: String = settings
+        .iter()
+        .filter(|(key, value)| settings_store::GAME_SYNCED.contains(&key.as_str()) && merged.get(*key) != Some(*value))
+        .map(|(key, value)| format!("BBSET launcher:{key}={}\n", settings_store::launcher_text(value)))
+        .collect();
     merged.extend(settings);
     let auto_hide = bool_setting(&merged, "hide_launcher");
     write_settings(&state.paths, merged)?;
+    send_to_game(&mut game, &sent);
     tray::set_auto_hide(&app, auto_hide);
     Ok(())
 }
 
 fn write_settings(p: &Paths, settings: Map<String, Value>) -> Result<(), String> {
+    let values: Vec<(String, Option<String>)> =
+        settings.iter().map(|(k, v)| (k.clone(), Some(v.to_string()))).collect();
+    settings_store::put(&p.data, settings_store::LAUNCHER, &values)?;
+    write_launcher_json(p, settings)
+}
+
+/// A setting the in-game menu changed: a game option (bbport.ini's key) or one of the launcher's
+/// that the menu shows ("launcher:key", typed like its default). Other launcher keys are ignored.
+fn store_game_setting(p: &Paths, key: &str, value: &str) -> Result<(), String> {
+    let Some(name) = key.strip_prefix("launcher:") else {
+        return settings_store::put(&p.data, settings_store::GAME, &[(key.to_string(), Some(value.to_string()))]);
+    };
+    let defaults = default_settings();
+    let Some(typed) = defaults.get(name).and_then(|d| settings_store::launcher_value(name, value, d)) else {
+        return Err(format!("{key}={value} is not a launcher option the game may change"));
+    };
+    settings_store::put(&p.data, settings_store::LAUNCHER, &[(name.to_string(), Some(typed.to_string()))])?;
+    write_launcher_json(p, load_settings(p))
+}
+
+/// launcher.json follows the database, for older launchers and as a readable copy.
+fn write_launcher_json(p: &Paths, settings: Map<String, Value>) -> Result<(), String> {
     fs::create_dir_all(&p.data).map_err(|e| e.to_string())?;
     let text = serde_json::to_string_pretty(&Value::Object(settings)).map_err(|e| e.to_string())?;
     let pending = p.data.join("launcher.json.pending");
@@ -412,10 +496,38 @@ fn save_operation(p: &Paths, id: &str, action: &str, backup: Option<&str>) -> Re
     result
 }
 
-/// Sets bbport.ini keys (null removes the line: the default applies), keeping the other lines.
+/// Sets game settings (null removes a key: the default applies): in the database, in bbport.ini
+/// (the game's own restart reads it), and in the running game ("BBSET key=value" on its input).
+/// Settings changed in the launcher go to the running game's menu ("BBSET ..." lines).
+fn send_to_game(game: &mut Game, lines: &str) {
+    if lines.is_empty() {
+        return;
+    }
+    if let Some(input) = game.input.as_mut() {
+        use std::io::Write;
+        if input.write_all(lines.as_bytes()).and_then(|_| input.flush()).is_err() {
+            game.input = None; // the game closed its input: changes apply at the next start
+        }
+    }
+}
+
 #[tauri::command]
 fn save_ini(state: State<AppState>, values: BTreeMap<String, Option<String>>) -> Result<(), String> {
     let p = &state.paths;
+    let entries: Vec<(String, Option<String>)> = values.iter().map(|(k, v)| (k.clone(), v.clone())).collect();
+    settings_store::put(&p.data, settings_store::GAME, &entries)?;
+    if let Ok(mut game) = state.game.lock() {
+        if game.child.is_some() {
+            let defaults = default_ini();
+            let mut sent = String::new();
+            for (key, value) in &values {
+                if let Some(value) = value.as_ref().or_else(|| defaults.get(key)) {
+                    sent.push_str(&format!("BBSET {key}={value}\n"));
+                }
+            }
+            send_to_game(&mut game, &sent);
+        }
+    }
     fs::create_dir_all(&p.data).map_err(|e| e.to_string())?;
     let mut lines = read_ini_lines(p);
     for (key, value) in &values {
@@ -630,6 +742,11 @@ fn game_environment(p: &Paths, s: &Map<String, Value>) -> Result<Vec<(String, St
         }
     }
     set("BB_TROPHY_OVERLAY", if bool_setting(s,"trophy_notifications") {"1"} else {"0"}.into());
+    // Apple's Metal Performance HUD (frame time, GPU time, memory), drawn by macOS over the game.
+    #[cfg(target_os = "macos")]
+    if bool_setting(s, "metal_hud") {
+        set("MTL_HUD_ENABLED", "1".into());
+    }
     // The selected profile wins over inherited and extra environment save paths. GPU caches
     // stay in the original user directory, shared by all profiles.
     let user=selected_user_dir(p)?;
@@ -687,16 +804,21 @@ fn start_game(app: &AppHandle, state: &AppState) -> Result<(), String> {
     save_operation(&p, &registry.active, "backup", None)?;
     fs::create_dir_all(p.data.join("logs")).map_err(|e| e.to_string())?;
     let log_path = p.data.join("logs/last.log");
+    // bbport.ini from the database: run.sh, the patch scripts and the game read it at start.
+    settings_store::export_ini(&p.data, &load_ini(&p))?;
     let mut cmd = Command::new(&p.bash);
     cmd.arg("run.sh")
         .current_dir(&p.game_root)
-        .stdin(Stdio::null())
+        .stdin(Stdio::piped())
         .stdout(Stdio::piped())
         .stderr(Stdio::piped());
     for (k, v) in game_environment(&p, &s)? {
         cmd.env(k, v);
     }
+    // The in-game menu and the launcher keep each other's settings (BBSET lines both ways).
+    cmd.env("BB_SETTINGS_CHANNEL", "1");
     let mut child = cmd.spawn().map_err(|e| format!("Could not start the game: {e}"))?;
+    game.input = child.stdin.take();
     let log = Arc::new(Mutex::new(fs::File::create(&log_path).ok()));
     for stream in [child.stdout.take().map(|s| Box::new(s) as Box<dyn std::io::Read + Send>),
                    child.stderr.take().map(|s| Box::new(s) as Box<dyn std::io::Read + Send>)]
@@ -705,8 +827,16 @@ fn start_game(app: &AppHandle, state: &AppState) -> Result<(), String> {
     {
         let app = app.clone();
         let log = log.clone();
+        let paths = p.clone();
         std::thread::spawn(move || {
             for line in BufReader::new(stream).lines().map_while(Result::ok) {
+                // The in-game menu changed a setting: stored before the UI hears of it (the line
+                // below makes it re-read the settings).
+                if let Some((key, value)) = settings_store::parse_game_line(&line) {
+                    if let Err(error) = store_game_setting(&paths, &key, &value) {
+                        eprintln!("Settings: the game's change was not stored: {error}");
+                    }
+                }
                 if let Ok(mut f) = log.lock() {
                     if let Some(f) = f.as_mut() {
                         use std::io::Write;
@@ -743,6 +873,7 @@ fn start_game(app: &AppHandle, state: &AppState) -> Result<(), String> {
                 game_lifecycle::Poll::Finished(code) => code,
             };
             g.child = None;
+            g.input = None;
             tray::game_changed(&app, false);
             let _ = app.emit("game-state", json!({"running": false, "code": code}));
             return;
@@ -774,7 +905,7 @@ fn main() {
         .plugin(tauri_plugin_sql::Builder::default().build())
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
-        .manage(AppState { paths, game: Arc::new(Mutex::new(Game { child: None })) })
+        .manage(AppState { paths, game: Arc::new(Mutex::new(Game { child: None, input: None })) })
         // `open Bloodborne.app --args --play`: start the game at once (shortcuts, scripted tests).
         .setup(|app| {
             if let Err(error) = tray::setup(app.handle(), |app| {
@@ -859,7 +990,7 @@ mod save_tests {
     #[test]
     fn save_changes_are_rejected_while_launcher_child_runs() {
         let child = Command::new("sleep").arg("30").spawn().unwrap();
-        let mut game = Game { child: Some(child) };
+        let mut game = Game { child: Some(child), input: None };
         assert!(saves_idle(&game).unwrap_err().contains("Stop the game"));
         game.child.as_mut().unwrap().kill().unwrap();
         game.child.as_mut().unwrap().wait().unwrap();

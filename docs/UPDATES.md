@@ -18,7 +18,7 @@ The modal opens automatically once per new release tag during the window session
 the banner hides that release’s notification until the launcher window is reloaded. **Advanced →
 Updates** shows the installed version and check status, and provides **Check now** and a release
 link. Turn off **Check for new versions automatically** to stop automatic requests; manual
-checks remain available. The preference is stored as `check_updates` in `launcher.json` and
+checks remain available. The preference is stored as `check_updates` in the launcher settings and
 requires no profile database migration. Existing installations default to enabled.
 
 Offline connections, API limits and invalid responses show a retryable status in Advanced.

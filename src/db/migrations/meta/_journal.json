@@ -15,6 +15,13 @@
       "when": 1791840525026,
       "tag": "0001_profile_deletion",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1792445301598,
+      "tag": "0002_settings",
+      "breakpoints": true
     }
   ]
 }

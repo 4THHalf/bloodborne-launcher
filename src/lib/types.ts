@@ -26,6 +26,8 @@ export type Settings = {
   /** Automatically hide the launcher during gameplay; does not disable logging. */
   hide_launcher: boolean;
   trophy_notifications: boolean;
+  /** macOS: Apple's Metal Performance HUD over the game (MTL_HUD_ENABLED). */
+  metal_hud: boolean;
   check_updates: boolean;
   crash_diag: boolean;
   gpu_profile: boolean;
@@ -56,6 +58,10 @@ export type Config = {
   paths: { data: string; mods: string; patches: string; logs: string; saves: string };
   bundled: boolean;
   version: string;
+  /** The launcher's OS (Rust's std::env::consts::OS: "macos", "linux", ...). */
+  platform?: string;
+  /** The computer's memory in MiB (0 when unknown). */
+  memory_mb?: number;
   running: boolean;
 };
 

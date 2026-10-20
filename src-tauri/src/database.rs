@@ -70,6 +70,10 @@ const MIGRATIONS: &[(&str, &str)] = &[
         "0001_profile_deletion",
         include_str!("../../src/db/migrations/0001_profile_deletion.sql"),
     ),
+    (
+        "0002_settings",
+        include_str!("../../src/db/migrations/0002_settings.sql"),
+    ),
 ];
 // This first migration briefly shipped under the original Drizzle-generated name.
 // Both identities describe exactly the same SQL; never rerun its DDL to repair history.
@@ -397,14 +401,12 @@ mod tests {
         block(async {
             let mut db = connect(&root).await?;
             seed(&mut db).await?;
-            let bad = [
-                MIGRATIONS[0],
-                MIGRATIONS[1],
-                (
-                    "synthetic_upgrade",
-                    "CREATE TABLE upgrade_data(id INTEGER); --> statement-breakpoint INVALID SQL",
-                ),
-            ];
+            // Every current migration, then a synthetic upgrade.
+            let mut bad = MIGRATIONS.to_vec();
+            bad.push((
+                "synthetic_upgrade",
+                "CREATE TABLE upgrade_data(id INTEGER); --> statement-breakpoint INVALID SQL",
+            ));
             assert!(migrate_with(&mut db, &bad).await.is_err());
             let backup = std::fs::read_dir(root.join("database-backups"))
                 .map_err(err)?
@@ -422,15 +424,9 @@ mod tests {
                 .await
                 .map_err(err)?;
             assert_eq!(count, 1);
-            migrate_with(
-                &mut db,
-                &[
-                    MIGRATIONS[0],
-                    MIGRATIONS[1],
-                    ("synthetic_upgrade", "CREATE TABLE upgrade_data(id INTEGER)"),
-                ],
-            )
-            .await?;
+            let mut good = MIGRATIONS.to_vec();
+            good.push(("synthetic_upgrade", "CREATE TABLE upgrade_data(id INTEGER)"));
+            migrate_with(&mut db, &good).await?;
             let count: i64 = sqlx::query_scalar(
                 "SELECT COUNT(*) FROM __launcher_migrations WHERE tag='synthetic_upgrade'",
             )

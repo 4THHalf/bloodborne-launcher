@@ -26,6 +26,7 @@ const config: Config = {
     save_log: false,
     hide_launcher: true,
     trophy_notifications: true,
+    metal_hud: false,
     check_updates: true,
     crash_diag: false,
     gpu_profile: false,
@@ -43,6 +44,8 @@ const config: Config = {
   },
   bundled: false,
   version: "0.7.0",
+  platform: "macos",
+  memory_mb: 18432,
   running: false,
 };
 

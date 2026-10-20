@@ -12,8 +12,10 @@ starts the game with the app's own bash and Python ([bloodborne-mac packaging](h
 
 - **Interface:** React 19, TypeScript, Tailwind CSS 4, [shadcn/ui](https://ui.shadcn.com)
   (Base UI), lucide icons, react-i18next.
-- **Backend:** [Tauri 2](https://tauri.app) (`src-tauri/src/main.rs`). It reads and writes
-  `launcher.json` and `bbport.ini` in `~/Library/Application Support/bloodborne_mac`, lists mods
+- **Backend:** [Tauri 2](https://tauri.app) (`src-tauri/src/main.rs`). It keeps the settings in its
+  SQLite database (`settings_store.rs`; `launcher.json` and `bbport.ini` in
+  `~/Library/Application Support/bloodborne_mac` are imported once and still written for the
+  scripts and older launchers) and in sync with the in-game menu while the game runs, lists mods
   and patches through `runtime/scripts/launcher_api.py`, controllers through `bb-gpu-capabilities`, and
   runs `run.sh`.
 

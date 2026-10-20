@@ -8,6 +8,8 @@ import { i18n } from "@/i18n";
 const MAX_LOG_LINES = 5000;
 /** The runtime's line for a recorded unlock ("Runtime: trophy 21 unlocked (recorded locally)"). */
 const TROPHY_RECORDED = /^Runtime: trophy \d+ unlocked/;
+/** The in-game menu changed a setting ("BBSET key=value"; the backend has already stored it). */
+const SETTING_CHANGED = /^BBSET \S+=/;
 
 type GameStore = {
   running: boolean;
@@ -57,6 +59,7 @@ export const useGameStore = create<GameStore>((set) => ({
       // Import the unlock now, also while the launcher is hidden in the menu bar (timed
       // refetches pause then): Home and the profile's Trophies page show it at once.
       if (TROPHY_RECORDED.test(line)) void queryClient.invalidateQueries({ queryKey: queryKeys.profiles });
+      if (SETTING_CHANGED.test(line)) void queryClient.invalidateQueries({ queryKey: queryKeys.config });
     });
     const state = api.onState(({ running, code }) => {
       set(running ? { running } : { running, lastExit: code ?? null, startedAt: null });

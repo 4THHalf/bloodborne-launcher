@@ -55,8 +55,10 @@ adapter exposes generated SELECT queries; SQL and file mutations go through nati
 The plugin's generic SELECT endpoint is not itself a read-only security boundary. The frontend
 has no execute permission and app services use only the constrained adapter.
 
-SQLite records metadata, not game save contents. `bbport.ini` and launcher startup settings keep
-their existing formats for runtime compatibility. The active profile in SQLite is authoritative;
+SQLite records metadata, not game save contents. Settings, shared by all profiles, are rows of
+the `settings` table (scopes `launcher` and `game`); `bbport.ini` is written from them when the
+game starts, in its existing format for runtime compatibility, and `launcher.json` follows the
+launcher's. The active profile in SQLite is authoritative;
 the legacy `save_profile` setting is used only for the initial development-profile adoption.
 
 ## Database upgrades and recovery

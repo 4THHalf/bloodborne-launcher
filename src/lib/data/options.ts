@@ -73,6 +73,21 @@ export const FPS_MODES: Option<string>[] = [
   { value: "30", label: "options.fps.30", hint: "options.fps.30Hint" },
 ];
 
+export const FPS_SIZES: Option<string>[] = [
+  { value: "small", label: "options.fpsSize.small" },
+  { value: "big", label: "options.fpsSize.big" },
+];
+
+/** Where the in-game FPS counter is (bbport.ini fps_position). */
+export const FPS_POSITIONS: Option<string>[] = [
+  { value: "top_left", label: "options.fpsPosition.top_left" },
+  { value: "top_center", label: "options.fpsPosition.top_center" },
+  { value: "top_right", label: "options.fpsPosition.top_right" },
+  { value: "bottom_left", label: "options.fpsPosition.bottom_left" },
+  { value: "bottom_center", label: "options.fpsPosition.bottom_center" },
+  { value: "bottom_right", label: "options.fpsPosition.bottom_right" },
+];
+
 export const MODEL_LOD: Option<string>[] = [
   { value: "-2", label: "options.lod.-2" },
   { value: "0", label: "options.lod.0" },
