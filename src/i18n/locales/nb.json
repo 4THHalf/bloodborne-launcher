@@ -126,7 +126,7 @@
     "effects": {
       "effect_chromatic_aberration": "Kromatisk aberrasjon", "effect_dof": "Dybdeskarphet", "effect_motion_blur": "Bevegelsesuskarphet",
       "effect_ssao": "Omgivelsesskygge (SSAO)", "effect_game_aa": "Spillets egen kantutjevning", "effect_dynamic_shadows": "Skygger fra dynamisk lys",
-      "effect_ssr": "Skjermromsrefleksjoner", "effect_ssrHint": "Fantes ikke i originalspillet"
+      "effect_ssr": "Skjermromsrefleksjoner", "effect_ssrHint": "Fantes ikke i originalspillet", "effect_bloom": "Bloom (glød)"
     }
   },
   "saves": {

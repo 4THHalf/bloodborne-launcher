@@ -126,7 +126,7 @@
     "effects": {
       "effect_chromatic_aberration": "Хроматическая аберрация", "effect_dof": "Глубина резкости", "effect_motion_blur": "Размытие в движении",
       "effect_ssao": "Затенение (SSAO)", "effect_game_aa": "Собственное сглаживание игры", "effect_dynamic_shadows": "Тени от динамических источников",
-      "effect_ssr": "Отражения в экранном пространстве", "effect_ssrHint": "Не было в оригинальной игре"
+      "effect_ssr": "Отражения в экранном пространстве", "effect_ssrHint": "Не было в оригинальной игре", "effect_bloom": "Свечение (Bloom)"
     }
   },
   "saves": {

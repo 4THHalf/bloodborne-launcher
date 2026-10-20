@@ -126,7 +126,7 @@
     "effects": {
       "effect_chromatic_aberration": "Kromatisk aberration", "effect_dof": "Skärpedjup", "effect_motion_blur": "Rörelseoskärpa",
       "effect_ssao": "Omgivningsskuggning (SSAO)", "effect_game_aa": "Spelets egen kantutjämning", "effect_dynamic_shadows": "Skuggor från dynamiska ljus",
-      "effect_ssr": "Skärmrymdsreflektioner", "effect_ssrHint": "Fanns inte i originalspelet"
+      "effect_ssr": "Skärmrymdsreflektioner", "effect_ssrHint": "Fanns inte i originalspelet", "effect_bloom": "Bloom (glöd)"
     }
   },
   "saves": {

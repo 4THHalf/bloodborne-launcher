@@ -29,7 +29,8 @@ export function renderSize(output: string, preset: number, upscaler: string): st
   return `${even(w || 1920)} × ${even(h || 1080)}`;
 }
 
-/** bbport.ini effect switches (patches at start); all on by default except SSR. */
+/** bbport.ini effect switches; all on by default except SSR. All but SSR switch while the game
+ *  runs (the runtime's game hooks); SSR applies at the next start. */
 export const EFFECTS: { key: string; label: TKey; hint?: TKey; defaultOn: boolean }[] = [
   { key: "effect_chromatic_aberration", label: "options.effects.effect_chromatic_aberration", defaultOn: true },
   { key: "effect_dof", label: "options.effects.effect_dof", defaultOn: true },
@@ -38,6 +39,7 @@ export const EFFECTS: { key: string; label: TKey; hint?: TKey; defaultOn: boolea
   { key: "effect_game_aa", label: "options.effects.effect_game_aa", defaultOn: true },
   { key: "effect_dynamic_shadows", label: "options.effects.effect_dynamic_shadows", defaultOn: true },
   { key: "effect_ssr", label: "options.effects.effect_ssr", hint: "options.effects.effect_ssrHint", defaultOn: false },
+  { key: "effect_bloom", label: "options.effects.effect_bloom", defaultOn: true },
 ];
 
 /** The PS4 system language the game sees (BB_LANGUAGE, SCE language codes): names in their own

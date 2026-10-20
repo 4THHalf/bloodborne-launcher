@@ -301,7 +301,8 @@
       "effect_game_aa": "Anti-aliasing do próprio jogo",
       "effect_dynamic_shadows": "Sombras de luzes dinâmicas",
       "effect_ssr": "Reflexos em espaço de tela",
-      "effect_ssrHint": "Não existia no jogo original"
+      "effect_ssrHint": "Não existia no jogo original",
+      "effect_bloom": "Bloom (brilho)"
     }
   },
   "saves": {

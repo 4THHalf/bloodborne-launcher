@@ -126,7 +126,7 @@
     "effects": {
       "effect_chromatic_aberration": "Renk sapması", "effect_dof": "Alan derinliği", "effect_motion_blur": "Hareket bulanıklığı",
       "effect_ssao": "Ortam perdelemesi (SSAO)", "effect_game_aa": "Oyunun kendi kenar yumuşatması", "effect_dynamic_shadows": "Dinamik ışık gölgeleri",
-      "effect_ssr": "Ekran alanı yansımaları", "effect_ssrHint": "Orijinal oyunda yoktu"
+      "effect_ssr": "Ekran alanı yansımaları", "effect_ssrHint": "Orijinal oyunda yoktu", "effect_bloom": "Bloom (ışıma)"
     }
   },
   "saves": {

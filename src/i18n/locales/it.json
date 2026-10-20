@@ -126,7 +126,7 @@
     "effects": {
       "effect_chromatic_aberration": "Aberrazione cromatica", "effect_dof": "Profondità di campo", "effect_motion_blur": "Sfocatura di movimento",
       "effect_ssao": "Occlusione ambientale (SSAO)", "effect_game_aa": "Antialiasing del gioco", "effect_dynamic_shadows": "Ombre delle luci dinamiche",
-      "effect_ssr": "Riflessi in screen space", "effect_ssrHint": "Non presente nel gioco originale"
+      "effect_ssr": "Riflessi in screen space", "effect_ssrHint": "Non presente nel gioco originale", "effect_bloom": "Bloom (bagliore)"
     }
   },
   "saves": {

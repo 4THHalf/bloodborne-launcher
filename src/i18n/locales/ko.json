@@ -126,7 +126,7 @@
     "effects": {
       "effect_chromatic_aberration": "색수차", "effect_dof": "피사계 심도", "effect_motion_blur": "모션 블러",
       "effect_ssao": "앰비언트 오클루전(SSAO)", "effect_game_aa": "게임 자체 안티에일리어싱", "effect_dynamic_shadows": "동적 조명의 그림자",
-      "effect_ssr": "화면 공간 반사", "effect_ssrHint": "원작 게임에는 없던 효과"
+      "effect_ssr": "화면 공간 반사", "effect_ssrHint": "원작 게임에는 없던 효과", "effect_bloom": "블룸"
     }
   },
   "saves": {

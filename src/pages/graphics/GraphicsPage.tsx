@@ -100,9 +100,11 @@ export function GraphicsPage() {
           onChange={(v) => setIni("model_lod", v)}
         />
       </SettingsSection>
-      <SettingsSection title={t("graphics.effects")} description={`${t("graphics.effectsHint")} ${t("common.restartNote")}`}>
+      <SettingsSection title={t("graphics.effects")} description={t("graphics.effectsHint")}>
+        {/* Effects switch while the game runs; SSR (with a hint) applies at the next start. */}
         {EFFECTS.map((effect) => (
-          <SwitchRow key={effect.key} title={t(effect.label)} description={effect.hint && t(effect.hint)}
+          <SwitchRow key={effect.key} title={t(effect.label)}
+            description={effect.hint && `${t(effect.hint)}. ${t("common.restartNote")}`}
             checked={flag(effect.key, effect.defaultOn)} onChange={(v) => setIni(effect.key, v ? "1" : "0")} />
         ))}
       </SettingsSection>

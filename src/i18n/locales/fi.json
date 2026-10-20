@@ -126,7 +126,7 @@
     "effects": {
       "effect_chromatic_aberration": "Kromaattinen aberraatio", "effect_dof": "Syväterävyys", "effect_motion_blur": "Liike-epäterävyys",
       "effect_ssao": "Ympäristön varjostus (SSAO)", "effect_game_aa": "Pelin oma reunanpehmennys", "effect_dynamic_shadows": "Dynaamisten valojen varjot",
-      "effect_ssr": "Ruutuavaruuden heijastukset", "effect_ssrHint": "Ei alkuperäisessä pelissä"
+      "effect_ssr": "Ruutuavaruuden heijastukset", "effect_ssrHint": "Ei alkuperäisessä pelissä", "effect_bloom": "Bloom (hehku)"
     }
   },
   "saves": {

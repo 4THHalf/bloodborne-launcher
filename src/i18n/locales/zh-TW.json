@@ -126,7 +126,7 @@
     "effects": {
       "effect_chromatic_aberration": "色差", "effect_dof": "景深", "effect_motion_blur": "動態模糊",
       "effect_ssao": "環境光遮蔽（SSAO）", "effect_game_aa": "遊戲內建反鋸齒", "effect_dynamic_shadows": "動態光源陰影",
-      "effect_ssr": "螢幕空間反射", "effect_ssrHint": "原版遊戲中沒有"
+      "effect_ssr": "螢幕空間反射", "effect_ssrHint": "原版遊戲中沒有", "effect_bloom": "泛光 (Bloom)"
     }
   },
   "saves": {

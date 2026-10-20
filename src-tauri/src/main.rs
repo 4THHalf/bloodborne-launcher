@@ -161,6 +161,7 @@ fn default_ini() -> BTreeMap<String, String> {
         ("effect_game_aa", "1"),
         ("effect_dynamic_shadows", "1"),
         ("effect_ssr", "0"),
+        ("effect_bloom", "1"),
         ("skip_intro", "0"),
         ("debug_camera", "0"),
         ("debug_menu", "0"),

@@ -126,7 +126,7 @@
     "effects": {
       "effect_chromatic_aberration": "Aberracja chromatyczna", "effect_dof": "Głębia ostrości", "effect_motion_blur": "Rozmycie ruchu",
       "effect_ssao": "Okluzja otoczenia (SSAO)", "effect_game_aa": "Wygładzanie krawędzi gry", "effect_dynamic_shadows": "Cienie od dynamicznych świateł",
-      "effect_ssr": "Odbicia w przestrzeni ekranu", "effect_ssrHint": "Nie było w oryginalnej grze"
+      "effect_ssr": "Odbicia w przestrzeni ekranu", "effect_ssrHint": "Nie było w oryginalnej grze", "effect_bloom": "Bloom (poświata)"
     }
   },
   "saves": {

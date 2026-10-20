@@ -126,7 +126,7 @@
     "effects": {
       "effect_chromatic_aberration": "Chromatische aberratie", "effect_dof": "Scherptediepte", "effect_motion_blur": "Bewegingsonscherpte",
       "effect_ssao": "Omgevingsocclusie (SSAO)", "effect_game_aa": "Anti-aliasing van het spel", "effect_dynamic_shadows": "Schaduwen van dynamische lichten",
-      "effect_ssr": "Screen-space reflecties", "effect_ssrHint": "Niet in het originele spel"
+      "effect_ssr": "Screen-space reflecties", "effect_ssrHint": "Niet in het originele spel", "effect_bloom": "Bloom (gloed)"
     }
   },
   "saves": {

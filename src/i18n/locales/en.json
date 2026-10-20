@@ -314,7 +314,8 @@
       "effect_game_aa": "The game's own anti-aliasing",
       "effect_dynamic_shadows": "Shadows from dynamic lights",
       "effect_ssr": "Screen-space reflections",
-      "effect_ssrHint": "Not in the original game"
+      "effect_ssrHint": "Not in the original game",
+      "effect_bloom": "Bloom"
     }
   },
   "saves": {

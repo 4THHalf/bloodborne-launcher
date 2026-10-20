@@ -126,7 +126,7 @@
     "effects": {
       "effect_chromatic_aberration": "色収差", "effect_dof": "被写界深度", "effect_motion_blur": "モーションブラー",
       "effect_ssao": "アンビエントオクルージョン（SSAO）", "effect_game_aa": "ゲーム本来のアンチエイリアス", "effect_dynamic_shadows": "動的ライトの影",
-      "effect_ssr": "スクリーンスペース反射", "effect_ssrHint": "オリジナルのゲームにはない機能"
+      "effect_ssr": "スクリーンスペース反射", "effect_ssrHint": "オリジナルのゲームにはない機能", "effect_bloom": "ブルーム"
     }
   },
   "saves": {
