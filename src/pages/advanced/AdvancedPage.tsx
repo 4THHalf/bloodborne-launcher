@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { FolderRow, PageHeader, SelectRow, SettingsSection, SwitchRow, TextRow } from "@/components/settings";
 import { useConfig, useIni, useSetting, useSettingsData } from "@/hooks";
 import { LAUNCHER_LANGUAGES } from "@/i18n";
-import { DRAW_PIPE, LIVE_RESOLUTION, PREUPLOAD, READBACKS } from "@/lib/data";
+import { DRAW_PIPE, LIVE_RESOLUTION, PREUPLOAD, READBACKS, RENDERERS } from "@/lib/data";
 import type { Option } from "@/lib";
 
 export function AdvancedPage() {
@@ -42,6 +42,15 @@ export function AdvancedPage() {
       </SettingsSection>
       <UpdateSettings />
       <SettingsSection title={t("advanced.performance")}>
+        {config?.platform === "macos" && (
+          <SelectRow
+            title={t("advanced.renderer")}
+            description={`${t("advanced.rendererHint")} ${t("common.restartNote")}`}
+            value={settings.renderer ?? "moltenvk"}
+            options={RENDERERS}
+            onChange={(v) => setSetting("renderer", v)}
+          />
+        )}
         <SelectRow title={t("advanced.drawPipe")} value={settings.draw_pipe} options={DRAW_PIPE} onChange={(v) => setSetting("draw_pipe", v)} />
         <SelectRow title={t("advanced.readbacks")} value={settings.readbacks} options={READBACKS} onChange={(v) => setSetting("readbacks", v)} />
         <SelectRow title={t("advanced.preupload")} value={settings.preupload} options={PREUPLOAD} onChange={(v) => setSetting("preupload", v)} />

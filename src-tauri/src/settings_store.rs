@@ -34,8 +34,10 @@ pub fn parse_ini(text: &str) -> Vec<(String, String)> {
 
 /// The launcher's options the in-game menu also shows and changes ("BBSET launcher:key=value";
 /// the game starts with them in its environment).
-pub const GAME_SYNCED: [&str; 9] =
-    ["fullscreen", "display", "present_mode", "fps_mode", "fps_limit", "metal_hud", "draw_pipe", "readbacks", "preupload"];
+pub const GAME_SYNCED: [&str; 10] = [
+    "fullscreen", "display", "present_mode", "fps_mode", "fps_limit", "metal_hud", "draw_pipe", "readbacks", "preupload",
+    "renderer",
+];
 
 /// A launcher option as the game reads and writes it: true/false and numbers as JSON, text as it is.
 pub fn launcher_text(value: &serde_json::Value) -> String {

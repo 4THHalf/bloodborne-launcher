@@ -28,6 +28,8 @@ export type Settings = {
   trophy_notifications: boolean;
   /** macOS: Apple's Metal Performance HUD over the game (MTL_HUD_ENABLED). */
   metal_hud: boolean;
+  /** macOS: "moltenvk" (default) or "metal" (the Metal backend's frame path). */
+  renderer: string;
   check_updates: boolean;
   crash_diag: boolean;
   gpu_profile: boolean;

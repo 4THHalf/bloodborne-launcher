@@ -130,6 +130,7 @@ fn default_settings() -> Map<String, Value> {
         "hide_launcher": true,
         "trophy_notifications": true,
         "metal_hud": false,
+        "renderer": "moltenvk",
         "check_updates": true,
         "crash_diag": false,
         "gpu_profile": false,
@@ -363,6 +364,9 @@ fn save_settings(app: AppHandle, state: State<AppState>, settings: Map<String, V
     let mut merged = load_settings(&state.paths);
     if settings.get("check_updates").is_some_and(|v| !v.is_boolean()) {
         return Err("check_updates must be a boolean.".into());
+    }
+    if settings.get("renderer").is_some_and(|v| !matches!(v.as_str(), Some("moltenvk" | "metal"))) {
+        return Err("renderer must be moltenvk or metal.".into());
     }
     if settings.get("metal_hud").is_some_and(|v| !v.is_boolean()) {
         return Err("metal_hud must be a boolean.".into());
@@ -743,6 +747,11 @@ fn game_environment(p: &Paths, s: &Map<String, Value>) -> Result<Vec<(String, St
     }
     set("BB_TROPHY_OVERLAY", if bool_setting(s,"trophy_notifications") {"1"} else {"0"}.into());
     // Apple's Metal Performance HUD (frame time, GPU time, memory), drawn by macOS over the game.
+    // The Metal backend's frame path (runtime renderer_metal/), experimental: MoltenVK otherwise.
+    #[cfg(target_os = "macos")]
+    if str_setting(s, "renderer") == "metal" {
+        set("BB_METAL_FRAME", "1".into());
+    }
     #[cfg(target_os = "macos")]
     if bool_setting(s, "metal_hud") {
         set("MTL_HUD_ENABLED", "1".into());

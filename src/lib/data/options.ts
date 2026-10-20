@@ -102,6 +102,12 @@ export const PRESENT_MODES: Option<string>[] = [
   { value: "Immediate", label: "options.present.Immediate" },
 ];
 
+/** macOS: what draws the frame (the launcher setting `renderer`, BB_METAL_FRAME). */
+export const RENDERERS: Option<string>[] = [
+  { value: "moltenvk", label: "options.renderer.moltenvk", hint: "options.renderer.moltenvkHint" },
+  { value: "metal", label: "options.renderer.metal", hint: "options.renderer.metalHint" },
+];
+
 export const DRAW_PIPE: Option<string>[] = [
   { value: "", label: "options.drawPipe.auto", hint: "options.drawPipe.autoHint" },
   { value: "1", label: "options.drawPipe.on" },

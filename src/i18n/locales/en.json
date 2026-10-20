@@ -216,6 +216,8 @@
     "systemDefault": "System default",
     "performance": "Performance",
     "drawPipe": "Two-stage GPU pipeline",
+    "renderer": "Renderer",
+    "rendererHint": "What draws the game on macOS. Metal is the new native renderer, still experimental.",
     "readbacks": "GPU data read by the CPU",
     "preupload": "Background upload to GPU memory",
     "liveResolution": "Live resolution changes",
@@ -280,6 +282,7 @@
       "Mailbox": "Mailbox",
       "Immediate": "Immediate (tearing)"
     },
+    "renderer": { "moltenvk": "MoltenVK", "moltenvkHint": "Vulkan through MoltenVK (default)", "metal": "Metal (experimental)", "metalHint": "Native Metal, usually faster" },
     "drawPipe": {
       "auto": "Auto",
       "autoHint": "On with 8 or more CPU threads",
