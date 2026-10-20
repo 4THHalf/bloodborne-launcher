@@ -44,7 +44,7 @@ const config: Config = {
     saves: "~/Library/Application Support/bloodborne_mac/user",
   },
   bundled: false,
-  version: "0.7.0",
+  version: "0.8.0",
   platform: "macos",
   memory_mb: 18432,
   running: false,
@@ -73,8 +73,10 @@ const wait = <T,>(value: T) => new Promise<T>((resolve) => setTimeout(() => reso
 
 let nextProfile = 0;
 let nextBackup = 0;
-let profileSetup = false;
-const saves: SaveList = { active: "original", profiles: [{ id: "original", name: "", path: config.paths.saves, bytes: new URLSearchParams(window.location.search).has("fresh") ? 0 : 12582912, modified: 1720000000, backups: [], trophies_eligible: true, trophy_unlocks: [], trophy_error: null }] };
+// ?profile=Name starts the preview with that profile already set up (screenshots).
+const previewProfile = new URLSearchParams(window.location.search).get("profile");
+let profileSetup = previewProfile !== null;
+const saves: SaveList = { active: "original", profiles: [{ id: "original", name: previewProfile ?? "", path: config.paths.saves, bytes: new URLSearchParams(window.location.search).has("fresh") ? 0 : 12582912, modified: 1720000000, backups: [], trophies_eligible: true, trophy_unlocks: [], trophy_error: null }] };
 
 export const mockApi = {
   setTrayLabels: () => wait(undefined),
@@ -116,8 +118,8 @@ export const mockApi = {
     return wait(undefined);
   },
   checkRelease: () => wait(new URLSearchParams(window.location.search).has("update")
-    ? { version: "0.7.1", tag: "v0.7.1", newer: true, notes: new URLSearchParams(window.location.search).has("empty-notes") ? "" : "## What’s new\n\n- Improved opening-video playback.\n- Profile and save management in the launcher.\n\nRead the **release notes** before installing. [GitHub](https://github.com)\n\n<script>window.untrustedReleaseScript = true</script>\n![Remote image](https://example.com/image.png)" }
-    : { version: "0.7.0", tag: "v0.7.0", newer: false, notes: "" }),
+    ? { version: "0.8.1", tag: "v0.8.1", newer: true, notes: new URLSearchParams(window.location.search).has("empty-notes") ? "" : "## What’s new\n\n- Improved opening-video playback.\n- Profile and save management in the launcher.\n\nRead the **release notes** before installing. [GitHub](https://github.com)\n\n<script>window.untrustedReleaseScript = true</script>\n![Remote image](https://example.com/image.png)" }
+    : { version: "0.8.0", tag: "v0.8.0", newer: false, notes: "" }),
   openRelease: (_tag: string) => wait(undefined),
   loadConfig: () => wait(structuredClone(config)),
   saveSettings: (settings: Partial<Settings>) => wait(void Object.assign(config.settings, settings)),
