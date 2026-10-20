@@ -348,6 +348,7 @@ version = "0.7.0"
 dependencies = [
  "core-foundation",
  "core-graphics",
+ "objc2",
  "objc2-app-kit",
  "reqwest",
  "semver",

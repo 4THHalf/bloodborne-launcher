@@ -305,3 +305,11 @@ the game is in front again. The decision is logged when it changes. With five pr
 game fullscreen on the second display, notices showed with the game in front and hid with VS Code
 in front. The runtime still waits for SDL's focus before sending, which delayed the first notice;
 dropping that wait on macOS is the next step.
+
+**Activation (2026-10-20).** In a fullscreen session on Metal, a real trophy notice took the
+keyboard and the controller from the game (SDL ignores the pad in the background) although the
+window order was unchanged: the helper had become the active app. Whenever the helper finds itself
+active (when it shows a notice and at each 250 ms check), it now gives activation back
+(`NSApp.deactivate`) and logs "the helper became the active app". In the following fullscreen test
+with five previews the controller kept working; activation did not happen in that run, so the
+guard has not been seen acting yet.

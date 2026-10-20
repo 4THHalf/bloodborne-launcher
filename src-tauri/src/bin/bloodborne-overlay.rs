@@ -176,11 +176,33 @@ fn follow_game(window: &tauri::WebviewWindow) -> tauri::Result<()> {
         if !window.is_visible()? {
             show_without_focus(window)?;
         }
+        give_back_activation();
         Ok(())
     } else {
         window.hide()
     }
 }
+
+/// The helper must never be the active app: the game then loses the keyboard and the controller
+/// (SDL ignores the pad in the background) while its window stays in front. A real trophy notice
+/// did that once in a fullscreen session; the window order was unchanged. Showing the window
+/// does not activate the helper (show_without_focus), but macOS can still make it active, so
+/// whenever it is, activation goes back to the app that had it (main thread).
+#[cfg(target_os = "macos")]
+fn give_back_activation() {
+    use objc2::MainThreadMarker;
+    use objc2_app_kit::NSApplication;
+    let Some(mtm) = MainThreadMarker::new() else {
+        return;
+    };
+    let app = NSApplication::sharedApplication(mtm);
+    if app.isActive() {
+        eprintln!("Overlay: the helper became the active app; giving activation back");
+        app.deactivate();
+    }
+}
+#[cfg(not(target_os = "macos"))]
+fn give_back_activation() {}
 
 fn main() {
     let prototype = std::env::args().any(|a| a == "--prototype");
