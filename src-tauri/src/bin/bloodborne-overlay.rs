@@ -122,6 +122,66 @@ fn show_without_focus(window: &tauri::WebviewWindow) -> tauri::Result<()> {
     window.show()
 }
 
+/// The game's window (this helper's parent process) is the front window on screen. A fullscreen
+/// game on its own Space kept SDL's input focus while another app was in front, so the notice, on
+/// every Space above normal windows, showed over that app; and macOS does not count the game, a
+/// process without an app bundle, as the frontmost application even while it has the keyboard.
+/// So the window order decides: the first normal window on screen (layer 0, front to back).
+/// Window metadata only; nothing on screen is captured.
+#[cfg(target_os = "macos")]
+fn game_in_front() -> bool {
+    use core_foundation::base::{CFType, TCFType};
+    use core_foundation::dictionary::{CFDictionary, CFDictionaryRef};
+    use core_foundation::number::CFNumber;
+    use core_foundation::string::CFString;
+    use core_graphics::window::{
+        copy_window_info, kCGNullWindowID, kCGWindowLayer, kCGWindowListExcludeDesktopElements,
+        kCGWindowListOptionOnScreenOnly, kCGWindowOwnerPID,
+    };
+    let game = std::os::unix::process::parent_id() as i64;
+    let Some(windows) =
+        copy_window_info(kCGWindowListOptionOnScreenOnly | kCGWindowListExcludeDesktopElements, kCGNullWindowID)
+    else {
+        return true;
+    };
+    // The keys are CoreGraphics' constant strings.
+    let (layer_key, pid_key) =
+        unsafe { (CFString::wrap_under_get_rule(kCGWindowLayer), CFString::wrap_under_get_rule(kCGWindowOwnerPID)) };
+    let number = |dict: &CFDictionary<CFString, CFType>, key: &CFString| {
+        dict.find(key).and_then(|v| v.downcast::<CFNumber>()).and_then(|n| n.to_i64())
+    };
+    let front = windows.iter().find_map(|item| {
+        // Each item of the window list is a dictionary, owned by the list.
+        let dict: CFDictionary<CFString, CFType> =
+            unsafe { CFDictionary::wrap_under_get_rule(*item as CFDictionaryRef) };
+        (number(&dict, &layer_key) == Some(0)).then(|| number(&dict, &pid_key)).flatten()
+    });
+    let in_front = front.is_none_or(|pid| pid == game);
+    // Logged when it changes (the game's log): which process owned the front window.
+    static LAST: std::sync::atomic::AtomicI64 = std::sync::atomic::AtomicI64::new(0);
+    let pid = front.unwrap_or(-1);
+    if LAST.swap(pid, Ordering::Relaxed) != pid {
+        eprintln!("Overlay: front window pid {pid}, game pid {game}: notices {}", if in_front { "shown" } else { "hidden" });
+    }
+    in_front
+}
+#[cfg(not(target_os = "macos"))]
+fn game_in_front() -> bool {
+    true
+}
+
+/// Shows the notice window while the game is in front, hides it otherwise (main thread).
+fn follow_game(window: &tauri::WebviewWindow) -> tauri::Result<()> {
+    if game_in_front() {
+        if !window.is_visible()? {
+            show_without_focus(window)?;
+        }
+        Ok(())
+    } else {
+        window.hide()
+    }
+}
+
 fn main() {
     let prototype = std::env::args().any(|a| a == "--prototype");
     if !prototype && !std::env::args().any(|a| a == "--runtime") {
@@ -202,14 +262,31 @@ fn main() {
             std::thread::spawn(move || {
                 let mut deadline: Option<std::time::Instant> = None;
                 let mut active = false;
+                // While a notice is up, it follows the game: hidden whenever another app is in
+                // front, back while it lasts when the game is.
+                const FOCUS_CHECK: Duration = Duration::from_millis(250);
                 loop {
                     let received = match deadline {
-                        Some(at) => receiver
-                            .recv_timeout(at.saturating_duration_since(std::time::Instant::now())),
+                        Some(at) => receiver.recv_timeout(
+                            at.saturating_duration_since(std::time::Instant::now()).min(FOCUS_CHECK),
+                        ),
                         None => receiver
                             .recv()
                             .map_err(|_| std::sync::mpsc::RecvTimeoutError::Disconnected),
                     };
+                    if matches!(received, Err(std::sync::mpsc::RecvTimeoutError::Timeout))
+                        && deadline.is_some_and(|at| std::time::Instant::now() < at)
+                    {
+                        if active {
+                            let app = handle.clone();
+                            let _ = handle.run_on_main_thread(move || {
+                                if let Some(window) = app.get_webview_window("overlay") {
+                                    let _ = follow_game(&window);
+                                }
+                            });
+                        }
+                        continue;
+                    }
                     match received {
                         Ok(notice) => {
                             if notice.kind == "window" {
@@ -217,12 +294,9 @@ fn main() {
                                 let showing = active && notice.visible;
                                 let _ = handle.run_on_main_thread(move || {
                                     if let Some(window) = app.get_webview_window("overlay") {
-                                        let _ = window.set_position(tauri::LogicalPosition::new(
-                                            notice.x as f64,
-                                            notice.y as f64,
-                                        ));
+                                        let _ = window.set_position(tauri::LogicalPosition::new(notice.x as f64, notice.y as f64));
                                         if showing {
-                                            let _ = show_without_focus(&window);
+                                            let _ = follow_game(&window);
                                         } else {
                                             let _ = window.hide();
                                         }
@@ -252,14 +326,11 @@ fn main() {
                                 .run_on_main_thread(move || {
                                     if let Some(window) = app.get_webview_window("overlay") {
                                         let result = window
-                                            .set_position(tauri::LogicalPosition::new(
-                                                notice.x as f64,
-                                                notice.y as f64,
-                                            ))
+                                            .set_position(tauri::LogicalPosition::new(notice.x as f64, notice.y as f64))
                                             .and_then(|()| {
                                                 window.emit("trophy-notification", &notice)
                                             })
-                                            .and_then(|()| show_without_focus(&window));
+                                            .and_then(|()| follow_game(&window));
                                         match result {
                                             Ok(()) => println!(
                                                 "{{\"v\":1,\"type\":\"shown\",\"seq\":{seq}}}"
