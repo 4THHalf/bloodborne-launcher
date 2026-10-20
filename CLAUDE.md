@@ -15,8 +15,8 @@ planned. Keep profile/save logic independent of the platform and renderer.
   Applied migration tags and SQL are immutable: add a migration, never rename or rewrite one.
   Test upgrades from the previous schema, rollback/retry, WAL-aware snapshots and data preservation.
   Never reset a user's database to bypass an initialization failure; keep the recovery UI usable.
-- `docs/`: profile/save design and roadmap. Keep the launcher wiki in step, and mirror relevant
-  player guides into bloodborne-mac's docs and wiki.
+- `docs/`: developer docs (settings, profiles/saves/database, lifecycle, notifications, updates).
+  Player guides live only in bloodborne-mac's `docs/guide/`. The wiki mirrors the docs.
 - `npm ci && npm run check && npm run build`.
 - `cd src-tauri && cargo test && cargo clippy -- -D warnings`.
 - Packaged QA: `BB_LAUNCHER_DATA_DIR` selects an absolute synthetic data directory; empty/relative
@@ -49,8 +49,9 @@ Keep bbport and shadPS4 credited in README, docs/CREDITS.md and the launcher wik
 third-party code needs credits in those docs, the wiki, the commit message and a short code
 comment naming
 the source repository and commit. Docs use plain, precise English and measured numbers. Status
-progress bars have 20 blocks, one per 5%. Do not claim Windows/Linux game integration or trophy
-persistence before they are implemented and tested.
+progress bars have 20 blocks, one per 5%. Docs say what is true now; investigation logs do not
+go in docs (conclusions do). Do not claim Windows/Linux game integration before it is
+implemented and tested.
 
 ## Save editor and trophies
 

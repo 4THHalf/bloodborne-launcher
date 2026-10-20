@@ -1,33 +1,38 @@
-# Settings locations
+# Settings
 
-The launcher groups settings by what the player controls. Display and image options belong in
-Graphics; game language, startup behaviour and the active save-folder location belong in Game.
-Troubleshooting, experimental runtime controls and debug tools belong in Advanced.
+[← Documentation](README.md)
+
+## Where they live
+
+All settings are rows of the `settings` table in `launcher.db` (scopes `launcher` and `game`),
+shared by all profiles (`src-tauri/src/settings_store.rs`). `bbport.ini` (game settings, for
+`run.sh` and the runtime) and `launcher.json` are written from them; on first start they are
+imported from those files once. Launcher options reach the game as environment variables
+(`main.rs`: for example `renderer` → `BB_METAL_FRAME`, `fps_limit` → `BB_FPS_LIMIT`).
+
+**While the game runs** the launcher and the in-game menu exchange changes as lines on the game's
+standard streams: `BBSET key=value` for game settings and `BBSET launcher:key=value` for the
+launcher options the menu shows (fullscreen, display, presentation, frame-rate mode and limit,
+Metal HUD, draw pipeline, readbacks, preupload, renderer: `GAME_SYNCED` in
+`settings_store.rs`). Each side applies what it can at once; the menu offers a restart for the
+rest.
+
+## Tabs
+
+Settings are grouped by what the player controls. Moving a control never changes its stored key,
+default or effect; translations move with it in all 20 locales.
 
 | Tab | Contents |
 |---|---|
-| Home | Active profile and recorded trophies, profile/save shortcuts, game installation folder, edition/readiness and shortcuts to common settings |
-| Graphics | Output resolution with a memory estimate, monitor, fullscreen, presentation, frame-rate mode/limit, FPS counter with its size and position, Metal performance HUD (macOS); upscaling, sharpening, motion vectors, model detail and all visual effects |
-| Controls | Controller selection and controller/keyboard bindings |
-| Game | Game language, skipping intro videos and the active profile's save-folder location |
-| Profiles | Create, select, rename and delete identities |
-| Saves | Active save information, backup/restore and backup-folder location |
-| Mods | Mod loading, load order and mod-folder location |
-| Patches | Third-party patches and their folder |
-| Advanced | Launcher language and hiding during gameplay; new-version checks and release links; renderer (macOS: MoltenVK, or experimental Metal), experimental draw pipeline, readbacks, preupload and live resolution; free camera/debug menu, logs, profiling, extra environment variables and launcher data-folder location; trophy notifications (on by default) |
-| Log | Game output |
+| Home | Active profile and trophies, Profiles/Saves shortcuts, game folder and edition, a summary of the main settings |
+| Graphics | Output resolution with the memory estimate, monitor, fullscreen, presentation, frame-rate mode and limit, FPS counter (size, position), Metal HUD; upscaling, sharpening, motion vectors, model detail, effects |
+| Controls | Controller choice and controller/keyboard bindings |
+| Game | Game language, skipping intro videos, the active profile's save folder |
+| Profiles | Profiles, each with Saves · Backups and Trophies |
+| Mods, Patches | Mods and their order; third-party patches |
+| Advanced | Launcher language and hiding during gameplay, updates, trophy notifications; the renderer (MoltenVK or experimental Metal) and other performance options, live resolution; free camera, debug menu, logs, profiling, extra environment variables; data folders |
+| Log | The game's output |
 
-The Home frame-rate shortcut opens Graphics. Save folders remain owned by profiles: the Game
-folder row reveals the current location, rather than reassigning a profile's storage. Saves
-retains its convenient folder-open button next to the active save details.
-
-Moving a control does not change its stored setting key, default or runtime behaviour. Existing
-translations move with their controls in all 20 locales. Experimental live-resolution controls
-stay in Advanced because they are used for troubleshooting the renderer; ordinary output
-resolution remains in Graphics.
-
-All settings are kept in the launcher's database, shared by all profiles. While the game runs,
-the in-game menu shows the same graphics settings under the same tabs, and the two send each
-other their changes (the game's standard output and input), so each shows the other's.
-
-See [New-version notifications](UPDATES.md) for automatic and manual release checks.
+The memory estimate (`src/lib/data/memory.ts`) computes what the game will use as `run.sh` sizes
+it, plus the renderer's measured share, against the Mac's memory; the in-game menu computes the
+same (`MemoryEstimate` in the runtime's `bbport_overlay.cpp`). Keep the three in step.

@@ -4,7 +4,8 @@ The independent launcher for [bloodborne-native](https://github.com/bloodborne-n
 Its source is included as the `launcher/` submodule of
 [bloodborne-mac](https://github.com/bloodborne-native/bloodborne-mac), which packages it as the macOS app.
 macOS game integration works today; Windows and Linux integration are planned.
-Player guides and the roadmap are in the [launcher wiki](https://github.com/bloodborne-native/bloodborne-launcher/wiki).
+Player guides are in the app's [docs](https://github.com/bloodborne-native/bloodborne-mac/tree/main/docs/guide);
+the launcher's own design is in [docs](docs/README.md).
 
 The launcher inside `Bloodborne.app`. It has a game folder check, graphics, controls (controller
 choice and button mapping), game options, user profiles, saves and backups, mods, patches, advanced options and the game's log. It
@@ -70,36 +71,27 @@ These are enforced by ESLint (`eslint.config.js`) where possible.
 | `src-tauri` | Rust backend, Tauri config, icons |
 | `scripts/make_icon.swift` | Draws the icon the app's icons are made from |
 
-## Save manager checks
+## Checks
 
 ```bash
-npm run check
-npm run build
+npm run check && npm run build
 cd src-tauri && cargo test && cargo clippy -- -D warnings
 ```
 
-File tests use synthetic data in temporary folders, never player saves. Browser previews use
-an in-memory save manager. [Save manager design](docs/SAVE_MANAGER.md) records the launch
-contract, recovery behavior and planned character previews and editing.
+Native tests use synthetic data in temporary folders, never player saves; the browser preview
+uses an in-memory backend (`?profile=Name` skips setup, `?update` fakes a new release).
+Database schema changes: `npm run db:generate`, then register the migration in
+`src-tauri/src/database.rs` ([Profiles, saves and the database](docs/SAVE_MANAGER.md)).
+
+## Documentation
+
+[Settings](docs/SETTINGS.md) · [Profiles, saves and the database](docs/SAVE_MANAGER.md) ·
+[While the game runs](docs/LAUNCHER_LIFECYCLE.md) · [Trophy notifications](docs/OVERLAY.md) ·
+[Updates](docs/UPDATES.md) · [Credits and license](docs/CREDITS.md)
 
 ## Credits
 
-The project is built on bbport and shadPS4. See [Credits and license](docs/CREDITS.md).
-
-Database schema changes: `npm run db:generate`; register each generated migration in
-`src-tauri/src/database.rs`. Rust applies migrations before setup or Play. The SQL adapter
-is adapted from [Leari](https://github.com/leari-mail/leari/tree/5876482); see
-[Credits and license](docs/CREDITS.md). Trophy storage is prepared; runtime collection is planned.
-
-## During gameplay
-
-By default, the launcher hides to the macOS menu bar/system tray while its game process runs,
-and returns when it exits. Turn off **Advanced → Launcher → Hide launcher during gameplay**
-to keep the Log tab visible; the setting also applies immediately during a game. Use Show launcher or Stop game from the tray menu. Native lifecycle details and
-the isolated GUI smoke check are in [Launcher lifecycle](docs/LAUNCHER_LIFECYCLE.md).
-
-## New-version notifications
-
-The launcher checks bloodborne-mac’s stable GitHub releases and opens a changelog modal with a dismissible banner
-when a newer app is available. The modal links to the GitHub release page. Advanced includes automatic-check preferences and a manual check.
-Downloads and installation remain manual. See [Updates](docs/UPDATES.md).
+The project is built on [bbport](https://github.com/deadinside28/bloodborne_pc) and
+[shadPS4](https://github.com/shadps4-emu/shadPS4). The SQL adapter and window handling are
+adapted from [Leari](https://github.com/leari-mail/leari/tree/5876482) (MIT). See
+[Credits and license](docs/CREDITS.md).

@@ -1,73 +1,28 @@
-# Launcher window and game lifecycle
+# The launcher while the game runs
 
-**Advanced → Launcher → Hide launcher during gameplay** is enabled by default. Turn it off
-to keep the launcher and Log tab visible while playing. The preference is saved as
-`hide_launcher` (launcher settings, in the database and `launcher.json`); existing installations keep the default without a database
-migration. Changing it during gameplay immediately hides or restores the window.
+[← Documentation](README.md)
 
-When a game process starts successfully, the launcher makes its menu-bar/system-tray icon
-visible. With automatic hiding enabled, it hides its window. When hidden on macOS, it switches
-from Regular to Accessory activation policy, removing the launcher's Dock entry. Windows/Linux use Tauri's taskbar
-visibility API; game integration on those platforms remains planned.
+**Advanced → Launcher → Hide launcher during gameplay** (`hide_launcher`, on by default; applies
+at once, also during a game).
 
-The menu contains **Show launcher** and **Stop game**, translated with the launcher language.
-Show launcher restores the window without stopping the game. Closing this reopened window
-while a game runs returns it to the tray. Closing the launcher while idle keeps the normal quit
-behaviour. Stop game uses the launcher's existing process-stop command.
+- When the game starts, the launcher shows its menu-bar (tray) icon and, with hiding on, hides
+  its window and its Dock entry (macOS's Accessory activation policy; the taskbar API on
+  Windows and Linux).
+- The menu has **Show launcher** (the window comes back; the game keeps running; closing it again
+  returns it to the tray) and **Stop game**.
+- When the game exits, however it exits, the launcher brings back its window and Dock entry and
+  hides the tray icon. A launch that fails early does not hide it. A failed process wait keeps the
+  Stop action and retries; it is not taken as an exit.
+- Output and game state keep flowing while hidden. If hiding fails the launcher stays visible; if
+  showing fails the tray stays for another try.
 
-When the owned process exits, including nonzero exits or termination by a signal, the launcher
-restores its Dock/taskbar entry, shows and focuses its window, and hides the tray icon. An early
-spawn failure does not hide it. Output logging and game-state events continue while hidden.
-A process-wait error restores the window and keeps the process handle and Stop action available
-while monitoring retries; it is not treated as a confirmed exit.
+The tray icon is the project's own hunter's sigil (`src-tauri/icons/tray-icon.svg`, a template
+image tinted by macOS). Window restoration follows [Leari](https://github.com/leari-mail/leari/tree/5876482/src-tauri/src) (MIT).
 
-Visibility changes run on the UI thread and read the current process state. A rapid exit/restart
-invalidates the last presented state, so the new launch hides again. Manual reopening cancels
-pending automatic hiding for the current run. If tray setup or hiding fails, the launcher stays
-available; if restoration fails, the tray remains available for another Show launcher attempt.
+## Checks
 
-## Icon and reference
-
-macOS uses the project's original hunter's sigil as a template icon, tinted by the system for
-light/dark menu bars. `src-tauri/icons/tray-icon.svg` is the source; `tray-icon.png` is its 64 px
-render. This is original project artwork, not an extracted game asset. Windows/Linux retain the
-app icon. Regenerate the template with the Tauri icon CLI into a temporary directory, then copy
-its `64x64.png` to `src-tauri/icons/tray-icon.png`.
-
-Window restoration and Dock/taskbar handling follow
-[leari-mail/leari 5876482](https://github.com/leari-mail/leari/tree/5876482/src-tauri/src)
-(MIT, Pablo Souza). Credit and the original MIT notice are in `docs/CREDITS.md` and
-`docs/licenses/leari-MIT.txt`. The launcher uses the public Tauri tray/menu APIs.
-
-## Verification
-
-`cargo test --manifest-path src-tauri/Cargo.toml` includes process polling tests for successful,
-nonzero and killed processes, a missing handle and a retryable wait error. There are 39 native
-tests in total; profile/save tests continue to use synthetic temporary data.
-
-For a native GUI smoke check on a logged-in desktop:
-
-```sh
-cargo run --manifest-path src-tauri/Cargo.toml --example tray_lifecycle
-```
-
-Tell the user before running it: it opens a small test window and tray icon. The harness has its
-own application identifier, loads only `about:blank`, and runs short-lived synthetic processes.
-It does not launch the game, open the profile database, write saves/settings or capture screens.
-It verifies native hiding/restoration, disabled automatic hiding, live preference changes,
-explicit close with automatic hiding disabled, manual reopen/close, normal/nonzero/killed exits
-and rapid restart after reopening. The macOS check passed on 2026-10-12. Windows/Linux GUI
-behaviour has not been exercised here. Actual game loading is tested separately with runtime `tools/test_run.sh`.
-
-### Packaged launcher QA
-
-Set `BB_LAUNCHER_DATA_DIR` to an absolute synthetic directory before launching a QA copy of
-the packaged launcher. Its profile database, saves and settings then use that directory; the
-normal location is unchanged when the variable is absent. Empty/relative overrides are
-rejected before initialization, rather than falling back to player data. Never set it to a
-player directory for testing. The test suite covers default selection and invalid overrides.
-
-On 2026-10-13 the packaged 0.6.0 launcher opened with a fresh synthetic data directory.
-The maintainer created “Release QA” and confirmed Home, the active profile and version 0.6.0.
-The synthetic database contained that profile with no foreign-key violations. All 39 native
-tests and frontend checks/build passed. This check does not cover Gatekeeper on another Mac.
+`cargo test` covers process polling (normal, nonzero and killed exits, a missing handle, a wait
+error). `cargo run --manifest-path src-tauri/Cargo.toml --example tray_lifecycle` is a native
+smoke test with its own app id and short synthetic processes (it opens a small window and a tray
+icon: say so before running it). Packaged QA: `BB_LAUNCHER_DATA_DIR=/absolute/synthetic/dir`
+makes a packaged launcher use that data folder; empty or relative values are refused.
