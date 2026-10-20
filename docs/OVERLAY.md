@@ -291,3 +291,17 @@ The repeated 35-second English desktop preview sent all five cards and exited cl
 The maintainer reported that the revised transparency and material colors looked right.
 The helper was reported frontmost in 14 of 33 metadata samples; input-focus behavior
 was not verified in this desktop test.
+
+### The front-window rule (2026-10-20)
+
+On a second display, with the game fullscreen in its own Space, notices showed over other apps:
+SDL kept reporting input focus for the game while another app was in front, so the runtime kept
+sending them. macOS's frontmost application cannot decide it either: the game, a process without
+an app bundle, was never reported frontmost (VS Code stayed so while the game had the keyboard).
+The helper now checks the window order itself: while a notice is up, every 250 ms, the front
+normal window on screen (layer 0 in CGWindowListCopyWindowInfo, window metadata only) must belong
+to the game, its parent process; otherwise the notice hides, and it comes back while it lasts when
+the game is in front again. The decision is logged when it changes. With five previews and the
+game fullscreen on the second display, notices showed with the game in front and hid with VS Code
+in front. The runtime still waits for SDL's focus before sending, which delayed the first notice;
+dropping that wait on macOS is the next step.

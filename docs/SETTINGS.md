@@ -7,14 +7,14 @@ Troubleshooting, experimental runtime controls and debug tools belong in Advance
 | Tab | Contents |
 |---|---|
 | Home | Active profile and recorded trophies, profile/save shortcuts, game installation folder, edition/readiness and shortcuts to common settings |
-| Graphics | Output resolution, monitor, fullscreen, presentation, frame-rate mode/limit and FPS counter; upscaling, sharpening, motion vectors, model detail and all visual effects |
+| Graphics | Output resolution with a memory estimate, monitor, fullscreen, presentation, frame-rate mode/limit, FPS counter with its size and position, Metal performance HUD (macOS); upscaling, sharpening, motion vectors, model detail and all visual effects |
 | Controls | Controller selection and controller/keyboard bindings |
 | Game | Game language, skipping intro videos and the active profile's save-folder location |
 | Profiles | Create, select, rename and delete identities |
 | Saves | Active save information, backup/restore and backup-folder location |
 | Mods | Mod loading, load order and mod-folder location |
 | Patches | Third-party patches and their folder |
-| Advanced | Launcher language and hiding during gameplay; new-version checks and release links; experimental draw pipeline, readbacks, preupload and live resolution; free camera/debug menu, logs, profiling, extra environment variables and launcher data-folder location; trophy notifications (on by default) |
+| Advanced | Launcher language and hiding during gameplay; new-version checks and release links; renderer (macOS: MoltenVK, or experimental Metal), experimental draw pipeline, readbacks, preupload and live resolution; free camera/debug menu, logs, profiling, extra environment variables and launcher data-folder location; trophy notifications (on by default) |
 | Log | Game output |
 
 The Home frame-rate shortcut opens Graphics. Save folders remain owned by profiles: the Game
@@ -25,5 +25,9 @@ Moving a control does not change its stored setting key, default or runtime beha
 translations move with their controls in all 20 locales. Experimental live-resolution controls
 stay in Advanced because they are used for troubleshooting the renderer; ordinary output
 resolution remains in Graphics.
+
+All settings are kept in the launcher's database, shared by all profiles. While the game runs,
+the in-game menu shows the same graphics settings under the same tabs, and the two send each
+other their changes (the game's standard output and input), so each shows the other's.
 
 See [New-version notifications](UPDATES.md) for automatic and manual release checks.
