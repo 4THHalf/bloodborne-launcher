@@ -52,7 +52,9 @@
     "controller": "コントローラー", "controllerHint": "選んだコントローラーは接続されるとすぐに使われます。", "auto": "自動（最初に接続されたもの）",
     "notConnected": "{{name}}（未接続）", "noControllers": "コントローラーが接続されていません。USB または Bluetooth で接続して更新してください。",
     "bindings": "割り当て", "gamepad": "コントローラー", "keyboard": "キーボード", "assign": "割り当て",
-    "press": "ボタンまたはキーを押してください…（Esc でキャンセル）", "keyboardOnly": "キーボードのみ", "resetAll": "すべてリセット",
+    "press": "ボタンまたはキーを押してください…（Esc でキャンセル）",
+    "mouse": "マウス",
+    "pressMouse": "マウスボタンをクリックするかホイールを回してください。組み合わせには Shift・Ctrl・Alt を押したまま…（Esc でキャンセル）", "keyboardOnly": "キーボードのみ", "resetAll": "すべてリセット",
     "groups": { "Face buttons": "アクションボタン", "Shoulders and sticks": "トリガーとスティック", "System": "システム", "D-pad": "方向キー", "Movement and camera": "移動とカメラ" },
     "inputs": {
       "cross": "×ボタン", "circle": "○ボタン", "square": "□ボタン", "triangle": "△ボタン", "l1": "L1", "r1": "R1", "l2": "L2", "r2": "R2",

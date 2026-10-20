@@ -52,7 +52,9 @@
     "controller": "Controller", "controllerHint": "De gekozen controller wordt gebruikt zodra hij verbonden is.", "auto": "Automatisch (de eerst verbonden)",
     "notConnected": "{{name}} (niet verbonden)", "noControllers": "Geen controller verbonden. Verbind er een via USB of Bluetooth en vernieuw.",
     "bindings": "Toewijzingen", "gamepad": "Controller", "keyboard": "Toetsenbord", "assign": "Toewijzen",
-    "press": "Druk op een knop of toets… (Esc annuleert)", "keyboardOnly": "Alleen toetsenbord", "resetAll": "Alles herstellen",
+    "press": "Druk op een knop of toets… (Esc annuleert)",
+    "mouse": "Muis",
+    "pressMouse": "Klik met een muisknop of scrol; houd Shift, Ctrl of Alt ingedrukt voor een combinatie… (Esc annuleert)", "keyboardOnly": "Alleen toetsenbord", "resetAll": "Alles herstellen",
     "groups": { "Face buttons": "Actieknoppen", "Shoulders and sticks": "Schouderknoppen en sticks", "System": "Systeem", "D-pad": "Richtingsknoppen", "Movement and camera": "Beweging en camera" },
     "inputs": {
       "cross": "Kruis", "circle": "Cirkel", "square": "Vierkant", "triangle": "Driehoek", "l1": "L1", "r1": "R1", "l2": "L2", "r2": "R2",

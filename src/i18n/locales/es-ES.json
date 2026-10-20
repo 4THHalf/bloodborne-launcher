@@ -52,7 +52,9 @@
     "controller": "Mando", "controllerHint": "El elegido se usa en cuanto se conecta.", "auto": "Automático (el primero conectado)",
     "notConnected": "{{name}} (no conectado)", "noControllers": "No hay ningún mando conectado. Conecta uno por USB o Bluetooth y actualiza.",
     "bindings": "Asignaciones", "gamepad": "Mando", "keyboard": "Teclado", "assign": "Asignar",
-    "press": "Pulsa un botón o una tecla… (Esc cancela)", "keyboardOnly": "Solo teclado", "resetAll": "Restablecer todo",
+    "press": "Pulsa un botón o una tecla… (Esc cancela)",
+    "mouse": "Ratón",
+    "pressMouse": "Pulsa un botón del ratón o desplaza; mantén Shift, Ctrl o Alt para una combinación… (Esc cancela)", "keyboardOnly": "Solo teclado", "resetAll": "Restablecer todo",
     "groups": { "Face buttons": "Botones frontales", "Shoulders and sticks": "Gatillos y joysticks", "System": "Sistema", "D-pad": "Cruceta", "Movement and camera": "Movimiento y cámara" },
     "inputs": {
       "cross": "Equis", "circle": "Círculo", "square": "Cuadrado", "triangle": "Triángulo", "l1": "L1", "r1": "R1", "l2": "L2", "r2": "R2",

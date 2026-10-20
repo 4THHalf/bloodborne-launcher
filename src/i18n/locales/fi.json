@@ -52,7 +52,9 @@
     "controller": "Ohjain", "controllerHint": "Valittua käytetään heti, kun se yhdistetään.", "auto": "Automaattinen (ensimmäinen yhdistetty)",
     "notConnected": "{{name}} (ei yhdistetty)", "noControllers": "Ohjainta ei ole yhdistetty. Yhdistä ohjain USB:llä tai Bluetoothilla ja päivitä.",
     "bindings": "Määritykset", "gamepad": "Ohjain", "keyboard": "Näppäimistö", "assign": "Määritä",
-    "press": "Paina painiketta tai näppäintä… (Esc peruuttaa)", "keyboardOnly": "Vain näppäimistö", "resetAll": "Palauta kaikki",
+    "press": "Paina painiketta tai näppäintä… (Esc peruuttaa)",
+    "mouse": "Hiiri",
+    "pressMouse": "Napsauta hiiren painiketta tai vieritä; pidä Shift, Ctrl tai Alt pohjassa yhdistelmää varten… (Esc peruuttaa)", "keyboardOnly": "Vain näppäimistö", "resetAll": "Palauta kaikki",
     "groups": { "Face buttons": "Toimintopainikkeet", "Shoulders and sticks": "Olkapainikkeet ja sauvat", "System": "Järjestelmä", "D-pad": "Ristiohjain", "Movement and camera": "Liike ja kamera" },
     "inputs": {
       "cross": "Risti", "circle": "Ympyrä", "square": "Neliö", "triangle": "Kolmio", "l1": "L1", "r1": "R1", "l2": "L2", "r2": "R2",

@@ -131,6 +131,8 @@
     "keyboard": "Keyboard",
     "assign": "Assign",
     "press": "Press a button or key… (Esc cancels)",
+    "mouse": "Mouse",
+    "pressMouse": "Click a mouse button or scroll; hold Shift, Ctrl or Alt for a combination… (Esc cancels)",
     "keyboardOnly": "Keyboard only",
     "resetAll": "Reset all",
     "groups": {

@@ -118,6 +118,8 @@
     "keyboard": "Teclado",
     "assign": "Atribuir",
     "press": "Pressione um botão ou tecla… (Esc cancela)",
+    "mouse": "Mouse",
+    "pressMouse": "Clique com um botão do mouse ou role; segure Shift, Ctrl ou Alt para uma combinação… (Esc cancela)",
     "keyboardOnly": "Só no teclado",
     "resetAll": "Restaurar tudo",
     "groups": {

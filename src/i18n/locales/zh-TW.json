@@ -52,7 +52,9 @@
     "controller": "控制器", "controllerHint": "所選控制器一連接就會使用。", "auto": "自動（第一個連接的控制器）",
     "notConnected": "{{name}}（未連接）", "noControllers": "未連接控制器。請透過 USB 或藍牙連接後重新整理。",
     "bindings": "按鍵指定", "gamepad": "控制器", "keyboard": "鍵盤", "assign": "指定",
-    "press": "請按下按鈕或按鍵…（Esc 取消）", "keyboardOnly": "僅鍵盤", "resetAll": "全部重設",
+    "press": "請按下按鈕或按鍵…（Esc 取消）",
+    "mouse": "滑鼠",
+    "pressMouse": "按下滑鼠按鍵或捲動滾輪；按住 Shift、Ctrl 或 Alt 可組合…（Esc 取消）", "keyboardOnly": "僅鍵盤", "resetAll": "全部重設",
     "groups": { "Face buttons": "動作按鈕", "Shoulders and sticks": "肩部按鈕與搖桿", "System": "系統", "D-pad": "方向鍵", "Movement and camera": "移動與鏡頭" },
     "inputs": {
       "cross": "叉叉鈕", "circle": "圓圈鈕", "square": "方塊鈕", "triangle": "三角鈕", "l1": "L1", "r1": "R1", "l2": "L2", "r2": "R2",

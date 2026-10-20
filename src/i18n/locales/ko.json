@@ -52,7 +52,9 @@
     "controller": "컨트롤러", "controllerHint": "선택한 컨트롤러는 연결되는 즉시 사용됩니다.", "auto": "자동(처음 연결된 컨트롤러)",
     "notConnected": "{{name}}(연결 안 됨)", "noControllers": "연결된 컨트롤러가 없습니다. USB 또는 블루투스로 연결한 뒤 새로 고침하세요.",
     "bindings": "할당", "gamepad": "컨트롤러", "keyboard": "키보드", "assign": "할당",
-    "press": "버튼이나 키를 누르세요… (Esc로 취소)", "keyboardOnly": "키보드 전용", "resetAll": "모두 초기화",
+    "press": "버튼이나 키를 누르세요… (Esc로 취소)",
+    "mouse": "마우스",
+    "pressMouse": "마우스 버튼을 클릭하거나 스크롤하세요. 조합은 Shift, Ctrl, Alt를 누른 채로… (Esc로 취소)", "keyboardOnly": "키보드 전용", "resetAll": "모두 초기화",
     "groups": { "Face buttons": "액션 버튼", "Shoulders and sticks": "트리거와 스틱", "System": "시스템", "D-pad": "방향 버튼", "Movement and camera": "이동과 카메라" },
     "inputs": {
       "cross": "X 버튼", "circle": "○ 버튼", "square": "□ 버튼", "triangle": "△ 버튼", "l1": "L1", "r1": "R1", "l2": "L2", "r2": "R2",

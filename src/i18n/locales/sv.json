@@ -52,7 +52,9 @@
     "controller": "Handkontroll", "controllerHint": "Den valda används så fort den ansluts.", "auto": "Automatiskt (den första anslutna)",
     "notConnected": "{{name}} (inte ansluten)", "noControllers": "Ingen handkontroll ansluten. Anslut en via USB eller Bluetooth och uppdatera.",
     "bindings": "Tilldelningar", "gamepad": "Handkontroll", "keyboard": "Tangentbord", "assign": "Tilldela",
-    "press": "Tryck på en knapp eller tangent… (Esc avbryter)", "keyboardOnly": "Endast tangentbord", "resetAll": "Återställ allt",
+    "press": "Tryck på en knapp eller tangent… (Esc avbryter)",
+    "mouse": "Mus",
+    "pressMouse": "Klicka med en musknapp eller scrolla; håll ned Skift, Ctrl eller Alt för en kombination… (Esc avbryter)", "keyboardOnly": "Endast tangentbord", "resetAll": "Återställ allt",
     "groups": { "Face buttons": "Handlingsknappar", "Shoulders and sticks": "Axelknappar och spakar", "System": "System", "D-pad": "Styrkors", "Movement and camera": "Rörelse och kamera" },
     "inputs": {
       "cross": "Kryss", "circle": "Cirkel", "square": "Fyrkant", "triangle": "Triangel", "l1": "L1", "r1": "R1", "l2": "L2", "r2": "R2",

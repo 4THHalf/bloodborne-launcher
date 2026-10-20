@@ -52,7 +52,9 @@
     "controller": "Controller", "controllerHint": "Den valgte bruges, så snart den er tilsluttet.", "auto": "Automatisk (den første tilsluttede)",
     "notConnected": "{{name}} (ikke tilsluttet)", "noControllers": "Ingen controller tilsluttet. Tilslut en via USB eller Bluetooth, og opdater.",
     "bindings": "Tildelinger", "gamepad": "Controller", "keyboard": "Tastatur", "assign": "Tildel",
-    "press": "Tryk på en knap eller tast… (Esc annullerer)", "keyboardOnly": "Kun tastatur", "resetAll": "Nulstil alt",
+    "press": "Tryk på en knap eller tast… (Esc annullerer)",
+    "mouse": "Mus",
+    "pressMouse": "Klik med en museknap eller rul; hold Skift, Ctrl eller Alt nede for en kombination… (Esc annullerer)", "keyboardOnly": "Kun tastatur", "resetAll": "Nulstil alt",
     "groups": { "Face buttons": "Handlingsknapper", "Shoulders and sticks": "Skulderknapper og pinde", "System": "System", "D-pad": "Retningsknapper", "Movement and camera": "Bevægelse og kamera" },
     "inputs": {
       "cross": "Kryds", "circle": "Cirkel", "square": "Firkant", "triangle": "Trekant", "l1": "L1", "r1": "R1", "l2": "L2", "r2": "R2",

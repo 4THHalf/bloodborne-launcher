@@ -52,7 +52,9 @@
     "controller": "Manette", "controllerHint": "Celle choisie est utilisée dès qu'elle est connectée.", "auto": "Automatique (la première connectée)",
     "notConnected": "{{name}} (non connectée)", "noControllers": "Aucune manette connectée. Branchez-en une en USB ou Bluetooth, puis actualisez.",
     "bindings": "Attributions", "gamepad": "Manette", "keyboard": "Clavier", "assign": "Attribuer",
-    "press": "Appuyez sur un bouton ou une touche… (Échap pour annuler)", "keyboardOnly": "Clavier uniquement", "resetAll": "Tout réinitialiser",
+    "press": "Appuyez sur un bouton ou une touche… (Échap pour annuler)",
+    "mouse": "Souris",
+    "pressMouse": "Cliquez avec un bouton de la souris ou faites défiler ; maintenez Maj, Ctrl ou Alt pour une combinaison… (Échap annule)", "keyboardOnly": "Clavier uniquement", "resetAll": "Tout réinitialiser",
     "groups": { "Face buttons": "Boutons d'action", "Shoulders and sticks": "Gâchettes et sticks", "System": "Système", "D-pad": "Croix directionnelle", "Movement and camera": "Déplacement et caméra" },
     "inputs": {
       "cross": "Croix", "circle": "Rond", "square": "Carré", "triangle": "Triangle", "l1": "L1", "r1": "R1", "l2": "L2", "r2": "R2",

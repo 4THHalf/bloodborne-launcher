@@ -52,7 +52,9 @@
     "controller": "Kontroler", "controllerHint": "Wybrany jest używany, gdy tylko zostanie podłączony.", "auto": "Automatycznie (pierwszy podłączony)",
     "notConnected": "{{name}} (niepodłączony)", "noControllers": "Brak podłączonego kontrolera. Podłącz go przez USB lub Bluetooth i odśwież.",
     "bindings": "Przypisania", "gamepad": "Kontroler", "keyboard": "Klawiatura", "assign": "Przypisz",
-    "press": "Naciśnij przycisk lub klawisz… (Esc anuluje)", "keyboardOnly": "Tylko klawiatura", "resetAll": "Przywróć wszystko",
+    "press": "Naciśnij przycisk lub klawisz… (Esc anuluje)",
+    "mouse": "Mysz",
+    "pressMouse": "Kliknij przyciskiem myszy lub przewiń; przytrzymaj Shift, Ctrl lub Alt, aby utworzyć kombinację… (Esc anuluje)", "keyboardOnly": "Tylko klawiatura", "resetAll": "Przywróć wszystko",
     "groups": { "Face buttons": "Przyciski akcji", "Shoulders and sticks": "Spusty i drążki", "System": "System", "D-pad": "Krzyżak", "Movement and camera": "Ruch i kamera" },
     "inputs": {
       "cross": "Krzyżyk", "circle": "Kółko", "square": "Kwadrat", "triangle": "Trójkąt", "l1": "L1", "r1": "R1", "l2": "L2", "r2": "R2",

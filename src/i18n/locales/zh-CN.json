@@ -52,7 +52,9 @@
     "controller": "手柄", "controllerHint": "所选手柄一经连接即会使用。", "auto": "自动（第一个连接的手柄）",
     "notConnected": "{{name}}（未连接）", "noControllers": "未连接手柄。请通过 USB 或蓝牙连接后刷新。",
     "bindings": "按键分配", "gamepad": "手柄", "keyboard": "键盘", "assign": "分配",
-    "press": "请按下按钮或按键…（Esc 取消）", "keyboardOnly": "仅键盘", "resetAll": "全部重置",
+    "press": "请按下按钮或按键…（Esc 取消）",
+    "mouse": "鼠标",
+    "pressMouse": "点击鼠标按键或滚动滚轮；按住 Shift、Ctrl 或 Alt 可组合…（Esc 取消）", "keyboardOnly": "仅键盘", "resetAll": "全部重置",
     "groups": { "Face buttons": "动作键", "Shoulders and sticks": "肩键与摇杆", "System": "系统", "D-pad": "方向键", "Movement and camera": "移动与镜头" },
     "inputs": {
       "cross": "叉键", "circle": "圆圈键", "square": "方块键", "triangle": "三角键", "l1": "L1", "r1": "R1", "l2": "L2", "r2": "R2",

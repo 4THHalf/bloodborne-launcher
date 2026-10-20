@@ -52,7 +52,9 @@
     "controller": "Kumanda", "controllerHint": "Seçilen kumanda bağlanır bağlanmaz kullanılır.", "auto": "Otomatik (ilk bağlanan)",
     "notConnected": "{{name}} (bağlı değil)", "noControllers": "Bağlı kumanda yok. USB veya Bluetooth ile bir kumanda bağlayıp yenileyin.",
     "bindings": "Atamalar", "gamepad": "Kumanda", "keyboard": "Klavye", "assign": "Ata",
-    "press": "Bir düğmeye veya tuşa basın… (Esc iptal eder)", "keyboardOnly": "Yalnızca klavye", "resetAll": "Tümünü sıfırla",
+    "press": "Bir düğmeye veya tuşa basın… (Esc iptal eder)",
+    "mouse": "Fare",
+    "pressMouse": "Bir fare düğmesine tıklayın veya kaydırın; kombinasyon için Shift, Ctrl veya Alt tuşunu basılı tutun… (Esc iptal eder)", "keyboardOnly": "Yalnızca klavye", "resetAll": "Tümünü sıfırla",
     "groups": { "Face buttons": "Eylem düğmeleri", "Shoulders and sticks": "Tetikler ve çubuklar", "System": "Sistem", "D-pad": "Yön tuşları", "Movement and camera": "Hareket ve kamera" },
     "inputs": {
       "cross": "Çarpı", "circle": "Daire", "square": "Kare", "triangle": "Üçgen", "l1": "L1", "r1": "R1", "l2": "L2", "r2": "R2",
